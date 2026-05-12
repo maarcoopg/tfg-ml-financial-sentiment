@@ -1,0 +1,103 @@
+name: Tarea imprevista / problema
+description: Issue para errores, bloqueos o tareas que han surgido durante el desarrollo
+title: "[IMPREVISTO] "
+labels: ["imprevisto"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa esta plantilla para problemas, errores, bloqueos o tareas que no estaban previstas inicialmente.
+
+  - type: input
+    id: resumen
+    attributes:
+      label: Resumen del imprevisto
+      description: Explica brevemente qué ha ocurrido.
+      placeholder: "Ejemplo: Error al combinar datos financieros con noticias por fecha"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de imprevisto
+      options:
+        - Error de código
+        - Problema con datos
+        - Problema con librerías
+        - Problema metodológico
+        - Cambio de alcance
+        - Duda técnica
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: Explica en qué parte del proyecto ha surgido.
+      placeholder: "Indica archivo, notebook, script, modelo o fase donde aparece el problema."
+    validations:
+      required: true
+
+  - type: textarea
+    id: comportamiento
+    attributes:
+      label: Qué ocurre actualmente
+      description: Describe el problema actual.
+      placeholder: "Qué error aparece, qué resultado incorrecto se obtiene o qué bloqueo existe."
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Qué debería ocurrir
+      description: Explica cuál sería el comportamiento esperado.
+      placeholder: "Describe el resultado correcto esperado."
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidencias
+    attributes:
+      label: Evidencias
+      description: Añade logs, capturas, fragmentos de error o ejemplos de datos.
+      placeholder: |
+        Pega aquí errores, trazas, capturas o enlaces relevantes.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: impacto
+    attributes:
+      label: Impacto en el TFG
+      description: Indica cómo afecta al avance del proyecto.
+      options:
+        - Bloquea el avance
+        - Afecta a una parte importante
+        - Afecta parcialmente
+        - Impacto bajo
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - Alta
+        - Media
+        - Baja
+    validations:
+      required: true
+
+  - type: textarea
+    id: posible_solucion
+    attributes:
+      label: Posible solución
+      description: Si tienes alguna idea, indícala aquí.
+      placeholder: "Ejemplo: revisar el merge por fecha, comprobar zonas horarias o rellenar días sin noticias con sentimiento neutro."
+    validations:
+      required: false

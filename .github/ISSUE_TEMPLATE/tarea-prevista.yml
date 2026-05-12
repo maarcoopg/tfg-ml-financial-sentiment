@@ -1,0 +1,90 @@
+name: Tarea prevista
+description: Issue para una tarea planificada dentro del desarrollo del TFG
+title: "[TAREA] "
+labels: ["tarea-prevista"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa esta plantilla para tareas que ya estaban previstas en la planificación del TFG.
+
+  - type: input
+    id: resumen
+    attributes:
+      label: Resumen de la tarea
+      description: Explica brevemente qué hay que hacer.
+      placeholder: "Ejemplo: Implementar descarga de datos históricos de Apple"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: fase
+    attributes:
+      label: Fase del TFG
+      description: Selecciona a qué parte del proyecto pertenece esta tarea.
+      options:
+        - Planificación
+        - Recopilación de datos
+        - Preprocesamiento
+        - Análisis de sentimiento
+        - Modelo base
+        - Modelo híbrido
+        - Evaluación
+        - Memoria
+        - Documentación
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción detallada
+      description: Describe la tarea con más detalle.
+      placeholder: "Qué hay que hacer, por qué es necesario y qué resultado se espera."
+    validations:
+      required: true
+
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos previstos
+      description: Lista los pasos principales para completar esta tarea.
+      placeholder: |
+        - [ ] Investigar fuente de datos
+        - [ ] Implementar script
+        - [ ] Guardar resultados en data/raw
+        - [ ] Documentar uso
+    validations:
+      required: false
+
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      description: Indica cuándo se puede considerar terminada la tarea.
+      placeholder: |
+        - El script funciona correctamente.
+        - Los datos se guardan en el formato esperado.
+        - El resultado queda documentado.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - Alta
+        - Media
+        - Baja
+    validations:
+      required: true
+
+  - type: input
+    id: rama
+    attributes:
+      label: Rama asociada
+      description: Nombre de la rama de Git que se usará para esta tarea, si aplica.
+      placeholder: "feature/download-prices"
+    validations:
+      required: false
