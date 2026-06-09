@@ -5,6 +5,7 @@ import pandas as pd
 PROCESSED_PRICES_DIR = Path("data/processed/prices")
 
 TICKERS = ["AAPL", "TSLA", "NVDA", "MSFT", "SPY"]
+MOVING_AVERAGE_WINDOWS = [5, 20, 50]
 
 
 def load_processed_price_data(ticker: str) -> pd.DataFrame:
@@ -20,10 +21,12 @@ def load_processed_price_data(ticker: str) -> pd.DataFrame:
     return df
 
 
-def add_daily_returns(df: pd.DataFrame) -> pd.DataFrame:
+def add_moving_averages(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
-    df["daily_return"] = df["Adj Close"].pct_change().fillna(0.0)
+    for window in MOVING_AVERAGE_WINDOWS:
+        column_name = f"sma_{window}"
+        df[column_name] = df["Adj Close"].rolling(window=window, min_periods=1).mean()
 
     return df
 
@@ -37,15 +40,17 @@ def save_processed_data(ticker: str, df: pd.DataFrame) -> None:
 
 
 def main():
+    moving_average_columns = [f"sma_{window}" for window in MOVING_AVERAGE_WINDOWS]
+
     for ticker in TICKERS:
         df = load_processed_price_data(ticker)
-        df = add_daily_returns(df)
+        df = add_moving_averages(df)
 
         save_processed_data(ticker, df)
 
         print(f"{ticker}")
-        print(df[["Date", "Adj Close", "daily_return"]].head())
-        print(f"Nulos en daily_return: {df['daily_return'].isna().sum()}")
+        print(df[["Date", "Adj Close", *moving_average_columns]].head())
+        print(df[moving_average_columns].isna().sum())
         print("-" * 50)
 
 
