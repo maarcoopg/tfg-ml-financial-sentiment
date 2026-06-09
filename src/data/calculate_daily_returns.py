@@ -13,7 +13,7 @@ def load_processed_price_data(ticker: str) -> pd.DataFrame:
     df = pd.read_csv(file_path)
 
     df["Date"] = pd.to_datetime(df["Date"])
-    df["Close"] = pd.to_numeric(df["Close"], errors="coerce")
+    df["Adj Close"] = pd.to_numeric(df["Adj Close"], errors="coerce")
 
     df = df.sort_values("Date").reset_index(drop=True)
 
@@ -23,7 +23,7 @@ def load_processed_price_data(ticker: str) -> pd.DataFrame:
 def add_daily_returns(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
-    df["daily_return"] = df["Close"].pct_change().fillna(0.0)
+    df["daily_return"] = df["Adj Close"].pct_change().fillna(0.0)
 
     return df
 
@@ -44,7 +44,7 @@ def main():
         save_processed_data(ticker, df)
 
         print(f"{ticker}")
-        print(df[["Date", "Close", "daily_return"]].head())
+        print(df[["Date", "Adj Close", "daily_return"]].head())
         print(f"Nulos en daily_return: {df['daily_return'].isna().sum()}")
         print("-" * 50)
 
