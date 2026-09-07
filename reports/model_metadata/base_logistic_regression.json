@@ -1,0 +1,27 @@
+{
+  "dataset_type": "base",
+  "model_name": "logistic_regression",
+  "feature_columns": [
+    "Adj Close",
+    "Close",
+    "High",
+    "Low",
+    "Open",
+    "Volume",
+    "daily_return",
+    "sma_5",
+    "sma_20",
+    "sma_50",
+    "RSI",
+    "MACD",
+    "MACD_signal",
+    "volatility_20"
+  ],
+  "train_rows": 8844,
+  "test_rows": 2212,
+  "train_start": "2015-01-02",
+  "train_end": "2023-10-13",
+  "test_start": "2023-10-16",
+  "test_end": "2025-12-29",
+  "random_state": 42
+}
