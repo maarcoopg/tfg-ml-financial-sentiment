@@ -44,5 +44,9 @@ Los modelos disponibles son:
 - `logistic_regression`
 - `random_forest`
 - `hist_gradient_boosting`
+- `xgboost`
+- `lightgbm`
 
-Todos los modelos usan una semilla fija (`42`) cuando el estimador lo permite. En `random_forest` se usa `n_jobs=1` para evitar variaciones por paralelización durante la revisión de reproducibilidad.
+El entrenamiento por defecto usa `dummy`, `logistic_regression`, `random_forest` e `hist_gradient_boosting`. `xgboost` y `lightgbm` pueden ejecutarse indicándolos explícitamente en `--models`.
+
+Todos los modelos usan una semilla fija (`42`) cuando el estimador lo permite. En los modelos con paralelización se usa `n_jobs=1` para evitar variaciones durante la revisión de reproducibilidad.

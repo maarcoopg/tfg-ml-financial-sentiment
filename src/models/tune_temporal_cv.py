@@ -2,9 +2,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+import warnings
 from itertools import product
 from pathlib import Path
+
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+warnings.filterwarnings(
+    "ignore",
+    message="X does not have valid feature names.*",
+    category=UserWarning,
+)
 
 import joblib
 import numpy as np
@@ -22,7 +31,7 @@ from src.models.train_models import build_model, load_dataset
 ID_COLUMNS = ["ticker", "Date"]
 TARGET_COLUMN = "target"
 N_SPLITS = 3
-THRESHOLDS = np.round(np.arange(0.30, 0.71, 0.025), 3)
+THRESHOLDS = np.round(np.arange(0.40, 0.61, 0.025), 3)
 
 TUNED_MODEL_DIR = Path("models/tuned")
 TUNED_PREDICTIONS_DIR = Path("reports/tuned_predictions")
@@ -42,18 +51,20 @@ INITIAL_GLOBAL_METRICS_FILE = Path("reports/metrics/global_model_metrics.csv")
 PARAM_GRIDS = {
     "logistic_regression": [
         {"model__C": c, "model__class_weight": class_weight}
-        for c, class_weight in product([0.1, 1.0, 10.0], [None, "balanced"])
+        for c, class_weight in product([0.01, 0.1, 1.0, 10.0, 100.0], [None, "balanced"])
     ],
     "random_forest": [
         {
-            "model__n_estimators": 200,
+            "model__n_estimators": 150,
             "model__max_depth": max_depth,
             "model__min_samples_leaf": min_samples_leaf,
+            "model__max_features": max_features,
             "model__class_weight": class_weight,
         }
-        for max_depth, min_samples_leaf, class_weight in product(
-            [6, 10],
-            [5, 20],
+        for max_depth, min_samples_leaf, max_features, class_weight in product(
+            [4, 8],
+            [10, 30],
+            ["sqrt", 0.7],
             [None, "balanced_subsample"],
         )
     ],
@@ -62,11 +73,51 @@ PARAM_GRIDS = {
             "model__max_iter": max_iter,
             "model__learning_rate": learning_rate,
             "model__max_leaf_nodes": max_leaf_nodes,
+            "model__l2_regularization": l2_regularization,
         }
-        for max_iter, learning_rate, max_leaf_nodes in product(
-            [150, 250],
+        for max_iter, learning_rate, max_leaf_nodes, l2_regularization in product(
+            [100, 200],
+            [0.02, 0.05],
+            [7, 15],
+            [0.0, 0.1],
+        )
+    ],
+    "xgboost": [
+        {
+            "model__n_estimators": n_estimators,
+            "model__max_depth": max_depth,
+            "model__learning_rate": learning_rate,
+            "model__subsample": subsample,
+            "model__colsample_bytree": colsample_bytree,
+            "model__min_child_weight": min_child_weight,
+        }
+        for n_estimators, max_depth, learning_rate, subsample, colsample_bytree, min_child_weight
+        in product(
+            [100, 250],
+            [2, 3],
             [0.03, 0.07],
-            [15, 31],
+            [0.8],
+            [0.8],
+            [1, 5],
+        )
+    ],
+    "lightgbm": [
+        {
+            "model__n_estimators": n_estimators,
+            "model__num_leaves": num_leaves,
+            "model__learning_rate": learning_rate,
+            "model__subsample": subsample,
+            "model__colsample_bytree": colsample_bytree,
+            "model__min_child_samples": min_child_samples,
+        }
+        for n_estimators, num_leaves, learning_rate, subsample, colsample_bytree, min_child_samples
+        in product(
+            [100, 250],
+            [7, 15],
+            [0.03, 0.07],
+            [0.8],
+            [0.8],
+            [20, 50],
         )
     ],
 }
@@ -338,11 +389,14 @@ def run_tuning(datasets: list[str], models: list[str]) -> None:
                 )
                 cv_rows.append(summary)
                 fold_rows.extend(folds)
-                print(
-                    f"CV {dataset_type}/{model_name} "
-                    f"f1={summary['f1']:.4f} threshold={summary['threshold']:.3f} "
-                    f"params={summary['params']}"
-                )
+            current_results = pd.DataFrame(cv_rows)
+            best_so_far = select_best_config(current_results, dataset_type, model_name)
+            print(
+                f"Mejor CV {dataset_type}/{model_name}: "
+                f"roc_auc={best_so_far['roc_auc']:.4f} "
+                f"f1_0.5={best_so_far['fixed_0_5_f1']:.4f} "
+                f"threshold={best_so_far['threshold']:.3f}"
+            )
 
     cv_results = pd.DataFrame(cv_rows)
     fold_results = pd.DataFrame(fold_rows)
@@ -405,8 +459,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--models",
         nargs="+",
-        default=["logistic_regression", "random_forest", "hist_gradient_boosting"],
-        choices=["logistic_regression", "random_forest", "hist_gradient_boosting"],
+        default=[
+            "logistic_regression",
+            "random_forest",
+            "hist_gradient_boosting",
+            "xgboost",
+            "lightgbm",
+        ],
+        choices=list(PARAM_GRIDS.keys()),
     )
     return parser.parse_args()
 
