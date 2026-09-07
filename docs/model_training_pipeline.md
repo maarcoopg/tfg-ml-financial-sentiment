@@ -45,4 +45,4 @@ Los modelos disponibles son:
 - `random_forest`
 - `hist_gradient_boosting`
 
-Todos los modelos usan una semilla fija (`42`) cuando el estimador lo permite.
+Todos los modelos usan una semilla fija (`42`) cuando el estimador lo permite. En `random_forest` se usa `n_jobs=1` para evitar variaciones por paralelización durante la revisión de reproducibilidad.
