@@ -33,35 +33,36 @@ Ejemplo: `ProsusAI/finbert`.
 
 ## Tecnica seleccionada
 
-La tecnica seleccionada es FinBERT, usando el modelo `ProsusAI/finbert`.
+La tecnica operativa seleccionada para la primera version del pipeline es el sentimiento por ticker devuelto por Alpha Vantage News Sentiment.
 
 La seleccion se justifica por:
 
-- Esta orientado especificamente a textos financieros.
-- Genera directamente las tres clases necesarias para el proyecto.
-- Permite obtener una puntuacion continua ademas de una clase.
-- Se puede aplicar de forma reproducible sobre `title` y `summary`.
+- Esta calculado para lenguaje financiero y asociado al ticker concreto de la noticia.
+- Genera una puntuacion continua y una etiqueta interpretable.
+- Evita volver a procesar decenas de miles de textos con un modelo pesado en local.
+- Es reproducible porque queda almacenado junto con la noticia descargada.
 - Encaja con el objetivo del TFG de combinar analisis tecnico y sentimiento financiero.
+
+FinBERT, usando el modelo `ProsusAI/finbert`, queda como alternativa avanzada si se quiere recalcular el sentimiento directamente sobre `title` y `summary`.
 
 ## Integracion prevista
 
-El pipeline aplicara FinBERT sobre una columna de texto construida a partir de:
+El pipeline usara como entrada principal:
 
-- `title`
-- `summary`, cuando este disponible
+- `ticker_sentiment_score`
+- `ticker_sentiment_label`
 
 Para cada noticia se guardaran:
 
 - `sentiment_label`
 - `sentiment_score`
-- `sentiment_positive`
-- `sentiment_negative`
-- `sentiment_neutral`
+- `sentiment_label_raw`
+- `sentiment_source`
 
-La puntuacion `sentiment_score` se calculara como:
+La puntuacion `sentiment_score` se tomara de:
 
 ```text
-sentiment_positive - sentiment_negative
+ticker_sentiment_score
 ```
 
 Este valor mantiene una interpretacion sencilla:
@@ -74,9 +75,7 @@ Este valor mantiene una interpretacion sencilla:
 
 La prueba inicial se hara sobre un subconjunto pequeno de noticias limpias para comprobar que:
 
-- El modelo carga correctamente.
-- Las tres clases aparecen en el resultado.
-- Las probabilidades suman aproximadamente 1.
+- La puntuacion numerica esta disponible.
+- La etiqueta original esta disponible.
+- No se generan valores nulos.
 - Los ejemplos clasificados son coherentes de forma manual.
-
-Si no se dispone del modelo localmente, el script debera fallar con un mensaje claro indicando que faltan las dependencias `transformers` y `torch`.
