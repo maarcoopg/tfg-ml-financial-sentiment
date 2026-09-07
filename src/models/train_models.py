@@ -2,18 +2,29 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+warnings.filterwarnings(
+    "ignore",
+    message="X does not have valid feature names.*",
+    category=UserWarning,
+)
+
 import joblib
 import pandas as pd
+from lightgbm import LGBMClassifier
 from sklearn.dummy import DummyClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from xgboost import XGBClassifier
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -92,6 +103,31 @@ def build_model(model_name: str) -> Pipeline:
             learning_rate=0.05,
             max_leaf_nodes=31,
             random_state=RANDOM_STATE,
+        )
+        steps = [("imputer", SimpleImputer(strategy="median")), ("model", estimator)]
+    elif model_name == "xgboost":
+        estimator = XGBClassifier(
+            n_estimators=200,
+            max_depth=3,
+            learning_rate=0.05,
+            subsample=0.8,
+            colsample_bytree=0.8,
+            eval_metric="logloss",
+            random_state=RANDOM_STATE,
+            n_jobs=1,
+        )
+        steps = [("imputer", SimpleImputer(strategy="median")), ("model", estimator)]
+    elif model_name == "lightgbm":
+        estimator = LGBMClassifier(
+            n_estimators=200,
+            max_depth=-1,
+            num_leaves=15,
+            learning_rate=0.05,
+            subsample=0.8,
+            colsample_bytree=0.8,
+            random_state=RANDOM_STATE,
+            n_jobs=1,
+            verbosity=-1,
         )
         steps = [("imputer", SimpleImputer(strategy="median")), ("model", estimator)]
     else:
@@ -182,8 +218,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--models",
         nargs="+",
-        default=["dummy", "logistic_regression", "random_forest", "hist_gradient_boosting"],
-        choices=["dummy", "logistic_regression", "random_forest", "hist_gradient_boosting"],
+        default=[
+            "dummy",
+            "logistic_regression",
+            "random_forest",
+            "hist_gradient_boosting",
+        ],
+        choices=[
+            "dummy",
+            "logistic_regression",
+            "random_forest",
+            "hist_gradient_boosting",
+            "xgboost",
+            "lightgbm",
+        ],
     )
     return parser.parse_args()
 
