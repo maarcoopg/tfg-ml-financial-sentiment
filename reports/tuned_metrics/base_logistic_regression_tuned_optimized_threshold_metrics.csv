@@ -1,0 +1,6 @@
+dataset_type,model_name,model_variant,scope,accuracy,precision,recall,f1,roc_auc,tn,fp,fn,tp,group
+base,logistic_regression,tuned_optimized_threshold,global,0.538878842676311,0.538878842676311,1.0,0.700352526439483,0.5113962363468878,0,1020,0,1192,
+base,logistic_regression,tuned_optimized_threshold,ticker,0.5443037974683544,0.5443037974683544,1.0,0.7049180327868853,0.4425987449243263,0,252,0,301,AAPL
+base,logistic_regression,tuned_optimized_threshold,ticker,0.5497287522603979,0.5497287522603979,1.0,0.7094515752625438,0.5415081378144155,0,249,0,304,MSFT
+base,logistic_regression,tuned_optimized_threshold,ticker,0.5497287522603979,0.5497287522603979,1.0,0.7094515752625438,0.525642041851617,0,249,0,304,NVDA
+base,logistic_regression,tuned_optimized_threshold,ticker,0.5117540687160941,0.5117540687160941,1.0,0.6770334928229665,0.5201936919251406,0,270,0,283,TSLA
