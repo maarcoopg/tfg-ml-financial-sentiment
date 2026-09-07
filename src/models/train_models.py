@@ -83,7 +83,7 @@ def build_model(model_name: str) -> Pipeline:
             max_depth=8,
             min_samples_leaf=10,
             random_state=RANDOM_STATE,
-            n_jobs=-1,
+            n_jobs=1,
         )
         steps = [("imputer", SimpleImputer(strategy="median")), ("model", estimator)]
     elif model_name == "hist_gradient_boosting":

@@ -77,6 +77,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.executed.ipynb
 
 # IPython
 profile_default/
@@ -202,6 +203,9 @@ cython_debug/
 # .vscode/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
+
+# Local review artifacts
+docs/issue_review/
 
 # Ruff stuff:
 .ruff_cache/
