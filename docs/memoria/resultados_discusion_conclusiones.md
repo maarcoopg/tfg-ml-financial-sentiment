@@ -1,5 +1,7 @@
 # Resultados, discusión y conclusiones
 
+> Estado de revisión: las tablas de este documento corresponden al experimento inicial y se conservan como antecedente. El protocolo corregido y sus limitaciones se describen en `docs/revision_implementation.md`; los resultados nuevos se documentan en `docs/resultados_revision_temporal.md`. El histórico utilizado ya se ha inspeccionado y no constituye un holdout nuevo.
+
 ## Resultados globales
 
 La comparación entre el modelo financiero base y el modelo híbrido se realizó sobre el mismo conjunto de activos: AAPL, MSFT, NVDA y TSLA. SPY no se incluyó en los entrenamientos para mantener una comparación homogénea.
@@ -29,7 +31,7 @@ Entre las variables financieras destacan `daily_return`, `RSI`, `volatility_20`,
 
 ## Discusión
 
-Los resultados apuntan a que el sentimiento financiero contiene cierta señal, pero su utilidad depende del algoritmo. Los métodos no lineales pueden aprovechar mejor interacciones entre indicadores técnicos y sentimiento, como se observa en `hist_gradient_boosting`. Sin embargo, el efecto no es suficientemente fuerte como para producir una mejora consistente en todos los modelos.
+Los resultados muestran diferencias puntuales entre algoritmos, pero no acreditan por sí solos que el sentimiento contenga una señal predictiva robusta. La capacidad de los métodos no lineales para representar interacciones es una motivación del experimento, no una explicación demostrada de las diferencias observadas. Deben considerarse la incertidumbre, la cobertura de noticias y la disponibilidad temporal de las variables.
 
 También debe tenerse en cuenta que la predicción diaria de dirección bursátil es una tarea ruidosa. Una parte importante de los movimientos de precio puede depender de factores no incluidos en el dataset, como resultados empresariales, cambios macroeconómicos, política monetaria, eventos geopolíticos o expectativas de mercado no capturadas por las noticias descargadas.
 
@@ -41,14 +43,14 @@ El proyecto permite construir un pipeline completo y reproducible que integra da
 
 La comparación empírica no permite afirmar que el sentimiento mejore siempre al modelo financiero base. La mejora más clara aparece en `hist_gradient_boosting`, mientras que otros modelos muestran mejoras parciales o empeoramientos.
 
-Por tanto, la conclusión principal es que el sentimiento financiero puede aportar información complementaria, pero su efecto depende del modelo y del modo en que se representa la información textual. En este diseño experimental, el enfoque híbrido resulta prometedor en modelos no lineales, aunque no sustituye a las variables financieras como principal fuente de señal.
+La comparación inicial no demuestra una mejora robusta atribuible al sentimiento. La utilidad de representaciones alternativas debe tratarse como una hipótesis experimental. Ni la importancia interna de una variable ni un AUC puntual ligeramente superior a 0,5 prueban capacidad predictiva independiente o rentabilidad.
 
 ## Limitaciones y líneas futuras
 
 Como limitaciones principales destacan:
 
 - Uso de sentimiento agregado diario en lugar de embeddings o análisis textual más profundo.
-- Ausencia de validación temporal con múltiples ventanas.
+- En el experimento inicial faltaba validación temporal con múltiples ventanas; la revisión posterior incorpora validación anidada y purga. Sigue pendiente una confirmación en un periodo realmente no utilizado.
 - Evaluación limitada a cuatro empresas tecnológicas de gran capitalización.
 - Exclusión de SPY del entrenamiento principal por falta de sentimiento corporativo comparable.
 

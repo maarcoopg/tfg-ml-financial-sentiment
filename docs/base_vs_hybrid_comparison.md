@@ -33,5 +33,5 @@ Con estos resultados no puede afirmarse que el sentimiento mejore de forma gener
 
 Las tablas completas se guardan en:
 
-- `reports/comparison/base_vs_hybrid_global.csv`
-- `reports/comparison/base_vs_hybrid_by_ticker.csv`
+- `reports/historical/comparison/base_vs_hybrid_global.csv`
+- `reports/historical/comparison/base_vs_hybrid_by_ticker.csv`

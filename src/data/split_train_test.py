@@ -1,7 +1,14 @@
 from pathlib import Path
 import json
+import sys
 
 import pandas as pd
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.models.temporal_validation import purged_train
 
 
 FINAL_DATASET_FILE = Path("data/processed/hybrid/final_hybrid_dataset.csv")
@@ -80,7 +87,7 @@ def split_by_time(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.Time
     split_index = int(len(sorted_dates) * TRAIN_RATIO)
     split_date = sorted_dates.iloc[split_index]
 
-    train = df[df["Date"] < split_date].copy()
+    train = purged_train(df, split_date)
     test = df[df["Date"] >= split_date].copy()
 
     return train, test, split_date
@@ -126,7 +133,17 @@ def save_splits(train: pd.DataFrame, test: pd.DataFrame) -> None:
         "financial_features": FINANCIAL_FEATURES,
         "sentiment_features": SENTIMENT_FEATURES,
         "hybrid_features": HYBRID_FEATURES,
+        "purged_datasets": {"base": True, "hybrid": True},
+        "label_horizon_sessions": 1,
     }
+    lagged_features = [
+        f"{column}_{suffix}_{window}"
+        for column in SENTIMENT_FEATURES
+        for suffix, windows in [("lag", [1, 2, 3]), ("rolling", [3, 5])]
+        for window in windows
+    ]
+    feature_config["lagged_sentiment_features"] = lagged_features
+    feature_config["lagged_hybrid_features"] = HYBRID_FEATURES + lagged_features
     FEATURE_CONFIG_FILE.write_text(
         json.dumps(feature_config, indent=2),
         encoding="utf-8",

@@ -17,6 +17,11 @@ Los datos financieros iniciales incluyen AAPL, MSFT, NVDA, TSLA y SPY. Para el e
 
 ## Ejecución
 
+La revisión metodológica se ejecuta con `python -m src.experiments.run_review`.
+Usa horarios reales del mercado, validación temporal anidada con purga y salidas
+aisladas por ejecución. Véase `docs/revision_implementation.md`. Los informes
+anteriores a esta revisión son históricos exploratorios.
+
 La guía completa de ejecución está en:
 
 ```text

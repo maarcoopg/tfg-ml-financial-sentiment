@@ -1,16 +1,23 @@
 from __future__ import annotations
 
 import json
+import argparse
+import sys
 from pathlib import Path
 
 import joblib
 import pandas as pd
 
 
-MODEL_DIR = Path("models/trained")
-METADATA_DIR = Path("reports/model_metadata")
-OUTPUT_DIR = Path("reports/feature_importance")
+MODEL_DIR = Path("models/experiments/legacy-trained")
+METADATA_DIR = Path("reports/historical/model_metadata")
+OUTPUT_DIR = Path("reports/historical/feature_importance")
 FEATURE_CONFIG_FILE = Path("data/processed/model/feature_sets.json")
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+from src.experiments.artifacts import artifact_dir, refresh_manifest
 
 
 def load_feature_groups() -> dict[str, set[str]]:
@@ -66,10 +73,10 @@ def extract_importance(model_file: Path, metadata_file: Path) -> pd.DataFrame | 
     return importance
 
 
-def build_feature_importance() -> pd.DataFrame:
+def build_feature_importance(model_dir: Path = MODEL_DIR, metadata_dir: Path = METADATA_DIR) -> pd.DataFrame:
     frames = []
-    for metadata_file in sorted(METADATA_DIR.glob("*.json")):
-        model_file = MODEL_DIR / f"{metadata_file.stem}.joblib"
+    for metadata_file in sorted(metadata_dir.glob("*.json")):
+        model_file = model_dir / f"{metadata_file.stem}.joblib"
         if not model_file.exists():
             continue
         importance = extract_importance(model_file, metadata_file)
@@ -83,12 +90,16 @@ def build_feature_importance() -> pd.DataFrame:
 
 
 def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    importance = build_feature_importance()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-dir", type=Path)
+    args = parser.parse_args()
+    output_dir = args.run_dir / "feature_importance" if args.run_dir else OUTPUT_DIR
+    output_dir.mkdir(parents=True, exist_ok=True)
+    importance = build_feature_importance(artifact_dir(args.run_dir, "models"), args.run_dir / "metadata") if args.run_dir else build_feature_importance()
 
-    all_file = OUTPUT_DIR / "feature_importance.csv"
-    top_file = OUTPUT_DIR / "top_10_feature_importance.csv"
-    group_file = OUTPUT_DIR / "feature_group_importance.csv"
+    all_file = output_dir / "feature_importance.csv"
+    top_file = output_dir / "top_10_feature_importance.csv"
+    group_file = output_dir / "feature_group_importance.csv"
 
     top_10 = (
         importance.sort_values(["dataset_type", "model_name", "rank"])
@@ -107,6 +118,8 @@ def main() -> None:
     importance.to_csv(all_file, index=False)
     top_10.to_csv(top_file, index=False)
     group_importance.to_csv(group_file, index=False)
+    if args.run_dir:
+        refresh_manifest(args.run_dir)
 
     print(f"Guardado: {all_file} - {len(importance)} filas")
     print(f"Guardado: {top_file} - {len(top_10)} filas")

@@ -6,6 +6,7 @@ import os
 import sys
 import warnings
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 
 os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
@@ -31,14 +32,16 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.models.evaluation import evaluate_predictions, save_metrics
+from src.models.temporal_validation import purged_train, validate_panel
+from src.experiments.artifacts import artifact_dir, create_run, finish_run, write_json
 
 
 DATA_DIR = Path("data/processed/model")
 FEATURE_CONFIG_FILE = DATA_DIR / "feature_sets.json"
-MODEL_DIR = Path("models/trained")
-PREDICTIONS_DIR = Path("reports/predictions")
-METRICS_DIR = Path("reports/metrics")
-METADATA_DIR = Path("reports/model_metadata")
+MODEL_DIR = Path("models/experiments/legacy-trained")
+PREDICTIONS_DIR = Path("reports/historical/predictions")
+METRICS_DIR = Path("reports/historical/metrics")
+METADATA_DIR = Path("reports/historical/model_metadata")
 
 ID_COLUMNS = ["ticker", "Date"]
 TARGET_COLUMN = "target"
@@ -61,18 +64,28 @@ def load_feature_sets() -> dict[str, list[str]]:
 
 
 def load_dataset(dataset_type: str) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
-    if dataset_type not in {"base", "hybrid"}:
-        raise ValueError("dataset_type debe ser 'base' o 'hybrid'")
+    if dataset_type not in {"base", "hybrid", "lagged_hybrid"}:
+        raise ValueError("dataset_type debe ser 'base', 'hybrid' o 'lagged_hybrid'")
 
     feature_sets = load_feature_sets()
-    feature_key = f"{dataset_type}_features"
     if dataset_type == "base":
         feature_columns = feature_sets["financial_features"]
+    elif dataset_type == "lagged_hybrid":
+        feature_columns = feature_sets["lagged_hybrid_features"]
     else:
-        feature_columns = feature_sets[feature_key]
+        feature_columns = feature_sets["hybrid_features"]
 
     train = pd.read_csv(DATA_DIR / f"{dataset_type}_train.csv")
     test = pd.read_csv(DATA_DIR / f"{dataset_type}_test.csv")
+
+    validate_panel(train)
+    validate_panel(test)
+    combined = pd.concat([train, test], ignore_index=True)
+    validate_panel(combined)
+    if pd.to_datetime(train["Date"]).max() >= pd.to_datetime(test["Date"]).min():
+        raise ValueError("Entrenamiento y test no estan separados temporalmente")
+    if not feature_sets.get("purged_datasets", {}).get(dataset_type, False):
+        train = purged_train(combined, pd.to_datetime(test["Date"]).min())
 
     return train, test, feature_columns
 
@@ -124,6 +137,7 @@ def build_model(model_name: str) -> Pipeline:
             num_leaves=15,
             learning_rate=0.05,
             subsample=0.8,
+            subsample_freq=1,
             colsample_bytree=0.8,
             random_state=RANDOM_STATE,
             n_jobs=1,
@@ -155,7 +169,7 @@ def create_predictions(
     return predictions
 
 
-def train_one_model(dataset_type: str, model_name: str) -> TrainResult:
+def train_one_model(dataset_type: str, model_name: str, output_root: Path | None = None) -> TrainResult:
     train, test, feature_columns = load_dataset(dataset_type)
     x_train = train[feature_columns]
     y_train = train[TARGET_COLUMN]
@@ -174,15 +188,16 @@ def train_one_model(dataset_type: str, model_name: str) -> TrainResult:
     metrics.insert(0, "model_name", model_name)
     metrics.insert(0, "dataset_type", dataset_type)
 
-    MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    PREDICTIONS_DIR.mkdir(parents=True, exist_ok=True)
-    METRICS_DIR.mkdir(parents=True, exist_ok=True)
-    METADATA_DIR.mkdir(parents=True, exist_ok=True)
-
-    model_file = MODEL_DIR / f"{dataset_type}_{model_name}.joblib"
-    predictions_file = PREDICTIONS_DIR / f"{dataset_type}_{model_name}_predictions.csv"
-    metrics_file = METRICS_DIR / f"{dataset_type}_{model_name}_metrics.csv"
-    metadata_file = METADATA_DIR / f"{dataset_type}_{model_name}.json"
+    if output_root is None:
+        output_root = Path("reports/experiments") / datetime.now(timezone.utc).strftime("train-%Y%m%dT%H%M%S%fZ")
+    model_file = artifact_dir(output_root, "models") / f"{dataset_type}_{model_name}.joblib"
+    predictions_file = output_root / "predictions" / f"{dataset_type}_{model_name}_predictions.csv"
+    metrics_file = output_root / "metrics" / f"{dataset_type}_{model_name}_metrics.csv"
+    metadata_file = output_root / "metadata" / f"{dataset_type}_{model_name}.json"
+    for path in [model_file, predictions_file, metrics_file, metadata_file]:
+        if path.exists():
+            raise FileExistsError(f"La salida ya existe: {path}")
+        path.parent.mkdir(parents=True, exist_ok=True)
 
     joblib.dump(model, model_file)
     predictions.to_csv(predictions_file, index=False)
@@ -214,7 +229,8 @@ def train_one_model(dataset_type: str, model_name: str) -> TrainResult:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Entrena modelos financieros e híbridos.")
-    parser.add_argument("--dataset", choices=["base", "hybrid"], required=True)
+    parser.add_argument("--dataset", nargs="+", choices=["base", "hybrid", "lagged_hybrid"], required=True)
+    parser.add_argument("--run-dir", type=Path)
     parser.add_argument(
         "--models",
         nargs="+",
@@ -238,12 +254,24 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    for model_name in args.models:
-        result = train_one_model(args.dataset, model_name)
-        print(
-            f"Entrenado {result.dataset_type}/{result.model_name}: "
-            f"{result.model_file}, {result.predictions_file}, {result.metrics_file}"
-        )
+    output = args.run_dir or Path("reports/experiments") / datetime.now(timezone.utc).strftime("train-%Y%m%dT%H%M%S%fZ")
+    run_dir, manifest = create_run(PROJECT_ROOT, output, vars(args))
+    manifest["evaluation_status"] = "Legacy processed dataset; exploratory holdout, not nested evaluation."
+    inputs = [PROJECT_ROOT / FEATURE_CONFIG_FILE]
+    try:
+        for dataset_type in args.dataset:
+            inputs.extend(PROJECT_ROOT / DATA_DIR / f"{dataset_type}_{split}.csv" for split in ["train", "test"])
+            for model_name in args.models:
+                result = train_one_model(dataset_type, model_name, run_dir)
+                print(
+                    f"Entrenado {result.dataset_type}/{result.model_name}: "
+                    f"{result.model_file}, {result.predictions_file}, {result.metrics_file}"
+                )
+        finish_run(run_dir, manifest, inputs, PROJECT_ROOT)
+    except Exception as exc:
+        manifest.update(status="failed", error=str(exc))
+        write_json(run_dir / "manifest.json", manifest)
+        raise
 
 
 if __name__ == "__main__":

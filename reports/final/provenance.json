@@ -1,0 +1,31 @@
+{
+  "run_id": "review-full-20260908",
+  "source_manifest": "reports/experiments/review-full-20260908/manifest.json",
+  "evaluation_status": "Exploratory nested evaluation on previously inspected historical dates; not a new untouched holdout.",
+  "files": {
+    "tables/global_metrics.csv": {
+      "source": "reports/experiments/review-full-20260908/metrics/global_metrics.csv",
+      "sha256": "ae89199b2175e0259d41f24d6478e2f75261acc06ef82551c1d2ea877d8287ae"
+    },
+    "tables/auc_intervals.csv": {
+      "source": "reports/experiments/review-full-20260908/metrics/auc_intervals.csv",
+      "sha256": "45d809064e6e5b300be6d70dc020e34da6111ac022493493a8ccb76dcf373459"
+    },
+    "figures/balanced_accuracy.png": {
+      "source": "reports/experiments/review-full-20260908/figures/balanced_accuracy.png",
+      "sha256": "38e79cc5f13f0aa40251deea1b954dfe2f3924d73586234fbb2aac743db3d065"
+    },
+    "figures/f1_macro.png": {
+      "source": "reports/experiments/review-full-20260908/figures/f1_macro.png",
+      "sha256": "01ac8634705946e672f3802c6b55bb702d90503cac47bc02902939e512636cf6"
+    },
+    "figures/mcc.png": {
+      "source": "reports/experiments/review-full-20260908/figures/mcc.png",
+      "sha256": "cd68be91c27eb03178e4abc73419e2098d99b26fade201e3feac16aa7c10d507"
+    },
+    "figures/roc_auc.png": {
+      "source": "reports/experiments/review-full-20260908/figures/roc_auc.png",
+      "sha256": "fa657b037b0ddd24aedb0d4bae099a0caec3f1fbca58f021154c01ee3d63aa3c"
+    }
+  }
+}

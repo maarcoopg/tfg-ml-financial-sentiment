@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Se incorporó una validación cruzada temporal dentro del conjunto de entrenamiento para ajustar hiperparámetros sin utilizar el conjunto de test final. El test final se mantiene reservado para una única evaluación posterior.
+Se incorporó una validación cruzada temporal dentro del conjunto de entrenamiento para ajustar hiperparámetros. El código no usa test para ese ajuste, pero el periodo de test se ha consultado en sucesivos experimentos y ya no constituye una evaluación final independiente.
 
 ## Diseño
 
@@ -76,8 +76,22 @@ El mejor ROC-AUC global del bloque tuned es el de `random_forest` base con 0.512
 
 Con umbral optimizado dentro del rango 0.40-0.60, el F1 sube en varios modelos. Aun así, esta variante aumenta mucho el recall y genera más falsos positivos, por lo que se considera un análisis secundario y no el resultado principal.
 
+## Experimento con sentimiento retardado
+
+También se evaluó el dataset `lagged_hybrid`, que añade retardos y ventanas móviles de variables de sentimiento. Con umbral fijo 0.5, los resultados frente al híbrido ajustado sin retardos son:
+
+| Modelo | Accuracy híbrido | Accuracy lagged | Delta accuracy | F1 híbrido | F1 lagged | Delta F1 | ROC-AUC híbrido | ROC-AUC lagged | Delta ROC-AUC |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| logistic_regression | 0.5063 | 0.5063 | 0.0000 | 0.5781 | 0.5321 | -0.0459 | 0.5033 | 0.5042 | 0.0009 |
+| random_forest | 0.4778 | 0.5086 | 0.0307 | 0.3899 | 0.5365 | 0.1466 | 0.5010 | 0.5147 | 0.0137 |
+| hist_gradient_boosting | 0.5145 | 0.4973 | -0.0172 | 0.5487 | 0.5260 | -0.0227 | 0.5087 | 0.4957 | -0.0130 |
+| xgboost | 0.5014 | 0.4896 | -0.0118 | 0.5194 | 0.4819 | -0.0375 | 0.5026 | 0.4993 | -0.0032 |
+| lightgbm | 0.5045 | 0.5122 | 0.0077 | 0.5116 | 0.5422 | 0.0306 | 0.5119 | 0.5217 | 0.0098 |
+
+El mejor resultado híbrido por ROC-AUC pasa a ser `lagged_hybrid + lightgbm`, con ROC-AUC 0.5217 y F1 0.5422.
+
 ## Conclusión
 
-La validación cruzada temporal mejora la calidad metodológica del experimento y permite ajustar hiperparámetros sin fuga temporal. No obstante, no produce una mejora fuerte y generalizada del enfoque híbrido.
+La validación cruzada temporal permite separar el ajuste de parámetros del test. Queda pendiente controlar el horizonte de las etiquetas en las fronteras y la disponibilidad horaria de las noticias; no puede afirmarse todavía ausencia de fuga temporal en el pipeline completo. No se demuestra una mejora fuerte y generalizada del enfoque híbrido.
 
 El ajuste confirma que el siguiente paso más prometedor no es seguir bajando umbrales, sino mejorar la representación temporal del sentimiento. Tiene sentido añadir variables retardadas y ventanas móviles de noticias para capturar que una noticia puede afectar no solo al día de publicación, sino también a sesiones posteriores.

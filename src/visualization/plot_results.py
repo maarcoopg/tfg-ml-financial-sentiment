@@ -1,16 +1,18 @@
 from __future__ import annotations
 
 from pathlib import Path
+import argparse
+import sys
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
 
-METRICS_FILE = Path("reports/metrics/global_model_metrics.csv")
-COMPARISON_FILE = Path("reports/comparison/base_vs_hybrid_global.csv")
-FEATURE_IMPORTANCE_FILE = Path("reports/feature_importance/top_10_feature_importance.csv")
-OUTPUT_DIR = Path("reports/figures")
+METRICS_FILE = Path("reports/historical/metrics/global_model_metrics.csv")
+COMPARISON_FILE = Path("reports/historical/comparison/base_vs_hybrid_global.csv")
+FEATURE_IMPORTANCE_FILE = Path("reports/historical/feature_importance/top_10_feature_importance.csv")
+OUTPUT_DIR = Path("reports/historical/figures")
 
 
 def set_style() -> None:
@@ -38,15 +40,16 @@ def plot_global_metrics() -> None:
 
     plt.figure(figsize=(11, 6))
     ax = sns.barplot(
-        data=melted,
+        data=metrics,
         x="model_name",
-        y="value",
+        y="roc_auc",
         hue="dataset_type",
         errorbar=None,
     )
-    ax.set_title("Métricas globales por modelo")
+    ax.set_title("ROC-AUC global por modelo")
     ax.set_xlabel("Modelo")
-    ax.set_ylabel("Valor")
+    ax.set_ylabel("ROC-AUC")
+    ax.axhline(0.5, color="black", linewidth=1, linestyle="--")
     ax.set_ylim(0, 1)
     ax.tick_params(axis="x", rotation=20)
     ax.legend(title="Dataset")
@@ -129,10 +132,23 @@ def plot_feature_importance() -> None:
 
 
 def main() -> None:
+    global METRICS_FILE, COMPARISON_FILE, FEATURE_IMPORTANCE_FILE, OUTPUT_DIR
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-dir", type=Path)
+    args = parser.parse_args()
+    if args.run_dir:
+        METRICS_FILE = args.run_dir / "metrics/global_model_metrics.csv"
+        COMPARISON_FILE = args.run_dir / "comparison/base_vs_hybrid_global.csv"
+        FEATURE_IMPORTANCE_FILE = args.run_dir / "feature_importance/top_10_feature_importance.csv"
+        OUTPUT_DIR = args.run_dir / "figures"
     set_style()
     plot_global_metrics()
     plot_base_hybrid_deltas()
     plot_feature_importance()
+    if args.run_dir:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+        from src.experiments.artifacts import refresh_manifest
+        refresh_manifest(args.run_dir)
 
 
 if __name__ == "__main__":

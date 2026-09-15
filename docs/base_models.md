@@ -27,4 +27,4 @@ SPY queda fuera del entrenamiento principal para mantener el mismo universo de a
 | random_forest | 0.5095 | 0.5388 | 0.6233 | 0.5780 | 0.5124 |
 | hist_gradient_boosting | 0.4855 | 0.5265 | 0.4497 | 0.4851 | 0.4930 |
 
-Las métricas completas, incluyendo matriz de confusión y desglose por ticker, se guardan en `reports/metrics/`.
+Las métricas completas, incluyendo matriz de confusión y desglose por ticker, se guardan en `reports/historical/metrics/`.

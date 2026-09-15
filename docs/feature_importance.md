@@ -17,9 +17,9 @@ El modelo `dummy` no tiene variables explicativas reales. `hist_gradient_boostin
 
 ## Salidas
 
-- `reports/feature_importance/feature_importance.csv`
-- `reports/feature_importance/top_10_feature_importance.csv`
-- `reports/feature_importance/feature_group_importance.csv`
+- `reports/historical/feature_importance/feature_importance.csv`
+- `reports/historical/feature_importance/top_10_feature_importance.csv`
+- `reports/historical/feature_importance/feature_group_importance.csv`
 
 ## Lectura por grupos
 

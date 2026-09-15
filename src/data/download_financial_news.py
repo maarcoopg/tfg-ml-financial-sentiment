@@ -23,6 +23,10 @@ END_DATE = date(2025, 12, 31)
 LIMIT = 1000
 SPLIT_THRESHOLD = 950
 REQUEST_DELAY_SECONDS = 1.0
+NEWS_COLUMNS = ["ticker", "title", "summary", "url", "source", "source_domain",
+                "time_published", "banner_image", "overall_sentiment_score",
+                "overall_sentiment_label", "relevance_score", "ticker_sentiment_score",
+                "ticker_sentiment_label"]
 
 
 @dataclass(frozen=True)
@@ -92,21 +96,26 @@ def request_news(ticker: str, date_range: DateRange, api_key: str) -> dict:
         "apikey": api_key,
     }
 
-    response = requests.get(API_URL, params=params, timeout=60)
-    response.raise_for_status()
-
-    data = response.json()
-
-    if "Note" in data:
-        raise RuntimeError(data["Note"])
-
-    if "Information" in data:
-        raise RuntimeError(data["Information"])
-
-    if "Error Message" in data:
-        raise RuntimeError(data["Error Message"])
-
-    return data
+    for attempt in range(3):
+        try:
+            response = requests.get(API_URL, params=params, timeout=60)
+            if response.status_code == 429 or response.status_code >= 500:
+                raise requests.ConnectionError("Respuesta transitoria del proveedor")
+            response.raise_for_status()
+            data = response.json()
+            if "Note" in data or "Information" in data:
+                raise requests.ConnectionError("Limite o indisponibilidad del proveedor")
+            if "Error Message" in data:
+                raise ValueError("El proveedor rechazo la consulta")
+            if not isinstance(data.get("feed"), list):
+                raise ValueError("Respuesta sin lista feed; no equivale a cero noticias")
+            return data
+        except (requests.ConnectionError, requests.Timeout):
+            if attempt == 2:
+                raise RuntimeError("No se pudo descargar tras tres intentos") from None
+            time.sleep(2 ** attempt)
+        except (requests.HTTPError, ValueError):
+            raise RuntimeError("Respuesta invalida del proveedor; no se guarda un chunk vacio") from None
 
 
 def get_ticker_sentiment(news_item: dict, ticker: str) -> dict:
@@ -147,7 +156,7 @@ def save_chunk(ticker: str, date_range: DateRange, feed: list[dict]) -> Path:
     CHUNKS_DIR.mkdir(parents=True, exist_ok=True)
 
     rows = [flatten_news_item(item, ticker) for item in feed]
-    df = pd.DataFrame(rows)
+    df = pd.DataFrame(rows, columns=NEWS_COLUMNS)
 
     output_path = chunk_path(ticker, date_range)
     df.to_csv(output_path, index=False)
@@ -159,7 +168,13 @@ def download_range(ticker: str, date_range: DateRange, api_key: str) -> list[Pat
     output_path = chunk_path(ticker, date_range)
 
     if output_path.exists():
-        existing_rows = len(pd.read_csv(output_path))
+        try:
+            existing_rows = len(pd.read_csv(output_path))
+        except pd.errors.EmptyDataError:
+            raise ValueError(f"Chunk sin esquema: {output_path}; debe volver a descargarse") from None
+
+        if existing_rows >= SPLIT_THRESHOLD and date_range.days == 1:
+            raise RuntimeError(f"Dia saturado: {ticker} {date_range.start}; requiere descarga intradia")
 
         if existing_rows >= SPLIT_THRESHOLD and date_range.days > 1:
             paths = []
@@ -177,16 +192,10 @@ def download_range(ticker: str, date_range: DateRange, api_key: str) -> list[Pat
 
     feed = data.get("feed", [])
     item_count = len(feed)
+    if item_count >= SPLIT_THRESHOLD and date_range.days == 1:
+        raise RuntimeError(f"Dia saturado: {ticker} {date_range.start}; no se garantiza exhaustividad")
 
     print(f"{ticker} {date_range.start} - {date_range.end}: {item_count} noticias")
-
-    if item_count >= SPLIT_THRESHOLD and date_range.days > 31:
-        paths = []
-
-        for child_range in split_range(date_range):
-            paths.extend(download_range(ticker, child_range, api_key))
-
-        return paths
 
     if item_count >= SPLIT_THRESHOLD and date_range.days > 1:
         paths = []
@@ -209,7 +218,7 @@ def combine_chunks(chunk_files: list[Path]) -> pd.DataFrame:
             dataframes.append(pd.read_csv(file_path))
 
     if not dataframes:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=NEWS_COLUMNS + ["published_at", "published_date"])
 
     df = pd.concat(dataframes, ignore_index=True)
 

@@ -6,6 +6,7 @@ import os
 import sys
 import warnings
 from itertools import product
+from datetime import datetime, timezone
 from pathlib import Path
 
 os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
@@ -26,6 +27,8 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from src.models.evaluation import evaluate_binary_classification, evaluate_predictions, save_metrics
 from src.models.train_models import build_model, load_dataset
+from src.models.temporal_validation import expanding_date_splits
+from src.experiments.artifacts import artifact_dir, create_run, finish_run, write_json
 
 
 ID_COLUMNS = ["ticker", "Date"]
@@ -33,10 +36,10 @@ TARGET_COLUMN = "target"
 N_SPLITS = 3
 THRESHOLDS = np.round(np.arange(0.40, 0.61, 0.025), 3)
 
-TUNED_MODEL_DIR = Path("models/tuned")
-TUNED_PREDICTIONS_DIR = Path("reports/tuned_predictions")
-TUNED_METRICS_DIR = Path("reports/tuned_metrics")
-TUNING_DIR = Path("reports/tuning")
+TUNED_MODEL_DIR = Path("models/experiments/legacy-tuned")
+TUNED_PREDICTIONS_DIR = Path("reports/historical/tuned_predictions")
+TUNED_METRICS_DIR = Path("reports/historical/tuned_metrics")
+TUNING_DIR = Path("reports/historical/tuning")
 
 CV_RESULTS_FILE = TUNING_DIR / "temporal_cv_results.csv"
 FOLD_RESULTS_FILE = TUNING_DIR / "temporal_cv_fold_results.csv"
@@ -45,7 +48,8 @@ TUNED_GLOBAL_METRICS_FILE = TUNING_DIR / "tuned_global_metrics.csv"
 TUNED_VS_INITIAL_FILE = TUNING_DIR / "tuned_vs_initial_global.csv"
 TUNED_BASE_VS_HYBRID_FILE = TUNING_DIR / "tuned_base_vs_hybrid_global.csv"
 
-INITIAL_GLOBAL_METRICS_FILE = Path("reports/metrics/global_model_metrics.csv")
+INITIAL_GLOBAL_METRICS_FILE = Path("reports/historical/metrics/global_model_metrics.csv")
+CURRENT_TUNED_GLOBAL_METRICS_FILE = Path("reports/historical/tuning/tuned_global_metrics.csv")
 
 
 PARAM_GRIDS = {
@@ -127,21 +131,7 @@ def temporal_date_splits(
     train: pd.DataFrame,
     n_splits: int = N_SPLITS,
 ) -> list[tuple[pd.Series, pd.Series]]:
-    dates = pd.Series(pd.to_datetime(train["Date"]).drop_duplicates().sort_values().to_list())
-    fold_size = len(dates) // (n_splits + 1)
-    if fold_size == 0:
-        raise ValueError("No hay fechas suficientes para validación temporal")
-
-    folds = []
-    for fold in range(n_splits):
-        train_end = fold_size * (fold + 1)
-        valid_start = train_end
-        valid_end = fold_size * (fold + 2) if fold < n_splits - 1 else len(dates)
-        train_dates = dates.iloc[:train_end]
-        valid_dates = dates.iloc[valid_start:valid_end]
-        folds.append((train_dates, valid_dates))
-
-    return folds
+    return expanding_date_splits(train, n_splits)
 
 
 def choose_threshold(y_true: pd.Series, probabilities: pd.Series) -> tuple[float, float]:
@@ -253,7 +243,7 @@ def evaluate_params(
         "precision": optimized_metrics["precision"],
         "recall": optimized_metrics["recall"],
         "f1": optimized_metrics["f1"],
-        "roc_auc": optimized_metrics["roc_auc"],
+        "roc_auc": float(np.mean([row["fixed_0_5_roc_auc"] for row in fold_rows])),
         "fixed_0_5_accuracy": fixed_metrics["accuracy"],
         "fixed_0_5_precision": fixed_metrics["precision"],
         "fixed_0_5_recall": fixed_metrics["recall"],
@@ -279,6 +269,7 @@ def train_final_tuned_model(
     dataset_type: str,
     model_name: str,
     best_config: pd.Series,
+    run_dir: Path,
 ) -> pd.DataFrame:
     train, test, feature_columns = load_dataset(dataset_type)
     params = json.loads(best_config["params"])
@@ -289,11 +280,11 @@ def train_final_tuned_model(
     model.fit(train[feature_columns], train[TARGET_COLUMN])
 
     probabilities = model.predict_proba(test[feature_columns])[:, 1]
-    TUNED_MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    TUNED_PREDICTIONS_DIR.mkdir(parents=True, exist_ok=True)
-    TUNED_METRICS_DIR.mkdir(parents=True, exist_ok=True)
+    model_dir, prediction_dir, metric_dir = (artifact_dir(run_dir, name) for name in ["models", "predictions", "metrics"])
+    for directory in [model_dir, prediction_dir, metric_dir]:
+        directory.mkdir(parents=True, exist_ok=True)
 
-    joblib.dump(model, TUNED_MODEL_DIR / f"{dataset_type}_{model_name}.joblib")
+    joblib.dump(model, model_dir / f"{dataset_type}_{model_name}.joblib")
 
     metric_frames = []
     for variant, variant_threshold in [
@@ -317,12 +308,12 @@ def train_final_tuned_model(
         metric_frames.append(metrics)
 
         predictions.to_csv(
-            TUNED_PREDICTIONS_DIR / f"{dataset_type}_{model_name}_{variant}_predictions.csv",
+            prediction_dir / f"{dataset_type}_{model_name}_{variant}_predictions.csv",
             index=False,
         )
         save_metrics(
             metrics,
-            TUNED_METRICS_DIR / f"{dataset_type}_{model_name}_{variant}_metrics.csv",
+            metric_dir / f"{dataset_type}_{model_name}_{variant}_metrics.csv",
         )
 
     return pd.concat(metric_frames, ignore_index=True)
@@ -371,8 +362,35 @@ def compare_tuned_base_hybrid(tuned_global_metrics: pd.DataFrame) -> pd.DataFram
     return comparison
 
 
-def run_tuning(datasets: list[str], models: list[str]) -> None:
-    TUNING_DIR.mkdir(parents=True, exist_ok=True)
+def compare_lagged_with_hybrid(tuned_global_metrics: pd.DataFrame) -> pd.DataFrame:
+    if "lagged_hybrid" not in set(tuned_global_metrics["dataset_type"]):
+        return pd.DataFrame()
+
+    if "hybrid" in set(tuned_global_metrics["dataset_type"]):
+        previous = tuned_global_metrics[tuned_global_metrics["dataset_type"] == "hybrid"].copy()
+    else:
+        return pd.DataFrame()
+
+    lagged = tuned_global_metrics[tuned_global_metrics["dataset_type"] == "lagged_hybrid"].copy()
+
+    metric_columns = ["accuracy", "precision", "recall", "f1", "roc_auc"]
+    index_columns = ["model_name", "model_variant"]
+    comparison = previous[index_columns + metric_columns].merge(
+        lagged[index_columns + metric_columns],
+        on=index_columns,
+        suffixes=("_hybrid", "_lagged_hybrid"),
+        validate="one_to_one",
+    )
+
+    for metric in metric_columns:
+        comparison[f"{metric}_delta"] = (
+            comparison[f"{metric}_lagged_hybrid"] - comparison[f"{metric}_hybrid"]
+        )
+
+    return comparison
+
+
+def _run_tuning_in_directory(datasets: list[str], models: list[str], run_dir: Path) -> None:
 
     cv_rows = []
     fold_rows = []
@@ -408,27 +426,29 @@ def run_tuning(datasets: list[str], models: list[str]) -> None:
     best_params = pd.DataFrame(best_rows).reset_index(drop=True)
 
     tuned_metrics = [
-        train_final_tuned_model(row["dataset_type"], row["model_name"], row)
+        train_final_tuned_model(row["dataset_type"], row["model_name"], row, run_dir)
         for _, row in best_params.iterrows()
     ]
     tuned_metrics = pd.concat(tuned_metrics, ignore_index=True)
     tuned_global_metrics = tuned_metrics[tuned_metrics["scope"] == "global"].copy()
     tuned_vs_initial = compare_with_initial(tuned_global_metrics)
     tuned_base_vs_hybrid = compare_tuned_base_hybrid(tuned_global_metrics)
+    lagged_vs_hybrid = compare_lagged_with_hybrid(tuned_global_metrics)
 
-    cv_results.to_csv(CV_RESULTS_FILE, index=False)
-    fold_results.to_csv(FOLD_RESULTS_FILE, index=False)
-    best_params.to_csv(BEST_PARAMS_FILE, index=False)
-    tuned_global_metrics.to_csv(TUNED_GLOBAL_METRICS_FILE, index=False)
-    tuned_vs_initial.to_csv(TUNED_VS_INITIAL_FILE, index=False)
-    tuned_base_vs_hybrid.to_csv(TUNED_BASE_VS_HYBRID_FILE, index=False)
+    (run_dir / "tuning").mkdir(exist_ok=True)
+    cv_results.to_csv(run_dir / "tuning" / CV_RESULTS_FILE.name, index=False)
+    fold_results.to_csv(run_dir / "tuning" / FOLD_RESULTS_FILE.name, index=False)
+    best_params.to_csv(run_dir / "tuning" / BEST_PARAMS_FILE.name, index=False)
+    tuned_global_metrics.to_csv(run_dir / "metrics" / TUNED_GLOBAL_METRICS_FILE.name, index=False)
+    tuned_vs_initial.to_csv(run_dir / "metrics" / TUNED_VS_INITIAL_FILE.name, index=False)
+    tuned_base_vs_hybrid.to_csv(run_dir / "metrics" / TUNED_BASE_VS_HYBRID_FILE.name, index=False)
+    if not lagged_vs_hybrid.empty:
+        lagged_file = run_dir / "metrics/lagged_hybrid_vs_hybrid_global.csv"
+        lagged_vs_hybrid.to_csv(lagged_file, index=False)
 
-    print(f"Guardado: {CV_RESULTS_FILE} - {len(cv_results)} filas")
-    print(f"Guardado: {FOLD_RESULTS_FILE} - {len(fold_results)} filas")
-    print(f"Guardado: {BEST_PARAMS_FILE} - {len(best_params)} filas")
-    print(f"Guardado: {TUNED_GLOBAL_METRICS_FILE} - {len(tuned_global_metrics)} filas")
-    print(f"Guardado: {TUNED_VS_INITIAL_FILE} - {len(tuned_vs_initial)} filas")
-    print(f"Guardado: {TUNED_BASE_VS_HYBRID_FILE} - {len(tuned_base_vs_hybrid)} filas")
+    print(f"Ejecucion guardada: {run_dir}")
+    if not lagged_vs_hybrid.empty:
+        print(f"Guardado: {lagged_file} - {len(lagged_vs_hybrid)} filas")
     print(
         tuned_vs_initial[
             [
@@ -446,15 +466,33 @@ def run_tuning(datasets: list[str], models: list[str]) -> None:
     )
 
 
+def run_tuning(datasets: list[str], models: list[str], run_dir: Path | None = None) -> None:
+    output = run_dir or Path("reports/experiments") / datetime.now(timezone.utc).strftime("tuning-%Y%m%dT%H%M%S%fZ")
+    run_dir, manifest = create_run(PROJECT_ROOT, output, {"datasets": datasets, "models": models,
+                                                       "parameter_grids": PARAM_GRIDS})
+    manifest["evaluation_status"] = "Legacy processed dataset; temporal tuning with previously inspected holdout."
+    inputs = [PROJECT_ROOT / "data/processed/model/feature_sets.json", PROJECT_ROOT / INITIAL_GLOBAL_METRICS_FILE]
+    inputs.extend(PROJECT_ROOT / "data/processed/model" / f"{dataset}_{split}.csv"
+                  for dataset in datasets for split in ["train", "test"])
+    try:
+        _run_tuning_in_directory(datasets, models, run_dir)
+        finish_run(run_dir, manifest, inputs, PROJECT_ROOT)
+    except Exception as exc:
+        manifest.update(status="failed", error=str(exc))
+        write_json(run_dir / "manifest.json", manifest)
+        raise
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Ajusta hiperparámetros con validación cruzada temporal."
     )
+    parser.add_argument("--run-dir", type=Path)
     parser.add_argument(
         "--datasets",
         nargs="+",
         default=["base", "hybrid"],
-        choices=["base", "hybrid"],
+        choices=["base", "hybrid", "lagged_hybrid"],
     )
     parser.add_argument(
         "--models",
@@ -473,7 +511,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    run_tuning(args.datasets, args.models)
+    run_tuning(args.datasets, args.models, args.run_dir)
 
 
 if __name__ == "__main__":
