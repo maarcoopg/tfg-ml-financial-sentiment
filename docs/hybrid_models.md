@@ -27,4 +27,4 @@ El universo de activos, fechas y variable objetivo coincide con el del modelo ba
 | random_forest | 0.5136 | 0.5488 | 0.5470 | 0.5479 | 0.5040 |
 | hist_gradient_boosting | 0.5059 | 0.5460 | 0.4933 | 0.5183 | 0.5054 |
 
-Las métricas completas, incluyendo matriz de confusión y desglose por ticker, se guardan en `reports/metrics/`.
+Las métricas completas, incluyendo matriz de confusión y desglose por ticker, se guardan en `reports/historical/metrics/`.

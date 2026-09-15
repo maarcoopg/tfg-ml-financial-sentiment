@@ -46,6 +46,7 @@ def merge_financial_sentiment(
         left_on=["ticker", "Date"],
         right_on=["ticker", "trading_date"],
         how="left",
+        validate="one_to_one",
     )
 
     merged = merged.drop(columns=["trading_date"])

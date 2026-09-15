@@ -1,6 +1,13 @@
 from pathlib import Path
+import sys
 
 import pandas as pd
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.data.point_in_time import align_at_close, trading_schedule
 
 
 NEWS_WITH_SENTIMENT_FILE = Path("data/processed/news/financial_news_with_sentiment.csv")
@@ -36,20 +43,11 @@ def align_ticker_news(news: pd.DataFrame, ticker: str) -> pd.DataFrame:
     ticker_news = news[news["ticker"] == ticker].copy()
     trading_dates = load_trading_dates(ticker)
 
-    ticker_news = ticker_news.sort_values("published_date").reset_index(drop=True)
-
-    aligned = pd.merge_asof(
-        ticker_news,
-        trading_dates,
-        left_on="published_date",
-        right_on="trading_date",
-        direction="forward",
-    )
-
-    aligned["original_published_date"] = aligned["published_date"]
-    aligned["is_non_trading_day"] = aligned["published_date"] != aligned["trading_date"]
-
-    return aligned
+    schedule = trading_schedule(trading_dates["trading_date"].min(), trading_dates["trading_date"].max())
+    aligned, unaligned = align_at_close(ticker_news, schedule)
+    result = pd.concat([aligned, unaligned], ignore_index=True)
+    result["original_published_date"] = result["published_date"]
+    return result
 
 
 def align_news_to_trading_days(news: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:

@@ -1,0 +1,117 @@
+[
+  {
+    "old": "models/trained/base_dummy.joblib",
+    "new": "models/experiments/legacy-trained/base_dummy.joblib",
+    "sha256": "cee48f573b543f4476d26285a88503d65c43297432fbaf59c51b168be055818c"
+  },
+  {
+    "old": "models/trained/base_hist_gradient_boosting.joblib",
+    "new": "models/experiments/legacy-trained/base_hist_gradient_boosting.joblib",
+    "sha256": "c58a7c3e882f39dac8fb0ddfad54f45df73b51f4fa8013efe08bc7505bf36766"
+  },
+  {
+    "old": "models/trained/base_logistic_regression.joblib",
+    "new": "models/experiments/legacy-trained/base_logistic_regression.joblib",
+    "sha256": "354bc6ce6dd9accf254e686ed42ee44032b8a885de700c6944be56b45b6d0dc4"
+  },
+  {
+    "old": "models/trained/base_random_forest.joblib",
+    "new": "models/experiments/legacy-trained/base_random_forest.joblib",
+    "sha256": "b24a7db81bb72e4a0308e003e770b693c314f32153500505eb08f395ca9dcc6d"
+  },
+  {
+    "old": "models/trained/hybrid_dummy.joblib",
+    "new": "models/experiments/legacy-trained/hybrid_dummy.joblib",
+    "sha256": "9b84d4ca9518ee41c73a914ad4dda23909c0136bcef63f43cca1598ced8da35b"
+  },
+  {
+    "old": "models/trained/hybrid_hist_gradient_boosting.joblib",
+    "new": "models/experiments/legacy-trained/hybrid_hist_gradient_boosting.joblib",
+    "sha256": "6447eb06399e1ee9ef83e2d7b3d874d3e4b326224ff8023f037d40f18e6ecef5"
+  },
+  {
+    "old": "models/trained/hybrid_logistic_regression.joblib",
+    "new": "models/experiments/legacy-trained/hybrid_logistic_regression.joblib",
+    "sha256": "654bce8c6b1ee57b39b0d3ff4834333ce8c24bb4a903a7df8e890c202a865f9e"
+  },
+  {
+    "old": "models/trained/hybrid_random_forest.joblib",
+    "new": "models/experiments/legacy-trained/hybrid_random_forest.joblib",
+    "sha256": "cf82859ba852aeb81ce11cb3c1b3d2c802b41ee79ed1ce73f95689acfd54d6bb"
+  },
+  {
+    "old": "models/tuned/base_hist_gradient_boosting.joblib",
+    "new": "models/experiments/legacy-tuned/base_hist_gradient_boosting.joblib",
+    "sha256": "66075494aff05b704816d8dd38613ffbf6da34e9fccfcab6d5e7ba0b4ff00db8"
+  },
+  {
+    "old": "models/tuned/base_lightgbm.joblib",
+    "new": "models/experiments/legacy-tuned/base_lightgbm.joblib",
+    "sha256": "a2cdb0263b29b5a563b4f85748b6c1394ee85b915216ec4d78250f4db9079744"
+  },
+  {
+    "old": "models/tuned/base_logistic_regression.joblib",
+    "new": "models/experiments/legacy-tuned/base_logistic_regression.joblib",
+    "sha256": "118b84574cc44e0f130eaa7ba7bad9c79e142a443c6273fe1b07b2685da430b8"
+  },
+  {
+    "old": "models/tuned/base_random_forest.joblib",
+    "new": "models/experiments/legacy-tuned/base_random_forest.joblib",
+    "sha256": "4a0acdbe0234950d26e6ca47a6d1f23c894c876bd870f4eb7da90ad073efa5cb"
+  },
+  {
+    "old": "models/tuned/base_xgboost.joblib",
+    "new": "models/experiments/legacy-tuned/base_xgboost.joblib",
+    "sha256": "318f6614825766c022ad129cf6d55e20018ffe59c963d7a9f6ba2b01e9779785"
+  },
+  {
+    "old": "models/tuned/hybrid_hist_gradient_boosting.joblib",
+    "new": "models/experiments/legacy-tuned/hybrid_hist_gradient_boosting.joblib",
+    "sha256": "4221fbef93871e3da1d542fa17c406f71316961391c23d877a6d9fdade89d0f7"
+  },
+  {
+    "old": "models/tuned/hybrid_lightgbm.joblib",
+    "new": "models/experiments/legacy-tuned/hybrid_lightgbm.joblib",
+    "sha256": "78946ee4ae70e921f0604d2159ef6a916287c7a90b58092250c2e22edbbe47b9"
+  },
+  {
+    "old": "models/tuned/hybrid_logistic_regression.joblib",
+    "new": "models/experiments/legacy-tuned/hybrid_logistic_regression.joblib",
+    "sha256": "aecc22f0739afaffa413dea84b0ec06df6eb43b88bf8a07ff558518dc686b83f"
+  },
+  {
+    "old": "models/tuned/hybrid_random_forest.joblib",
+    "new": "models/experiments/legacy-tuned/hybrid_random_forest.joblib",
+    "sha256": "d5c22aa204fab734134dc0769154ec43399a3df6a0da8fa69393a166fbd48466"
+  },
+  {
+    "old": "models/tuned/hybrid_xgboost.joblib",
+    "new": "models/experiments/legacy-tuned/hybrid_xgboost.joblib",
+    "sha256": "700e39cea7b5b219f6372bf601533bf265e3e4b508bcfae7740ad00707969d5c"
+  },
+  {
+    "old": "models/tuned/lagged_hybrid_hist_gradient_boosting.joblib",
+    "new": "models/experiments/legacy-tuned/lagged_hybrid_hist_gradient_boosting.joblib",
+    "sha256": "d279dfb019eaea9a29c1f5cd9b8cd565e229a7c4fcf67d74fb041de277181eca"
+  },
+  {
+    "old": "models/tuned/lagged_hybrid_lightgbm.joblib",
+    "new": "models/experiments/legacy-tuned/lagged_hybrid_lightgbm.joblib",
+    "sha256": "6a46964413aae50d1af07adb06c5483132a7688f6fd4809b6dd38f65d1800490"
+  },
+  {
+    "old": "models/tuned/lagged_hybrid_logistic_regression.joblib",
+    "new": "models/experiments/legacy-tuned/lagged_hybrid_logistic_regression.joblib",
+    "sha256": "88451a5373ee3c3986e9ae682b8194c0b122dc1d962adf10bfe814232aedfd29"
+  },
+  {
+    "old": "models/tuned/lagged_hybrid_random_forest.joblib",
+    "new": "models/experiments/legacy-tuned/lagged_hybrid_random_forest.joblib",
+    "sha256": "bd7dfb47bfcf58b828171b3648f637171719b65f7515fb31b81fee26e948e1c8"
+  },
+  {
+    "old": "models/tuned/lagged_hybrid_xgboost.joblib",
+    "new": "models/experiments/legacy-tuned/lagged_hybrid_xgboost.joblib",
+    "sha256": "b7298bf439096b3d12560688df395379e1e72e90ea47e3e81e9a82900d72dc60"
+  }
+]

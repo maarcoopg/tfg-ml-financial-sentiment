@@ -11,6 +11,7 @@ El script recibe el tipo de dataset:
 ```bash
 python src/models/train_models.py --dataset base
 python src/models/train_models.py --dataset hybrid
+python src/models/train_models.py --dataset lagged_hybrid
 ```
 
 También permite entrenar modelos concretos:
@@ -25,16 +26,21 @@ Los datos se cargan desde `data/processed/model/`:
 
 - `base_train.csv` y `base_test.csv` para el modelo financiero base.
 - `hybrid_train.csv` y `hybrid_test.csv` para el modelo híbrido.
+- `lagged_hybrid_train.csv` y `lagged_hybrid_test.csv` para el modelo híbrido con retardos de sentimiento.
 - `feature_sets.json` para definir las columnas predictoras de cada enfoque.
 
 ## Salidas
 
 El pipeline genera:
 
-- Modelos entrenados en `models/trained/`.
-- Predicciones en `reports/predictions/`.
-- Métricas en `reports/metrics/`.
-- Metadatos de entrenamiento en `reports/model_metadata/`.
+- Modelos entrenados en `models/experiments/<id>/`.
+- Predicciones en `reports/experiments/<id>/predictions/`.
+- Métricas en `reports/experiments/<id>/metrics/`.
+- Metadatos de entrenamiento en `reports/experiments/<id>/metadata/`.
+
+Los resultados anteriores se conservan en `reports/historical/` y sus modelos
+en `models/experiments/legacy-trained/`. La estructura completa y las salidas
+de verificación se describen en `docs/report_organization.md`.
 
 ## Modelos candidatos
 

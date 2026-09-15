@@ -1,0 +1,2360 @@
+{
+  "status": "complete",
+  "created_at": "2026-09-15T09:11:15.593694+00:00",
+  "files": [
+    {
+      "old": "reports/comparison/base_vs_hybrid_by_ticker.csv",
+      "new": "reports/historical/comparison/base_vs_hybrid_by_ticker.csv",
+      "sha256": "d303a1e187137d7fc2afef42b8fe65dcd783ee21d746bcaa1c650b14e0048393"
+    },
+    {
+      "old": "reports/comparison/base_vs_hybrid_global.csv",
+      "new": "reports/historical/comparison/base_vs_hybrid_global.csv",
+      "sha256": "6efe0ae967cc0ec935d9b8dd338f54c10c52f4da8ef2fb40b816d8a995c52213"
+    },
+    {
+      "old": "reports/feature_importance/feature_group_importance.csv",
+      "new": "reports/historical/feature_importance/feature_group_importance.csv",
+      "sha256": "d430ac07585912c74c18ba21bc4b675fbfb987fc6734bead6681d53856419027"
+    },
+    {
+      "old": "reports/feature_importance/feature_importance.csv",
+      "new": "reports/historical/feature_importance/feature_importance.csv",
+      "sha256": "67b2f80d62ef31f43a5d087fa3feae95cafb589ee839570c2dd04922458e4842"
+    },
+    {
+      "old": "reports/feature_importance/top_10_feature_importance.csv",
+      "new": "reports/historical/feature_importance/top_10_feature_importance.csv",
+      "sha256": "7e0e709c208ac314b40f92b0a501f8e4b24ac7e49b35d2648e43c020d28c39fa"
+    },
+    {
+      "old": "reports/figures/base_vs_hybrid_metric_deltas.png",
+      "new": "reports/historical/figures/base_vs_hybrid_metric_deltas.png",
+      "sha256": "9a20555dfe2dcb91542d83feb3adcf1c0d23d73fb83f6581425e98ccdaa9d099"
+    },
+    {
+      "old": "reports/figures/global_metrics_by_model.png",
+      "new": "reports/historical/figures/global_metrics_by_model.png",
+      "sha256": "bcf6d55f05fdd57d1a74667d7ddeb11ee16895c25a84a2287431806c0cb80b1a"
+    },
+    {
+      "old": "reports/figures/global_metrics_facets.png",
+      "new": "reports/historical/figures/global_metrics_facets.png",
+      "sha256": "d665444f9ebda2be31013295d1c225b1a1f20c339d95cbaf24641b1ed4913395"
+    },
+    {
+      "old": "reports/figures/hybrid_top_feature_importance.png",
+      "new": "reports/historical/figures/hybrid_top_feature_importance.png",
+      "sha256": "18509cb54b5cc419a52a60ec10799b23039726cadcbc5754dd01aadc3726ee64"
+    },
+    {
+      "old": "reports/metrics/all_model_metrics.csv",
+      "new": "reports/historical/metrics/all_model_metrics.csv",
+      "sha256": "db77b82154894884ea2728e5e34a103428ca79e6f22d65b69134504ed5009ece"
+    },
+    {
+      "old": "reports/metrics/base_dummy_metrics.csv",
+      "new": "reports/historical/metrics/base_dummy_metrics.csv",
+      "sha256": "d725a7740aab2b5da2560b9a35d2a4db0e8755d1c3e5319138d1cc2d15c95e78"
+    },
+    {
+      "old": "reports/metrics/base_hist_gradient_boosting_metrics.csv",
+      "new": "reports/historical/metrics/base_hist_gradient_boosting_metrics.csv",
+      "sha256": "73611f6c2de59bb3363c9ae5ae54e382ccbfd2e05f64f4264ad2412b7721215b"
+    },
+    {
+      "old": "reports/metrics/base_logistic_regression_metrics.csv",
+      "new": "reports/historical/metrics/base_logistic_regression_metrics.csv",
+      "sha256": "1b509dd07a606c181beaed8e730752ac5b426f9f0a63f30694212c7e25fa0df7"
+    },
+    {
+      "old": "reports/metrics/base_random_forest_metrics.csv",
+      "new": "reports/historical/metrics/base_random_forest_metrics.csv",
+      "sha256": "3333b8c223b7fcdf8769135ccd6e007a99a533f856c560d69808e91fd738f326"
+    },
+    {
+      "old": "reports/metrics/global_model_metrics.csv",
+      "new": "reports/historical/metrics/global_model_metrics.csv",
+      "sha256": "bf8a168ccc2f1a237109d053f44755aa7b3363a909e0f6480922ead97ee7507a"
+    },
+    {
+      "old": "reports/metrics/hybrid_dummy_metrics.csv",
+      "new": "reports/historical/metrics/hybrid_dummy_metrics.csv",
+      "sha256": "99022d647a37201e82a105c3ba69a9504a619f9465132f9b8b693b1315144b0f"
+    },
+    {
+      "old": "reports/metrics/hybrid_hist_gradient_boosting_metrics.csv",
+      "new": "reports/historical/metrics/hybrid_hist_gradient_boosting_metrics.csv",
+      "sha256": "31e8f44a254ff4b3cb3e739cd855df9f695b269754ed092db40252ba20b84b63"
+    },
+    {
+      "old": "reports/metrics/hybrid_logistic_regression_metrics.csv",
+      "new": "reports/historical/metrics/hybrid_logistic_regression_metrics.csv",
+      "sha256": "51967959eaf3102b5de9c359eaa670cd3bff9393d62c107aae5d6609580352e9"
+    },
+    {
+      "old": "reports/metrics/hybrid_random_forest_metrics.csv",
+      "new": "reports/historical/metrics/hybrid_random_forest_metrics.csv",
+      "sha256": "1fe7f595a74f4814853e6bcbd9fd171580de123142131162fa2f9df99cf5d17c"
+    },
+    {
+      "old": "reports/model_metadata/base_dummy.json",
+      "new": "reports/historical/model_metadata/base_dummy.json",
+      "sha256": "826bd948a1ad4671094110b291c1162c92fd6bfa78c48df8db1a1ee95939a774"
+    },
+    {
+      "old": "reports/model_metadata/base_hist_gradient_boosting.json",
+      "new": "reports/historical/model_metadata/base_hist_gradient_boosting.json",
+      "sha256": "70f6e7b5e4b93e49cb97dba5723741041b0f4f757cf223353ac6c02bf935f017"
+    },
+    {
+      "old": "reports/model_metadata/base_logistic_regression.json",
+      "new": "reports/historical/model_metadata/base_logistic_regression.json",
+      "sha256": "c8b29c06a64c4a77cb0aa5b6b3b0a317cd148c5b1d7e6cd2889e52bc850966b6"
+    },
+    {
+      "old": "reports/model_metadata/base_random_forest.json",
+      "new": "reports/historical/model_metadata/base_random_forest.json",
+      "sha256": "efd984761701ffa4e469a5dc99c3c07ba295e2f937486efb3d682e00e7fcc80f"
+    },
+    {
+      "old": "reports/model_metadata/hybrid_dummy.json",
+      "new": "reports/historical/model_metadata/hybrid_dummy.json",
+      "sha256": "ee2382d517a043074d3995847271f9557ee0cb6acf933e8491e40de8f4b6df5b"
+    },
+    {
+      "old": "reports/model_metadata/hybrid_hist_gradient_boosting.json",
+      "new": "reports/historical/model_metadata/hybrid_hist_gradient_boosting.json",
+      "sha256": "5878c65289b12d8d467d222de54a5ef8ab4d9c7cb09069c004167f4a8ea85345"
+    },
+    {
+      "old": "reports/model_metadata/hybrid_logistic_regression.json",
+      "new": "reports/historical/model_metadata/hybrid_logistic_regression.json",
+      "sha256": "012f7cb9aefb3834416f77c1eb7c75c83465e512401389236825d65aae7fd2a4"
+    },
+    {
+      "old": "reports/model_metadata/hybrid_random_forest.json",
+      "new": "reports/historical/model_metadata/hybrid_random_forest.json",
+      "sha256": "3abbb11d9c8afe6019807b4804a4d832ca01c3982f35f03ff0fbf290638b1c8d"
+    },
+    {
+      "old": "reports/predictions/base_dummy_predictions.csv",
+      "new": "reports/historical/predictions/base_dummy_predictions.csv",
+      "sha256": "c9ba9725627b3444a2466a27a59427050755b48f002e01f8560e8aa42fa48a7e"
+    },
+    {
+      "old": "reports/predictions/base_hist_gradient_boosting_predictions.csv",
+      "new": "reports/historical/predictions/base_hist_gradient_boosting_predictions.csv",
+      "sha256": "7f7b95159a0677fec629bbe3ebca43d978fd56612df42defd76df367336aa1ee"
+    },
+    {
+      "old": "reports/predictions/base_logistic_regression_predictions.csv",
+      "new": "reports/historical/predictions/base_logistic_regression_predictions.csv",
+      "sha256": "1815eca8238c7945a42c586226df57ad03117ce6277709f79ed35dcedf5498da"
+    },
+    {
+      "old": "reports/predictions/base_random_forest_predictions.csv",
+      "new": "reports/historical/predictions/base_random_forest_predictions.csv",
+      "sha256": "cdda96168ba7cfa7b12d605cbf58c4850fd55a4a9539359b526d3377fd79c529"
+    },
+    {
+      "old": "reports/predictions/hybrid_dummy_predictions.csv",
+      "new": "reports/historical/predictions/hybrid_dummy_predictions.csv",
+      "sha256": "8705db06e1c823cfeac3aae5f708915eb6e793b16ab7ca1b7bcb142e075c583b"
+    },
+    {
+      "old": "reports/predictions/hybrid_hist_gradient_boosting_predictions.csv",
+      "new": "reports/historical/predictions/hybrid_hist_gradient_boosting_predictions.csv",
+      "sha256": "582c006fff59114fd7504399a17e6049bfff68c5c67ce61af2edb92b98bac68c"
+    },
+    {
+      "old": "reports/predictions/hybrid_logistic_regression_predictions.csv",
+      "new": "reports/historical/predictions/hybrid_logistic_regression_predictions.csv",
+      "sha256": "949f6eb536ab4571021b51dc586cc18cc438e34875cc098c6a8377f39b2aa4ab"
+    },
+    {
+      "old": "reports/predictions/hybrid_random_forest_predictions.csv",
+      "new": "reports/historical/predictions/hybrid_random_forest_predictions.csv",
+      "sha256": "eb0f9c2419a5ad8897313143844cab76e2e555617a84be485bb951ae6614dd13"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/comparison/base_vs_hybrid_by_ticker.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/comparison/base_vs_hybrid_by_ticker.csv",
+      "sha256": "6f73014a3393404ef4347f7bbd00df8d143e1895387a37aac04ccde5c52eb460"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/comparison/base_vs_hybrid_global.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/comparison/base_vs_hybrid_global.csv",
+      "sha256": "e6556e820f22636a8119ded8508e748d7a93e800f36c35254aed01e3b136f649"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metadata/base_dummy.json",
+      "new": "artifacts/verification/legacy-smoke-20260908/metadata/base_dummy.json",
+      "sha256": "f5566ba5dd8fcdf659d9390766498b532a920f1041953d2700fbd80a42c8176e"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metadata/hybrid_dummy.json",
+      "new": "artifacts/verification/legacy-smoke-20260908/metadata/hybrid_dummy.json",
+      "sha256": "3c2ec94b7614bcffbe98e7e845410162f5ad43cf81d83be91b2f619c07086068"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metrics/all_model_metrics.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/metrics/all_model_metrics.csv",
+      "sha256": "65f5a2aaf64357eec58c20023a920445d3e63e4a08771811e673573f81c4cfe4"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metrics/base_dummy_metrics.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/metrics/base_dummy_metrics.csv",
+      "sha256": "ff6d1f9112cbef659d266676110be2463e55615874fb79d524f4ae2b17053771"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metrics/global_model_metrics.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/metrics/global_model_metrics.csv",
+      "sha256": "56ec9613511b4207772014f8f644576da251189228ea275cfd9c9aa99632403d"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/metrics/hybrid_dummy_metrics.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/metrics/hybrid_dummy_metrics.csv",
+      "sha256": "6559dabd317a4e0eeb77eed85f767fad3224078bac83f28672d9ac2fe053322e"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/models/base_dummy.joblib",
+      "new": "models/experiments/legacy-smoke-20260908/base_dummy.joblib",
+      "sha256": "fa8620d26d2e7be36274cfc1ad84ddc190e719fb1ee12392a06ca309920e2370"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/models/hybrid_dummy.joblib",
+      "new": "models/experiments/legacy-smoke-20260908/hybrid_dummy.joblib",
+      "sha256": "fe2cbce51ab03d35bac83dbdbff6a1d48f76c3257d1971691aa83d196503af1b"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/predictions/base_dummy_predictions.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/predictions/base_dummy_predictions.csv",
+      "sha256": "c9ba9725627b3444a2466a27a59427050755b48f002e01f8560e8aa42fa48a7e"
+    },
+    {
+      "old": "reports/runs/legacy-smoke-20260908/predictions/hybrid_dummy_predictions.csv",
+      "new": "artifacts/verification/legacy-smoke-20260908/predictions/hybrid_dummy_predictions.csv",
+      "sha256": "8705db06e1c823cfeac3aae5f708915eb6e793b16ab7ca1b7bcb142e075c583b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/auc_intervals.csv",
+      "new": "reports/experiments/review-full-20260908/metrics/auc_intervals.csv",
+      "sha256": "45d809064e6e5b300be6d70dc020e34da6111ac022493493a8ccb76dcf373459"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/coverage/coverage_by_year_ticker.csv",
+      "new": "reports/experiments/review-full-20260908/coverage/coverage_by_year_ticker.csv",
+      "sha256": "40fd6780addca17e689ecfec34103ae5023f42ec2f954316a3abe04e8e4a15ac"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/coverage/relevance_by_year_ticker.csv",
+      "new": "reports/experiments/review-full-20260908/coverage/relevance_by_year_ticker.csv",
+      "sha256": "3f9e630b23c1c47642260a621db752cc867de2c783b6adce3305cf2fd5768532"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/coverage/sources_by_year_ticker.csv",
+      "new": "reports/experiments/review-full-20260908/coverage/sources_by_year_ticker.csv",
+      "sha256": "9cfa812bac587a0ecdcb4a691af09ac5f4d48f12b390981794d799df8f32eb4b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/data/dataset.csv",
+      "new": "data/experiments/review-full-20260908/dataset.csv",
+      "sha256": "96880b580d47d8a6df4376bfba810f9db2de8ddf81498b3287c76f0e1e670d86"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/data/news_alignment.csv",
+      "new": "data/experiments/review-full-20260908/news_alignment.csv",
+      "sha256": "cd92615ffe4c8de5c2c6869dac2560d989f73a0948e14df23901da043775b8aa"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/data/trading_schedule.csv",
+      "new": "data/experiments/review-full-20260908/trading_schedule.csv",
+      "sha256": "14a6e5901b7ec6c91770db455054be894e8db3230ce713576fec7b7c3aa22546"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/data/unaligned_news.csv",
+      "new": "data/experiments/review-full-20260908/unaligned_news.csv",
+      "sha256": "e6549577e60108d7945d79704141420b4e222b6adf4c6901cee06d2423ba4815"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/figures/balanced_accuracy.png",
+      "new": "reports/experiments/review-full-20260908/figures/balanced_accuracy.png",
+      "sha256": "38e79cc5f13f0aa40251deea1b954dfe2f3924d73586234fbb2aac743db3d065"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/figures/f1_macro.png",
+      "new": "reports/experiments/review-full-20260908/figures/f1_macro.png",
+      "sha256": "01ac8634705946e672f3802c6b55bb702d90503cac47bc02902939e512636cf6"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/figures/mcc.png",
+      "new": "reports/experiments/review-full-20260908/figures/mcc.png",
+      "sha256": "cd68be91c27eb03178e4abc73419e2098d99b26fade201e3feac16aa7c10d507"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/figures/roc_auc.png",
+      "new": "reports/experiments/review-full-20260908/figures/roc_auc.png",
+      "sha256": "fa657b037b0ddd24aedb0d4bae099a0caec3f1fbca58f021154c01ee3d63aa3c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/global_metrics.csv",
+      "new": "reports/experiments/review-full-20260908/metrics/global_metrics.csv",
+      "sha256": "ae89199b2175e0259d41f24d6478e2f75261acc06ef82551c1d2ea877d8287ae"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/inner_cv.csv",
+      "new": "reports/experiments/review-full-20260908/tuning/inner_cv.csv",
+      "sha256": "7870ce58e6fea08b10132a6afcd63c170491f773f914ef692b50515e532fe60c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/manifest.json",
+      "new": "reports/experiments/review-full-20260908/manifest.json",
+      "sha256": "7a24cc01a33f88aa396a7bd8226d835db84d42cb889953214381bebde15435c2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/metrics.csv",
+      "new": "reports/experiments/review-full-20260908/metrics/metrics.csv",
+      "sha256": "5a867a045705d01ce227f831104e42e709519fadedaa33ea9b9ffeb42c1c9e19"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_dummy.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_dummy.joblib",
+      "sha256": "fa8620d26d2e7be36274cfc1ad84ddc190e719fb1ee12392a06ca309920e2370"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_hist_gradient_boosting.joblib",
+      "sha256": "2f7a5ff528da7ed563e8768877549ba82132a3e79131a2ce84406dccda8adeec"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_lightgbm.joblib",
+      "sha256": "772d040b8997657c5162cd570ced9e5329a4fb1481abaf319fb2284c54af2ed4"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_logistic_regression.joblib",
+      "sha256": "397b2e314a729bb9075054bd2ca9cf08d2d6062349b5998a600ab0a33139dcbc"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_random_forest.joblib",
+      "sha256": "8ca6b1c03cd77096d87ea2faaadc34cec921af7d2e52b3ef25c1cbd1486640c9"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_base_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_base_xgboost.joblib",
+      "sha256": "6d70d4c0707b072696bb8e2802f0dfddba5a2b03519ec0daa40fb21e31e82ab6"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_financial_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_financial_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "83f90a03096f48cf598cef3d20dc867a2050758fa8af7f917009dd888e2ce17b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_financial_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_financial_sentiment_lightgbm.joblib",
+      "sha256": "a0e52ef4a0c850c091cae3ddcc4b4151936b7af0e46ffa6173025988afbbc9d9"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_financial_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_financial_sentiment_logistic_regression.joblib",
+      "sha256": "35a690383efbe7384781ca8c7602742389564df1a4a79628fc80103bc6b18761"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_financial_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_financial_sentiment_random_forest.joblib",
+      "sha256": "15a7904640752468d7f461ac7614f7ebceee922f524471ec00cd78d110144fda"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_financial_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_financial_sentiment_xgboost.joblib",
+      "sha256": "4a91fe24f8335daf40b9e4a8ff566e8433e214180d64bee9e217f72d3ef9e575"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_hybrid_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_hybrid_hist_gradient_boosting.joblib",
+      "sha256": "4fd664647ae6808b4502bbf3830d216418c1cad9c77969d79039f9bd49195d74"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_hybrid_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_hybrid_lightgbm.joblib",
+      "sha256": "b25599f440ef63cef63cc97f755ec8cd12a858c65bc24d1f939d0827dcf459d7"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_hybrid_logistic_regression.joblib",
+      "sha256": "4be0f1d62752d692606973a800e4cb5846deac27b923afb4be29c294f1dbd2d8"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_hybrid_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_hybrid_random_forest.joblib",
+      "sha256": "99a199eb09b0c52c739d3b12cd72850931c17c0a4520bb9155cfb143e4f4e8dd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_hybrid_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_hybrid_xgboost.joblib",
+      "sha256": "4c7a1d16fead749a02f8dc0cd760b89401898372701fc6566ffaf06a1b803ca6"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_1_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_1_hist_gradient_boosting.joblib",
+      "sha256": "e544aefd95b34ffb62f7ced518837753195898a858de9c87aefaafebf8015349"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_1_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_1_lightgbm.joblib",
+      "sha256": "cce454d83ae799d1f6be08e8e9b4b89a11697000acef731538c246f0734cea6c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_1_logistic_regression.joblib",
+      "sha256": "b70227d888ed65cb3b62b1710aceaa4010ab5bfe5ec27ea60f4b4314a3101b58"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_1_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_1_random_forest.joblib",
+      "sha256": "59dcad397374ed51bdfb4428d8a4dd7a177745caf172c2ded387545f7cfc5f4c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_1_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_1_xgboost.joblib",
+      "sha256": "ef1107df4d584078c90342540788bd4d4a64b140c809577d9920ca75faa8800e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_2_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_2_hist_gradient_boosting.joblib",
+      "sha256": "a679d8c11475cc4738f6c6d737be5939f47ecf71c88cab566bf60280293c8c42"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_2_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_2_lightgbm.joblib",
+      "sha256": "d1e748a9e38810fdd255c05408049df1fe80c6991f1fcbeb50b3cf08c7893b5c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_2_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_2_logistic_regression.joblib",
+      "sha256": "c0593293fd145be927234adb65924558aae88ace0c3e218443a2b88bc272fc9e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_2_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_2_random_forest.joblib",
+      "sha256": "e9097e673d214add570a220da8494f45321a01b67c0b9b5ce85a7857bcb65a2a"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_2_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_2_xgboost.joblib",
+      "sha256": "602f0c10fb2cab514414fe6877941b800d1f51f732d8a1738f7b3921e9a4ca9d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_3_hist_gradient_boosting.joblib",
+      "sha256": "4b7ebb2e0bf93c7c9e6ea6849b3bf9b58bc1120a5c6abba09c4528056b82e6fd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_3_lightgbm.joblib",
+      "sha256": "82e48d0053e0f8f42b8aecc993791a57f53f38d05baa873da6059181fb948ca5"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_3_logistic_regression.joblib",
+      "sha256": "98704795a6087e358149efdf9db53073971020a331050491ca35eb182ad77061"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_3_random_forest.joblib",
+      "sha256": "8383c1e21945b41e4e18b981f6fd9cc728178805f59c19db04b79cb31318be3a"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_lag_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_lag_3_xgboost.joblib",
+      "sha256": "a047aa74ea2bf8859da269586d7baa53e75a1567a778fbff37d13288aee9dee6"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_news_volume_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_news_volume_hist_gradient_boosting.joblib",
+      "sha256": "7e52412f397a193014d61b1401038b6535b617a53c3b8929d69994a6794a0f25"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_news_volume_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_news_volume_lightgbm.joblib",
+      "sha256": "0ae8bbe7692b98c67bcfe07b1ff7fce716f0a658d5971b9a32b9db34d72d476b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_news_volume_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_news_volume_logistic_regression.joblib",
+      "sha256": "42f8e36b633e52725dde4645973d9ae4dd4be2bb6de367084f31f068da6c0dda"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_news_volume_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_news_volume_random_forest.joblib",
+      "sha256": "3154440af99432897a4521e504e26c6ff95fcff8f46a14c9ab0762ee02a5a807"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_news_volume_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_news_volume_xgboost.joblib",
+      "sha256": "d88bb348b58804854f8650a2293675761bd43dd7934a2c36adc806ac41a6da59"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_relative_features_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_relative_features_hist_gradient_boosting.joblib",
+      "sha256": "a450578f6b328985978adcd5cc3d1cc8dcb3e9aad484e7cc9b05cc557c47ec35"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_relative_features_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_relative_features_lightgbm.joblib",
+      "sha256": "70d22bcd0353b3315885cc01d63acd62ef2beee0c4bfbd71c02f9b2715b46c94"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_relative_features_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_relative_features_logistic_regression.joblib",
+      "sha256": "f5a298e53d76881d92ba37bb32b2f743a6e2c000c25e977d49e15f79af61850f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_relative_features_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_relative_features_random_forest.joblib",
+      "sha256": "2656d47b26f9feab33854f516226b9a70972c0ea25c2eecc4b9b2918f38f3cd1"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_relative_features_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_relative_features_xgboost.joblib",
+      "sha256": "ceac75cbba7f0fcd2739293b9d5aa1e33d8eaa12f6edb136908035475c431250"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_3_hist_gradient_boosting.joblib",
+      "sha256": "bfcf849efec052b94f989315a70174b54cce6b911ab21e945ba8bf69cf5c5eb0"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_3_lightgbm.joblib",
+      "sha256": "0148e0b1eda2eb48ace8e3a8e04c6a0495665f94a9f48c580ea10bcda82f2f22"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_3_logistic_regression.joblib",
+      "sha256": "e505fb0d37f468caa96e5de9f7210c565e4c3e09761c95c037f13e02b8ae24a5"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_3_random_forest.joblib",
+      "sha256": "1c44359c21cc32c2de483c5793424979c4c1a0e962bdf9b732aa8dcc969ae55d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_3_xgboost.joblib",
+      "sha256": "6a1263d1d4d5ecd052cec4fa9a8ae27c4f38b20a5b2c6af508b47c4f7bf7841d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_5_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_5_hist_gradient_boosting.joblib",
+      "sha256": "e6350e7689572a13bf15b2ec3b1e00cfff41f6dbea1cbd29e31d80d8a6321e2d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_5_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_5_lightgbm.joblib",
+      "sha256": "54a121fcfb605cb8291356384856b5535781f9f196a5bdb444c8abc3fe22d3c9"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_5_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_5_logistic_regression.joblib",
+      "sha256": "28d24b7101fa1c5d88356bb52c3ec733f479b8663601ed62b45d975925c47ec3"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_5_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_5_random_forest.joblib",
+      "sha256": "3605cb3a4393aaefd8f275d47cb5b69ced11be49f248ab39eacbe4471f3dc9c7"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_rolling_5_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_rolling_5_xgboost.joblib",
+      "sha256": "0e217eb23f7376107c9bfae257840edfbb12abfe94d36df4ae4ad2081011cd80"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_sentiment_only_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_sentiment_only_hist_gradient_boosting.joblib",
+      "sha256": "f372b8918c83d278a22346c4de3507f4ef6e241b1b00ec65b4a1d37acc02348c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_sentiment_only_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_sentiment_only_lightgbm.joblib",
+      "sha256": "0188d10c79ab6cd1b55ab2f4c009436f9cd1d431e25e1fd832ed7daf026369d2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_sentiment_only_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_sentiment_only_logistic_regression.joblib",
+      "sha256": "c084c67c864b5a3e7d8b4980bc7cbe2c5a8a45830c7223172330d29e39f96c51"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_sentiment_only_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_sentiment_only_random_forest.joblib",
+      "sha256": "4d173d2eef8d8eee68fb2d06f7e21117bf9fc52c6475ed591bb33114277d81bd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_sentiment_only_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_sentiment_only_xgboost.joblib",
+      "sha256": "d3af7d6c70802015aa38dcf29824000da14a53b684f2173125a84a34d8d356b6"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_weighted_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_weighted_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "b1423b7ee11274ac831dddd4cb2dcbb366b4e88ff64dfe5a519bbe4a242f8aa3"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_weighted_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_weighted_sentiment_lightgbm.joblib",
+      "sha256": "3dc3353e0e70c8b0027f0195ae2eb6a96703bf80cadfad97b96ff1934af46fed"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_weighted_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_weighted_sentiment_logistic_regression.joblib",
+      "sha256": "d851bf5533ac19691b0812de0746ee1904bd6f611cadc8d7665c89df0d9e2b87"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_weighted_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_weighted_sentiment_random_forest.joblib",
+      "sha256": "4b2ea550cf80bc98e040d3434655d5c0df784cd8489980a52443e919b084ed9f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_1_weighted_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_1_weighted_sentiment_xgboost.joblib",
+      "sha256": "d9f4cc5a9fd06df94f82755ee577147371bba4ccb21bced3cb07abbf34a1456e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_dummy.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_dummy.joblib",
+      "sha256": "5d0fca2b31635a5f8e0c47265b9d7711637f99b1b7cd520012bc2127839141bf"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_hist_gradient_boosting.joblib",
+      "sha256": "de6c2454d1392ee3edc6079b41c75e8d91b7028bc6a390955b3e6cee84672a50"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_lightgbm.joblib",
+      "sha256": "3f20ad9d35c266fe799e816f18c8078b4902e49fe1b07369e66b10e0a6872a2d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_logistic_regression.joblib",
+      "sha256": "672fcf5fb0dddd0ac5b95ec44ad3240c23c54a39f9a6cc815401cfe9b9ba83b3"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_random_forest.joblib",
+      "sha256": "c27b90de8be80058fdbcac7b547a964952714200a17a1f930516be763990ac59"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_base_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_base_xgboost.joblib",
+      "sha256": "c045d9c22f983b58633aef76b13a0f36881e8de5015e3b17f5e4ca7c39d27df2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_financial_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_financial_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "6ca0c94a2786d177c962cafb88b6ac16314c81e0b64a4f2eee347f95121b1055"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_financial_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_financial_sentiment_lightgbm.joblib",
+      "sha256": "55783fb81d067864028a0f6e1b554f8f4a5a290e0c9f2a6aeb04c8282622404a"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_financial_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_financial_sentiment_logistic_regression.joblib",
+      "sha256": "9e2d2ba1e0b7d89bef3da29a6f2317276a93b7fe0ff7b29460e341af809dfba2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_financial_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_financial_sentiment_random_forest.joblib",
+      "sha256": "46dc4000b45400a90350c6bba3a6d9c8fa3265387de7bc9e391821baae1f132c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_financial_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_financial_sentiment_xgboost.joblib",
+      "sha256": "338a4b72df26397fcbdcbcb5b822475360d247ed7a66a7423a2e69d64a216481"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_hybrid_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_hybrid_hist_gradient_boosting.joblib",
+      "sha256": "18c7aac3c08669959c804d92438480d364aceab35bd89ac0da27dd616206c668"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_hybrid_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_hybrid_lightgbm.joblib",
+      "sha256": "fdd08196f0516f8849b78c08b2638e23b2126458e9baaf82a1773bf7790ed255"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_hybrid_logistic_regression.joblib",
+      "sha256": "9dc59a7b0141c23e29403456596274df017e391faa7c7b725391978aa1251d13"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_hybrid_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_hybrid_random_forest.joblib",
+      "sha256": "80a4dcc577551f1f8d30870a6cb6528c4c32101e54c0502323f013cb5ff3d319"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_hybrid_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_hybrid_xgboost.joblib",
+      "sha256": "3f573788d8d798229bbd6b2ac92f9e0db2a576cfbf93c7d86c34f565bcfd1546"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_1_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_1_hist_gradient_boosting.joblib",
+      "sha256": "590d8c9875894dc4884aad69de1ad3808e53718399de589cf9a6c9b754c816b2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_1_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_1_lightgbm.joblib",
+      "sha256": "bd9cee0d25502aeed8608c616dc524f7de6cf8b18a05a6f301be86c27cab560d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_1_logistic_regression.joblib",
+      "sha256": "c926adefcda8ba18b745bbac80488b0bc76d6b39ca83cc85a2caf28a789cb7a5"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_1_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_1_random_forest.joblib",
+      "sha256": "805e2f2ef743925ca2348ec60f20c2e879399f3bb18d49f2fbf45daff1ad7b6b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_1_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_1_xgboost.joblib",
+      "sha256": "bfdf3b912c6d0c7715990b25522f0b58e1d3b77f79a37be6f399f100cfca0a1d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_2_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_2_hist_gradient_boosting.joblib",
+      "sha256": "cac1dd7f333aae2c88b0dc992466d1ed39fa085c940975dcf822e0655fd5007e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_2_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_2_lightgbm.joblib",
+      "sha256": "6ffab9baaadee60f8f06695825bd7c3ea1830fcecfa7c1ce39be6e47b0acd1de"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_2_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_2_logistic_regression.joblib",
+      "sha256": "a1bc2fdf26c52b23ad520c33b6aad75a0424d5f49f10151d27da3d44c8495d8d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_2_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_2_random_forest.joblib",
+      "sha256": "5acf6df97585a4878268b2d7909eda7ea1255c1ddca40499e0c811ace3854b94"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_2_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_2_xgboost.joblib",
+      "sha256": "782d0046c726d6df06fd1cbfe060e59fe31b6d6c6f1733f19dc6dae85cffcf2f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_3_hist_gradient_boosting.joblib",
+      "sha256": "2d479e9856ada6a04b861d86060e18fa60ae2369e59e48fa854c851c8668be5d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_3_lightgbm.joblib",
+      "sha256": "c4a7c8a5360ac47592fff45156bc14e136a9abe6842a98a4185a1ab4d13e0064"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_3_logistic_regression.joblib",
+      "sha256": "d2c53ca355c682b401ca61dc9da4cd50d9cb8d9d32405cf3295b6df79e40f177"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_3_random_forest.joblib",
+      "sha256": "b9aaa2b227d2bc3a77a1fcffb1645561a8b3ea8dd8d28e39375e55d50e145327"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_lag_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_lag_3_xgboost.joblib",
+      "sha256": "660423cfb9249d37abe0bafdf54e423f519569d3ad7c510442821159be78bb6f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_news_volume_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_news_volume_hist_gradient_boosting.joblib",
+      "sha256": "60858c7d8fd7310be43b6ef546826804fdc63f7044bf984b39e0fc8e40a08246"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_news_volume_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_news_volume_lightgbm.joblib",
+      "sha256": "8a3a45bb8bd4a93cf63cf80d14dc8c529438856885da355284ed46c85e9042e8"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_news_volume_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_news_volume_logistic_regression.joblib",
+      "sha256": "3a3df3ebbf2fbf9fa4940bb13a8eed6f66e225b969c0158634042cbf79541cbd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_news_volume_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_news_volume_random_forest.joblib",
+      "sha256": "a87d31a4951a9b30a7df487afefd0d6ef6f63a0fa2702fff9004508e3c63cd49"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_news_volume_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_news_volume_xgboost.joblib",
+      "sha256": "fe7559f79c04b77a763e0c9f65ea8f80da6fcd92e7be83dfb5b2d6fd2af9f11f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_relative_features_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_relative_features_hist_gradient_boosting.joblib",
+      "sha256": "ae317ed33a48345760d666d0974a19227098c4336ff59e1219b2dee805c20ffd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_relative_features_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_relative_features_lightgbm.joblib",
+      "sha256": "ce6673760376a3482f1ab2237b027e9c333217e9117da4a1a55608d3252adecd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_relative_features_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_relative_features_logistic_regression.joblib",
+      "sha256": "3a679d304f1e936fd3ea450809ae050aceaf03b9aab34b5db2fde549df874579"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_relative_features_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_relative_features_random_forest.joblib",
+      "sha256": "1a471c5fd8e3d15a03b2b3897bcb4464db13842b1cc2c1e97c5996cf89781818"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_relative_features_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_relative_features_xgboost.joblib",
+      "sha256": "bb6c6a6183151ee692ebb67fe3f38a020557f30976ce2fcf1b1b27d9c3f8ed46"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_3_hist_gradient_boosting.joblib",
+      "sha256": "47599d38ba918b8c9dda9ca38ec9b2735b080924cc22854c87d74c172df69678"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_3_lightgbm.joblib",
+      "sha256": "862bf3ca49beff097b4fd77930bbfad6ac72f935de4c944eb8fdf38755c99901"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_3_logistic_regression.joblib",
+      "sha256": "ad22e44f687cef2d588116503c26d9c21a7fdfe7bf3d6e758efcb23b8e50c9c1"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_3_random_forest.joblib",
+      "sha256": "ae70dc7583e967014c5439883ea6bee46404bdb5ea1871a4453609f4bd5010fa"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_3_xgboost.joblib",
+      "sha256": "abbf0389f7640c7794c23144387b6030820760e656ad746e5691c1970aa61df4"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_5_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_5_hist_gradient_boosting.joblib",
+      "sha256": "4aacfaf0684de10ed2ae8df3c6b5c49b984de0818d8e333c7ba6963a0b1611ea"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_5_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_5_lightgbm.joblib",
+      "sha256": "cd37ac4c18f32a613bc61745a2ab2e692e4b2479573d4264909415caf16ffd25"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_5_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_5_logistic_regression.joblib",
+      "sha256": "94318f1c6560360871c961ae94bec41c1d9896da5e93842441b34c54e29ec0c7"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_5_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_5_random_forest.joblib",
+      "sha256": "ffddcec7de436a2f14aa3046d47c0e474e9f651b651d64b97114068637c2a0b5"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_rolling_5_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_rolling_5_xgboost.joblib",
+      "sha256": "0a672b1e2345c373f1d79d45e051713d8476c72c8f40cd7ee9e6f6e68f915a36"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_sentiment_only_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_sentiment_only_hist_gradient_boosting.joblib",
+      "sha256": "da3d344a7128ef1fcf8eeae479c09b94e8fd2dac4424dfebaf49004ea90d7f95"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_sentiment_only_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_sentiment_only_lightgbm.joblib",
+      "sha256": "a1ca83c6b1d18b4330abf1fcf17731cc4d143af462a5c4e409bf50fae1338a0e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_sentiment_only_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_sentiment_only_logistic_regression.joblib",
+      "sha256": "a94379dfe485ff11dbb4e7d630fd039d6ee413559f2c39dcde5676c3d1d4189f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_sentiment_only_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_sentiment_only_random_forest.joblib",
+      "sha256": "699f637e8db0b856aec3708dd186501cf582e3f411ebff8a776e40c2c88e2da0"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_sentiment_only_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_sentiment_only_xgboost.joblib",
+      "sha256": "e674be83d2424fd4f2b66f0708ee27b323f2220328f51229bb874d69e78d57da"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_weighted_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_weighted_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "5aacf651f055418afb6fea247ceb2370b70780a5a0a99bdf733a4d8b268976d5"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_weighted_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_weighted_sentiment_lightgbm.joblib",
+      "sha256": "7a8a8b1f0b04ed3585cfc04318e0a265d020719a8f4f58936444a493665b4c19"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_weighted_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_weighted_sentiment_logistic_regression.joblib",
+      "sha256": "d2ca9517c0ab43ba219a94f746c9a6ccd4cc2964e3d4945f41c339df995c8a7f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_weighted_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_weighted_sentiment_random_forest.joblib",
+      "sha256": "604a06a50fe36a9d1b0b93a1256b38f0b4344de4ff4f9cc1ec292d7d6f96afee"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_2_weighted_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_2_weighted_sentiment_xgboost.joblib",
+      "sha256": "e18a4b3d882553124362175626994342bb29ee0677f6bcf051bd271cb9748a4b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_dummy.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_dummy.joblib",
+      "sha256": "39581658081de493eaa5eb19a6c59a80d65d7f48808299fef27a05e2d92d9e43"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_hist_gradient_boosting.joblib",
+      "sha256": "6832ab0e9cc89832aa501721ef27b1069596612b46e29bc38a8e96c2c6e58931"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_lightgbm.joblib",
+      "sha256": "8017360d11a2b03be10b6b09dd416606e9b9e67483ade4f3fa597ffdb290553f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_logistic_regression.joblib",
+      "sha256": "685cc7d3d7764e48aedc74b072b0a5f669c6f450734ed35405839eb5023e91b0"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_random_forest.joblib",
+      "sha256": "f3a4d364db026ce243fcee0662377046abe56ce29b9616de56570c62ef97b66b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_base_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_base_xgboost.joblib",
+      "sha256": "6ce271d66f9714352b14c84a8bdb00f1574e028d1d0f0137c267accf67384753"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_financial_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_financial_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "c9bd3b7e918200932355246b7df0f685e378ca4ac259141e464d2c60add5bc96"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_financial_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_financial_sentiment_lightgbm.joblib",
+      "sha256": "5bdf746075edec8e1e41dee77b8213e7f085b8dfaa2354aee0679ca0ca41b278"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_financial_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_financial_sentiment_logistic_regression.joblib",
+      "sha256": "0bfa07f672491ec6d8353a5807a8506984b316317855beb0e60c81f719db78f1"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_financial_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_financial_sentiment_random_forest.joblib",
+      "sha256": "156ad63f2d918ee16295e79b81cdd84a3d166d37fc1e9ab8921804d5a86e48a3"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_financial_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_financial_sentiment_xgboost.joblib",
+      "sha256": "ba6ab081705056c71e0eb3c45bc09d634298e16b2b9bbf8c4e949e63b2a97306"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_hybrid_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_hybrid_hist_gradient_boosting.joblib",
+      "sha256": "661accff5db2431c18988e7e24ff02268c88f8d0ccd57f718411702944757215"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_hybrid_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_hybrid_lightgbm.joblib",
+      "sha256": "65a6d20a194e6cd82aa00ef08ee3b4cd875a1085a5ac5a62b8964453b0ae1ceb"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_hybrid_logistic_regression.joblib",
+      "sha256": "63828cecb9f34efd52c3dd0f0285e47c4be6b8308e275b177baca4c89f20d0b2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_hybrid_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_hybrid_random_forest.joblib",
+      "sha256": "da79f1799764d6424fa2b86c0fba3e7e950a74099014e5765dff459cce3dec2d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_hybrid_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_hybrid_xgboost.joblib",
+      "sha256": "154579316af4dd9c0b2c3d754e329e09ed46f07f6c37530530d695d80d498fbb"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_1_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_1_hist_gradient_boosting.joblib",
+      "sha256": "6320c7e69ffeb434540ad2ce10e27a89bc9a000615fc98e745140da0929908a7"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_1_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_1_lightgbm.joblib",
+      "sha256": "c5c04572abfd225e79c9ffced41e8fc6699c22a73cfd9a176da4a5060bdd7c5e"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_1_logistic_regression.joblib",
+      "sha256": "9730c1511496e225b16e210b75efb955c979153986f24ea1b59f268dc6e1392f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_1_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_1_random_forest.joblib",
+      "sha256": "dd7dd1850daf78f40e24d83b956ddd340b6a69eef14860403dacf6c63c85de6b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_1_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_1_xgboost.joblib",
+      "sha256": "9d2acb3fe8bed43495b8db8fb15cec6e4a22c2baba6a2c59739e44d7cf0510eb"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_2_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_2_hist_gradient_boosting.joblib",
+      "sha256": "dba3dbd09badc9371b1afab909476131c09d633360e957adc454d090a4900d74"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_2_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_2_lightgbm.joblib",
+      "sha256": "84cc0924ad00ac4594bd651e99cfe51aaf009d81aae19850cf75230d9f010a6c"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_2_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_2_logistic_regression.joblib",
+      "sha256": "66d64a05f693bb80f591f0ff1300c0ee494a783c5e449d2f7b67892002eb5bb8"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_2_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_2_random_forest.joblib",
+      "sha256": "6987ae497b342efcff98b15bb54b97a85bf39d9207b38c2fc32d1c35f3eb443d"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_2_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_2_xgboost.joblib",
+      "sha256": "cbab3f94acdf0b6c2c34f90cca88e24d905b2c94bea4c38c6d91679761a86090"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_3_hist_gradient_boosting.joblib",
+      "sha256": "a4f7a919c6d3272cb4af3849c0e475587dde3dadc0ec4be57fc0317ba529652f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_3_lightgbm.joblib",
+      "sha256": "a74a7bdfde15310a10540ae94f9bb3c14c22acc5d02fd14d15e3374e37a99ed2"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_3_logistic_regression.joblib",
+      "sha256": "031357edc8096a0f87b2c6387732b297973dad1459214a7ea0849fb475f731dd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_3_random_forest.joblib",
+      "sha256": "7c81f3c1f63345a2cd16ff8574942ee8b29a32a8ec6697f91d8b00e9db8d75b3"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_lag_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_lag_3_xgboost.joblib",
+      "sha256": "69e4773c01b8490234131ed6b754235ff57747b2794b4413ffe97048e4382623"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_news_volume_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_news_volume_hist_gradient_boosting.joblib",
+      "sha256": "bf80887583ebb15c3b063b0e4f34f0525596e5be99986d229f4c1391f1c96423"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_news_volume_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_news_volume_lightgbm.joblib",
+      "sha256": "030469170fd8b1c9bd4b2961a677bfc4faeabb59d95c6c13e534f01995c2b711"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_news_volume_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_news_volume_logistic_regression.joblib",
+      "sha256": "78dae3806b8b8a8372dab92df18fce1b18d1305eaf6bed4e6a510572fbd6ed78"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_news_volume_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_news_volume_random_forest.joblib",
+      "sha256": "bc6adc1f003c60b26844bafe74b35e1692421c8cf0544dd6bd4404b14b8714e8"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_news_volume_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_news_volume_xgboost.joblib",
+      "sha256": "4e71bee8f38695410792fbee4d73e8d70f2175508371553fa2a023a9fa403868"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_relative_features_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_relative_features_hist_gradient_boosting.joblib",
+      "sha256": "305e0ea5b78d2ea0b9aa00e3bbd7263f60ad6d326b6b7814062b3a9a98df4896"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_relative_features_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_relative_features_lightgbm.joblib",
+      "sha256": "7bb1e82c03bcb14d1bcc88210125e8b9a10dd2b231749edb61cb115bf5e45d40"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_relative_features_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_relative_features_logistic_regression.joblib",
+      "sha256": "c79c65dc2581c6f29f154ecf42607196a75b725da4c048ca0ed9f03a26dcc919"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_relative_features_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_relative_features_random_forest.joblib",
+      "sha256": "e2c6b1cbc0df67aa5e4ddf6e02202afdef7c9e69d1967e7452b429d8f98de134"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_relative_features_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_relative_features_xgboost.joblib",
+      "sha256": "a22d30387d0b1011de470d0aa128593fc3dcb6e20fa5e5fbfdeecc136d01df67"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_3_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_3_hist_gradient_boosting.joblib",
+      "sha256": "5b0e78c6838f5ff7d757ea6da5803ecdfd2d595f353569e66117f5b6832c6261"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_3_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_3_lightgbm.joblib",
+      "sha256": "74997fbca36fc6d5e8258e91ac5dd3b6326513cd450027a7520f516e7d13f0ab"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_3_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_3_logistic_regression.joblib",
+      "sha256": "bd8d965b4001d7bccad195eee997a82d7fed9e9dda3d8a3c7748a6b0edb18e24"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_3_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_3_random_forest.joblib",
+      "sha256": "c8543c5949a56a4be83106f6dde43a6ac44fb2816e944be84e9d0bab21c13222"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_3_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_3_xgboost.joblib",
+      "sha256": "4add2189181ef1be1c4772a90ea9fd97676745502f337d003ae209ce91066044"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_5_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_5_hist_gradient_boosting.joblib",
+      "sha256": "cb96a26c0da5c0519b36cc680ade907c0816d86d64d8360eed201d730bd80d6a"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_5_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_5_lightgbm.joblib",
+      "sha256": "a50e768fd423f4dd6526d7ba175c317511dd578f9a77204711c4e5574497b7cd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_5_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_5_logistic_regression.joblib",
+      "sha256": "11a136f350e134473b78164ab60eab2814780d79a9d0d7bbdf9abe6a01d579fa"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_5_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_5_random_forest.joblib",
+      "sha256": "d42ef3acdbd3c5ea2aeca302ae0a70a5c3ee32ca87204749e439cf8e1ed7c0fa"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_rolling_5_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_rolling_5_xgboost.joblib",
+      "sha256": "522a77d042ce1c13e7a18ecbb8e12595736260cca568140d0f6799ab13c868de"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_sentiment_only_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_sentiment_only_hist_gradient_boosting.joblib",
+      "sha256": "6669c99edf0bdc0c27d29a964952dccc71c50ade7667aeb44d80e529d0ed250b"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_sentiment_only_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_sentiment_only_lightgbm.joblib",
+      "sha256": "b19af54bb0d6c35117048da78f3ef738a2df4125f1164b11bbd00428c2f3d3dd"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_sentiment_only_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_sentiment_only_logistic_regression.joblib",
+      "sha256": "d552d40830fdeef351e7c1b5b740bd1a6b2c95ec8d74e7e8d442d4cd0fa943f0"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_sentiment_only_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_sentiment_only_random_forest.joblib",
+      "sha256": "15f9526240e84ac8d11f5357ced2e0d68af7fb6309db8c58acf09f1e2e0407a1"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_sentiment_only_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_sentiment_only_xgboost.joblib",
+      "sha256": "ae2d2c0069d08ceaa318ea9431ff4fdcebb35108d029bcad333af10be3bd25c4"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_weighted_sentiment_hist_gradient_boosting.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_weighted_sentiment_hist_gradient_boosting.joblib",
+      "sha256": "8cc8389a3751b64fadf2143cb28a607dbc375231cce9fb55dc085b3c897f1192"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_weighted_sentiment_lightgbm.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_weighted_sentiment_lightgbm.joblib",
+      "sha256": "e7cba71d23ff142510e132b7bb981d620e86e032e5be3cebe5880ca6d6b8067f"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_weighted_sentiment_logistic_regression.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_weighted_sentiment_logistic_regression.joblib",
+      "sha256": "1422df920fa96756d3620d066b9e578f8e14b4bee7719d15ce32fca809e04870"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_weighted_sentiment_random_forest.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_weighted_sentiment_random_forest.joblib",
+      "sha256": "5c75b51f56bb16086f25088001e3ab5cc55eaa70b990ca193a641871dd708a63"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/models/fold_3_weighted_sentiment_xgboost.joblib",
+      "new": "models/experiments/review-full-20260908/fold_3_weighted_sentiment_xgboost.joblib",
+      "sha256": "2a9069fb0c8d0dc2e7c99e5428afce74bb46235ba865ec7a78507798d3e49760"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/predictions.csv",
+      "new": "reports/experiments/review-full-20260908/predictions/predictions.csv",
+      "sha256": "4bb62e15ed6f39dc6265845327924cb920eeed417ccd8860e4947d607dff4571"
+    },
+    {
+      "old": "reports/runs/review-full-20260908/selected_params.csv",
+      "new": "reports/experiments/review-full-20260908/tuning/selected_params.csv",
+      "sha256": "fddf48e4a647bee1d3426a49f4f5826fe7f088930f1f2ef9e60e41ec34881e27"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/auc_intervals.csv",
+      "new": "artifacts/verification/review-smoke-20260908/metrics/auc_intervals.csv",
+      "sha256": "8ed92f550498b4e97516d1152bad7445585a11150796e0aa01536dd50aa42637"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/coverage/coverage_by_year_ticker.csv",
+      "new": "artifacts/verification/review-smoke-20260908/coverage/coverage_by_year_ticker.csv",
+      "sha256": "40fd6780addca17e689ecfec34103ae5023f42ec2f954316a3abe04e8e4a15ac"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/coverage/relevance_by_year_ticker.csv",
+      "new": "artifacts/verification/review-smoke-20260908/coverage/relevance_by_year_ticker.csv",
+      "sha256": "3f9e630b23c1c47642260a621db752cc867de2c783b6adce3305cf2fd5768532"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/coverage/sources_by_year_ticker.csv",
+      "new": "artifacts/verification/review-smoke-20260908/coverage/sources_by_year_ticker.csv",
+      "sha256": "9cfa812bac587a0ecdcb4a691af09ac5f4d48f12b390981794d799df8f32eb4b"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/data/dataset.csv",
+      "new": "data/experiments/review-smoke-20260908/dataset.csv",
+      "sha256": "96880b580d47d8a6df4376bfba810f9db2de8ddf81498b3287c76f0e1e670d86"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/data/news_alignment.csv",
+      "new": "data/experiments/review-smoke-20260908/news_alignment.csv",
+      "sha256": "cd92615ffe4c8de5c2c6869dac2560d989f73a0948e14df23901da043775b8aa"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/data/trading_schedule.csv",
+      "new": "data/experiments/review-smoke-20260908/trading_schedule.csv",
+      "sha256": "14a6e5901b7ec6c91770db455054be894e8db3230ce713576fec7b7c3aa22546"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/data/unaligned_news.csv",
+      "new": "data/experiments/review-smoke-20260908/unaligned_news.csv",
+      "sha256": "e6549577e60108d7945d79704141420b4e222b6adf4c6901cee06d2423ba4815"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/figures/balanced_accuracy.png",
+      "new": "artifacts/verification/review-smoke-20260908/figures/balanced_accuracy.png",
+      "sha256": "e63a0c10c68ffb540d0dcf1328338e469986e35bfe72f8d6875b735c0995ba89"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/figures/f1_macro.png",
+      "new": "artifacts/verification/review-smoke-20260908/figures/f1_macro.png",
+      "sha256": "26318ff51e7b448335cf670d442a9b000c6e6f29fa87236abe7371274f2d6a3a"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/figures/mcc.png",
+      "new": "artifacts/verification/review-smoke-20260908/figures/mcc.png",
+      "sha256": "626471cc47c83d26090b55e6532bfe76c2a23260b927a6b9923a29aaafe30cc3"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/figures/roc_auc.png",
+      "new": "artifacts/verification/review-smoke-20260908/figures/roc_auc.png",
+      "sha256": "92fdb6942945e684bcaa572039fdb066954082e359b04291214bfe41fdce95bd"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/global_metrics.csv",
+      "new": "artifacts/verification/review-smoke-20260908/metrics/global_metrics.csv",
+      "sha256": "8e7b8e5d09e72e8a896be01b110520b5f1bf5d6af97c4d5a2f23715a7894a71d"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/inner_cv.csv",
+      "new": "artifacts/verification/review-smoke-20260908/tuning/inner_cv.csv",
+      "sha256": "ab2919387379885e4c23a6156bbdf75f3547eda41bdf9ac71f32f82e64800495"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/manifest.json",
+      "new": "artifacts/verification/review-smoke-20260908/manifest.json",
+      "sha256": "6d77df090f900c3a40d2ba2c20921e3fe5a756f09c2ba72280070220b8be9fa6"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/metrics.csv",
+      "new": "artifacts/verification/review-smoke-20260908/metrics/metrics.csv",
+      "sha256": "811db657b1c03571b0a7ef9c10d6b02b57bf60adcf5c6d6d891d061b1cd70b81"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_1_base_dummy.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_1_base_dummy.joblib",
+      "sha256": "fa8620d26d2e7be36274cfc1ad84ddc190e719fb1ee12392a06ca309920e2370"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_1_base_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_1_base_logistic_regression.joblib",
+      "sha256": "397b2e314a729bb9075054bd2ca9cf08d2d6062349b5998a600ab0a33139dcbc"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_1_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_1_hybrid_logistic_regression.joblib",
+      "sha256": "4be0f1d62752d692606973a800e4cb5846deac27b923afb4be29c294f1dbd2d8"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_1_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_1_lag_1_logistic_regression.joblib",
+      "sha256": "b70227d888ed65cb3b62b1710aceaa4010ab5bfe5ec27ea60f4b4314a3101b58"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_2_base_dummy.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_2_base_dummy.joblib",
+      "sha256": "8fc57d378cb275a5eed54b3f7b5b03dfe519d790ab90b94f6bc441a1640dcdd7"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_2_base_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_2_base_logistic_regression.joblib",
+      "sha256": "ded06dc94f567152c581b5b6579f3c80cbf695875ecb44f21937d5a78fe3cca2"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_2_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_2_hybrid_logistic_regression.joblib",
+      "sha256": "8fe93447d5d4cf689863e063ec1e4bd90b8b748223f681f4ef6726b1cf2cfff0"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/models/fold_2_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-smoke-20260908/fold_2_lag_1_logistic_regression.joblib",
+      "sha256": "ce039f8f82f6082244ab30d5c9cb474e99016e38a6330ae04766e2fd040bb666"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/predictions.csv",
+      "new": "artifacts/verification/review-smoke-20260908/predictions/predictions.csv",
+      "sha256": "1583ccd36b34648328206b57b74b8446ce6c480415b1e616f9f72f1f2e373cd3"
+    },
+    {
+      "old": "reports/runs/review-smoke-20260908/selected_params.csv",
+      "new": "artifacts/verification/review-smoke-20260908/tuning/selected_params.csv",
+      "sha256": "e656b361c6130718f422f09d525b6fd9b6a4d7d86012ebbcfe341f76d4e756e9"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/auc_intervals.csv",
+      "new": "artifacts/verification/review-verification-20260908/metrics/auc_intervals.csv",
+      "sha256": "8ed92f550498b4e97516d1152bad7445585a11150796e0aa01536dd50aa42637"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/coverage/coverage_by_year_ticker.csv",
+      "new": "artifacts/verification/review-verification-20260908/coverage/coverage_by_year_ticker.csv",
+      "sha256": "40fd6780addca17e689ecfec34103ae5023f42ec2f954316a3abe04e8e4a15ac"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/coverage/relevance_by_year_ticker.csv",
+      "new": "artifacts/verification/review-verification-20260908/coverage/relevance_by_year_ticker.csv",
+      "sha256": "3f9e630b23c1c47642260a621db752cc867de2c783b6adce3305cf2fd5768532"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/coverage/sources_by_year_ticker.csv",
+      "new": "artifacts/verification/review-verification-20260908/coverage/sources_by_year_ticker.csv",
+      "sha256": "9cfa812bac587a0ecdcb4a691af09ac5f4d48f12b390981794d799df8f32eb4b"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/data/dataset.csv",
+      "new": "data/experiments/review-verification-20260908/dataset.csv",
+      "sha256": "96880b580d47d8a6df4376bfba810f9db2de8ddf81498b3287c76f0e1e670d86"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/data/news_alignment.csv",
+      "new": "data/experiments/review-verification-20260908/news_alignment.csv",
+      "sha256": "cd92615ffe4c8de5c2c6869dac2560d989f73a0948e14df23901da043775b8aa"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/data/trading_schedule.csv",
+      "new": "data/experiments/review-verification-20260908/trading_schedule.csv",
+      "sha256": "14a6e5901b7ec6c91770db455054be894e8db3230ce713576fec7b7c3aa22546"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/data/unaligned_news.csv",
+      "new": "data/experiments/review-verification-20260908/unaligned_news.csv",
+      "sha256": "e6549577e60108d7945d79704141420b4e222b6adf4c6901cee06d2423ba4815"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/figures/balanced_accuracy.png",
+      "new": "artifacts/verification/review-verification-20260908/figures/balanced_accuracy.png",
+      "sha256": "e63a0c10c68ffb540d0dcf1328338e469986e35bfe72f8d6875b735c0995ba89"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/figures/f1_macro.png",
+      "new": "artifacts/verification/review-verification-20260908/figures/f1_macro.png",
+      "sha256": "26318ff51e7b448335cf670d442a9b000c6e6f29fa87236abe7371274f2d6a3a"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/figures/mcc.png",
+      "new": "artifacts/verification/review-verification-20260908/figures/mcc.png",
+      "sha256": "626471cc47c83d26090b55e6532bfe76c2a23260b927a6b9923a29aaafe30cc3"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/figures/roc_auc.png",
+      "new": "artifacts/verification/review-verification-20260908/figures/roc_auc.png",
+      "sha256": "92fdb6942945e684bcaa572039fdb066954082e359b04291214bfe41fdce95bd"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/global_metrics.csv",
+      "new": "artifacts/verification/review-verification-20260908/metrics/global_metrics.csv",
+      "sha256": "d7d5fa5e28d9fe001c339376112d9580bfeed7a119d1f3b87ec9d2a25e3333bb"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/inner_cv.csv",
+      "new": "artifacts/verification/review-verification-20260908/tuning/inner_cv.csv",
+      "sha256": "ab2919387379885e4c23a6156bbdf75f3547eda41bdf9ac71f32f82e64800495"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/manifest.json",
+      "new": "artifacts/verification/review-verification-20260908/manifest.json",
+      "sha256": "2c2d629bb4448481607227e549941c366c121e8996381360ca38c3a6e6c893dd"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/metrics.csv",
+      "new": "artifacts/verification/review-verification-20260908/metrics/metrics.csv",
+      "sha256": "31e64e5f8272b901953da0084fc38dfc3e0b062bd1cbd934156c6864b22e535f"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_1_base_dummy.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_1_base_dummy.joblib",
+      "sha256": "fa8620d26d2e7be36274cfc1ad84ddc190e719fb1ee12392a06ca309920e2370"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_1_base_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_1_base_logistic_regression.joblib",
+      "sha256": "397b2e314a729bb9075054bd2ca9cf08d2d6062349b5998a600ab0a33139dcbc"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_1_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_1_hybrid_logistic_regression.joblib",
+      "sha256": "4be0f1d62752d692606973a800e4cb5846deac27b923afb4be29c294f1dbd2d8"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_1_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_1_lag_1_logistic_regression.joblib",
+      "sha256": "b70227d888ed65cb3b62b1710aceaa4010ab5bfe5ec27ea60f4b4314a3101b58"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_2_base_dummy.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_2_base_dummy.joblib",
+      "sha256": "8fc57d378cb275a5eed54b3f7b5b03dfe519d790ab90b94f6bc441a1640dcdd7"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_2_base_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_2_base_logistic_regression.joblib",
+      "sha256": "ded06dc94f567152c581b5b6579f3c80cbf695875ecb44f21937d5a78fe3cca2"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_2_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_2_hybrid_logistic_regression.joblib",
+      "sha256": "8fe93447d5d4cf689863e063ec1e4bd90b8b748223f681f4ef6726b1cf2cfff0"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/models/fold_2_lag_1_logistic_regression.joblib",
+      "new": "models/experiments/review-verification-20260908/fold_2_lag_1_logistic_regression.joblib",
+      "sha256": "ce039f8f82f6082244ab30d5c9cb474e99016e38a6330ae04766e2fd040bb666"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/predictions.csv",
+      "new": "artifacts/verification/review-verification-20260908/predictions/predictions.csv",
+      "sha256": "1583ccd36b34648328206b57b74b8446ce6c480415b1e616f9f72f1f2e373cd3"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/selected_params.csv",
+      "new": "artifacts/verification/review-verification-20260908/tuning/selected_params.csv",
+      "sha256": "ebe6c40e00f599491370d24e63fb2643c5b5883ed18392dbb8f64cbb3db2e5dd"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/requirements.txt",
+      "new": "artifacts/snapshots/review-verification-20260908/requirements.txt",
+      "sha256": "7f8a5ae3871d7152b4e09ae3d6e0c5d4507b50ed0ad3f39ac6d80301db747e34"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/aggregate_daily_sentiment.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/aggregate_daily_sentiment.py",
+      "sha256": "2838df77ac0943d2b656ffba4e6b1da21d44c12bc8014cf450b55401182dddfc"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/align_news_to_trading_days.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/align_news_to_trading_days.py",
+      "sha256": "41eed1ac2b58d5d874ec75484039c3f7f9a95895fb11f802798b0dc622b4eae0"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/audit_news_coverage.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/audit_news_coverage.py",
+      "sha256": "effbe3dc6995e23a879c9384df793fb3ca4b82997de2a67707ff3fb0d5a3cca2"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/calculate_daily_returns.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/calculate_daily_returns.py",
+      "sha256": "dd6c54c9bfb4163c22c78354bfc999c6369b40884d55e9309bab893b3dda9b74"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/calculate_macd.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/calculate_macd.py",
+      "sha256": "87731876b94806c0d4c0b0d0f5ed88180e22d29d202b8c0a8ccb969f3c6ebad3"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/calculate_moving_averages.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/calculate_moving_averages.py",
+      "sha256": "7d67bd5957dd8846511b2444fc8d92c5a70fdefba782a27c020586dd9d1f7a37"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/calculate_rsi.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/calculate_rsi.py",
+      "sha256": "f70137922785c0f771a10e7cfa3fa269d8c4a94ddbbd8f22118ac312f3c5090e"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/calculate_volatility.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/calculate_volatility.py",
+      "sha256": "ccb8748422978cd8a1585f2811f2823fa73cf35521d343ab79d9c0a41a0a41c9"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/classify_news_sentiment.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/classify_news_sentiment.py",
+      "sha256": "ee35b834144be02066b313683a892615043fdeff06451ac276c3c637acdc239e"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/clean_financial_news.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/clean_financial_news.py",
+      "sha256": "a68f336a92cdf1f72c3fb801a4c4903ccb322eb11842ee438cfec0a81cea1658"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/create_final_hybrid_dataset.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/create_final_hybrid_dataset.py",
+      "sha256": "c1e5a258ac2577672f2710445aeb2fd4cc2aa0ba0d05989169167a4c9bd5074c"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/create_lagged_sentiment_dataset.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/create_lagged_sentiment_dataset.py",
+      "sha256": "341774d71d842a96cc0b8781c5c3f49ba95be06536659f8d6d9ef19fc33a1312"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/create_target.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/create_target.py",
+      "sha256": "d429b4c4ab477989c34f09aa05aa11b077f490a8e795fbc3ec5fde73370252a5"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/download_financial_news.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/download_financial_news.py",
+      "sha256": "e57c7edfeaa3753879c9a6f9caf3b88b3ca720dcdbcb0f93bb911b83aeed2cfa"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/download_prices.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/download_prices.py",
+      "sha256": "544cb83c13e9e4a13792b21874c0d3deaa9564fdc1ffab148cc0f92f68c30118"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/extract_news_sentiment.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/extract_news_sentiment.py",
+      "sha256": "a14830e5bceec28cf4eab9f6e423bf95b50823c5c4ce20125e2920f691af4e3a"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/handle_days_without_news.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/handle_days_without_news.py",
+      "sha256": "4d80c167b812cb88b1a0be1b9452a324e31a89ec75552e36683e2b8a3c4ef46c"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/merge_financial_sentiment_data.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/merge_financial_sentiment_data.py",
+      "sha256": "a0289008e3f59f15922ae6a8b521f639c547b4f129070f0e735c840b5be98314"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/point_in_time.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/point_in_time.py",
+      "sha256": "9abb2bbdeebcd29b26b39b8639657cfd244333ea746f0667fa232e26a563e89c"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/data/split_train_test.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/data/split_train_test.py",
+      "sha256": "60ddd0a0354e0b203a510a76eebc9b488dac80d1ccd23cc6085c79edd38120eb"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/experiments/__init__.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/experiments/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/experiments/ablations.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/experiments/ablations.py",
+      "sha256": "aea2ad7ba104b1522d363f4c74c2aac097ad3c831200e901ff6ddaab1108c182"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/experiments/artifacts.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/experiments/artifacts.py",
+      "sha256": "ce03bbd04cd2a095eac0dcbad77878ee046ea40bea4f378c5cf7600fa2a7048e"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/experiments/run_review.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/experiments/run_review.py",
+      "sha256": "3f5e32dde53e93cb78ffd442a490905cfbbc771befc06d5635cf0ee8a142a863"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/__init__.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/__init__.py",
+      "sha256": "2e6086c749c35723926910d8fa8a1b3104999686b3cda325af907a5637a23c27"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/analyze_feature_importance.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/analyze_feature_importance.py",
+      "sha256": "56e08319e710ca669391668789095debcff59f4744e7346585f02b73ac780520"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/compare_models.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/compare_models.py",
+      "sha256": "e8a48efde36db6f713af0fc2618db2ad9ea4d1a63b027cb9454029caf48bd32a"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/evaluate_models.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/evaluate_models.py",
+      "sha256": "1716ba5769a5b2d29e3cabaa2f4f3c0d244d55b60795a1989b74414794d72535"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/evaluation.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/evaluation.py",
+      "sha256": "08874af44d5bb4b3f77bdac442add97c09217afa80a9c848b5f74f0dc61e59c9"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/temporal_validation.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/temporal_validation.py",
+      "sha256": "0df618ef9ba94a8521c15d636e4c5324303f6178c913beecff63acea9492c39e"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/train_models.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/train_models.py",
+      "sha256": "056e4b2726b3d3cee4b2b68b13002f747a02fdfe9fd3ddac5022ef73ebea713a"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/models/tune_temporal_cv.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/models/tune_temporal_cv.py",
+      "sha256": "8abca1ed0f19b51adf4a5b9ea197607e65ad8de00ad3bb6c3b31961002ead6fc"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/visualization/__init__.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/visualization/__init__.py",
+      "sha256": "f51b53c069072fc347e8f17aa186d96a1e54623dfb17fddde89bee397d3b07f9"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/visualization/plot_experiment.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/visualization/plot_experiment.py",
+      "sha256": "73f3a148a43c46b5b2df35473bb80d4aea3873b417b27f5de687e8a381c08c1b"
+    },
+    {
+      "old": "reports/runs/review-verification-20260908/source/src/visualization/plot_results.py",
+      "new": "artifacts/snapshots/review-verification-20260908/src/visualization/plot_results.py",
+      "sha256": "eee4f4d7a3cf91c518d4c1c30094491f1e18563f0afe81f0ed4864f2e2902020"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/best_temporal_cv_params.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/tuning/best_temporal_cv_params.csv",
+      "sha256": "7307261be2b2a743d0d0d84529b1e200223bb0c0cac14b91ef0085f065bae4a1"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/lagged_hybrid_vs_hybrid_global.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/lagged_hybrid_vs_hybrid_global.csv",
+      "sha256": "ec944f9ad4fd195338228181d1214ad9b4b4ad8f112c90ba6e8800ef274063ba"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/manifest.json",
+      "new": "artifacts/verification/tuning-verification-20260908/manifest.json",
+      "sha256": "dc17814d9d9ed74a359a0ad47cf4b04c789d58ff07784d25f3c04023aa5d398e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/base_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/base_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "a01a083a69dc9908ea3be1c936c729c74120b242453f37659fd421f3f9c27b35"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/base_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/base_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "001788d882f243c5b7caa71035c3e417ff1d1ea563b90f1759ba2acac8e07930"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "4147ef61e1094e9e5d34251c00d95e97d8adadb20d02a116e22793ac0bc5797e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "9ad0b42489d86bbe3697ed46aeae9513426562e90e45ab9bacae72e09acdf572"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/lagged_hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/lagged_hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "fe239332aaa6e23f52d38fcca848fa53f22431fdd734e85c6ff38b46d3f65692"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/metrics/lagged_hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/lagged_hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "bab03827a8560640095ed17988ea18b47418e87ee5251544e4d600a21e185938"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/models/base_logistic_regression.joblib",
+      "new": "models/experiments/tuning-verification-20260908/base_logistic_regression.joblib",
+      "sha256": "1b290a0c1358b3acf3fa83a2d1fd9a49196f86bac95f56f75d3bbcf0aaa9b2a3"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/models/hybrid_logistic_regression.joblib",
+      "new": "models/experiments/tuning-verification-20260908/hybrid_logistic_regression.joblib",
+      "sha256": "ee5954470cda5daa7305e998773256db9484b70bc87cc45d918125aa4816de1f"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/models/lagged_hybrid_logistic_regression.joblib",
+      "new": "models/experiments/tuning-verification-20260908/lagged_hybrid_logistic_regression.joblib",
+      "sha256": "1c3a6036750aa20af2a2d8cf4663a5a364b02d7925edefcc0c7874ff005c896f"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/base_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/base_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "cb42245c7d7e6ded9504ccbbcb3b9c16ec16e67ac26b394b60e2e63ee74abef4"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/base_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/base_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "2e5a306ef920529372470a1873c092b65613beb41e27a6c91efed79a813c992d"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "d13af534f991321aca2caeb2b0233696dbc499a6fa2480934954b5af97b03529"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "2e5f148f0a6e51b0b2c0af1281e2ef0b1f2f21a559cbb9d187f0e2a580b6a480"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/lagged_hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/lagged_hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "504fff9b7e2bc44a36f8d592f34c3d2163d066a6398d0bfabf142645d7e891d7"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/predictions/lagged_hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/predictions/lagged_hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "87e47405a8cdb58d243e87068446cf66d907781f6dc6c6099741743eb7e82094"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/requirements.txt",
+      "new": "artifacts/snapshots/tuning-verification-20260908/requirements.txt",
+      "sha256": "7f8a5ae3871d7152b4e09ae3d6e0c5d4507b50ed0ad3f39ac6d80301db747e34"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/aggregate_daily_sentiment.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/aggregate_daily_sentiment.py",
+      "sha256": "2838df77ac0943d2b656ffba4e6b1da21d44c12bc8014cf450b55401182dddfc"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/align_news_to_trading_days.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/align_news_to_trading_days.py",
+      "sha256": "41eed1ac2b58d5d874ec75484039c3f7f9a95895fb11f802798b0dc622b4eae0"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/audit_news_coverage.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/audit_news_coverage.py",
+      "sha256": "effbe3dc6995e23a879c9384df793fb3ca4b82997de2a67707ff3fb0d5a3cca2"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/calculate_daily_returns.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/calculate_daily_returns.py",
+      "sha256": "dd6c54c9bfb4163c22c78354bfc999c6369b40884d55e9309bab893b3dda9b74"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/calculate_macd.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/calculate_macd.py",
+      "sha256": "87731876b94806c0d4c0b0d0f5ed88180e22d29d202b8c0a8ccb969f3c6ebad3"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/calculate_moving_averages.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/calculate_moving_averages.py",
+      "sha256": "7d67bd5957dd8846511b2444fc8d92c5a70fdefba782a27c020586dd9d1f7a37"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/calculate_rsi.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/calculate_rsi.py",
+      "sha256": "f70137922785c0f771a10e7cfa3fa269d8c4a94ddbbd8f22118ac312f3c5090e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/calculate_volatility.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/calculate_volatility.py",
+      "sha256": "ccb8748422978cd8a1585f2811f2823fa73cf35521d343ab79d9c0a41a0a41c9"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/classify_news_sentiment.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/classify_news_sentiment.py",
+      "sha256": "ee35b834144be02066b313683a892615043fdeff06451ac276c3c637acdc239e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/clean_financial_news.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/clean_financial_news.py",
+      "sha256": "a68f336a92cdf1f72c3fb801a4c4903ccb322eb11842ee438cfec0a81cea1658"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/create_final_hybrid_dataset.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/create_final_hybrid_dataset.py",
+      "sha256": "c1e5a258ac2577672f2710445aeb2fd4cc2aa0ba0d05989169167a4c9bd5074c"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/create_lagged_sentiment_dataset.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/create_lagged_sentiment_dataset.py",
+      "sha256": "341774d71d842a96cc0b8781c5c3f49ba95be06536659f8d6d9ef19fc33a1312"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/create_target.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/create_target.py",
+      "sha256": "d429b4c4ab477989c34f09aa05aa11b077f490a8e795fbc3ec5fde73370252a5"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/download_financial_news.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/download_financial_news.py",
+      "sha256": "e57c7edfeaa3753879c9a6f9caf3b88b3ca720dcdbcb0f93bb911b83aeed2cfa"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/download_prices.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/download_prices.py",
+      "sha256": "544cb83c13e9e4a13792b21874c0d3deaa9564fdc1ffab148cc0f92f68c30118"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/extract_news_sentiment.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/extract_news_sentiment.py",
+      "sha256": "a14830e5bceec28cf4eab9f6e423bf95b50823c5c4ce20125e2920f691af4e3a"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/handle_days_without_news.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/handle_days_without_news.py",
+      "sha256": "4d80c167b812cb88b1a0be1b9452a324e31a89ec75552e36683e2b8a3c4ef46c"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/merge_financial_sentiment_data.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/merge_financial_sentiment_data.py",
+      "sha256": "a0289008e3f59f15922ae6a8b521f639c547b4f129070f0e735c840b5be98314"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/point_in_time.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/point_in_time.py",
+      "sha256": "9abb2bbdeebcd29b26b39b8639657cfd244333ea746f0667fa232e26a563e89c"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/data/split_train_test.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/data/split_train_test.py",
+      "sha256": "60ddd0a0354e0b203a510a76eebc9b488dac80d1ccd23cc6085c79edd38120eb"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/experiments/__init__.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/experiments/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/experiments/ablations.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/experiments/ablations.py",
+      "sha256": "aea2ad7ba104b1522d363f4c74c2aac097ad3c831200e901ff6ddaab1108c182"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/experiments/artifacts.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/experiments/artifacts.py",
+      "sha256": "ce03bbd04cd2a095eac0dcbad77878ee046ea40bea4f378c5cf7600fa2a7048e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/experiments/run_review.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/experiments/run_review.py",
+      "sha256": "3f5e32dde53e93cb78ffd442a490905cfbbc771befc06d5635cf0ee8a142a863"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/__init__.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/__init__.py",
+      "sha256": "2e6086c749c35723926910d8fa8a1b3104999686b3cda325af907a5637a23c27"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/analyze_feature_importance.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/analyze_feature_importance.py",
+      "sha256": "56e08319e710ca669391668789095debcff59f4744e7346585f02b73ac780520"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/compare_models.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/compare_models.py",
+      "sha256": "e8a48efde36db6f713af0fc2618db2ad9ea4d1a63b027cb9454029caf48bd32a"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/evaluate_models.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/evaluate_models.py",
+      "sha256": "1716ba5769a5b2d29e3cabaa2f4f3c0d244d55b60795a1989b74414794d72535"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/evaluation.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/evaluation.py",
+      "sha256": "08874af44d5bb4b3f77bdac442add97c09217afa80a9c848b5f74f0dc61e59c9"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/temporal_validation.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/temporal_validation.py",
+      "sha256": "0df618ef9ba94a8521c15d636e4c5324303f6178c913beecff63acea9492c39e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/train_models.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/train_models.py",
+      "sha256": "056e4b2726b3d3cee4b2b68b13002f747a02fdfe9fd3ddac5022ef73ebea713a"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/models/tune_temporal_cv.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/models/tune_temporal_cv.py",
+      "sha256": "8abca1ed0f19b51adf4a5b9ea197607e65ad8de00ad3bb6c3b31961002ead6fc"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/visualization/__init__.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/visualization/__init__.py",
+      "sha256": "f51b53c069072fc347e8f17aa186d96a1e54623dfb17fddde89bee397d3b07f9"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/visualization/plot_experiment.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/visualization/plot_experiment.py",
+      "sha256": "73f3a148a43c46b5b2df35473bb80d4aea3873b417b27f5de687e8a381c08c1b"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/source/src/visualization/plot_results.py",
+      "new": "artifacts/snapshots/tuning-verification-20260908/src/visualization/plot_results.py",
+      "sha256": "eee4f4d7a3cf91c518d4c1c30094491f1e18563f0afe81f0ed4864f2e2902020"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/temporal_cv_fold_results.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/tuning/temporal_cv_fold_results.csv",
+      "sha256": "40a90b9955bdf292fa38a8d50a5e0b74a0a73b8be26eaf78c9316620cbf10b9e"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/temporal_cv_results.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/tuning/temporal_cv_results.csv",
+      "sha256": "7307261be2b2a743d0d0d84529b1e200223bb0c0cac14b91ef0085f065bae4a1"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/tuned_base_vs_hybrid_global.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/tuned_base_vs_hybrid_global.csv",
+      "sha256": "4dcbf94a0f08511f280aeaa8ed0b390b73f9905beb6cf09f845db1838505a527"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/tuned_global_metrics.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/tuned_global_metrics.csv",
+      "sha256": "8cd58b662ca15fa29bdcfa543a01a01823c0cf9b112368f555c0258ca69ee182"
+    },
+    {
+      "old": "reports/runs/tuning-verification-20260908/tuned_vs_initial_global.csv",
+      "new": "artifacts/verification/tuning-verification-20260908/metrics/tuned_vs_initial_global.csv",
+      "sha256": "8ff6666164e3e523c585fd136c42798da70111dd425a146f02f334110e1c52a6"
+    },
+    {
+      "old": "reports/tuned_metrics/base_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "sha256": "291ef8b17682117e7a0d3a88dbfccb5fd4a5f47d7f20fd208cc16ab79dc67873"
+    },
+    {
+      "old": "reports/tuned_metrics/base_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "sha256": "90e1c1a3ebdbc1d1122c49e0358b1d6e720fe0529809b5920c0a25f2d1c57569"
+    },
+    {
+      "old": "reports/tuned_metrics/base_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "sha256": "97521cca087d92bb32b9096ade67c5254c6fc7b84afa26087004acc9c2817207"
+    },
+    {
+      "old": "reports/tuned_metrics/base_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "sha256": "c0c1601f709bc91c79c98a3b5475f0a1bceb218b867175a052c1dfa921142956"
+    },
+    {
+      "old": "reports/tuned_metrics/base_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "6261ccdb7d876f94519012d20da08b3d8b63aea03383273daa8ec7d603058860"
+    },
+    {
+      "old": "reports/tuned_metrics/base_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "c55e5f70095fac6fe9d42e8a4f87a5e5b5fcd7735847c3afc356f460613f51b1"
+    },
+    {
+      "old": "reports/tuned_metrics/base_random_forest_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_random_forest_tuned_fixed_0_5_metrics.csv",
+      "sha256": "c7b2077a79261e004e889b83b734d2367afb2e923024c8d083c67f0d31bc04e2"
+    },
+    {
+      "old": "reports/tuned_metrics/base_random_forest_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_random_forest_tuned_optimized_threshold_metrics.csv",
+      "sha256": "60ef21e885a6677a0739ce0281913d31f13f5a6f7fde2e9e90d9b09bce75c467"
+    },
+    {
+      "old": "reports/tuned_metrics/base_xgboost_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_xgboost_tuned_fixed_0_5_metrics.csv",
+      "sha256": "380184e17e6e497305e63dd65fcc999d87cb257aea1625175b724cf7908c65fa"
+    },
+    {
+      "old": "reports/tuned_metrics/base_xgboost_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/base_xgboost_tuned_optimized_threshold_metrics.csv",
+      "sha256": "ca34afa2375e1d4758ea5525db727a2d61952928f34c7790b14ded486560be2f"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "sha256": "4c9758a35670219d823459f7a545b94689f25a84fe83feb5b152702fdebd9170"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "sha256": "680c987b1366c8b4cd625c9db13af6a2f9e6f70b82ae9bdf3bc63cabe0f737cd"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "sha256": "dd5feae0b56c96a1fb250b363705dda2e9c84a82fc6c4ca971be6145eeb3f1bb"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "sha256": "32f093247b5475e2ae5cb128c992e7f6878c56ec3562058f4e5bdc6caf92363e"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "e88681b13b403a898b02346ff487eb008db8a0f5d54f9b230afc21cc562ecdab"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "b48f10fcad4a468d7bd066342cb89cab15064dfa3124ae1db2edaca9fbe403ff"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_random_forest_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_random_forest_tuned_fixed_0_5_metrics.csv",
+      "sha256": "8902dba2c816b47aa31e1f7949bf660cd126e4628693401fa88ac009ce94b745"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_random_forest_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_random_forest_tuned_optimized_threshold_metrics.csv",
+      "sha256": "bcca4864342411396a05140d65a6052685d5400fac626827673c3c3072d88a53"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_xgboost_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_xgboost_tuned_fixed_0_5_metrics.csv",
+      "sha256": "196a0bcf7c10b4b77a34bf121effdc68b08987afd8630d6b756727bc1ab6ce62"
+    },
+    {
+      "old": "reports/tuned_metrics/hybrid_xgboost_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/hybrid_xgboost_tuned_optimized_threshold_metrics.csv",
+      "sha256": "6080f66d4dde04dbb30e07af5155e122fcade708bf856b67afabdb0bf9d8dd35"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_hist_gradient_boosting_tuned_fixed_0_5_metrics.csv",
+      "sha256": "f338eb73c6b931b0f40107b8bd3232c77ae56825faa7e9f9906244f598a97b93"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_hist_gradient_boosting_tuned_optimized_threshold_metrics.csv",
+      "sha256": "6a70d8f362ec72f39c7673a6b7c60d63d53623147a6cc46175a04ea877f442a2"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_lightgbm_tuned_fixed_0_5_metrics.csv",
+      "sha256": "0adf1bcacfbfa2f6716c65a3359d18a53d633627a0cdfaaa9c6046170a2da72b"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_lightgbm_tuned_optimized_threshold_metrics.csv",
+      "sha256": "02d7c7f0c370864061ac352acb88bfdf48384e44c1a64340d79a82c352770e55"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_logistic_regression_tuned_fixed_0_5_metrics.csv",
+      "sha256": "254ed8143a3ad409dcb4e8b518a044f1f7b614403f1b5dc959960697a34b47a9"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_logistic_regression_tuned_optimized_threshold_metrics.csv",
+      "sha256": "3701f601b42c3cb89a174d20e27de14fbf8ec4789578d6ffc02d1f5bea72b939"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_random_forest_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_random_forest_tuned_fixed_0_5_metrics.csv",
+      "sha256": "0b605a233cae1b4c933455035403c6c67763e044a7ff75f7a5f94e8cb44744e2"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_random_forest_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_random_forest_tuned_optimized_threshold_metrics.csv",
+      "sha256": "b01630a4629149646daff7cbcc52d913c6aec9157851a6946c3f617bb75aafc4"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_xgboost_tuned_fixed_0_5_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_xgboost_tuned_fixed_0_5_metrics.csv",
+      "sha256": "e88c6cd819a3aebd26adf5db63b1421673f93b6986222a1925fefe2c10b0bde9"
+    },
+    {
+      "old": "reports/tuned_metrics/lagged_hybrid_xgboost_tuned_optimized_threshold_metrics.csv",
+      "new": "reports/historical/tuned_metrics/lagged_hybrid_xgboost_tuned_optimized_threshold_metrics.csv",
+      "sha256": "fc6bd9fa6eddc4ea5fda81638511e203b7cfde188f23bbb32088717e4f9c8b69"
+    },
+    {
+      "old": "reports/tuned_predictions/base_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "sha256": "77e94ac94d9779a4b773341a1a989f808b0b8978277e17ff7d13f405e3872356"
+    },
+    {
+      "old": "reports/tuned_predictions/base_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "sha256": "22c62a8a915ddbd6a8e6841819c198ed2f7dbde3dd2a2d714b5c8ddad3044bd8"
+    },
+    {
+      "old": "reports/tuned_predictions/base_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "sha256": "efb85ddae7ba8aa18f380959d1cd567d850dd52c682dbc22a1000c44c2f81ea0"
+    },
+    {
+      "old": "reports/tuned_predictions/base_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "sha256": "ff93b3baecf141e567c55d3f2cb635480aae1b71e278dcf1537b36b95385c8f3"
+    },
+    {
+      "old": "reports/tuned_predictions/base_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "9fa4ca3419e8bfb87bcc7096152710b18587c1dbebd0aa9eedf1bddfec9c3f3f"
+    },
+    {
+      "old": "reports/tuned_predictions/base_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "c09afeb9b75c94a209768f87bd57e9b37d2e37ec0fab9cf1722455cf25fd2537"
+    },
+    {
+      "old": "reports/tuned_predictions/base_random_forest_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_random_forest_tuned_fixed_0_5_predictions.csv",
+      "sha256": "0a78a262153cba511a12a996e581bb720146a0471869a3c1d817a5ebb682407a"
+    },
+    {
+      "old": "reports/tuned_predictions/base_random_forest_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_random_forest_tuned_optimized_threshold_predictions.csv",
+      "sha256": "79c95ee7c6df0e7cd3295597f9b91fd84aaaa1fa2b3291f3170a9e3471ed0775"
+    },
+    {
+      "old": "reports/tuned_predictions/base_xgboost_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_xgboost_tuned_fixed_0_5_predictions.csv",
+      "sha256": "c5f325748890b5bc90cfa9a2d212e96e6c80c75d7a262176550a0b42bd16617a"
+    },
+    {
+      "old": "reports/tuned_predictions/base_xgboost_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/base_xgboost_tuned_optimized_threshold_predictions.csv",
+      "sha256": "166e27b0e8d00deabb89e11eeae3fd0add5a605b8fb3db747ad8cc6f8b00eca4"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "sha256": "1c5c6c9aa6e5485bf2951d987550d024697cd851e8bbc2c61094c549f7a082d9"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "sha256": "3613cf8d251a254a4f36775e3b03d57db88bf46438bdc5f39128f343600a99bb"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "sha256": "7a19fff0edbfe408335d34e314413c6e95029d5eac11daa8b98e260a214edf98"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "sha256": "98f69fdc32daef0ced0d07146cd47bfe6e1fc5b897c3afbd945d0839c18fe7f7"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "8de2c435fbb1bae8d20ebed341c89f08c6ee6037215438dabb132b08e58b40e8"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "e973417463010bd09f97a3c77b348688973f12cbd2d785e3915fb8eb6da5731e"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_random_forest_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_random_forest_tuned_fixed_0_5_predictions.csv",
+      "sha256": "56489abfd6425c1e4f7f955fec4d14533ec1b6c00e982e6aabdd0bdf3180d2d8"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_random_forest_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_random_forest_tuned_optimized_threshold_predictions.csv",
+      "sha256": "f174cf2a4bd3f9f0cd2dea191fc532847ea0db3e62021d825a38f42786b5324d"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_xgboost_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_xgboost_tuned_fixed_0_5_predictions.csv",
+      "sha256": "28cee50f538faaa75388c1376d710ca56511562190d511360a5c77203fc434dd"
+    },
+    {
+      "old": "reports/tuned_predictions/hybrid_xgboost_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/hybrid_xgboost_tuned_optimized_threshold_predictions.csv",
+      "sha256": "75990b6110ae1dbebc851edb44236bbda4c7c51d817e128d1cb4b51db90d0181"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_hist_gradient_boosting_tuned_fixed_0_5_predictions.csv",
+      "sha256": "777628bcf77357a45a0d7172abe6ecd559fa9f5f7dc74b28f0aca76625936488"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_hist_gradient_boosting_tuned_optimized_threshold_predictions.csv",
+      "sha256": "9e29dc3d85c560e553cf03f1caa33b0909cde14af31af69492182dfe5199bd93"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_lightgbm_tuned_fixed_0_5_predictions.csv",
+      "sha256": "25da766865255545f2ca1781edd659d356b5a81ee76e9f57b60d016b0759560e"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_lightgbm_tuned_optimized_threshold_predictions.csv",
+      "sha256": "0ca56c305f60e5d2fae8b132ae916ee0b461e2629df5b9844bfdca1b2d82b61c"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_logistic_regression_tuned_fixed_0_5_predictions.csv",
+      "sha256": "1d8ae581a598dad075f24a9eb0e92f4c05004286aa273977801a97f6a326ce29"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_logistic_regression_tuned_optimized_threshold_predictions.csv",
+      "sha256": "9c8918e49b27105fd302805bf5a346d5b604d587b0efa497a61dbd92818f792c"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_random_forest_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_random_forest_tuned_fixed_0_5_predictions.csv",
+      "sha256": "b69826144c873adb2bab093f51ae5101b9def8792d99439238c83b86dad001c9"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_random_forest_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_random_forest_tuned_optimized_threshold_predictions.csv",
+      "sha256": "8b51eea382b8e47c58e93a32c7b43d9e0d4f8dac96d5ed0c492703c10898d3ef"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_xgboost_tuned_fixed_0_5_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_xgboost_tuned_fixed_0_5_predictions.csv",
+      "sha256": "db5934dc9d6332ac90eb587c3c00a86dd45cfe71ea7ba5d85653f3f953cc4c19"
+    },
+    {
+      "old": "reports/tuned_predictions/lagged_hybrid_xgboost_tuned_optimized_threshold_predictions.csv",
+      "new": "reports/historical/tuned_predictions/lagged_hybrid_xgboost_tuned_optimized_threshold_predictions.csv",
+      "sha256": "563a938803284c9b1d314144517bc5489763f139bb436057b8666f4fd8e64b73"
+    },
+    {
+      "old": "reports/tuning/best_temporal_cv_params.csv",
+      "new": "reports/historical/tuning/best_temporal_cv_params.csv",
+      "sha256": "08cdc48be9ad0bdac824fec934c7cfbf0249fc77e6e0dec66fe78e2808ddd355"
+    },
+    {
+      "old": "reports/tuning/lagged_hybrid_vs_hybrid_global.csv",
+      "new": "reports/historical/tuning/lagged_hybrid_vs_hybrid_global.csv",
+      "sha256": "0e4394962ed0b14b5054ba9d2bd0e635e3855a3a3c22ce4eac0c2d190e1f240f"
+    },
+    {
+      "old": "reports/tuning/model_progression_summary.csv",
+      "new": "reports/historical/tuning/model_progression_summary.csv",
+      "sha256": "0f2f7836d7f2e1662377942dd56535c8bc4030c1445d46ac047024635f87eb31"
+    },
+    {
+      "old": "reports/tuning/temporal_cv_fold_results.csv",
+      "new": "reports/historical/tuning/temporal_cv_fold_results.csv",
+      "sha256": "17b6b8d0b4968141b70bc6e659b1f52fded234d22fdbf4c9632539d1679ab064"
+    },
+    {
+      "old": "reports/tuning/temporal_cv_results.csv",
+      "new": "reports/historical/tuning/temporal_cv_results.csv",
+      "sha256": "7ca633ffa305b570e52fb503574086f123a2ba6090464684c0d64c6195cd01a3"
+    },
+    {
+      "old": "reports/tuning/tuned_base_vs_hybrid_global.csv",
+      "new": "reports/historical/tuning/tuned_base_vs_hybrid_global.csv",
+      "sha256": "c09a379d19c6f697f781a5c6b3763d4009f4362e77cbe18810d7d2d77946dba2"
+    },
+    {
+      "old": "reports/tuning/tuned_global_metrics.csv",
+      "new": "reports/historical/tuning/tuned_global_metrics.csv",
+      "sha256": "6158ad52503c790d014273a538df2c3972267e4f3f3538087f1d68ff7de8e800"
+    },
+    {
+      "old": "reports/tuning/tuned_vs_initial_global.csv",
+      "new": "reports/historical/tuning/tuned_vs_initial_global.csv",
+      "sha256": "80bfd0134f4a51a1bdc83156e78e8bec955347aec109977445bab5593c6a3e8b"
+    }
+  ],
+  "empty_directories_retained": [
+    "reports/runs/tuning-verification-20260908/source/src/data",
+    "reports/runs/tuning-verification-20260908/source/src/experiments",
+    "reports/runs/tuning-verification-20260908/source/src/models",
+    "reports/runs/tuning-verification-20260908/source/src/visualization",
+    "reports/runs/review-verification-20260908/source/src/data",
+    "reports/runs/review-verification-20260908/source/src/experiments",
+    "reports/runs/review-verification-20260908/source/src/models",
+    "reports/runs/review-verification-20260908/source/src/visualization",
+    "reports/runs/legacy-smoke-20260908/comparison",
+    "reports/runs/legacy-smoke-20260908/metadata",
+    "reports/runs/legacy-smoke-20260908/metrics",
+    "reports/runs/legacy-smoke-20260908/models",
+    "reports/runs/legacy-smoke-20260908/predictions",
+    "reports/runs/review-full-20260908/coverage",
+    "reports/runs/review-full-20260908/data",
+    "reports/runs/review-full-20260908/figures",
+    "reports/runs/review-full-20260908/models",
+    "reports/runs/review-smoke-20260908/coverage",
+    "reports/runs/review-smoke-20260908/data",
+    "reports/runs/review-smoke-20260908/figures",
+    "reports/runs/review-smoke-20260908/models",
+    "reports/runs/review-verification-20260908/coverage",
+    "reports/runs/review-verification-20260908/data",
+    "reports/runs/review-verification-20260908/figures",
+    "reports/runs/review-verification-20260908/models",
+    "reports/runs/tuning-verification-20260908/metrics",
+    "reports/runs/tuning-verification-20260908/models",
+    "reports/runs/tuning-verification-20260908/predictions",
+    "reports/comparison",
+    "reports/feature_importance",
+    "reports/figures",
+    "reports/metrics",
+    "reports/model_metadata",
+    "reports/predictions",
+    "reports/tuned_metrics",
+    "reports/tuned_predictions",
+    "reports/tuning"
+  ]
+}

@@ -27,12 +27,12 @@ Todos los comandos finalizaron correctamente.
 - `data/processed/model/base_test.csv`: 2.212 filas.
 - `data/processed/model/hybrid_train.csv`: 8.844 filas.
 - `data/processed/model/hybrid_test.csv`: 2.212 filas.
-- `reports/metrics/all_model_metrics.csv`: 40 filas.
-- `reports/metrics/global_model_metrics.csv`: 8 filas.
-- `reports/comparison/base_vs_hybrid_global.csv`: 4 filas.
-- `reports/comparison/base_vs_hybrid_by_ticker.csv`: 16 filas.
-- `reports/feature_importance/feature_importance.csv`: 82 filas.
-- `reports/figures/`: 4 figuras PNG.
+- `reports/historical/metrics/all_model_metrics.csv`: 40 filas.
+- `reports/historical/metrics/global_model_metrics.csv`: 8 filas.
+- `reports/historical/comparison/base_vs_hybrid_global.csv`: 4 filas.
+- `reports/historical/comparison/base_vs_hybrid_by_ticker.csv`: 16 filas.
+- `reports/historical/feature_importance/feature_importance.csv`: 82 filas.
+- `reports/historical/figures/`: 4 figuras PNG.
 
 ## Consistencia metodológica
 

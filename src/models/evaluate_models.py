@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import argparse
 from pathlib import Path
 
 import pandas as pd
@@ -10,18 +11,19 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.models.evaluation import evaluate_predictions, save_metrics
+from src.experiments.artifacts import refresh_manifest
 
 
-PREDICTIONS_DIR = Path("reports/predictions")
-METRICS_DIR = Path("reports/metrics")
+PREDICTIONS_DIR = Path("reports/historical/predictions")
+METRICS_DIR = Path("reports/historical/metrics")
 SUMMARY_FILE = METRICS_DIR / "all_model_metrics.csv"
 GLOBAL_SUMMARY_FILE = METRICS_DIR / "global_model_metrics.csv"
 
 
-def load_prediction_files() -> list[Path]:
-    prediction_files = sorted(PREDICTIONS_DIR.glob("*_predictions.csv"))
+def load_prediction_files(predictions_dir: Path = PREDICTIONS_DIR) -> list[Path]:
+    prediction_files = sorted(predictions_dir.glob("*_predictions.csv"))
     if not prediction_files:
-        raise FileNotFoundError(f"No hay predicciones en {PREDICTIONS_DIR}")
+        raise FileNotFoundError(f"No hay predicciones en {predictions_dir}")
     return prediction_files
 
 
@@ -37,14 +39,16 @@ def evaluate_prediction_file(prediction_file: Path) -> pd.DataFrame:
     metrics = evaluate_predictions(predictions, group_columns=["ticker"])
     metrics.insert(0, "model_name", predictions["model_name"].iloc[0])
     metrics.insert(0, "dataset_type", predictions["dataset_type"].iloc[0])
+    if "model_variant" in predictions:
+        metrics.insert(0, "model_variant", predictions["model_variant"].iloc[0])
 
     return metrics
 
 
-def build_metrics_summary() -> pd.DataFrame:
+def build_metrics_summary(predictions_dir: Path = PREDICTIONS_DIR) -> pd.DataFrame:
     metric_frames = [
         evaluate_prediction_file(prediction_file)
-        for prediction_file in load_prediction_files()
+        for prediction_file in load_prediction_files(predictions_dir)
     ]
     metrics = pd.concat(metric_frames, ignore_index=True)
     metrics = metrics.sort_values(
@@ -56,14 +60,22 @@ def build_metrics_summary() -> pd.DataFrame:
 
 
 def main() -> None:
-    metrics = build_metrics_summary()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-dir", type=Path)
+    args = parser.parse_args()
+    predictions_dir = args.run_dir / "predictions" if args.run_dir else PREDICTIONS_DIR
+    metrics = build_metrics_summary(predictions_dir)
     global_metrics = metrics[metrics["scope"] == "global"].copy()
 
-    save_metrics(metrics, SUMMARY_FILE)
-    save_metrics(global_metrics, GLOBAL_SUMMARY_FILE)
+    summary_file = args.run_dir / "metrics" / SUMMARY_FILE.name if args.run_dir else SUMMARY_FILE
+    global_file = args.run_dir / "metrics" / GLOBAL_SUMMARY_FILE.name if args.run_dir else GLOBAL_SUMMARY_FILE
+    save_metrics(metrics, summary_file)
+    save_metrics(global_metrics, global_file)
+    if args.run_dir:
+        refresh_manifest(args.run_dir)
 
-    print(f"Guardado: {SUMMARY_FILE} - {len(metrics)} filas")
-    print(f"Guardado: {GLOBAL_SUMMARY_FILE} - {len(global_metrics)} filas")
+    print(f"Guardado: {summary_file} - {len(metrics)} filas")
+    print(f"Guardado: {global_file} - {len(global_metrics)} filas")
     print(global_metrics[["dataset_type", "model_name", "accuracy", "f1", "roc_auc"]])
 
 

@@ -11,7 +11,7 @@ python src/models/evaluate_models.py
 El script lee todas las predicciones disponibles en:
 
 ```text
-reports/predictions/
+reports/historical/predictions/
 ```
 
 Cada archivo debe contener:
@@ -27,8 +27,8 @@ Cada archivo debe contener:
 
 La evaluación genera:
 
-- `reports/metrics/all_model_metrics.csv`: métricas globales y por ticker.
-- `reports/metrics/global_model_metrics.csv`: métricas globales por modelo.
+- `reports/historical/metrics/all_model_metrics.csv`: métricas globales y por ticker.
+- `reports/historical/metrics/global_model_metrics.csv`: métricas globales por modelo.
 
 ## Resultado
 

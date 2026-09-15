@@ -2,6 +2,8 @@
 
 Esta guía resume cómo reproducir el flujo principal del proyecto desde la descarga de datos hasta las métricas y figuras finales.
 
+Desde la revisión metodológica, el bloque recomendado de modelado es `python -m src.experiments.run_review`. Reconstruye la alineación horaria y guarda una ejecución aislada. Los informes anteriores son históricos. Véase `docs/revision_implementation.md`.
+
 ## 1. Entorno
 
 Instalar dependencias:
@@ -93,18 +95,26 @@ python src/data/split_train_test.py
 
 El split usa el 80% inicial de fechas únicas para entrenamiento y el 20% final para prueba. No se usa división aleatoria.
 
-## 6. Modelado
-
-Entrenar modelos base:
+Opcionalmente, para probar el efecto retardado de las noticias:
 
 ```bash
-python src/models/train_models.py --dataset base
+python src/data/create_lagged_sentiment_dataset.py
 ```
 
-Entrenar modelos híbridos:
+Este paso genera el dataset `lagged_hybrid`, que mantiene las mismas filas que el híbrido original y añade retardos y ventanas móviles de sentimiento.
+
+## 6. Modelado
+
+Ejecutar el protocolo corregido, incluyendo los cinco algoritmos, baseline, selección interna de hiperparámetros y comparaciones controladas:
 
 ```bash
-python src/models/train_models.py --dataset hybrid
+python -m src.experiments.run_review
+```
+
+Alternativamente, entrenar los CSV de modelado disponibles en una ejecución tradicional aislada:
+
+```bash
+python src/models/train_models.py --dataset base hybrid --run-dir reports/experiments/modelado-tradicional
 ```
 
 Los modelos disponibles son:
@@ -113,22 +123,24 @@ Los modelos disponibles son:
 - `logistic_regression`
 - `random_forest`
 - `hist_gradient_boosting`
+- `xgboost`
+- `lightgbm`
 
 ## 7. Evaluación y comparación
 
-Consolidar métricas:
+El protocolo corregido consolida métricas, intervalos y figuras automáticamente dentro de su directorio. Para el entrenamiento tradicional del apartado anterior, consolidar métricas:
 
 ```bash
-python src/models/evaluate_models.py
+python src/models/evaluate_models.py --run-dir reports/experiments/modelado-tradicional
 ```
 
 Comparar modelo base e híbrido:
 
 ```bash
-python src/models/compare_models.py
+python src/models/compare_models.py --run-dir reports/experiments/modelado-tradicional
 ```
 
-Analizar importancia de variables:
+Los siguientes comandos corresponden exclusivamente a los modelos e informes históricos originales; no incluyen los experimentos corregidos:
 
 ```bash
 python src/models/analyze_feature_importance.py
@@ -140,15 +152,23 @@ Generar visualizaciones:
 python src/visualization/plot_results.py
 ```
 
+Para ajustar hiperparámetros con validación temporal:
+
+```bash
+python src/models/tune_temporal_cv.py --datasets base hybrid lagged_hybrid --run-dir reports/experiments/tuning-tradicional
+```
+
 ## 8. Salidas principales
 
+La revisión corregida guarda métricas, configuración e intervalos en `reports/experiments/<ejecución>/`. Los modelos, datos e instantáneas se guardan por separado con el mismo identificador, según `docs/report_organization.md`. Las rutas siguientes corresponden al flujo histórico:
+
 - Datos procesados: `data/processed/`
-- Modelos entrenados: `models/trained/`
-- Predicciones: `reports/predictions/`
-- Métricas: `reports/metrics/`
-- Comparación: `reports/comparison/`
-- Importancia de variables: `reports/feature_importance/`
-- Figuras: `reports/figures/`
+- Modelos entrenados: `models/experiments/legacy-trained/`
+- Predicciones: `reports/historical/predictions/`
+- Métricas: `reports/historical/metrics/`
+- Comparación: `reports/historical/comparison/`
+- Importancia de variables: `reports/historical/feature_importance/`
+- Figuras: `reports/historical/figures/`
 
 ## Nota sobre SPY
 

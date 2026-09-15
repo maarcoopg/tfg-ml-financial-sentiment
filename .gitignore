@@ -3,6 +3,12 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Generated model artifacts
+*.joblib
+/data/experiments/
+/artifacts/snapshots/
+/artifacts/verification/
+
 # C extensions
 *.so
 
