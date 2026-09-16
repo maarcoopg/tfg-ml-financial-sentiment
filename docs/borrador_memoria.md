@@ -5,7 +5,7 @@ Grado en Ingeniería del Software · Universidad de Sevilla
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
 
-> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. Los resultados principales corresponden a `review-full-20260908`; los ensayos anteriores se identifican como antecedentes exploratorios.
+> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916` y `ticker-aware-full-20260916`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
 ## Índice
 
@@ -40,6 +40,8 @@ El mayor ROC-AUC agrupado observado fue 0,5108, con HistGradientBoosting y varia
 
 La contribución del proyecto es tanto experimental como de ingeniería: integración de fuentes heterogéneas, control temporal explícito, evaluación comparable y conservación verificable de resultados. El histórico ya había sido consultado, por lo que los resultados deben considerarse exploratorios y no una confirmación independiente.
 
+Dos experimentos adicionales estudian si conviene especializar el aprendizaje por empresa o conservar el entrenamiento conjunto incorporando identidad, variables relativas e interacciones. Entrenar por separado no mejora el promedio general. Las variables relativas producen pequeñas mejoras descriptivas, pero ninguno de los 81 intervalos de diferencias de AUC macro del segundo experimento excluye cero. Destaca el bosque aleatorio híbrido en NVDA: pasa de 0,5180 a 0,5717 de AUC al utilizar relativas e identificador, aunque sin identificador ya obtiene 0,5711. Esta señal no se generaliza a todas las empresas ni demuestra rentabilidad.
+
 **Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad.
 
 ## 2. Introducción y motivación
@@ -62,15 +64,15 @@ Desde Ingeniería del Software, el trabajo requiere resolver adquisición de dat
 2. Definir una etiqueta y variables coherentes con el instante de predicción.
 3. Comparar configuraciones base e híbrida sobre las mismas observaciones.
 4. Seleccionar hiperparámetros sin utilizar el bloque externo correspondiente.
-5. Investigar si retardos, ventanas, relevancia y representaciones relativas modifican los resultados.
+5. Investigar si retardos, ventanas, relevancia, representaciones relativas y especialización por empresa modifican los resultados.
 6. Cuantificar incertidumbre y documentar los límites de las conclusiones.
 7. Proporcionar programas, pruebas y cuadernos de análisis que permitan inspeccionar y reproducir el experimento.
 
-La hipótesis principal plantea una posible contribución adicional del sentimiento. Una hipótesis secundaria plantea persistencia durante varias sesiones. También se propuso estudiar diferencias entre empresas, particularmente TSLA y NVDA; el proyecto dispone de métricas por empresa, pero no ha establecido una ventaja diferencial confirmada para esas empresas.
+La hipótesis principal plantea una posible contribución adicional del sentimiento. Una hipótesis secundaria plantea persistencia durante varias sesiones. También se estudia si entrenar un modelo independiente por empresa mejora la adaptación a sus características, y si un modelo conjunto con identidad e interacciones puede conservar información compartida sin ignorar esas diferencias. Las comparaciones realizadas no establecen una ventaja general confirmada; el resultado favorable en NVDA con variables relativas requiere validación independiente.
 
 ### 3.3 Alcance y exclusiones
 
-La unidad de observación es una pareja empresa-sesión. Se utilizan modelos conjuntos para las cuatro empresas; el identificador bursátil identifica filas y agrupaciones, pero no se introduce como predictor. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. Tampoco se entrena un modelo propio de lenguaje: el sentimiento empleado procede del proveedor.
+La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. Tampoco se entrena un modelo propio de lenguaje: el sentimiento empleado procede del proveedor.
 
 ## 4. Fundamentos y referencias
 
@@ -107,7 +109,7 @@ Esta sección constituye una fundamentación inicial, no una revisión sistemát
 | Aislar imputación y escalado | Cadena de preprocesamiento y modelado ajustada en cada entrenamiento | `src/models/train_models.py` |
 | No sobrescribir experimentos anteriores | Identificador nuevo y rechazo de colisiones | `src/experiments/artifacts.py` |
 | Conservar resultados auditables | CSV, manifiestos y hashes SHA-256 | `reports/experiments/` |
-| Facilitar la explicación | Memoria, guías y dos cuadernos de análisis | `docs/` y `notebooks/` |
+| Facilitar la explicación | Memoria, guías y cuatro cuadernos de análisis | `docs/` y `notebooks/` |
 
 ### 5.2 Arquitectura
 
@@ -155,7 +157,7 @@ $$
 y_{i,t}=\mathbb{1}\left(P^{adj}_{i,t+1}>P^{adj}_{i,t}\right).
 $$
 
-La clase cero incluye bajadas e igualdad; no equivale exclusivamente a «baja». El horizonte es la siguiente sesión disponible, no necesariamente el siguiente día natural. La última observación sin precio posterior se elimina. `next_adj_close` sirve para construir la etiqueta, pero no entra en las variables predictoras; tampoco entran `target`, `target_end`, `Date` o `ticker`.
+La clase cero incluye bajadas e igualdad; no equivale exclusivamente a «baja». El horizonte es la siguiente sesión disponible, no necesariamente el siguiente día natural. La última observación sin precio posterior se elimina. `next_adj_close` sirve para construir la etiqueta, pero no entra en las variables predictoras; tampoco entran `target`, `target_end` o `Date`. La columna textual `ticker` identifica y agrupa filas: solo el experimento de identidad incorpora indicadores binarios derivados de ella, nunca del objetivo.
 
 Se utiliza `Adj Close` para objetivo, retorno e indicadores basados en cierre. La revisión comprueba el objetivo frente al precio bruto guardado y obtiene `target_end` a partir de la fecha de la siguiente observación. Esto permite expresar de forma explícita cuándo se conoce cada etiqueta.
 
@@ -301,6 +303,42 @@ Se emplea remuestreo pareado de bloques móviles: las fechas se remuestrean en b
 
 El bloque principal tiene veinte sesiones. La comparación LightGBM con retardo de una sesión frente a híbrido también se evalúa con bloques de cinco y sesenta. Los intervalos son exploratorios: no incorporan todo el proceso de reentrenamiento y selección, ni corrigen las múltiples comparaciones. La comparación principal se fijó para esta ejecución tras haber observado resultados históricos anteriores; no equivale a un prerregistro independiente de todo el desarrollo.
 
+### 10.4 Especialización por empresa y representación compartida
+
+El experimento `per-company-20260916` surge de una limitación posible del entrenamiento conjunto: las cuatro empresas pueden responder de manera distinta a indicadores y noticias. Se entrenan estimadores independientes para AAPL, MSFT, NVDA y TSLA, comparando base, híbrido y retardo de una sesión. Se mantienen los cinco algoritmos, las rejillas de la sección 9.3, tres particiones internas, tres bloques externos y umbral 0,5. No se utiliza el antiguo diseño de 92 variables, sino 14, 27 y 29 variables, respectivamente.
+
+Cada empresa dispone de 2.764 observaciones y 553 sesiones externas entre el 16 de octubre de 2023 y el 29 de diciembre de 2025. Tras la purga, los entrenamientos individuales contienen 2.210, 2.395 y 2.579 filas. La especialización reduce a una cuarta parte los ejemplos de cada estimador respecto al panel conjunto. Puede favorecer adaptación, pero también aumentar la variabilidad del ajuste; el experimento no identifica una causa única para los cambios observados.
+
+Las noticias se filtran por empresa antes de calcular sus retardos. Un artículo que menciona varias empresas puede participar en cada una con su puntuación específica; no se impone exclusividad artificial ni se mezcla el sentimiento entre activos. Imputación, escalado, selección de parámetros y entrenamiento utilizan exclusivamente el pasado de la empresa correspondiente. La referencia conjunta se reentrena y sus 35.392 probabilidades coinciden exactamente con las variantes equivalentes de la revisión principal.
+
+El resultado mixto motiva `ticker-aware-full-20260916`: conservar el panel completo, permitiendo identificar la empresa y reduciendo diferencias de escala entre activos. Se separan cambios para distinguir su contribución:
+
+| Enfoque | Cambio respecto a la referencia conjunta | Algoritmos |
+| --- | --- | --- |
+| Original + empresa | Variables originales y tres indicadores binarios de empresa | Los cinco |
+| Relativas | Sustituir niveles absolutos por representaciones relativas, sin identidad | Los cinco |
+| Relativas + empresa | Representación relativa más identidad | Los cinco |
+| Interacciones originales | Originales, identidad y productos empresa-variable | Regresión logística |
+| Interacciones relativas | Relativas, identidad y productos empresa-variable | Regresión logística |
+
+Se codifican MSFT, NVDA y TSLA, con AAPL como referencia. En regresión logística los indicadores permiten distintos niveles de partida, mientras que sus productos con las variables permiten pendientes diferentes. Los árboles pueden representar interacciones mediante sus divisiones. No se implementa un modelo jerárquico bayesiano ni se garantiza que compartir información sea óptimo.
+
+Las relativas incluyen distancias del cierre ajustado a sus medias móviles, MACD dividido por precio y volúmenes frente a su media de veinte sesiones anteriores. La base relativa tiene 9 variables financieras; el híbrido, 22; y el híbrido con retardo, 24. La base no incorpora noticias. El retardo relativo añade el tono medio y el volumen relativo de noticias de la sesión anterior de la misma empresa. Añadir identidad incorpora tres columnas; las interacciones relativas alcanzan 39, 91 y 99 variables. La rejilla de regularización permanece igual, por lo que no se optimiza exhaustivamente esta mayor dimensionalidad.
+
+Se reutilizan las referencias conjunta e individual solo tras verificar entradas, panel reconstruido, código principal, versiones, rejillas, umbral y fronteras temporales. No se descargan datos nuevos. La selección interna del modelo conjunto mantiene el AUC agrupado del panel; la evaluación externa prioriza el promedio de AUC dentro de cada empresa. Esta diferencia entre criterio de ajuste y resumen externo se conserva para mantener la comparación, no se presenta como una selección optimizada para AUC macro.
+
+### 10.5 Métricas comparables en las ampliaciones
+
+Para evitar comparar puntuaciones de empresas con calibraciones distintas, se calcula el AUC de cada empresa sobre sus 553 sesiones externas y después su media con igual peso:
+
+$$
+\operatorname{AUC}_{macro}=\frac{1}{4}\sum_{i=1}^{4}\operatorname{AUC}_i.
+$$
+
+Este AUC macro no es el AUC agrupado de todas las filas de la revisión inicial. Tampoco coincide necesariamente con la media por bloque temporal. Las tablas que promedian además los cinco algoritmos son resúmenes descriptivos, no un modelo adicional ni una combinación de predicciones. Los contrastes mantienen fijos algoritmo, variante y observaciones.
+
+En el experimento individual se calculan 60 diferencias individual menos conjunto y otras 40 comparaciones de sentimiento y retardo dentro del enfoque individual. En el segundo experimento, la comparación principal es relativas con identidad menos conjunto original para cada algoritmo y variante; los demás contrastes separan identidad, representación e interacciones. Sus 405 intervalos se distribuyen en 81 macro y 324 por empresa. Se mantienen 1.000 réplicas de bloques de veinte sesiones; en los contrastes macro se remuestrean las mismas fechas simultáneamente para las cuatro empresas y ambos enfoques. No se reentrena dentro del remuestreo ni se corrige por comparaciones múltiples.
+
 ## 11. Resultados
 
 ### 11.1 Antecedentes experimentales
@@ -359,6 +397,65 @@ Fuente: `metrics/auc_intervals.csv` de la misma ejecución, bloques de veinte se
 
 De 62 intervalos de diferencias, 61 incluyen cero. El único que no lo incluye corresponde a un empeoramiento de LightGBM con solo sentimiento frente al modelo de referencia. Ninguna mejora positiva excluye cero bajo este análisis. Esto limita la evidencia disponible, pero no demuestra equivalencia exacta entre modelos ni ausencia universal de efecto de las noticias.
 
+### 11.5 Modelos independientes por empresa
+
+Promediando el AUC dentro de cada empresa y después entre los cinco algoritmos:
+
+| Variante | Conjunto original | Individual | Diferencia individual − conjunto |
+| --- | ---: | ---: | ---: |
+| Base | 0,4947 | 0,4930 | −0,0017 |
+| Híbrido | 0,4986 | 0,4964 | −0,0021 |
+| Con retardo | 0,4986 | 0,4969 | −0,0017 |
+
+Separar empresas no mejora el promedio general. El desglose del híbrido, como media de los cinco algoritmos, muestra la heterogeneidad:
+
+| Empresa | Híbrido conjunto | Híbrido individual |
+| --- | ---: | ---: |
+| AAPL | 0,4799 | 0,4489 |
+| MSFT | 0,4934 | 0,5021 |
+| NVDA | 0,5013 | 0,5120 |
+| TSLA | 0,5197 | 0,5227 |
+
+De las 60 diferencias individual menos conjunto, 28 son positivas. Solo tres intervalos quedan totalmente por encima de cero, todos en MSFT; otros tres quedan por debajo, todos en AAPL; los 54 restantes incluyen cero. Las mejoras relativas en MSFT no prueban discriminación absoluta: el AUC de esas configuraciones sigue próximo a 0,5. En las 40 comparaciones internas de híbrido frente a base y retardo frente a híbrido no hay intervalos completamente positivos.
+
+Los máximos individuales observados son 0,4709 en AAPL, 0,5141 en MSFT, 0,5304 en NVDA y 0,5324 en TSLA. Son máximos seleccionados después de observar la prueba; ninguno supera en exactitud a su referencia mayoritaria. No se usan para elegir automáticamente un modelo final. Los resultados completos y sus intervalos están en el [análisis por empresa](../reports/experiments/per-company-20260916/analysis.md) y en el [cuaderno 03](../notebooks/03_per_company_models.ipynb).
+
+### 11.6 Identidad, variables relativas e interacciones
+
+Se utiliza el mismo resumen de AUC macro promediado entre cinco algoritmos, sin incorporar las interacciones exclusivas de regresión logística a esa media:
+
+| Variante | Conjunto original | Original + empresa | Relativas | Relativas + empresa |
+| --- | ---: | ---: | ---: | ---: |
+| Base | 0,4947 | 0,4947 | 0,5031 | 0,5010 |
+| Híbrido | 0,4986 | 0,4984 | 0,5064 | 0,5069 |
+| Con retardo | 0,4986 | 0,4989 | 0,5058 | 0,5037 |
+
+Las relativas sin identidad mejoran descriptivamente las 15 combinaciones algoritmo-variante frente al conjunto original; relativas con identidad mejoran 12. Añadir identidad a las relativas solo mejora 6 de 15. La evidencia apunta a la representación relativa como cambio más relevante que el identificador, pero **ninguno de los 81 intervalos de diferencias macro excluye cero**. No se demuestra una mejora global ni equivalencia exacta entre enfoques.
+
+El mayor AUC macro nuevo es 0,5157, con bosque aleatorio, relativas, identidad y retardo. Su intervalo es [0,4863; 0,5386]. Frente al mismo algoritmo conjunto con retardo, la diferencia es +0,0066, con intervalo [−0,0163; 0,0294]. Su exactitud macro es 52,35 %, exactitud equilibrada 50,13 % y MCC medio 0,0019; la referencia mayoritaria alcanza 53,89 % de exactitud. Este máximo descriptivo no acredita una ventaja global en aciertos.
+
+En regresión logística, las interacciones relativas elevan el AUC macro híbrido de 0,4980 a 0,5059 y el de retardo de 0,4981 a 0,5076, pero reducen el de la base de 0,5010 a 0,4978. Ninguno de los seis intervalos macro que comparan interacciones con su versión de solo identidad excluye cero.
+
+### 11.7 Resultado exploratorio en NVDA
+
+La comparación del mismo bosque aleatorio híbrido en las mismas fechas permite separar los cambios:
+
+| Enfoque | AUC en NVDA |
+| --- | ---: |
+| Conjunto original | 0,5180 |
+| Individual | 0,5026 |
+| Original + empresa | 0,5132 |
+| Relativas | 0,5711 |
+| Relativas + empresa | 0,5717 |
+
+Relativas con identidad obtiene un intervalo de AUC [0,5314; 0,6158]. La diferencia frente al conjunto original es +0,0537, con intervalo [0,0147; 0,0980]. Sin embargo, añadir identidad a las relativas aporta solo +0,00065, con intervalo [−0,0307; 0,0322]. La mejora observada no puede atribuirse principalmente al identificador ni, por esta comparación, al sentimiento: cambia la representación y ambos modelos comparados ya incorporan noticias.
+
+El AUC de la configuración con relativas e identidad es 0,5783, 0,5429 y 0,5936 en los tres bloques. Su exactitud es 55,88 %, frente a 54,97 % de la clase mayoritaria, equivalente a cinco aciertos adicionales en 553 sesiones. La exactitud equilibrada es 54,75 % y MCC 0,0972. Un AUC de 0,5717 no significa acertar el 57,17 %.
+
+El patrón no es general: AAPL empeora en los promedios de las tres variantes; MSFT y TSLA presentan cambios pequeños o mixtos. En el contraste principal por empresa hay ocho intervalos positivos, todos en NVDA, y uno negativo en AAPL. Son comparaciones correlacionadas y sin corrección por multiplicidad, no ocho confirmaciones independientes. El caso de NVDA se destaca después de explorar muchas combinaciones sobre fechas conocidas y requiere confirmación en fechas nuevas.
+
+Fuente: [análisis de identidad y relativas](../reports/experiments/ticker-aware-full-20260916/analysis.md), sus tablas `metrics/` y el [cuaderno 04](../notebooks/04_ticker_aware_models.ipynb). Estos resultados amplían la memoria sin reemplazar la selección histórica de `reports/final/`.
+
 ## 12. Discusión
 
 ### 12.1 Respuesta a la pregunta principal
@@ -377,11 +474,23 @@ Las importancias de árboles o los coeficientes absolutos del modelo logístico 
 
 La revisión sustituyó una evaluación más frágil por un procedimiento verificable: horarios explícitos, fronteras purgadas, selección interna, comparaciones pareadas, artefactos aislados y pruebas. La calidad del software y la trazabilidad mejoraron sin que mejoraran necesariamente las métricas predictivas. Diferenciar esas dos dimensiones es una aportación del trabajo.
 
+### 12.4 Qué aportan los nuevos experimentos
+
+Separar empresas prueba una hipótesis distinta de añadir noticias. Su resultado muestra que una mayor especialización no garantiza una mejora: se elimina información de otros activos y se reduce el tamaño de entrenamiento. Esa pérdida de datos es una explicación posible, no un mecanismo demostrado. El segundo experimento conserva el panel para estudiar otra vía de adaptación.
+
+Las relativas describen posiciones y cambios comparables entre activos con niveles de precio y volumen distintos. Pueden facilitar patrones compartidos, mientras que un indicador binario por sí solo no transforma esas escalas. Los resultados son compatibles con esa interpretación, pero no permiten atribuir causalmente toda la mejora a un único mecanismo: se sustituyen varias variables simultáneamente y la selección interna sigue optimizando AUC agrupado.
+
+La decisión es conservar ambos experimentos como evidencia, no reemplazar automáticamente el modelo conjunto ni presentar NVDA como un ganador validado. Su valor académico reside en acotar hipótesis y documentar resultados favorables y desfavorables con el mismo protocolo. Las conclusiones sobre sentimiento, especialización y representación se mantienen separadas.
+
 ## 13. Verificación y reproducibilidad
 
-El conjunto local de pruebas contiene 28 pruebas: calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas vacías o erróneas y organización de artefactos. Se ejecuta mediante `python -m unittest discover -s tests -v`.
+El conjunto local de pruebas contiene 41 pruebas superadas, frente a las 28 de la revisión inicial. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. Se ejecuta mediante `python -m unittest discover -s tests -v`.
 
 En la revisión completa se verificó que los 183 modelos guardados reproducían las probabilidades y clases almacenadas, y que las fronteras de los 1.080 ajustes internos y los 183 externos respetaban la condición de purga. Se verificaron ejecuciones reducidas independientes del protocolo y del flujo tradicional.
+
+El experimento por empresa verificó 240 modelos guardados, incluidos los de referencia conjunta, y 1.350 evaluaciones internas. El de identidad añadió 168 modelos y 918 evaluaciones internas; sus 194.656 predicciones incluyen las referencias reutilizadas, no otras tantas observaciones independientes. Los modelos nuevos reproducen las probabilidades guardadas con tolerancia absoluta de 10⁻¹². La recarga de `features.csv` utiliza `float_precision="round_trip"`: un redondeo al leer puede alterar la rama elegida por un árbol cuando una variable está junto a un umbral.
+
+El remuestreo optimizado convierte fechas repetidas en pesos y reproduce los 60 intervalos individual-conjunto de la implementación previa, con diferencia máxima aproximada de 2,6 × 10⁻¹⁶. No modifica el procedimiento estadístico para mejorar resultados. Los cuadernos 03 y 04 están ejecutados y verifican claves, métricas y huellas de informes. `.gitattributes` conserva los bytes de estos informes para evitar invalidar sus hashes al cambiar finales de línea entre sistemas.
 
 La reorganización conservó 486 archivos entre resultados y modelos históricos, comprobando su contenido mediante hashes. Los manifiestos nuevos registran rutas relativas a la raíz, versiones, parámetros, estado, entradas y salidas. Los anteriores se conservaron en instantáneas. Las instantáneas de fuente no estaban disponibles cuando comenzó el primer experimento completo: este conserva hashes del código original, mientras que la copia de código se comprobó en ejecuciones posteriores.
 
@@ -391,7 +500,7 @@ La reproducibilidad tiene tres niveles distintos: inspeccionar informes guardado
 
 ## 14. Proceso de desarrollo y decisiones
 
-El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros de cambios identificables y fusiones de ramas. El historial conserva, entre otras etapas, indicadores, conjuntos de datos, modelos base e híbridos, evaluación, ajuste temporal y retardos. El trabajo acumulado de retardos, revisión y organización se integró en `main` mediante la fusión `2f1111d`, con implementación en `1ffdc1b`. La presente remodelación documental se desarrolla separadamente en la rama `docs`.
+El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros de cambios identificables y fusiones de ramas. El historial conserva, entre otras etapas, indicadores, conjuntos de datos, modelos base e híbridos, evaluación, ajuste temporal y retardos. El trabajo acumulado de retardos, revisión y organización se integró en `main` mediante la fusión `2f1111d`, con implementación en `1ffdc1b`. La remodelación documental se realizó en `docs` y se integró mediante `3efa444`. Los experimentos adicionales de la tarea #47 se desarrollaron en `feature/per-company-temporal-evaluation`: `abdcce5` incorpora la evaluación independiente y `06cbd00` la identidad y las variables relativas. La memoria se amplía antes de integrar esta rama, conservando ambas ejecuciones por separado.
 
 | Decisión | Motivo | Consecuencia o compromiso |
 | --- | --- | --- |
@@ -404,6 +513,9 @@ El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros
 | Purga y validación anidada | Controlar disponibilidad de etiquetas y selección | Mayor coste computacional |
 | Retardos separados en la revisión | Aislar representaciones concretas | No reproduce exactamente el ensayo de 92 variables |
 | Mantener resultados históricos | Explicar la evolución sin borrar evidencia | Deben rotularse para evitar mezclas |
+| Probar estimadores independientes | Estudiar especialización por activo | Menos datos por ajuste; sin mejora media general |
+| Separar identidad y representación relativa | Distinguir adaptación y diferencias de escala | Más comparaciones exploratorias; no se declara un ganador global |
+| Conservar cuadernos 03 y 04 separados | Comparar hipótesis sin sobrescribir resultados | AUC macro y agrupado deben distinguirse explícitamente |
 | Excluir modelos de Git ordinario | Reducir binarios y ruido experimental | Requiere gestión externa de artefactos |
 
 El asistente de programación se utilizó para implementación, revisión, experimentos y documentación bajo decisiones del estudiante. La memoria debe reflejar ese uso con arreglo a las indicaciones académicas aplicables; este borrador no atribuye al estudiante verificaciones personales que no estén documentadas. Las afirmaciones científicas y la versión entregada requieren su revisión y defensa.
@@ -413,6 +525,8 @@ El asistente de programación se utilizó para implementación, revisión, exper
 ### 15.1 Validez interna
 
 El histórico externo se consultó durante el desarrollo. La validación anidada posterior reduce contaminación dentro de una ejecución, pero no deshace decisiones motivadas por resultados anteriores. Tampoco los intervalos de predicciones fijas incorporan toda la incertidumbre del entrenamiento. La comparación entre etapas modifica varios elementos simultáneamente.
+
+Los experimentos por empresa e identidad reutilizan esas fechas. La selección posterior del caso de NVDA y la abundancia de contrastes impiden tratar sus intervalos nominales como confirmación independiente. La coherencia entre bloques no elimina este sesgo. Además, el criterio interno de AUC agrupado no coincide exactamente con el AUC macro externo y la búsqueda de dos configuraciones por algoritmo limita la adaptación de las variantes con interacciones.
 
 ### 15.2 Datos y generalización
 
@@ -425,11 +539,19 @@ El cierre ajustado descargado retrospectivamente, las revisiones del proveedor y
 No se han calculado comisiones, deslizamiento, rotación, exposición, caída máxima desde un máximo previo ni reglas de ejecución. AUC y exactitud no permiten deducir rentabilidad. Las salidas son académicas y no constituyen recomendaciones de inversión. Las claves de API permanecen fuera del repositorio; antes de redistribuir noticias o textos debe revisarse la autorización correspondiente del proveedor.
 
 
+### 15.4 Validación futura propuesta
+
+Antes de ampliar otra búsqueda, se fijaría una regla de selección y una comparación principal para evaluarlas en fechas nuevas no utilizadas en estas decisiones. Las variables relativas constituyen una hipótesis prioritaria, no una garantía de mejora. Debe comprobarse si el patrón de NVDA persiste y si es específico de la empresa, del periodo o de la cobertura informativa.
+
+También sería pertinente estudiar periodos con cobertura comparable y, como experimento separado, alinear la selección interna con el AUC macro externo. Una búsqueda más amplia, otras empresas o un horizonte diferente requerirían su propio protocolo. No se han realizado estas propuestas y no se presentan resultados esperados como obtenidos.
+
 ## 16. Conclusiones
 
 Se ha construido un sistema modular capaz de integrar precios e información de noticias, generar variables comparables y evaluar modelos de clasificación temporal. La pregunta inicial se ha estudiado mediante cinco algoritmos, una referencia trivial, ajuste de hiperparámetros y variantes de sentimiento contemporáneo y retardado.
 
-La evidencia obtenida no acredita una ventaja predictiva robusta del sentimiento para la siguiente sesión en este histórico. Los resultados más favorables son puntuales, los intervalos relevantes incluyen la referencia y el modelo de referencia explica por qué una exactitud o un F1 positivo aparentemente altos pueden resultar poco informativos.
+La evidencia obtenida no acredita una ventaja predictiva robusta y general del sentimiento para la siguiente sesión en este histórico. Entrenar por empresa no mejora el promedio global. Las variables relativas producen mejoras descriptivas mayores que añadir solo identidad, pero ninguno de los 81 intervalos de diferencias macro de la ampliación excluye cero. El modelo de referencia explica por qué una exactitud o un F1 positivo aparentemente altos pueden resultar poco informativos.
+
+NVDA presenta una señal exploratoria más favorable: el bosque aleatorio híbrido relativo con identidad alcanza 0,5717 de AUC, frente a 0,5180 del conjunto original, con un intervalo de diferencia positivo. Las relativas sin identidad ya alcanzan 0,5711, y AAPL empeora. Por tanto, se conserva este resultado como hipótesis para fechas nuevas, no como evidencia general del sentimiento, confirmación independiente ni demostración de rentabilidad.
 
 El resultado no invalida el TFG ni prueba que las noticias no afecten a los mercados. Delimita lo que puede sostenerse con el experimento realizado. La principal contribución es un procedimiento de comparación más controlado, verificable y documentado, junto con un análisis explícito de sus límites.
 
@@ -459,9 +581,13 @@ Las referencias siguientes se consultaron para este borrador el 15 de septiembre
 | Auditoría de cobertura | `reports/experiments/review-full-20260908/coverage/` |
 | Evolución histórica de resultados | `reports/historical/tuning/model_progression_summary.csv` |
 | Selección para la memoria | `reports/final/provenance.json` |
-| Pruebas automatizadas | `tests/test_temporal_pipeline.py`, `tests/test_artifact_layout.py` |
+| Experimento independiente por empresa | `reports/experiments/per-company-20260916/analysis.md` y `manifest.json` |
+| Identidad, relativas e interacciones | `reports/experiments/ticker-aware-full-20260916/analysis.md` y `manifest.json` |
+| Métricas macro, por empresa e intervalos adicionales | `reports/experiments/ticker-aware-full-20260916/metrics/` |
+| Cuadernos de las ampliaciones | `notebooks/03_per_company_models.ipynb`, `notebooks/04_ticker_aware_models.ipynb` |
+| Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los dos cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuatro cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
 ### 18.2 Glosario
 

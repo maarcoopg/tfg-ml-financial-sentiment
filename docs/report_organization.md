@@ -20,6 +20,22 @@ Los modelos históricos se conservan en `models/experiments/legacy-trained/` y
 `models/experiments/legacy-tuned/`. No se modifican los datos de entrada de
 `data/raw/` ni de `data/processed/`.
 
+El experimento `per-company-20260916` añade subdirectorios `companies/<empresa>/`
+y `joint/` a sus informes. Guarda la comparación en `metrics/`, las predicciones
+emparejadas en `predictions/` y las selecciones individuales en `tuning/`.
+Los modelos y datos locales se subdividen por empresa bajo el mismo identificador;
+`models/experiments/<id>/joint/` contiene la referencia conjunta reentrenada.
+Este experimento permanece separado de `reports/final/`.
+
+El experimento `ticker-aware-full-20260916` conserva sus enfoques nuevos bajo
+`approaches/<enfoque>/`. La tabla de predicciones identifica tanto esos enfoques
+como las referencias conjunta e individual reutilizadas tras verificar su
+procedencia. No reemplaza `per-company-20260916` ni modifica `reports/final/`.
+
+Los informes `per-company-*` y `ticker-aware-*` conservan sus bytes mediante `.gitattributes`.
+Así Git no cambia los finales de línea al descargarlos en otro sistema operativo
+y se mantienen válidas las huellas SHA-256 verificadas por los notebooks correspondientes.
+
 Los directorios de informes, modelos, datos e instantáneas comparten el mismo
 identificador. Los manifiestos de versión 2 contienen `artifact_paths` y
 `output_sha256`, con rutas relativas a la raíz del proyecto. Los manifiestos
