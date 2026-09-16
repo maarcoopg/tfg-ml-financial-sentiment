@@ -35,6 +35,16 @@ La comparación principal es `tuned` menos `reference` para el híbrido de cada 
 
 ## Entrega incremental
 
+La búsqueda ampliada conserva las dos configuraciones originales con toda la historia y añade dieciocho candidatos aleatorios únicos, con semilla 42, repartidos entre las tres ventanas. No son veinte candidatos por ventana: son veinte en total por algoritmo de árboles. La regresión logística compara sus dos valores de C con las tres ventanas (seis candidatos). Las configuraciones completas se guardan en el manifiesto antes del entrenamiento.
+
+| Algoritmo | Espacio adicional |
+| --- | --- |
+| Bosque aleatorio | 100/200 árboles; profundidad 3/4/6/8; mínimo por hoja 5/10/20/40; variables por división `sqrt`/0,5/1,0 |
+| Potenciación por histogramas | 100/200 iteraciones; 3/7/15/31 hojas; tasa 0,025/0,05/0,1; mínimo por hoja 10/20/40/80; regularización L2 0/1/10; sin parada temprana |
+| Regresión logística | C 0,1/10; misma representación y preprocesamiento, distinta ventana |
+
+Las fronteras internas parten del pasado completo del bloque externo y son comunes a todas las ventanas. Si en un ajuste temprano hay menos de tres o cinco años disponibles, la ventana utiliza solo esa historia existente; no se fabrican observaciones ni se trasladan fronteras. La referencia mayoritaria usa todo el pasado en las siete etapas para conservar una referencia común.
+
 La representación enriquecida añade cinco variables: desviación típica del tono dentro de la sesión, media de su valor absoluto, diferencia del tono actual respecto a su media de las veinte sesiones anteriores con noticias (mínimo cinco observaciones), indicador de historia suficiente y sorpresa del logaritmo del número de noticias respecto a las veinte sesiones anteriores. Esta última se estandariza con desviación histórica y se limita a [−5; 5]; si no hay variación histórica, se utiliza cero. La media de tono usa una ventana de veinte sesiones bursátiles, no las últimas veinte noticias. El híbrido tiene 27 variables y el de retardo 34, al añadir los cinco retardos nuevos a las variables actuales. La base relativa permanece en nueve.
 
 Commits separados para auditoría, ventanas, representación, selección y resultados. Antes de cada commit se comunica el contenido, su verificación y el beneficio esperado u observado. Los resultados desfavorables también se conservan. La issue permanece abierta y la rama no se fusiona hasta revisar la ejecución con el autor.
