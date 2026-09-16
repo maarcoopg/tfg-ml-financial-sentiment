@@ -35,4 +35,6 @@ La comparación principal es `tuned` menos `reference` para el híbrido de cada 
 
 ## Entrega incremental
 
+La representación enriquecida añade cinco variables: desviación típica del tono dentro de la sesión, media de su valor absoluto, diferencia del tono actual respecto a su media de las veinte sesiones anteriores con noticias (mínimo cinco observaciones), indicador de historia suficiente y sorpresa del logaritmo del número de noticias respecto a las veinte sesiones anteriores. Esta última se estandariza con desviación histórica y se limita a [−5; 5]; si no hay variación histórica, se utiliza cero. La media de tono usa una ventana de veinte sesiones bursátiles, no las últimas veinte noticias. El híbrido tiene 27 variables y el de retardo 34, al añadir los cinco retardos nuevos a las variables actuales. La base relativa permanece en nueve.
+
 Commits separados para auditoría, ventanas, representación, selección y resultados. Antes de cada commit se comunica el contenido, su verificación y el beneficio esperado u observado. Los resultados desfavorables también se conservan. La issue permanece abierta y la rama no se fusiona hasta revisar la ejecución con el autor.
