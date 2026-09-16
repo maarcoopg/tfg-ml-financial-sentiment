@@ -1,18 +1,67 @@
 # Notebooks de análisis
 
-Los notebooks se encuentran en:
+Los dos cuadernos se leen en orden y fijan explícitamente la ejecución
+`review-full-20260908`. Incluyen explicaciones antes de los análisis, tablas,
+gráficos y conclusiones. No entrenan modelos ni realizan llamadas a proveedores.
 
-```text
-notebooks/
+## 01. Datos y calidad
+
+[01_dataset_exploration.ipynb](../notebooks/01_dataset_exploration.ipynb) explica
+qué representa cada fila, el objetivo, las variables, los precios, el balance
+de clases, la cobertura de noticias, las sesiones sin registros y la purga.
+
+Si existe `data/experiments/review-full-20260908/dataset.csv`, lo consulta.
+Si falta, reconstruye el panel con las funciones de `src/` y las entradas
+guardadas en `data/raw/` y `data/processed/`, usando un directorio temporal.
+No modifica esas entradas ni sustituye resultados. Si faltan, indica sus rutas.
+Cambiar `REBUILD_DATASET` a `True` permite comprobar esta alternativa.
+
+Los hashes de las entradas se contrastan al reconstruir. Una diferencia genera
+un aviso: el panel reconstruido con datos o código distintos no debe confundirse
+con la instantánea original. La cobertura mostrada sigue siendo el informe
+conservado de la ejecución seleccionada.
+
+## 02. Resultados e incertidumbre
+
+[02_model_results.ipynb](../notebooks/02_model_results.ipynb) comprueba las claves
+de las predicciones y recalcula sus AUC. Después compara base e híbrido, muestra
+el baseline, las doce variantes, el desglose externo y por empresa, y los
+intervalos pareados. La evolución histórica aparece al final, claramente separada.
+
+Este cuaderno solo necesita los informes versionados; no requiere `.joblib`,
+datasets de ejecución ni instantáneas locales de código. Los AUC agrupados y
+los promedios por bloque se presentan como medidas diferentes.
+
+## Preparación y ejecución
+
+Desde la raíz, con el entorno del proyecto activado:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m ipykernel install --user --name tfg-finanzas --display-name "Python (TFG Finanzas)"
+python -m jupyter lab notebooks/
 ```
 
-## Notebooks disponibles
+Selecciona el kernel **Python (TFG Finanzas)** y ejecuta todas las celdas en
+orden. El kernel debe usar el mismo intérprete que tiene las dependencias;
+abrir Jupyter desde un entorno no garantiza que un kernel antiguo lo utilice.
+Los cuadernos reconocen tanto la raíz del repositorio como `notebooks/`.
 
-- `01_dataset_exploration.ipynb`: revisión de datasets base e híbrido, dimensiones, tickers, objetivo y estadísticos descriptivos.
-- `02_model_results.ipynb`: revisión de métricas, comparación base vs híbrido, importancia de variables y figuras generadas.
+Para ejecutarlos sin interfaz y conservar las salidas:
 
-## Criterio de uso
+```powershell
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb
+```
 
-Los notebooks no sustituyen a los scripts reproducibles de `src/`. Su función es facilitar la exploración, revisión y presentación de resultados ya generados por el pipeline.
+Las salidas incluidas se han generado mediante ejecución completa, no mediante
+tablas o gráficos simulados. Pueden regenerarse con las mismas entradas.
+El único aviso del entorno Windows observado durante la ejecución se refiere
+al bucle de eventos de Jupyter; no representa una excepción de las celdas.
 
-Ambos notebooks se han validado con `jupyter nbconvert --execute`.
+## Interpretación
+
+Una ausencia de noticias registradas no certifica ausencia de noticias reales.
+Un F1 positivo alto puede corresponder a predecir siempre subida. Un AUC cercano
+a 0,5 no demuestra rentabilidad; tampoco los máximos entre muchas variantes
+constituyen una validación independiente. La evidencia y sus límites se
+desarrollan en [el borrador de memoria](borrador_memoria.md).

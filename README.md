@@ -19,7 +19,7 @@ Los datos financieros iniciales incluyen AAPL, MSFT, NVDA, TSLA y SPY. Para el e
 
 La revisión metodológica se ejecuta con `python -m src.experiments.run_review`.
 Usa horarios reales del mercado, validación temporal anidada con purga y salidas
-aisladas por ejecución. Véase `docs/revision_implementation.md`. Los informes
+aisladas por ejecución. Véase [la guía de ejecución](docs/full_pipeline_execution.md). Los informes
 anteriores a esta revisión son históricos exploratorios.
 
 La guía completa de ejecución está en:
@@ -28,14 +28,18 @@ La guía completa de ejecución está en:
 docs/full_pipeline_execution.md
 ```
 
-El bloque final de modelado se reproduce con:
+El protocolo corregido se ejecuta con:
 
 ```bash
-python src/data/split_train_test.py
-python src/models/train_models.py --dataset base
-python src/models/train_models.py --dataset hybrid
-python src/models/evaluate_models.py
-python src/models/compare_models.py
-python src/models/analyze_feature_importance.py
-python src/visualization/plot_results.py
+python -m src.experiments.run_review
 ```
+
+## Documentación
+
+- [Borrador de la memoria del TFG](docs/borrador_memoria.md): problema, decisiones, metodología, resultados y limitaciones.
+- [Ejecución del pipeline](docs/full_pipeline_execution.md): preparación y reproducción.
+- [Resultados de la revisión temporal](docs/resultados_revision_temporal.md): evidencia del experimento principal.
+- [Organización de artefactos](docs/report_organization.md): informes, modelos, datos y trazabilidad.
+- [Notebooks de análisis](docs/notebooks.md): exploración guiada y comparación de modelos.
+
+La memoria consolida la documentación anteriormente dividida por tareas. Las plantillas de GitHub se conservan en `.github/ISSUE_TEMPLATE/`; la documentación versionada en `docs/` ya no contiene borradores de issues.
