@@ -59,12 +59,13 @@ def choose_params(train: pd.DataFrame, columns: list[str], model_name: str, inne
 
 
 def nested_predictions(dataset: pd.DataFrame, variants: dict, models: list[str], output: Path,
-                       outer_start: str, outer_splits: int, inner_splits: int):
+                       outer_start: str, outer_splits: int, inner_splits: int,
+                       model_dir: Path | None = None):
     dates = sorted(dataset.loc[dataset["Date"] >= pd.Timestamp(outer_start), "Date"].unique())
     if outer_splits < 2 or len(dates) < outer_splits * 2:
         raise ValueError("Fechas insuficientes para los folds externos")
     predictions, search_rows, selection_rows = [], [], []
-    model_dir = artifact_dir(output, "models")
+    model_dir = model_dir if model_dir is not None else artifact_dir(output, "models")
     model_dir.mkdir(parents=True)
     for kind in ["predictions", "tuning"]:
         (output / kind).mkdir(parents=True, exist_ok=True)

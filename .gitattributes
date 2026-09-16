@@ -1,0 +1,2 @@
+# Preserve exact report bytes for the checksummed per-company experiments.
+reports/experiments/per-company-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol

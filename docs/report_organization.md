@@ -20,6 +20,17 @@ Los modelos históricos se conservan en `models/experiments/legacy-trained/` y
 `models/experiments/legacy-tuned/`. No se modifican los datos de entrada de
 `data/raw/` ni de `data/processed/`.
 
+El experimento `per-company-20260916` añade subdirectorios `companies/<empresa>/`
+y `joint/` a sus informes. Guarda la comparación en `metrics/`, las predicciones
+emparejadas en `predictions/` y las selecciones individuales en `tuning/`.
+Los modelos y datos locales se subdividen por empresa bajo el mismo identificador;
+`models/experiments/<id>/joint/` contiene la referencia conjunta reentrenada.
+Este experimento permanece separado de `reports/final/`.
+
+Los informes `per-company-*` conservan sus bytes mediante `.gitattributes`.
+Así Git no cambia los finales de línea al descargarlos en otro sistema operativo
+y se mantienen válidas las huellas SHA-256 verificadas por el tercer notebook.
+
 Los directorios de informes, modelos, datos e instantáneas comparten el mismo
 identificador. Los manifiestos de versión 2 contienen `artifact_paths` y
 `output_sha256`, con rutas relativas a la raíz del proyecto. Los manifiestos
