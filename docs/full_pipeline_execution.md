@@ -2,7 +2,9 @@
 
 Esta guía resume cómo reproducir el flujo principal del proyecto desde la descarga de datos hasta las métricas y figuras finales.
 
-Desde la revisión metodológica, el bloque recomendado de modelado es `python -m src.experiments.run_review`. Reconstruye la alineación horaria y guarda una ejecución aislada. Los informes anteriores son históricos. Véase `docs/revision_implementation.md`.
+Desde la revisión metodológica, el bloque recomendado de modelado es `python -m src.experiments.run_review`. Reconstruye la alineación horaria y guarda una ejecución aislada. Los informes anteriores son históricos. La justificación está en [el borrador de memoria](borrador_memoria.md).
+
+Todos los comandos parten de la raíz del repositorio y deben utilizar el mismo entorno virtual. Para inspeccionar informes existentes basta con los notebooks. Las descargas de los apartados 2 y 3 pueden sobrescribir datos o consumir cuota del proveedor; no son necesarias para leer resultados.
 
 ## 1. Entorno
 
@@ -11,6 +13,8 @@ Instalar dependencias:
 ```bash
 pip install -r requirements.txt
 ```
+
+En Windows puede crearse el entorno con `python -m venv .venv` y activarse con `.venv/Scripts/Activate.ps1`. Comprueba el intérprete seleccionado antes de iniciar Jupyter.
 
 La descarga de noticias requiere un archivo `.env` con:
 
@@ -103,6 +107,8 @@ python src/data/create_lagged_sentiment_dataset.py
 
 Este paso genera el dataset `lagged_hybrid`, que mantiene las mismas filas que el híbrido original y añade retardos y ventanas móviles de sentimiento.
 
+Las funciones actuales incorporan purga temporal: regenerar una partición histórica puede cambiar el número de filas en la frontera. Para reproducir exactamente un ensayo deben comprobarse también entradas y configuración.
+
 ## 6. Modelado
 
 Ejecutar el protocolo corregido, incluyendo los cinco algoritmos, baseline, selección interna de hiperparámetros y comparaciones controladas:
@@ -110,6 +116,14 @@ Ejecutar el protocolo corregido, incluyendo los cinco algoritmos, baseline, sele
 ```bash
 python -m src.experiments.run_review
 ```
+
+Requiere precios procesados con indicadores y noticias clasificadas; no realiza llamadas a la API. Genera automáticamente predicciones, métricas, intervalos y figuras. Para una prueba reducida:
+
+```bash
+python -m src.experiments.run_review --run-dir artifacts/verification/comprobacion-documentacion --models logistic_regression --variants base hybrid lag_1 --outer-splits 2 --inner-splits 2 --bootstrap-repeats 100
+```
+
+El directorio y el identificador deben ser nuevos. Véase [organización de resultados](report_organization.md).
 
 Alternativamente, entrenar los CSV de modelado disponibles en una ejecución tradicional aislada:
 
@@ -140,16 +154,16 @@ Comparar modelo base e híbrido:
 python src/models/compare_models.py --run-dir reports/experiments/modelado-tradicional
 ```
 
-Los siguientes comandos corresponden exclusivamente a los modelos e informes históricos originales; no incluyen los experimentos corregidos:
+Para continuar sobre esa misma ejecución tradicional:
 
 ```bash
-python src/models/analyze_feature_importance.py
+python src/models/analyze_feature_importance.py --run-dir reports/experiments/modelado-tradicional
 ```
 
 Generar visualizaciones:
 
 ```bash
-python src/visualization/plot_results.py
+python src/visualization/plot_results.py --run-dir reports/experiments/modelado-tradicional
 ```
 
 Para ajustar hiperparámetros con validación temporal:

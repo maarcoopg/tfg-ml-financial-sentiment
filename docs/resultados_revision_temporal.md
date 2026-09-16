@@ -4,7 +4,7 @@
 
 Ejecución completa: `reports/experiments/review-full-20260908`. Estado del manifiesto: `complete`. Se usaron doce variantes de variables, cinco algoritmos, tres folds externos y tres internos. Hubo 1.080 entrenamientos internos y 183 externos, contando tres baselines. Cada comparación contiene las mismas 2.212 observaciones externas, de AAPL, MSFT, NVDA y TSLA. SPY no participa.
 
-Se corrigieron horarios de noticias, purga temporal y muestreo de LightGBM. También se cambió el protocolo a selección anidada con una búsqueda pequeña predefinida. Por tanto, la diferencia frente al antiguo AUC 0,5217 no puede atribuirse exclusivamente a una de esas correcciones. El nuevo experimento no reproduce exactamente las 65 variables de la issue #45: compara retardos y ventanas por separado.
+Se corrigieron horarios de noticias, purga temporal y muestreo de LightGBM. También se cambió el protocolo a selección anidada con una búsqueda pequeña predefinida. Por tanto, la diferencia frente al antiguo AUC 0,5217 no puede atribuirse exclusivamente a una de esas correcciones. El nuevo experimento no reproduce exactamente las 65 variables adicionales del ensayo histórico de persistencia: compara retardos y ventanas por separado.
 
 ## Resultados principales
 
@@ -66,9 +66,9 @@ El dataset modelado registra 3.675 noticias en 2024 y 27.336 en 2025. La cobertu
 - Verificados los hashes de todos los archivos registrados en el manifiesto de la ejecución completa.
 - Ejecución reducida independiente con instantánea de código verificada: `artifacts/verification/review-verification-20260908`.
 - Compatibilidad de entrenamiento, evaluación y comparación tradicional comprobada; tuning reducido verificado en `artifacts/verification/tuning-verification-20260908`.
-- Figuras revisadas visualmente. La configuración de CI está preparada, pero no se ha ejecutado en GitHub porque la publicación permanece bloqueada.
+- Figuras revisadas visualmente. La configuración de CI está publicada; las consultas realizadas durante la integración no devolvieron ejecuciones remotas. No se afirma que CI haya superado las pruebas.
 
-El primer ensayo completo conserva hashes del código de inicio, pero comenzó antes de añadir las copias de fuente por ejecución. Esa mejora se verificó en el ensayo reducido posterior. Véase `docs/revision_implementation.md`.
+El primer ensayo completo conserva hashes del código de inicio, pero comenzó antes de añadir las copias de fuente por ejecución. Esa mejora se verificó en el ensayo reducido posterior. Posteriormente, la reorganización añadió seis pruebas de artefactos, hasta 28 pruebas locales superadas. La explicación integrada está en [el borrador de memoria](borrador_memoria.md).
 
 ## Conclusión
 
