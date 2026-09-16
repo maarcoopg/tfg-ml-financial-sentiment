@@ -27,9 +27,14 @@ Los modelos y datos locales se subdividen por empresa bajo el mismo identificado
 `models/experiments/<id>/joint/` contiene la referencia conjunta reentrenada.
 Este experimento permanece separado de `reports/final/`.
 
-Los informes `per-company-*` conservan sus bytes mediante `.gitattributes`.
+El experimento `ticker-aware-full-20260916` conserva sus enfoques nuevos bajo
+`approaches/<enfoque>/`. La tabla de predicciones identifica tanto esos enfoques
+como las referencias conjunta e individual reutilizadas tras verificar su
+procedencia. No reemplaza `per-company-20260916` ni modifica `reports/final/`.
+
+Los informes `per-company-*` y `ticker-aware-*` conservan sus bytes mediante `.gitattributes`.
 Así Git no cambia los finales de línea al descargarlos en otro sistema operativo
-y se mantienen válidas las huellas SHA-256 verificadas por el tercer notebook.
+y se mantienen válidas las huellas SHA-256 verificadas por los notebooks correspondientes.
 
 Los directorios de informes, modelos, datos e instantáneas comparten el mismo
 identificador. Los manifiestos de versión 2 contienen `artifact_paths` y

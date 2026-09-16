@@ -52,6 +52,25 @@ Para regenerar el entrenamiento, desde la raíz y con un identificador nuevo:
 python -m src.experiments.run_per_company --run-dir reports/experiments/per-company-NUEVA-EJECUCION
 ```
 
+## 04. Modelos conjuntos con identidad de empresa
+
+[04_ticker_aware_models.ipynb](../notebooks/04_ticker_aware_models.ipynb) estudia
+`ticker-aware-full-20260916` sin sobrescribir el experimento anterior. Compara
+identificador de empresa, variables relativas y ambas modificaciones para los
+cinco algoritmos. En regresión logística añade interacciones empresa-variable.
+
+Incluye base, híbrido y retardo de una sesión, referencias conjunta e individual,
+AUC macro y por empresa, estabilidad por bloque e intervalos pareados. Comprueba
+las claves, recalcula las métricas y verifica hashes usando solo informes
+versionados. Las comparaciones siguen siendo exploratorias.
+
+```powershell
+python -m src.experiments.run_ticker_aware --run-dir reports/experiments/ticker-aware-NUEVA-EJECUCION
+```
+
+La reutilización de las referencias exige las mismas entradas, panel, código
+principal, versiones, rejillas y protocolo; el ejecutor se detiene si no coinciden.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:
@@ -70,7 +89,7 @@ Los cuadernos reconocen tanto la raíz del repositorio como `notebooks/`.
 Para ejecutarlos sin interfaz y conservar las salidas:
 
 ```powershell
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb notebooks/04_ticker_aware_models.ipynb
 ```
 
 Las salidas incluidas se han generado mediante ejecución completa, no mediante
