@@ -1,0 +1,1422 @@
+{
+  "status": "complete",
+  "created_at": "2026-09-16T20:46:18.055161+00:00",
+  "config": {
+    "run_dir": "reports\\experiments\\first-round-full-20260916",
+    "models": [
+      "logistic_regression",
+      "random_forest",
+      "hist_gradient_boosting"
+    ],
+    "outer_start": "2023-10-16",
+    "outer_splits": 3,
+    "inner_splits": 3,
+    "source_timezone": "UTC",
+    "bootstrap_repeats": 1000,
+    "stages": {
+      "reference": [
+        "original",
+        null,
+        "pooled_auc",
+        false
+      ],
+      "deduplicated": [
+        "clean",
+        null,
+        "pooled_auc",
+        false
+      ],
+      "window_3y": [
+        "clean",
+        3,
+        "pooled_auc",
+        false
+      ],
+      "window_5y": [
+        "clean",
+        5,
+        "pooled_auc",
+        false
+      ],
+      "enhanced": [
+        "enhanced",
+        null,
+        "pooled_auc",
+        false
+      ],
+      "macro": [
+        "enhanced",
+        null,
+        "macro_auc",
+        false
+      ],
+      "tuned": [
+        "enhanced",
+        null,
+        "macro_auc",
+        true
+      ]
+    },
+    "candidates": {
+      "reference": {
+        "logistic_regression": [
+          {
+            "years": null,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "deduplicated": {
+        "logistic_regression": [
+          {
+            "years": null,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "window_3y": {
+        "logistic_regression": [
+          {
+            "years": 3,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "window_5y": {
+        "logistic_regression": [
+          {
+            "years": 5,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "enhanced": {
+        "logistic_regression": [
+          {
+            "years": null,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "macro": {
+        "logistic_regression": [
+          {
+            "years": null,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      },
+      "tuned": {
+        "logistic_regression": [
+          {
+            "years": null,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__C": 10.0
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__C": 10.0
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__C": 0.1
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__C": 10.0
+            }
+          }
+        ],
+        "random_forest": [
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 0.5
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 5,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 3,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 3,
+              "model__min_samples_leaf": 40,
+              "model__max_features": 0.5
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 5,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 6,
+              "model__min_samples_leaf": 10,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 10,
+              "model__max_features": "sqrt"
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 6,
+              "model__min_samples_leaf": 40,
+              "model__max_features": "sqrt"
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 10,
+              "model__max_features": 0.5
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 0.5
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 10,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 8,
+              "model__min_samples_leaf": 40,
+              "model__max_features": "sqrt"
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 10,
+              "model__max_features": "sqrt"
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 200,
+              "model__max_depth": 3,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 1.0
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 40,
+              "model__max_features": 0.5
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 4,
+              "model__min_samples_leaf": 40,
+              "model__max_features": "sqrt"
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__n_estimators": 100,
+              "model__max_depth": 3,
+              "model__min_samples_leaf": 20,
+              "model__max_features": 0.5
+            }
+          }
+        ],
+        "hist_gradient_boosting": [
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 31,
+              "model__learning_rate": 0.05,
+              "model__min_samples_leaf": 20,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 3,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 10,
+              "model__l2_regularization": 0.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 31,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 15,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 7,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 7,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 40,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 3,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 40,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 31,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 20,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 31,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 20,
+              "model__l2_regularization": 0.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 7,
+              "model__learning_rate": 0.1,
+              "model__min_samples_leaf": 40,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 3,
+              "model__learning_rate": 0.05,
+              "model__min_samples_leaf": 20,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 15,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 40,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 15,
+              "model__learning_rate": 0.05,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 31,
+              "model__learning_rate": 0.05,
+              "model__min_samples_leaf": 10,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 3,
+              "model__learning_rate": 0.05,
+              "model__min_samples_leaf": 10,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": null,
+            "params": {
+              "model__max_iter": 100,
+              "model__max_leaf_nodes": 7,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 40,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 3,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 7,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 1.0,
+              "model__early_stopping": false
+            }
+          },
+          {
+            "years": 5,
+            "params": {
+              "model__max_iter": 200,
+              "model__max_leaf_nodes": 3,
+              "model__learning_rate": 0.025,
+              "model__min_samples_leaf": 80,
+              "model__l2_regularization": 10.0,
+              "model__early_stopping": false
+            }
+          }
+        ]
+      }
+    },
+    "threshold": 0.5,
+    "deduplication_hours": 24,
+    "primary_comparison": "tuned minus reference, hybrid, each prespecified algorithm; macro AUC",
+    "contrasts": [
+      [
+        "deduplicated",
+        "reference"
+      ],
+      [
+        "window_3y",
+        "deduplicated"
+      ],
+      [
+        "window_5y",
+        "deduplicated"
+      ],
+      [
+        "enhanced",
+        "deduplicated"
+      ],
+      [
+        "macro",
+        "enhanced"
+      ],
+      [
+        "tuned",
+        "macro"
+      ],
+      [
+        "tuned",
+        "reference"
+      ]
+    ],
+    "uncertainty": "paired moving blocks of 20 dates; unadjusted; no refit"
+  },
+  "python": "3.13.7",
+  "git_commit": "037e741bfb91056673a95f741337d3cd4249dded",
+  "git_status": "",
+  "versions": {
+    "pandas": "2.3.3",
+    "numpy": "2.2.6",
+    "scikit-learn": "1.7.2",
+    "lightgbm": "4.6.0",
+    "xgboost": "3.2.0",
+    "pandas_market_calendars": "5.4.0",
+    "exchange-calendars": "4.13.2",
+    "scipy": "1.17.1",
+    "joblib": "1.4.2",
+    "tzdata": "2025.2"
+  },
+  "source_sha256": {
+    "src\\data\\aggregate_daily_sentiment.py": "2838df77ac0943d2b656ffba4e6b1da21d44c12bc8014cf450b55401182dddfc",
+    "src\\data\\align_news_to_trading_days.py": "7f15b7722b50a7b801f9b6d2d919e0474ecdb0d3daf67f86b7570b97eb2678ff",
+    "src\\data\\audit_news_coverage.py": "666d11f140bc055e88b4364f6785a895f5ccf780886e9ea456418f126a3c4262",
+    "src\\data\\calculate_daily_returns.py": "dd6c54c9bfb4163c22c78354bfc999c6369b40884d55e9309bab893b3dda9b74",
+    "src\\data\\calculate_macd.py": "87731876b94806c0d4c0b0d0f5ed88180e22d29d202b8c0a8ccb969f3c6ebad3",
+    "src\\data\\calculate_moving_averages.py": "7d67bd5957dd8846511b2444fc8d92c5a70fdefba782a27c020586dd9d1f7a37",
+    "src\\data\\calculate_rsi.py": "f70137922785c0f771a10e7cfa3fa269d8c4a94ddbbd8f22118ac312f3c5090e",
+    "src\\data\\calculate_volatility.py": "ccb8748422978cd8a1585f2811f2823fa73cf35521d343ab79d9c0a41a0a41c9",
+    "src\\data\\classify_news_sentiment.py": "ee35b834144be02066b313683a892615043fdeff06451ac276c3c637acdc239e",
+    "src\\data\\clean_financial_news.py": "a68f336a92cdf1f72c3fb801a4c4903ccb322eb11842ee438cfec0a81cea1658",
+    "src\\data\\create_final_hybrid_dataset.py": "c1e5a258ac2577672f2710445aeb2fd4cc2aa0ba0d05989169167a4c9bd5074c",
+    "src\\data\\create_lagged_sentiment_dataset.py": "77688f5d72b2f5ae1221a2aaf16a46bf8a22b6e11e1ba13dd2f0f4995a0374eb",
+    "src\\data\\create_target.py": "d429b4c4ab477989c34f09aa05aa11b077f490a8e795fbc3ec5fde73370252a5",
+    "src\\data\\download_financial_news.py": "cefbfb98348a38c29343a6d6d1e27340a448f552991eb2c7d6dc8acf83399066",
+    "src\\data\\download_prices.py": "544cb83c13e9e4a13792b21874c0d3deaa9564fdc1ffab148cc0f92f68c30118",
+    "src\\data\\extract_news_sentiment.py": "a14830e5bceec28cf4eab9f6e423bf95b50823c5c4ce20125e2920f691af4e3a",
+    "src\\data\\handle_days_without_news.py": "4d80c167b812cb88b1a0be1b9452a324e31a89ec75552e36683e2b8a3c4ef46c",
+    "src\\data\\merge_financial_sentiment_data.py": "001172c61c828c91272c13b5ebb69581a0ef27c1bbd53fdc391e29c80ffd5241",
+    "src\\data\\point_in_time.py": "27387acaaaa6db58261b1e0da3d21b6a15241b0ad1d9f3f99b5dba28955b370e",
+    "src\\data\\split_train_test.py": "c0169accc0cd074cf7e6e6f7600c1ed3970601b2f1e7658c165e47ea2e010a26",
+    "src\\experiments\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\experiments\\ablations.py": "7d2b5120de153092ba77eb78493533c9360277187c65e4fb2d5027e662297e27",
+    "src\\experiments\\artifacts.py": "dfa19ede050b927eb28de1c53e9baa2409e74c1ccf5c4bec6fef788ed25fd882",
+    "src\\experiments\\news_quality.py": "37a3971e4a594b2aedcc1bc841020b7d0cca26888c68fa736d73cf0ec158161a",
+    "src\\experiments\\organize_reports.py": "551e9e6bb0881db9faceeed28c992f8ef861bcaefddcb83ce64e175789e3d724",
+    "src\\experiments\\panel_uncertainty.py": "5e3de28afd101eb7139f24c90ed0ae3a7dd3b39c6c4eea4ef84cb8390b7922c7",
+    "src\\experiments\\round_selection.py": "6e28e6597bcb3374f82143103ef1339ce179ae9b155629baf05d9c8b4434525d",
+    "src\\experiments\\run_first_round.py": "e07be7ba5e9f536b1cfe0d0d800325971207a8c4d28f0d6c16ad9f5bcb92a5f6",
+    "src\\experiments\\run_per_company.py": "d9b71fd29e7049fd2e934bff0d9f5da26d432107bbdc2ea803ecc28a983c885b",
+    "src\\experiments\\run_review.py": "c95fc338c7acb6e66a746f95d81dc628bfb0838b7a73a6c15ee55243bde565c8",
+    "src\\experiments\\run_ticker_aware.py": "120d8c0796c07978f92b9eaf3085aa7a9a0fab119dd2ed8063bc7857aa1de0d0",
+    "src\\experiments\\sentiment_representation.py": "c97f5105252d03291bf9260b4dbfa19ee9c42f216de1431d94a883c330d1e082",
+    "src\\experiments\\training_windows.py": "31105eb836e54ac2c460a642be7912c2e802f7c443ead8bdd4f099c6f6d2a8e4",
+    "src\\models\\__init__.py": "2e6086c749c35723926910d8fa8a1b3104999686b3cda325af907a5637a23c27",
+    "src\\models\\analyze_feature_importance.py": "d427b70a3ac79f7965b67d031e9dce9342f19018605631ffa12e7f688538ed83",
+    "src\\models\\compare_models.py": "1a3de06957a8d7433985ad8431616bee71577376afc90ac5b2cc8b9b13b3804d",
+    "src\\models\\evaluate_models.py": "67a335fdd198baf602e4de781c6a83334ea552ec208ab46b2463fc8f84be1878",
+    "src\\models\\evaluation.py": "27d247ed15b58746687f9db49c5fb8b49f56049c0597975816b576fe70573b73",
+    "src\\models\\temporal_validation.py": "8d7af0530f9b3f7addf1769d2b07e779a198e22261e2735f02f29e77fea5c811",
+    "src\\models\\train_models.py": "cdc630c192e584ddadd01ffba35b67622f35ab4354f84602eff4bfa568facc4b",
+    "src\\models\\tune_temporal_cv.py": "c880db843d255fc1b251ddab3117a89b9ade93e33e9c0a10bb550a7a0895c14a",
+    "src\\visualization\\__init__.py": "f51b53c069072fc347e8f17aa186d96a1e54623dfb17fddde89bee397d3b07f9",
+    "src\\visualization\\plot_experiment.py": "8acfc24d9f58f2f06406f5fec2f675b5e6d9d9b9d6c497afe6114d3808cbecdb",
+    "src\\visualization\\plot_results.py": "0f63ae2d8e3982350ea24448cd5bfa5532858143777cb17915ed661ebfb1891b"
+  },
+  "requirements_sha256": "adb620e420c87866f0eafde62e447f9a7131f545a760c5b18ed1cda641933d30",
+  "evaluation_status": "Exploratory nested evaluation on previously inspected historical dates; not a new untouched holdout.",
+  "layout_version": 2,
+  "run_id": "first-round-full-20260916",
+  "artifact_paths": {
+    "reports": "reports/experiments/first-round-full-20260916",
+    "models": "models/experiments/first-round-full-20260916",
+    "data": "data/experiments/first-round-full-20260916",
+    "source": "artifacts/snapshots/first-round-full-20260916"
+  },
+  "output_sha256": {
+    "reports/experiments/first-round-full-20260916/analysis.md": "dd9b0264081566508f2977f782b811375eec0ccbe33743d9d122f2102c73f6f1",
+    "reports/experiments/first-round-full-20260916/metrics/all_metrics.csv": "4da409cab70200229b893b92c7a4095d87533b9bd58b53a1c07c56fce40a4446",
+    "reports/experiments/first-round-full-20260916/metrics/company_metrics.csv": "0132696160beebebfd894f12a4e8d78a69a56125cdb7a266d3e85389f75a1ca7",
+    "reports/experiments/first-round-full-20260916/metrics/macro_metrics.csv": "f58b918da8f8287e93daf5aa26cd3010b736f5c643000c3c09ff55ceff72547d",
+    "reports/experiments/first-round-full-20260916/metrics/paired_intervals.csv": "90acd78c2f3de333b55796d979b41cb72829795de56cd6f2cdd37b841b8e1478",
+    "reports/experiments/first-round-full-20260916/predictions/all_predictions.csv": "54b71e978e3f3f20abaf193d74c9f9650d76a252fdd2ef42b9bffd86c9cb9b0d",
+    "reports/experiments/first-round-full-20260916/quality/monthly_coverage.csv": "fe6ec97654c045958af41da7f97f7b2f463e35a91c070f358c09d742dfe5e9e8",
+    "reports/experiments/first-round-full-20260916/quality/monthly_sources.csv": "67841160be53b7458810fe8513c8806c93800ee8b13a196a83269a8f249e4c30",
+    "reports/experiments/first-round-full-20260916/quality/removed_by_year.csv": "4783c9d91d1b7d4e9ef2769f883c389fc7789a5d80af6e62542f058d30fe73e9",
+    "reports/experiments/first-round-full-20260916/tuning/inner_cv.csv": "324436999cf9a4e67b9c6fbfb24f6999034ad6ff48f1c22d283fcac907068fe4",
+    "reports/experiments/first-round-full-20260916/tuning/selected_params.csv": "cca6eaae4702d339933e8d24def5be80fc5b084c6533ab48dee4c958aa7a4502",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_base_hist_gradient_boosting.joblib": "6af6170a4dbb8aaa0422d72958be30476a0c47fb84349a1c618f2d98da35e0a5",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_base_logistic_regression.joblib": "c5ca843354302c3094a743108605c315d6b1f30974ac8fdf1a76a88d0ca675b5",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_base_random_forest.joblib": "b3e422c9aaf1ff69ba0b9774a8effd43e4c4e61f703c562f4c5f05670b60f873",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_hybrid_hist_gradient_boosting.joblib": "9a80e995f0246900b444c3af180177f5db7ab359f45bccd5da46706e54caf200",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_hybrid_logistic_regression.joblib": "e6f1423a4d6bea96898d65f9f564659761b3326637aaaf90d9bf5624e807817f",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_hybrid_random_forest.joblib": "7c3c237df4dd8f24afa073bbafe14871fb48a8e29af19384fafe73483cbff1e9",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_lag_1_hist_gradient_boosting.joblib": "c9955fa8fe2a487ae88ee4b2cf247cbf5ce3853001a914bbb50392b492441178",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_lag_1_logistic_regression.joblib": "7e84fa466cc0218969944a9a8852647caeb80b929d3ba01b8720d3649d2998dc",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_1_lag_1_random_forest.joblib": "778ec5f354f5c6b74c6524dc13680f1f317b5a03f91d48eb733365915c3f398b",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_base_hist_gradient_boosting.joblib": "ad46058cfd6815e81afe3d8bb07ed4ecded986770c18a15f6d0d1f9e31a759e3",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_base_logistic_regression.joblib": "10a5ad6546480a1f9f258e3596377345e3acd2da42f93abb123f8934bc1a368e",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_base_random_forest.joblib": "e593d1808e1a189493bf752879d7fb10402992f076e819f66882e05829261fe9",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_hybrid_hist_gradient_boosting.joblib": "37b75dfff01839f62c438bf4a76f78bf71015a85bcc1bd0ea4febbfa82953f0e",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_hybrid_logistic_regression.joblib": "8a545e063e18d5090ab0e7415b82a153be8fa89ee36381a4a6116184f2dbe20b",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_hybrid_random_forest.joblib": "8a9f4e12e8fe3c6d2758ce83bd61301a0ccb834ed320e5e5782bfdd95023ba4f",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_lag_1_hist_gradient_boosting.joblib": "c4dd9b42c9059a396f6a55c80afb301110ba02421763b70345098b3e49c8d4a2",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_lag_1_logistic_regression.joblib": "a61dd7f880d9c9be6e1d783aff0a5400ae8c867b497f0c6aa0e1894865ad8476",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_2_lag_1_random_forest.joblib": "c33131f0dfacfc30ae1a81996108d1b5e18000aad359e4f7af41cb28b10d14f4",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_base_hist_gradient_boosting.joblib": "ddd56a3d28f8052234322ff1b0a03ed72a44cb55bf96f359ac8b65a1c297cdd4",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_base_logistic_regression.joblib": "20f3c69544ace9775553c817214ba2cfb8e82ec7f7a51d1582410425c0460073",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_base_random_forest.joblib": "3dbe943840ca8fefa050eb7ae9e12c26c78029bcc1a05b7bcb39012a65a33627",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_hybrid_hist_gradient_boosting.joblib": "0f262c8e87f9febb6fa09606d1911f62507a3a12fb1bf60d90f68305ef0b4f95",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_hybrid_logistic_regression.joblib": "8d64f600d62a9a306c039c3d9a2b9fdd1191f96ff2cd16215f004493a3c53c1d",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_hybrid_random_forest.joblib": "1fc5d7d49508c929bbb38c4fbb8c77184c7b1b2101995d915940ccf1222df5ce",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_lag_1_hist_gradient_boosting.joblib": "262505ff77028a948d73143b5a9d9de443efb803343505c929fbde61f895e6b0",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_lag_1_logistic_regression.joblib": "c48235533417e46d69be13f4558460232c61738a8a687b534356287ffa54e3fb",
+    "models/experiments/first-round-full-20260916/deduplicated/fold_3_lag_1_random_forest.joblib": "23301e918e6a79db5b2c7e0e909b07c09e6253bc15c529d7c3a40a140e1b2ffb",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_base_hist_gradient_boosting.joblib": "6af6170a4dbb8aaa0422d72958be30476a0c47fb84349a1c618f2d98da35e0a5",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_base_logistic_regression.joblib": "c5ca843354302c3094a743108605c315d6b1f30974ac8fdf1a76a88d0ca675b5",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_base_random_forest.joblib": "b3e422c9aaf1ff69ba0b9774a8effd43e4c4e61f703c562f4c5f05670b60f873",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_hybrid_hist_gradient_boosting.joblib": "82346634b15ffb2b5f005666b197866b03080b277a895e4630b0d07a274cc423",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_hybrid_logistic_regression.joblib": "8bd5b34fea29b4b867427ac2168491eef9d6face07c20dec9dfa0ca6e82d0b94",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_hybrid_random_forest.joblib": "b13aaad60743be71a2f23772c29173c44176c05919efa5634a3e4a112a181d93",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_lag_1_hist_gradient_boosting.joblib": "f0f9017987698889b12b8131103b01ee27c5581e5a9e4820d976c40559e50d4e",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_lag_1_logistic_regression.joblib": "4f72ee13cc2ffe29f0b03e9fbdb7f1043a8521f300956bc8cf766d14daefb252",
+    "models/experiments/first-round-full-20260916/enhanced/fold_1_lag_1_random_forest.joblib": "0456996a2d69c482bdabbea21ec9085963079771145b03892e48a65bdee427dc",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_base_hist_gradient_boosting.joblib": "ad46058cfd6815e81afe3d8bb07ed4ecded986770c18a15f6d0d1f9e31a759e3",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_base_logistic_regression.joblib": "10a5ad6546480a1f9f258e3596377345e3acd2da42f93abb123f8934bc1a368e",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_base_random_forest.joblib": "e593d1808e1a189493bf752879d7fb10402992f076e819f66882e05829261fe9",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_hybrid_hist_gradient_boosting.joblib": "cb1412a338a02916da24a2e20b6b3a6a1628d7edfcd7227300894fef08377aba",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_hybrid_logistic_regression.joblib": "eba6cb0e90dd3939f3ad745796a0d2b082184ea087f750ef79c1bffc0d92fc52",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_hybrid_random_forest.joblib": "b0f89eed1f5fec7cf64fd05c2b629c6a9962e78d87bef3382ad748851f9d3901",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_lag_1_hist_gradient_boosting.joblib": "e88b865629946a9e58faf3ee407014d69ee18341ea97dd42f7c2440c829ceba8",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_lag_1_logistic_regression.joblib": "5cbd23169688c9017c328afce7c5aa71cc8216b3b4eeac2e28c777fe9d89720c",
+    "models/experiments/first-round-full-20260916/enhanced/fold_2_lag_1_random_forest.joblib": "d079f4ad0a658c5558b952ec7264cf9b307c4f1745e6da74c278f5d725466f33",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_base_hist_gradient_boosting.joblib": "ddd56a3d28f8052234322ff1b0a03ed72a44cb55bf96f359ac8b65a1c297cdd4",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_base_logistic_regression.joblib": "20f3c69544ace9775553c817214ba2cfb8e82ec7f7a51d1582410425c0460073",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_base_random_forest.joblib": "3dbe943840ca8fefa050eb7ae9e12c26c78029bcc1a05b7bcb39012a65a33627",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_hybrid_hist_gradient_boosting.joblib": "741d46c9e3aa821b7a0f5222573079a85ca6df7973e0b3a5a3212061506d3546",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_hybrid_logistic_regression.joblib": "74ed2161b225ac7540d349139519d42b048cadb3f1c23d7c204bbde92d684f92",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_hybrid_random_forest.joblib": "746668d6164f13d80308d389fbefc37aefee6b6ceb3d61d1ab5d6d5335380e77",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_lag_1_hist_gradient_boosting.joblib": "b71e68dc183ab40a2f93ea599309a74de4f482699a4858d2bed1d1e42522ee45",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_lag_1_logistic_regression.joblib": "1c4f9e8baeb6dbdabbbe48e42d332049097e45deba98a80b9d441730abe7a008",
+    "models/experiments/first-round-full-20260916/enhanced/fold_3_lag_1_random_forest.joblib": "3946656240dec9f0372f074708104d34757fcbc3056ff27ad29aba4ec59f711e",
+    "models/experiments/first-round-full-20260916/macro/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/macro/fold_1_base_hist_gradient_boosting.joblib": "6af6170a4dbb8aaa0422d72958be30476a0c47fb84349a1c618f2d98da35e0a5",
+    "models/experiments/first-round-full-20260916/macro/fold_1_base_logistic_regression.joblib": "c5ca843354302c3094a743108605c315d6b1f30974ac8fdf1a76a88d0ca675b5",
+    "models/experiments/first-round-full-20260916/macro/fold_1_base_random_forest.joblib": "b3e422c9aaf1ff69ba0b9774a8effd43e4c4e61f703c562f4c5f05670b60f873",
+    "models/experiments/first-round-full-20260916/macro/fold_1_hybrid_hist_gradient_boosting.joblib": "82346634b15ffb2b5f005666b197866b03080b277a895e4630b0d07a274cc423",
+    "models/experiments/first-round-full-20260916/macro/fold_1_hybrid_logistic_regression.joblib": "8bd5b34fea29b4b867427ac2168491eef9d6face07c20dec9dfa0ca6e82d0b94",
+    "models/experiments/first-round-full-20260916/macro/fold_1_hybrid_random_forest.joblib": "b13aaad60743be71a2f23772c29173c44176c05919efa5634a3e4a112a181d93",
+    "models/experiments/first-round-full-20260916/macro/fold_1_lag_1_hist_gradient_boosting.joblib": "f0f9017987698889b12b8131103b01ee27c5581e5a9e4820d976c40559e50d4e",
+    "models/experiments/first-round-full-20260916/macro/fold_1_lag_1_logistic_regression.joblib": "4f72ee13cc2ffe29f0b03e9fbdb7f1043a8521f300956bc8cf766d14daefb252",
+    "models/experiments/first-round-full-20260916/macro/fold_1_lag_1_random_forest.joblib": "0456996a2d69c482bdabbea21ec9085963079771145b03892e48a65bdee427dc",
+    "models/experiments/first-round-full-20260916/macro/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/macro/fold_2_base_hist_gradient_boosting.joblib": "ad46058cfd6815e81afe3d8bb07ed4ecded986770c18a15f6d0d1f9e31a759e3",
+    "models/experiments/first-round-full-20260916/macro/fold_2_base_logistic_regression.joblib": "10a5ad6546480a1f9f258e3596377345e3acd2da42f93abb123f8934bc1a368e",
+    "models/experiments/first-round-full-20260916/macro/fold_2_base_random_forest.joblib": "e593d1808e1a189493bf752879d7fb10402992f076e819f66882e05829261fe9",
+    "models/experiments/first-round-full-20260916/macro/fold_2_hybrid_hist_gradient_boosting.joblib": "cb1412a338a02916da24a2e20b6b3a6a1628d7edfcd7227300894fef08377aba",
+    "models/experiments/first-round-full-20260916/macro/fold_2_hybrid_logistic_regression.joblib": "eba6cb0e90dd3939f3ad745796a0d2b082184ea087f750ef79c1bffc0d92fc52",
+    "models/experiments/first-round-full-20260916/macro/fold_2_hybrid_random_forest.joblib": "b0f89eed1f5fec7cf64fd05c2b629c6a9962e78d87bef3382ad748851f9d3901",
+    "models/experiments/first-round-full-20260916/macro/fold_2_lag_1_hist_gradient_boosting.joblib": "e88b865629946a9e58faf3ee407014d69ee18341ea97dd42f7c2440c829ceba8",
+    "models/experiments/first-round-full-20260916/macro/fold_2_lag_1_logistic_regression.joblib": "5cbd23169688c9017c328afce7c5aa71cc8216b3b4eeac2e28c777fe9d89720c",
+    "models/experiments/first-round-full-20260916/macro/fold_2_lag_1_random_forest.joblib": "d079f4ad0a658c5558b952ec7264cf9b307c4f1745e6da74c278f5d725466f33",
+    "models/experiments/first-round-full-20260916/macro/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/macro/fold_3_base_hist_gradient_boosting.joblib": "ddd56a3d28f8052234322ff1b0a03ed72a44cb55bf96f359ac8b65a1c297cdd4",
+    "models/experiments/first-round-full-20260916/macro/fold_3_base_logistic_regression.joblib": "20f3c69544ace9775553c817214ba2cfb8e82ec7f7a51d1582410425c0460073",
+    "models/experiments/first-round-full-20260916/macro/fold_3_base_random_forest.joblib": "3dbe943840ca8fefa050eb7ae9e12c26c78029bcc1a05b7bcb39012a65a33627",
+    "models/experiments/first-round-full-20260916/macro/fold_3_hybrid_hist_gradient_boosting.joblib": "741d46c9e3aa821b7a0f5222573079a85ca6df7973e0b3a5a3212061506d3546",
+    "models/experiments/first-round-full-20260916/macro/fold_3_hybrid_logistic_regression.joblib": "74ed2161b225ac7540d349139519d42b048cadb3f1c23d7c204bbde92d684f92",
+    "models/experiments/first-round-full-20260916/macro/fold_3_hybrid_random_forest.joblib": "746668d6164f13d80308d389fbefc37aefee6b6ceb3d61d1ab5d6d5335380e77",
+    "models/experiments/first-round-full-20260916/macro/fold_3_lag_1_hist_gradient_boosting.joblib": "b71e68dc183ab40a2f93ea599309a74de4f482699a4858d2bed1d1e42522ee45",
+    "models/experiments/first-round-full-20260916/macro/fold_3_lag_1_logistic_regression.joblib": "1c4f9e8baeb6dbdabbbe48e42d332049097e45deba98a80b9d441730abe7a008",
+    "models/experiments/first-round-full-20260916/macro/fold_3_lag_1_random_forest.joblib": "3946656240dec9f0372f074708104d34757fcbc3056ff27ad29aba4ec59f711e",
+    "models/experiments/first-round-full-20260916/reference/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/reference/fold_1_base_hist_gradient_boosting.joblib": "6af6170a4dbb8aaa0422d72958be30476a0c47fb84349a1c618f2d98da35e0a5",
+    "models/experiments/first-round-full-20260916/reference/fold_1_base_logistic_regression.joblib": "c5ca843354302c3094a743108605c315d6b1f30974ac8fdf1a76a88d0ca675b5",
+    "models/experiments/first-round-full-20260916/reference/fold_1_base_random_forest.joblib": "b3e422c9aaf1ff69ba0b9774a8effd43e4c4e61f703c562f4c5f05670b60f873",
+    "models/experiments/first-round-full-20260916/reference/fold_1_hybrid_hist_gradient_boosting.joblib": "a450578f6b328985978adcd5cc3d1cc8dcb3e9aad484e7cc9b05cc557c47ec35",
+    "models/experiments/first-round-full-20260916/reference/fold_1_hybrid_logistic_regression.joblib": "f5a298e53d76881d92ba37bb32b2f743a6e2c000c25e977d49e15f79af61850f",
+    "models/experiments/first-round-full-20260916/reference/fold_1_hybrid_random_forest.joblib": "2656d47b26f9feab33854f516226b9a70972c0ea25c2eecc4b9b2918f38f3cd1",
+    "models/experiments/first-round-full-20260916/reference/fold_1_lag_1_hist_gradient_boosting.joblib": "b1efbcdfab76a18a5f442ce330bccfd54af3294525eb254e06d6bc3e88f81662",
+    "models/experiments/first-round-full-20260916/reference/fold_1_lag_1_logistic_regression.joblib": "5a00342c3eef612f6d9689fc030ab28a66f3771fdeb37929f32d9224c43a77ce",
+    "models/experiments/first-round-full-20260916/reference/fold_1_lag_1_random_forest.joblib": "9ddba410cb5a5fb908bff404c3311da0e5e7662557eb63829a1c9456a7099666",
+    "models/experiments/first-round-full-20260916/reference/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/reference/fold_2_base_hist_gradient_boosting.joblib": "ad46058cfd6815e81afe3d8bb07ed4ecded986770c18a15f6d0d1f9e31a759e3",
+    "models/experiments/first-round-full-20260916/reference/fold_2_base_logistic_regression.joblib": "10a5ad6546480a1f9f258e3596377345e3acd2da42f93abb123f8934bc1a368e",
+    "models/experiments/first-round-full-20260916/reference/fold_2_base_random_forest.joblib": "e593d1808e1a189493bf752879d7fb10402992f076e819f66882e05829261fe9",
+    "models/experiments/first-round-full-20260916/reference/fold_2_hybrid_hist_gradient_boosting.joblib": "ae317ed33a48345760d666d0974a19227098c4336ff59e1219b2dee805c20ffd",
+    "models/experiments/first-round-full-20260916/reference/fold_2_hybrid_logistic_regression.joblib": "3a679d304f1e936fd3ea450809ae050aceaf03b9aab34b5db2fde549df874579",
+    "models/experiments/first-round-full-20260916/reference/fold_2_hybrid_random_forest.joblib": "1a471c5fd8e3d15a03b2b3897bcb4464db13842b1cc2c1e97c5996cf89781818",
+    "models/experiments/first-round-full-20260916/reference/fold_2_lag_1_hist_gradient_boosting.joblib": "8d074957ac944ef49cd9ecb2182c0da41b125bfffd8b7757ae2591bb5a6d41f8",
+    "models/experiments/first-round-full-20260916/reference/fold_2_lag_1_logistic_regression.joblib": "a57af02063b4c6b3504f2f377be37741277db5bab5ce48344601c992093741be",
+    "models/experiments/first-round-full-20260916/reference/fold_2_lag_1_random_forest.joblib": "327eb82db09f3e9ace2109ca165ed3bc34f8485f79e3c07aeabab32b3896929f",
+    "models/experiments/first-round-full-20260916/reference/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/reference/fold_3_base_hist_gradient_boosting.joblib": "ddd56a3d28f8052234322ff1b0a03ed72a44cb55bf96f359ac8b65a1c297cdd4",
+    "models/experiments/first-round-full-20260916/reference/fold_3_base_logistic_regression.joblib": "20f3c69544ace9775553c817214ba2cfb8e82ec7f7a51d1582410425c0460073",
+    "models/experiments/first-round-full-20260916/reference/fold_3_base_random_forest.joblib": "3dbe943840ca8fefa050eb7ae9e12c26c78029bcc1a05b7bcb39012a65a33627",
+    "models/experiments/first-round-full-20260916/reference/fold_3_hybrid_hist_gradient_boosting.joblib": "305e0ea5b78d2ea0b9aa00e3bbd7263f60ad6d326b6b7814062b3a9a98df4896",
+    "models/experiments/first-round-full-20260916/reference/fold_3_hybrid_logistic_regression.joblib": "c79c65dc2581c6f29f154ecf42607196a75b725da4c048ca0ed9f03a26dcc919",
+    "models/experiments/first-round-full-20260916/reference/fold_3_hybrid_random_forest.joblib": "e2c6b1cbc0df67aa5e4ddf6e02202afdef7c9e69d1967e7452b429d8f98de134",
+    "models/experiments/first-round-full-20260916/reference/fold_3_lag_1_hist_gradient_boosting.joblib": "cda5e0463828a0224e678b55b309f02cfd179c94b4618b7de2defb5bb578310b",
+    "models/experiments/first-round-full-20260916/reference/fold_3_lag_1_logistic_regression.joblib": "b21478ebaa2eb8fa4531d29497a912ba33d64de6ba077ebcb1d0cbc94a022068",
+    "models/experiments/first-round-full-20260916/reference/fold_3_lag_1_random_forest.joblib": "f78377e890536cf8caabbd81ec5496377fb2a6d1dfed769037aa23b62d2df112",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_base_hist_gradient_boosting.joblib": "3ba07bda13125045834c79e0237e3a793238888b927ea8579c97e48e5ed0d9fe",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_base_logistic_regression.joblib": "d251a6fe235393837a88f36a60d56c739a479bb027c95a5bcbdb662c2ad1e021",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_base_random_forest.joblib": "cb090d71dc57fbe92ceb37801f41d246408794af3f928b6b32ea1f6fc4c6ee3e",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_hybrid_hist_gradient_boosting.joblib": "d73d4e486933df21cc71aee645cb25dc25bf0489c4b4e41a7b72e4e9e512d75d",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_hybrid_logistic_regression.joblib": "72297401594c66b1d32c6c403f30bea272fb6231c3566c3643923a809effdd87",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_hybrid_random_forest.joblib": "b13aaad60743be71a2f23772c29173c44176c05919efa5634a3e4a112a181d93",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_lag_1_hist_gradient_boosting.joblib": "46e9704915ad5e67bc3616104be6eaa30e4138f020595feea5ee796c2c43d897",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_lag_1_logistic_regression.joblib": "4f72ee13cc2ffe29f0b03e9fbdb7f1043a8521f300956bc8cf766d14daefb252",
+    "models/experiments/first-round-full-20260916/tuned/fold_1_lag_1_random_forest.joblib": "776723f1b69bccd89a384cd9f5979e890bb25c0be677224b25d2ee8acbd104dc",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_base_hist_gradient_boosting.joblib": "9a5ebf9895d8baa9d99154c1866c6d7ec14333691e59e741268424c7225fec3b",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_base_logistic_regression.joblib": "e10456be5d7361f1626dc12a1d799f4259de1286707aeb734c0502c20df2f0f8",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_base_random_forest.joblib": "db3893666e01bb573d983d13e11e7b5fad532e050217299d4f4c0adc0ebc769e",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_hybrid_hist_gradient_boosting.joblib": "15434cf414a3430b189fb3cc6b3c179cf7411341284297fcd0edbbb5dd67d2d7",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_hybrid_logistic_regression.joblib": "c03a05645cb6ff503f3cb56d3122146b561e4e81ac801edf5ae7c5eeed5ca271",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_hybrid_random_forest.joblib": "b0f89eed1f5fec7cf64fd05c2b629c6a9962e78d87bef3382ad748851f9d3901",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_lag_1_hist_gradient_boosting.joblib": "c997fc3307a7de536802b62d6de368cf4bd9d5496fc0766fb92c9146f37a3ecd",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_lag_1_logistic_regression.joblib": "e74f9848bb63dc00cdb9a17d38f9f27e71b3fc4d12cf0dab6637615aa6dd80a9",
+    "models/experiments/first-round-full-20260916/tuned/fold_2_lag_1_random_forest.joblib": "63fdf81aacadbebaf7bceaa3f92059873d8fe5fabf6c4b062e79bc2ea63e9648",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_base_hist_gradient_boosting.joblib": "ddd56a3d28f8052234322ff1b0a03ed72a44cb55bf96f359ac8b65a1c297cdd4",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_base_logistic_regression.joblib": "77ea3833c55146c0dff94808a03de08fd8b2b9b45394d26b071160418318f82f",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_base_random_forest.joblib": "e5fe853052445ed088ccd1729e9a3199e4aab86d19a7c5de02b597696c30032a",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_hybrid_hist_gradient_boosting.joblib": "d1bcf5d93c6ee5f5e92dfe6b731c82f5c9a24c89f7be9c71cb46a4015d1d06d9",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_hybrid_logistic_regression.joblib": "2d74c032d76cd7b6da977b6476d4dfb7dafc2db9e1823a37feaf1ed8c4fe0db1",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_hybrid_random_forest.joblib": "2d4202b4f826b21abaa43cfedf797812cbce44dbbb25fbc438109c6cf226abad",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_lag_1_hist_gradient_boosting.joblib": "1794b825dcd481e4cdef4f0cb593e1c80a07e8bf684dff2bcfc45f8dca879136",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_lag_1_logistic_regression.joblib": "bde571970cc1b1d198760b72e074a4fced22bc6d9e8d6425f7190ba74f98ee9c",
+    "models/experiments/first-round-full-20260916/tuned/fold_3_lag_1_random_forest.joblib": "ffa65f30b96e798755543079d589366676bbbdbbc06410cfaa3909587b5cc6c8",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_base_hist_gradient_boosting.joblib": "d85534ec8b121e1fa805ee2c5a528515393a0b4a815e974513250a47990fad09",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_base_logistic_regression.joblib": "d7c870556f6ce70057ccdd1e196dd63245ef00948ac72ca01c0cb8dff9decead",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_base_random_forest.joblib": "216a341db0d750fcbf588fea67a66ff02a6459a3be6c5b5922fa585fcdde5793",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_hybrid_hist_gradient_boosting.joblib": "f7634dd77d6c34524301f8833acfe5b44fcec5a8291f75a684e18ac703b5f951",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_hybrid_logistic_regression.joblib": "60a02a4522c5bf26a5a2f7cc454cca7b1fbfae1f257d13d067c48193a05a5465",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_hybrid_random_forest.joblib": "51c6738af49cab1ff7a617fd6df80141484ebb5b7ae0fbe014ad24a856ab7a30",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_lag_1_hist_gradient_boosting.joblib": "94ab9d92b7caf828a5eda468063ee616d8a0a0f7a5cf071d5b7e922ea82488db",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_lag_1_logistic_regression.joblib": "dc290c61723f6f2deaf625f095f4d46c344733ea0d24db09d0d9654371a7422e",
+    "models/experiments/first-round-full-20260916/window_3y/fold_1_lag_1_random_forest.joblib": "7ad382212b9ee5a6be4ad426154e15faa70fd07d0c556b72338587158a1aa30c",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_base_hist_gradient_boosting.joblib": "2d6ae8df6f93b9f3307d9a6636738d02b8e88cd2e69f9100dd242b01a31f6caa",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_base_logistic_regression.joblib": "e10456be5d7361f1626dc12a1d799f4259de1286707aeb734c0502c20df2f0f8",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_base_random_forest.joblib": "8c3550b54e660e8a33a9420d7c6609b77c7542191756599f5f40cc427ad86c8f",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_hybrid_hist_gradient_boosting.joblib": "fc1d5a825ae9c062779a744a55715b5dd058bf51583d8161d35b8b14a93086ab",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_hybrid_logistic_regression.joblib": "3d91c217a72d4bfa275a058e7b62885b53a0a441605dc8a15e6f4b1ef64789df",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_hybrid_random_forest.joblib": "aeb24760492dcc0ac84fdaf0ea2adeed46f2da27157d161f546421f459f93467",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_lag_1_hist_gradient_boosting.joblib": "31bd18fc1c194e88511507fcfa7cd896e566f954ab3daf5de27b299effd6a14c",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_lag_1_logistic_regression.joblib": "30c7c5416559cf54cc517fa313dd0de5f440c40325d097ec18f193a63bad9220",
+    "models/experiments/first-round-full-20260916/window_3y/fold_2_lag_1_random_forest.joblib": "a92820a99d4af509b481834318974e298a9aa8c01f5aedeaf739d07f33317496",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_base_hist_gradient_boosting.joblib": "8d18da4508877d985fc26202c95996440a0ffb8f7ba0415fad2386e057baf82d",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_base_logistic_regression.joblib": "77ea3833c55146c0dff94808a03de08fd8b2b9b45394d26b071160418318f82f",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_base_random_forest.joblib": "2ce264025833d5967b6d84d50a47a9b246c42b8a123b28249845e4578663c6ba",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_hybrid_hist_gradient_boosting.joblib": "922c7d3b04054353bd2f84d3a6de53b4b5f31d2e5665cad84ae1cb3bf821de59",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_hybrid_logistic_regression.joblib": "67b3dc555c1e7e548d398fc592ecce7aa4e80d35ed5d3a5f3513ae4bf03d496a",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_hybrid_random_forest.joblib": "837a9dce381834857862c775a1539ba30fd0e34c2a842f2e6e7f210dad7f76d7",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_lag_1_hist_gradient_boosting.joblib": "c83279a312d7ff8713a0f5e2ad42d15b9f6ed4388240bc6fd6ea3910c588de21",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_lag_1_logistic_regression.joblib": "b71ddb1e7b1f0a716290905d79c040cad5517f34849296d5a912e0e38db933d3",
+    "models/experiments/first-round-full-20260916/window_3y/fold_3_lag_1_random_forest.joblib": "4c27b4a1637910d000c1f297ec9e7ec273865bb0125b0cd1869b66ce96f0203a",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_base_dummy.joblib": "aa976c3e807ad9a086bc443ae85346f94ec6fb66cac10555dec23d7d95da6496",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_base_hist_gradient_boosting.joblib": "b3998d0b18e688cc25b5f54a50754ee2aac608a49e2095ced7370d48ea69255e",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_base_logistic_regression.joblib": "d251a6fe235393837a88f36a60d56c739a479bb027c95a5bcbdb662c2ad1e021",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_base_random_forest.joblib": "a4289e01cdee39459484339d40a5d8449bbf4fb0237c393053d0545de62d8516",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_hybrid_hist_gradient_boosting.joblib": "bebe98a41bd6a3e7bf11ce7c536041cbccaf8ef8ee7e5252f79eec789347d2e9",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_hybrid_logistic_regression.joblib": "ec349806bb9f9b5ade796629767ff6e74763046922f33226eb08d0a6a019ff4a",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_hybrid_random_forest.joblib": "86a54fb8ba88be1a8890d5629f372d5e85c2e86bd115566220f44fe6ddf9d02a",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_lag_1_hist_gradient_boosting.joblib": "3500bd9f0b8d5cf660d116366f5b3f9b382c5d5602567252b26f5bf59c543369",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_lag_1_logistic_regression.joblib": "e7e9de927208e6b726bdd824496eaf68f81bb086903b9d0c11c2a8344e74e86b",
+    "models/experiments/first-round-full-20260916/window_5y/fold_1_lag_1_random_forest.joblib": "5b6736e55766348e4e984e2fee2cd8e9ca2f4c46debd26d4f35f7a998eb7a1ae",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_base_dummy.joblib": "fb5963f00d40a74e23cf6ed81f14796282eb0e21bde8a8a02fa197199da2b937",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_base_hist_gradient_boosting.joblib": "955bcd0be80894f950deec3e521398b2811dc7b3567b096c838d1b54d14c3b3e",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_base_logistic_regression.joblib": "c17d4a2f482b8d805cf787ac73480f31488a02af717927520037fb88bac51d9d",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_base_random_forest.joblib": "12a51c0018c2eb914bb8b3870d74e6115bf0b437fd961237cb85a8b75dd848d0",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_hybrid_hist_gradient_boosting.joblib": "e07cf3e34c32d47a5dbe11b0f8b313f09dd2feb99b7a6307c0aa8fe54936c4c6",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_hybrid_logistic_regression.joblib": "f16616b81573051767d11ae5b3a44496dac8d2cd42bfde0f8c86b19305266f93",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_hybrid_random_forest.joblib": "0511b8959877be5806459fd9fee91e4b778ebe30eee919893aae65d04ec31fbc",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_lag_1_hist_gradient_boosting.joblib": "ec2074a7a2d00efbdce1a6064bf8fcde033bb8a4992954827735f4a64cbb6b62",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_lag_1_logistic_regression.joblib": "66fd91aa72deffd143b2b2c8f9a6a92e2cc9b3b4018d8894528a7872b38be456",
+    "models/experiments/first-round-full-20260916/window_5y/fold_2_lag_1_random_forest.joblib": "672b106c8fe9e8df9bdb3c8a5a8c53c281a0aa36bf2cc46a72a937c4f458dbbd",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_base_dummy.joblib": "5257b971ab6723804f33a56e1e4e3f7ad3ec1ad9882058be14bae7212952d33c",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_base_hist_gradient_boosting.joblib": "da6bf03730e0db76be18c6c04f125f4084272e7e38b7dc9300eac26e405e9aa8",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_base_logistic_regression.joblib": "a8bc8ff74bf82f9a2cbf39eedd1f66ac5e7b5948e884a1064a00f6d506096d41",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_base_random_forest.joblib": "790c6d186b494312f5b5064e082fad70c3834f8b74cefd0e184d6b5aeeeef36b",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_hybrid_hist_gradient_boosting.joblib": "013946267233d97e70eb14cd281a797fce129297b8c98c5a3a62abe76198ec2a",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_hybrid_logistic_regression.joblib": "763dcf000679dca9f684b258931ca21a911cd7b9422597e28a7124a5ab02d4e0",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_hybrid_random_forest.joblib": "143fe5c7980a29b73dd16b4058766dfb11c295c3f7df172dca7f4f5979a2ca58",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_lag_1_hist_gradient_boosting.joblib": "4cae9aa602f5ac26f45ae648d810317995ba0a246ac039ba7564c4047c43e113",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_lag_1_logistic_regression.joblib": "e3abc3376bf71f1576b36f5e099b9b6b290e280c20b3d1be1cace1161e5265dc",
+    "models/experiments/first-round-full-20260916/window_5y/fold_3_lag_1_random_forest.joblib": "abfa47dd8d2b1421d16a584ac7dfbdb42f377bae5e5d7e80a16a1bfd4656f7d9",
+    "data/experiments/first-round-full-20260916/clean_features.csv": "a0b2d8cb915046a98cb34316694e16fa3cd12062ca1b11a3ac624b92c207055b",
+    "data/experiments/first-round-full-20260916/dataset.csv": "96880b580d47d8a6df4376bfba810f9db2de8ddf81498b3287c76f0e1e670d86",
+    "data/experiments/first-round-full-20260916/enhanced_features.csv": "e7f402722c71a6807b4dc3cba6797ff79ea823e589ebb1c35e7ae0325717e117",
+    "data/experiments/first-round-full-20260916/news_alignment.csv": "cd92615ffe4c8de5c2c6869dac2560d989f73a0948e14df23901da043775b8aa",
+    "data/experiments/first-round-full-20260916/original_features.csv": "14f0577843e8790b4358e42e52ca9ac00aa91fb9f7c237cf95292e752287407f",
+    "data/experiments/first-round-full-20260916/removed_news.csv": "50b5255eaefaae222a31ff2107c83c824fe0222ba814504dbdceb22f1a89fff5",
+    "data/experiments/first-round-full-20260916/trading_schedule.csv": "14a6e5901b7ec6c91770db455054be894e8db3230ce713576fec7b7c3aa22546",
+    "data/experiments/first-round-full-20260916/unaligned_news.csv": "e6549577e60108d7945d79704141420b4e222b6adf4c6901cee06d2423ba4815",
+    "artifacts/snapshots/first-round-full-20260916/requirements.txt": "adb620e420c87866f0eafde62e447f9a7131f545a760c5b18ed1cda641933d30",
+    "artifacts/snapshots/first-round-full-20260916/src/data/aggregate_daily_sentiment.py": "2838df77ac0943d2b656ffba4e6b1da21d44c12bc8014cf450b55401182dddfc",
+    "artifacts/snapshots/first-round-full-20260916/src/data/align_news_to_trading_days.py": "7f15b7722b50a7b801f9b6d2d919e0474ecdb0d3daf67f86b7570b97eb2678ff",
+    "artifacts/snapshots/first-round-full-20260916/src/data/audit_news_coverage.py": "666d11f140bc055e88b4364f6785a895f5ccf780886e9ea456418f126a3c4262",
+    "artifacts/snapshots/first-round-full-20260916/src/data/calculate_daily_returns.py": "dd6c54c9bfb4163c22c78354bfc999c6369b40884d55e9309bab893b3dda9b74",
+    "artifacts/snapshots/first-round-full-20260916/src/data/calculate_macd.py": "87731876b94806c0d4c0b0d0f5ed88180e22d29d202b8c0a8ccb969f3c6ebad3",
+    "artifacts/snapshots/first-round-full-20260916/src/data/calculate_moving_averages.py": "7d67bd5957dd8846511b2444fc8d92c5a70fdefba782a27c020586dd9d1f7a37",
+    "artifacts/snapshots/first-round-full-20260916/src/data/calculate_rsi.py": "f70137922785c0f771a10e7cfa3fa269d8c4a94ddbbd8f22118ac312f3c5090e",
+    "artifacts/snapshots/first-round-full-20260916/src/data/calculate_volatility.py": "ccb8748422978cd8a1585f2811f2823fa73cf35521d343ab79d9c0a41a0a41c9",
+    "artifacts/snapshots/first-round-full-20260916/src/data/classify_news_sentiment.py": "ee35b834144be02066b313683a892615043fdeff06451ac276c3c637acdc239e",
+    "artifacts/snapshots/first-round-full-20260916/src/data/clean_financial_news.py": "a68f336a92cdf1f72c3fb801a4c4903ccb322eb11842ee438cfec0a81cea1658",
+    "artifacts/snapshots/first-round-full-20260916/src/data/create_final_hybrid_dataset.py": "c1e5a258ac2577672f2710445aeb2fd4cc2aa0ba0d05989169167a4c9bd5074c",
+    "artifacts/snapshots/first-round-full-20260916/src/data/create_lagged_sentiment_dataset.py": "77688f5d72b2f5ae1221a2aaf16a46bf8a22b6e11e1ba13dd2f0f4995a0374eb",
+    "artifacts/snapshots/first-round-full-20260916/src/data/create_target.py": "d429b4c4ab477989c34f09aa05aa11b077f490a8e795fbc3ec5fde73370252a5",
+    "artifacts/snapshots/first-round-full-20260916/src/data/download_financial_news.py": "cefbfb98348a38c29343a6d6d1e27340a448f552991eb2c7d6dc8acf83399066",
+    "artifacts/snapshots/first-round-full-20260916/src/data/download_prices.py": "544cb83c13e9e4a13792b21874c0d3deaa9564fdc1ffab148cc0f92f68c30118",
+    "artifacts/snapshots/first-round-full-20260916/src/data/extract_news_sentiment.py": "a14830e5bceec28cf4eab9f6e423bf95b50823c5c4ce20125e2920f691af4e3a",
+    "artifacts/snapshots/first-round-full-20260916/src/data/handle_days_without_news.py": "4d80c167b812cb88b1a0be1b9452a324e31a89ec75552e36683e2b8a3c4ef46c",
+    "artifacts/snapshots/first-round-full-20260916/src/data/merge_financial_sentiment_data.py": "001172c61c828c91272c13b5ebb69581a0ef27c1bbd53fdc391e29c80ffd5241",
+    "artifacts/snapshots/first-round-full-20260916/src/data/point_in_time.py": "27387acaaaa6db58261b1e0da3d21b6a15241b0ad1d9f3f99b5dba28955b370e",
+    "artifacts/snapshots/first-round-full-20260916/src/data/split_train_test.py": "c0169accc0cd074cf7e6e6f7600c1ed3970601b2f1e7658c165e47ea2e010a26",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/ablations.py": "7d2b5120de153092ba77eb78493533c9360277187c65e4fb2d5027e662297e27",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/artifacts.py": "dfa19ede050b927eb28de1c53e9baa2409e74c1ccf5c4bec6fef788ed25fd882",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/news_quality.py": "37a3971e4a594b2aedcc1bc841020b7d0cca26888c68fa736d73cf0ec158161a",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/organize_reports.py": "551e9e6bb0881db9faceeed28c992f8ef861bcaefddcb83ce64e175789e3d724",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/panel_uncertainty.py": "5e3de28afd101eb7139f24c90ed0ae3a7dd3b39c6c4eea4ef84cb8390b7922c7",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/round_selection.py": "6e28e6597bcb3374f82143103ef1339ce179ae9b155629baf05d9c8b4434525d",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/run_first_round.py": "e07be7ba5e9f536b1cfe0d0d800325971207a8c4d28f0d6c16ad9f5bcb92a5f6",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/run_per_company.py": "d9b71fd29e7049fd2e934bff0d9f5da26d432107bbdc2ea803ecc28a983c885b",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/run_review.py": "c95fc338c7acb6e66a746f95d81dc628bfb0838b7a73a6c15ee55243bde565c8",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/run_ticker_aware.py": "120d8c0796c07978f92b9eaf3085aa7a9a0fab119dd2ed8063bc7857aa1de0d0",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/sentiment_representation.py": "c97f5105252d03291bf9260b4dbfa19ee9c42f216de1431d94a883c330d1e082",
+    "artifacts/snapshots/first-round-full-20260916/src/experiments/training_windows.py": "31105eb836e54ac2c460a642be7912c2e802f7c443ead8bdd4f099c6f6d2a8e4",
+    "artifacts/snapshots/first-round-full-20260916/src/models/__init__.py": "2e6086c749c35723926910d8fa8a1b3104999686b3cda325af907a5637a23c27",
+    "artifacts/snapshots/first-round-full-20260916/src/models/analyze_feature_importance.py": "d427b70a3ac79f7965b67d031e9dce9342f19018605631ffa12e7f688538ed83",
+    "artifacts/snapshots/first-round-full-20260916/src/models/compare_models.py": "1a3de06957a8d7433985ad8431616bee71577376afc90ac5b2cc8b9b13b3804d",
+    "artifacts/snapshots/first-round-full-20260916/src/models/evaluate_models.py": "67a335fdd198baf602e4de781c6a83334ea552ec208ab46b2463fc8f84be1878",
+    "artifacts/snapshots/first-round-full-20260916/src/models/evaluation.py": "27d247ed15b58746687f9db49c5fb8b49f56049c0597975816b576fe70573b73",
+    "artifacts/snapshots/first-round-full-20260916/src/models/temporal_validation.py": "8d7af0530f9b3f7addf1769d2b07e779a198e22261e2735f02f29e77fea5c811",
+    "artifacts/snapshots/first-round-full-20260916/src/models/train_models.py": "cdc630c192e584ddadd01ffba35b67622f35ab4354f84602eff4bfa568facc4b",
+    "artifacts/snapshots/first-round-full-20260916/src/models/tune_temporal_cv.py": "c880db843d255fc1b251ddab3117a89b9ade93e33e9c0a10bb550a7a0895c14a",
+    "artifacts/snapshots/first-round-full-20260916/src/visualization/__init__.py": "f51b53c069072fc347e8f17aa186d96a1e54623dfb17fddde89bee397d3b07f9",
+    "artifacts/snapshots/first-round-full-20260916/src/visualization/plot_experiment.py": "8acfc24d9f58f2f06406f5fec2f675b5e6d9d9b9d6c497afe6114d3808cbecdb",
+    "artifacts/snapshots/first-round-full-20260916/src/visualization/plot_results.py": "0f63ae2d8e3982350ea24448cd5bfa5532858143777cb17915ed661ebfb1891b"
+  },
+  "output_hash_base": "project_root",
+  "quality_audit": {
+    "original_records": 46014,
+    "retained_records": 42734,
+    "removed_records": 3280,
+    "policy": "first identical NFKC/casefold/whitespace-normalized title per ticker within 24 hours",
+    "coverage_verified": false,
+    "semantic_duplicates_removed": false
+  },
+  "feature_sets": {
+    "original": {
+      "base": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative"
+      ],
+      "hybrid": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news"
+      ],
+      "lag_1": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news",
+        "sentiment_mean_lag_1",
+        "news_count_relative_lag_1"
+      ]
+    },
+    "clean": {
+      "base": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative"
+      ],
+      "hybrid": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news"
+      ],
+      "lag_1": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news",
+        "sentiment_mean_lag_1",
+        "news_count_relative_lag_1"
+      ]
+    },
+    "enhanced": {
+      "base": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative"
+      ],
+      "hybrid": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news",
+        "news_sentiment_std",
+        "news_abs_sentiment",
+        "sentiment_surprise_20",
+        "sentiment_history_ready",
+        "news_log_surprise_20"
+      ],
+      "lag_1": [
+        "daily_return",
+        "RSI",
+        "volatility_20",
+        "distance_sma_5",
+        "distance_sma_20",
+        "distance_sma_50",
+        "MACD_relative",
+        "MACD_signal_relative",
+        "Volume_relative",
+        "news_count_relative",
+        "sentiment_mean",
+        "sentiment_median",
+        "sentiment_min",
+        "sentiment_max",
+        "non_trading_news_count",
+        "positive_news_count",
+        "negative_news_count",
+        "neutral_news_count",
+        "positive_news_ratio",
+        "negative_news_ratio",
+        "neutral_news_ratio",
+        "has_news",
+        "sentiment_mean_lag_1",
+        "news_count_relative_lag_1",
+        "news_sentiment_std",
+        "news_abs_sentiment",
+        "sentiment_surprise_20",
+        "sentiment_history_ready",
+        "news_log_surprise_20",
+        "news_sentiment_std_lag_1",
+        "news_abs_sentiment_lag_1",
+        "sentiment_surprise_20_lag_1",
+        "sentiment_history_ready_lag_1",
+        "news_log_surprise_20_lag_1"
+      ]
+    }
+  },
+  "reference_predictions_verified": 22120,
+  "input_sha256": {
+    "data\\processed\\news\\financial_news_with_sentiment.csv": "3ef77a2094c9975de73c65f9fb926c6c7e4d381b77194b854e5233c2ab46ef9d",
+    "data\\processed\\prices\\AAPL_with_target.csv": "eef0bd0273d7eaeaeb71f91acf65c571a30f48f8bed8cffbe685985bbce76ec1",
+    "data\\raw\\prices\\AAPL.csv": "d3071b2386722aff527bb6b6d3130eca017f150aebf83bb5def2ca843f2b76cb",
+    "data\\processed\\prices\\MSFT_with_target.csv": "7a8f30028b5d7e5a36e63a45f15255e667cf59c389bc3c28ffc3b62b85d976da",
+    "data\\raw\\prices\\MSFT.csv": "dea114b4efc98fc09a74b2e612b5874daf108477d8877c39c39c25c68bb936bb",
+    "data\\processed\\prices\\NVDA_with_target.csv": "525fee94b144390aae91dd7c00fe505ded9ad5a422b4bbf038a791df1b210379",
+    "data\\raw\\prices\\NVDA.csv": "5201d0e8977ae946791f8a9ca2fb3f9b2f63854bdcc358f78bf873767a71826c",
+    "data\\processed\\prices\\TSLA_with_target.csv": "692c9556010ed6c14939ceb39b05890ebf6195b90e07b0b591a2e1ce5dec0072",
+    "data\\raw\\prices\\TSLA.csv": "d24f104bd926006f5e574edef389f3ab00ccef6d1e3880a3321ac36bed71f08b",
+    "reports\\experiments\\ticker-aware-full-20260916\\predictions\\all_predictions.csv": "70254f5e9f12600fa5936b1af2baf349c8841340d73f5ab3c58a8cda9d4902d3",
+    "reports\\experiments\\ticker-aware-full-20260916\\manifest.json": "715266dd1eff6a13f7d61cda6d090d59ba149f9f65976cbd6bc15270e24be84b"
+  },
+  "completed_at": "2026-09-16T21:40:29.736435+00:00"
+}

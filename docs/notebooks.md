@@ -71,6 +71,41 @@ python -m src.experiments.run_ticker_aware --run-dir reports/experiments/ticker-
 La reutilización de las referencias exige las mismas entradas, panel, código
 principal, versiones, rejillas y protocolo; el ejecutor se detiene si no coinciden.
 
+## 05. Primera ronda controlada de mejoras
+
+[05_controlled_improvement_round.ipynb](../notebooks/05_controlled_improvement_round.ipynb)
+compara las siete etapas de `first-round-full-20260916`: referencia relativa,
+deduplicación, ventanas de tres y cinco años, sentimiento enriquecido, selección
+macro y ajuste ampliado. Mantiene separados los experimentos anteriores.
+
+Incluye auditoría de cobertura y fuentes, tamaños de variables, fronteras,
+candidatos y selecciones internas, AUC macro y por empresa, aciertos e intervalos
+pareados. Los resúmenes promedian tres algoritmos prefijados, no cinco. Verifica
+huellas, emparejamiento y métricas sin cargar modelos ni consumir API.
+
+El [protocolo](first_round_protocol.md) explica los controles y las limitaciones.
+Para repetir la ejecución completa con las entradas locales y un identificador nuevo:
+
+```powershell
+python -m src.experiments.run_first_round --run-dir reports/experiments/first-round-NUEVA-EJECUCION
+```
+
+La referencia anterior debe estar disponible y conservar entradas, versiones y
+fronteras. El ejecutor comprueba que reproduce sus predicciones antes de evaluar cambios.
+
+## 06. Ablación individual de variables
+
+[06_sentiment_variable_ablation.ipynb](../notebooks/06_sentiment_variable_ablation.ipynb)
+separa las cinco variables añadidas en la primera ronda. Compara añadir cada una
+a la referencia sin extras y retirarla del bloque completo, con parámetros fijos
+heredados de cada referencia. En retardo se estudia la variable y su retardo juntos.
+
+Incluye los 60 contrastes macro, intervalos pareados, diferencias por empresa y
+por bloque, comprobaciones de hashes y recálculo de AUC. Lee exclusivamente
+`variable-ablation-full-20260917`; no entrena ni necesita los modelos locales.
+El [protocolo previo](variable_ablation_protocol.md) explica los controles y
+el carácter exploratorio sobre fechas ya inspeccionadas.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:
@@ -89,7 +124,7 @@ Los cuadernos reconocen tanto la raíz del repositorio como `notebooks/`.
 Para ejecutarlos sin interfaz y conservar las salidas:
 
 ```powershell
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb notebooks/04_ticker_aware_models.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb notebooks/04_ticker_aware_models.ipynb notebooks/05_controlled_improvement_round.ipynb notebooks/06_sentiment_variable_ablation.ipynb
 ```
 
 Las salidas incluidas se han generado mediante ejecución completa, no mediante
