@@ -2,3 +2,4 @@
 reports/experiments/per-company-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 reports/experiments/ticker-aware-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 reports/experiments/first-round-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+reports/experiments/variable-ablation-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
