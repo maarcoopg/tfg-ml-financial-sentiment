@@ -5,7 +5,7 @@ Grado en Ingeniería del Software · Universidad de Sevilla
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
 
-> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916` y `ticker-aware-full-20260916`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
+> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916` y `variable-ablation-full-20260917`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
 ## Índice
 
@@ -41,6 +41,8 @@ El mayor ROC-AUC agrupado observado fue 0,5108, con HistGradientBoosting y varia
 La contribución del proyecto es tanto experimental como de ingeniería: integración de fuentes heterogéneas, control temporal explícito, evaluación comparable y conservación verificable de resultados. El histórico ya había sido consultado, por lo que los resultados deben considerarse exploratorios y no una confirmación independiente.
 
 Dos experimentos adicionales estudian si conviene especializar el aprendizaje por empresa o conservar el entrenamiento conjunto incorporando identidad, variables relativas e interacciones. Entrenar por separado no mejora el promedio general. Las variables relativas producen pequeñas mejoras descriptivas, pero ninguno de los 81 intervalos de diferencias de AUC macro del segundo experimento excluye cero. Destaca el bosque aleatorio híbrido en NVDA: pasa de 0,5180 a 0,5717 de AUC al utilizar relativas e identificador, aunque sin identificador ya obtiene 0,5711. Esta señal no se generaliza a todas las empresas ni demuestra rentabilidad.
+
+Una ronda posterior separa deduplicación, ventanas de entrenamiento, nuevas variables de sentimiento, criterio de selección y búsqueda ampliada. La combinación completa no mejora el AUC macro general. Una ablación individual identifica resultados puntuales: la sorpresa del volumen mejora descriptivamente los tres híbridos sin retardo, y la intensidad absoluta eleva el AUC macro del bosque híbrido de 0,5045 a 0,5202. No se acredita una mejora robusta tras considerar la incertidumbre, las comparaciones múltiples y la reutilización de las fechas evaluadas.
 
 **Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad.
 
@@ -339,6 +341,24 @@ Este AUC macro no es el AUC agrupado de todas las filas de la revisión inicial.
 
 En el experimento individual se calculan 60 diferencias individual menos conjunto y otras 40 comparaciones de sentimiento y retardo dentro del enfoque individual. En el segundo experimento, la comparación principal es relativas con identidad menos conjunto original para cada algoritmo y variante; los demás contrastes separan identidad, representación e interacciones. Sus 405 intervalos se distribuyen en 81 macro y 324 por empresa. Se mantienen 1.000 réplicas de bloques de veinte sesiones; en los contrastes macro se remuestrean las mismas fechas simultáneamente para las cuatro empresas y ambos enfoques. No se reentrena dentro del remuestreo ni se corrige por comparaciones múltiples.
 
+### 10.6 Ronda controlada de mejoras
+
+El experimento `first-round-full-20260916` investiga si la calidad de las noticias, la cantidad de historia y el procedimiento de selección limitaban la representación relativa. Su referencia es el modelo conjunto con variables relativas y sin identidad. Se prefijan tres algoritmos: regresión logística, bosque aleatorio y potenciación por histogramas. Los promedios entre estos tres no deben compararse directamente con los promedios de cinco algoritmos anteriores.
+
+Se conservan las cuatro empresas, las 553 sesiones externas por empresa, tres bloques externos, tres particiones internas, purga y umbral 0,5. Las siete etapas son referencia, deduplicación, ventana de tres años, ventana de cinco años, sentimiento enriquecido, selección por AUC macro y búsqueda ampliada. Las ventanas se calculan respecto al inicio de cada partición, también durante la selección interna. El contraste principal es ajuste ampliado menos referencia para el híbrido de cada algoritmo.
+
+La deduplicación conserva la primera publicación de cada título normalizado idéntico por empresa en 24 horas, sin utilizar noticias futuras. El enriquecimiento añade dispersión del sentimiento, intensidad absoluta, sorpresa del tono, disponibilidad de historia y sorpresa del volumen. Las referencias históricas usan las veinte sesiones anteriores; el tono requiere al menos cinco observaciones con noticias, y la sorpresa del volumen estandariza `log1p(news_count)` y se limita a [−5; 5]. El híbrido pasa de 22 a 27 variables y el de retardo de 24 a 34; la base permanece en nueve.
+
+La selección macro alinea el criterio interno con el promedio de AUC por empresa. La búsqueda ampliada compara veinte candidatos totales por algoritmo de árboles y seis en regresión logística, incluyendo la ventana de entrenamiento. No son veinte candidatos por ventana. Los candidatos y semillas se fijan antes de ejecutar la ronda. Se generan 210 modelos externos y 2.214 evaluaciones internas; los 315 intervalos pareados se distribuyen en 63 macro y 252 por empresa. El [protocolo de la ronda](first_round_protocol.md) conserva los espacios de búsqueda y controles.
+
+### 10.7 Ablación individual de las nuevas variables
+
+Como añadir las cinco variables simultáneamente no produjo una mejora general, `variable-ablation-full-20260917` estudia qué aporta cada variable añadida a la referencia sin extras y qué sucede al retirarla del bloque completo. Se mantienen noticias deduplicadas, historia completa, fechas, etiquetas, algoritmos y purga. En la variante con retardo se añade o retira conjuntamente la variable actual y su retardo de una sesión; no se aísla el efecto de cada componente.
+
+Los hiperparámetros se heredan, por algoritmo, variante y bloque, de la referencia correspondiente: `deduplicated` al añadir y `enhanced` al retirar. Se habían seleccionado mediante validación temporal interna, pero no se vuelven a optimizar para cada subconjunto. Las dos referencias pueden tener parámetros diferentes. Esta decisión estudia el cambio de representación manteniendo fijo el ajuste dentro de cada contraste, no busca el mejor modelo posible para cada variable.
+
+Se verifican 36 modelos de referencia y se entrenan 180 nuevos: cinco variables, dos operaciones, dos variantes, tres algoritmos y tres bloques. Se calculan 60 contrastes macro y 240 por empresa. Las 15 adiciones al híbrido sin retardo son primarias; las demás, secundarias. Los intervalos del 95 % utilizan 1.000 réplicas pareadas de bloques de veinte sesiones, sin reajustar modelos ni corregir por multiplicidad. El [protocolo de ablación](variable_ablation_protocol.md) se fija antes de consultar estos resultados.
+
 ## 11. Resultados
 
 ### 11.1 Antecedentes experimentales
@@ -456,6 +476,44 @@ El patrón no es general: AAPL empeora en los promedios de las tres variantes; M
 
 Fuente: [análisis de identidad y relativas](../reports/experiments/ticker-aware-full-20260916/analysis.md), sus tablas `metrics/` y el [cuaderno 04](../notebooks/04_ticker_aware_models.ipynb). Estos resultados amplían la memoria sin reemplazar la selección histórica de `reports/final/`.
 
+### 11.8 Primera ronda de mejoras: resultado agregado
+
+La deduplicación reduce el corpus alineado de 46.014 a 42.734 registros: elimina 3.280, de los cuales 3.103 corresponden a 2025. Esto reduce repeticiones literales, pero no certifica cobertura exhaustiva ni identifica todos los eventos repetidos semánticamente. Las entradas originales se conservan.
+
+Media de AUC macro entre los tres algoritmos de esta ronda:
+
+| Variante | Referencia | Deduplicación | Tres años | Cinco años | Enriquecido | Selección macro | Ajuste ampliado |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Base | 0,5039 | 0,5039 | 0,4970 | 0,5023 | 0,5039 | 0,5039 | 0,4995 |
+| Híbrido | 0,5080 | 0,5056 | 0,4951 | 0,5039 | 0,5046 | 0,5046 | 0,5015 |
+| Con retardo | 0,5040 | 0,5079 | 0,4979 | 0,5070 | 0,5007 | 0,5007 | 0,4996 |
+
+Las ventanas de tres años empeoran las nueve combinaciones algoritmo-variante frente a la deduplicación con historia completa. El bloque enriquecido solo mejora una de las seis combinaciones con noticias, el bosque híbrido. La selección macro elige los mismos parámetros y produce las mismas predicciones que el criterio agrupado con la rejilla pequeña. La búsqueda ampliada mejora la puntuación interna en 23 de 27 ajustes predictivos, pero solo mejora dos de las nueve combinaciones externas agregadas respecto a la etapa de selección macro.
+
+Los tres contrastes principales del híbrido muestran diferencias negativas cuyos intervalos incluyen cero. El único intervalo macro nominalmente positivo entre 63 contrastes corresponde a deduplicación con potenciación por histogramas y retardo: AUC 0,517173, diferencia +0,014758 e intervalo [0,000080; 0,029403]. El intervalo del propio AUC [0,495506; 0,546076] contiene 0,5. El límite inferior de la diferencia está casi en cero y no hay corrección por multiplicidad; no se considera una mejora robusta. La ronda completa no justifica sustituir automáticamente la configuración anterior.
+
+Fuente: [informe de la ronda](../reports/experiments/first-round-full-20260916/analysis.md) y [cuaderno 05](../notebooks/05_controlled_improvement_round.ipynb).
+
+### 11.9 Aporte individual de las variables de sentimiento
+
+La tabla muestra diferencias de AUC macro, promediadas entre los tres algoritmos únicamente como resumen descriptivo. No representa una combinación de modelos ni dispone de un intervalo propio. Un valor positivo al añadir sugiere utilidad en ese contexto; un valor positivo al retirar sugiere perjuicio dentro del bloque completo.
+
+| Variable | Añadir: híbrido | Añadir: retardo | Retirar: híbrido | Retirar: retardo |
+| --- | ---: | ---: | ---: | ---: |
+| Dispersión del sentimiento | +0,002037 | −0,004899 | +0,000015 | +0,002836 |
+| Intensidad absoluta | +0,003609 | −0,002369 | +0,002242 | +0,001187 |
+| Sorpresa del sentimiento | +0,001186 | −0,003151 | −0,000233 | +0,001029 |
+| Historia disponible | +0,001750 | −0,000591 | −0,000290 | −0,000543 |
+| Sorpresa del volumen de noticias | +0,006484 | −0,001424 | +0,001661 | +0,002466 |
+
+La sorpresa del volumen es la adición con mayor mejora media sin retardo y mejora los tres algoritmos, aunque sus tres intervalos incluyen cero. La intensidad absoluta destaca en el bosque híbrido: AUC 0,520192 frente a 0,504481, diferencia +0,015711 e intervalo [0,000408; 0,026242]. Es el único contraste macro entre los 60 cuyo intervalo no incluye cero. El intervalo del propio AUC [0,498521; 0,540210] todavía contiene 0,5. Mejora en AAPL, NVDA y TSLA, pero empeora en MSFT; no es un beneficio uniforme.
+
+Las cinco adiciones con retardo empeoran en promedio entre algoritmos, especialmente la dispersión. Esto no demuestra que todo retardo sea perjudicial: se comparan familias concretas contra una referencia que ya incorpora dos variables retardadas. Al retirar variables del bloque completo aparecen mejoras pequeñas, pero ninguno de los 30 intervalos macro de retirada excluye cero.
+
+Que una variable ayude sola y no dentro del bloque completo es compatible con redundancia, interacciones o diferencias entre los ajustes de referencia. Cambiar el número de columnas también afecta al muestreo de variables del bosque. La ablación no identifica mecanismos causales. No se elimina ninguna variable automáticamente ni se construye una combinación ganadora seleccionando sobre estas mismas fechas.
+
+Fuente: [informe de ablación](../reports/experiments/variable-ablation-full-20260917/analysis.md) y [cuaderno 06](../notebooks/06_sentiment_variable_ablation.ipynb), con resultados por algoritmo, empresa y bloque.
+
 ## 12. Discusión
 
 ### 12.1 Respuesta a la pregunta principal
@@ -482,15 +540,23 @@ Las relativas describen posiciones y cambios comparables entre activos con nivel
 
 La decisión es conservar ambos experimentos como evidencia, no reemplazar automáticamente el modelo conjunto ni presentar NVDA como un ganador validado. Su valor académico reside en acotar hipótesis y documentar resultados favorables y desfavorables con el mismo protocolo. Las conclusiones sobre sentimiento, especialización y representación se mantienen separadas.
 
+### 12.5 Qué cambia tras la ronda y las ablaciones
+
+Las nuevas pruebas acotan explicaciones que antes eran solo propuestas. Alinear el criterio interno no cambia las predicciones con los candidatos pequeños, ampliar la búsqueda mejora principalmente la puntuación interna y reducir la historia no aporta una ventaja general. Enriquecer el sentimiento como bloque tampoco ayuda de forma uniforme; separar sus variables permite localizar señales más concretas sin convertirlas en conclusiones robustas.
+
+Se conservan la auditoría, los controles y los resultados como aportaciones metodológicas. La sorpresa del volumen y la intensidad absoluta son hipótesis para una evaluación posterior prefijada, no ganadores confirmados. Incorporar los experimentos al código principal no implica adoptar sus transformaciones como configuración operativa ni modificar `reports/final/`.
+
 ## 13. Verificación y reproducibilidad
 
-El conjunto local de pruebas contiene 41 pruebas superadas, frente a las 28 de la revisión inicial. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. Se ejecuta mediante `python -m unittest discover -s tests -v`.
+El conjunto local de pruebas contiene 58 pruebas superadas, frente a las 28 de la revisión inicial. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. La última ronda añade deduplicación, ventanas, nuevas representaciones, selección macro y aislamiento de las familias de variables. Se ejecuta mediante `python -m unittest discover -s tests -v`.
 
 En la revisión completa se verificó que los 183 modelos guardados reproducían las probabilidades y clases almacenadas, y que las fronteras de los 1.080 ajustes internos y los 183 externos respetaban la condición de purga. Se verificaron ejecuciones reducidas independientes del protocolo y del flujo tradicional.
 
 El experimento por empresa verificó 240 modelos guardados, incluidos los de referencia conjunta, y 1.350 evaluaciones internas. El de identidad añadió 168 modelos y 918 evaluaciones internas; sus 194.656 predicciones incluyen las referencias reutilizadas, no otras tantas observaciones independientes. Los modelos nuevos reproducen las probabilidades guardadas con tolerancia absoluta de 10⁻¹². La recarga de `features.csv` utiliza `float_precision="round_trip"`: un redondeo al leer puede alterar la rama elegida por un árbol cuando una variable está junto a un umbral.
 
 El remuestreo optimizado convierte fechas repetidas en pesos y reproduce los 60 intervalos individual-conjunto de la implementación previa, con diferencia máxima aproximada de 2,6 × 10⁻¹⁶. No modifica el procedimiento estadístico para mejorar resultados. Los cuadernos 03 y 04 están ejecutados y verifican claves, métricas y huellas de informes. `.gitattributes` conserva los bytes de estos informes para evitar invalidar sus hashes al cambiar finales de línea entre sistemas.
+
+La primera ronda verifica 210 modelos guardados, 2.214 evaluaciones internas y 154.840 predicciones pareadas. La ablación verifica otros 180 modelos, 36 referencias reutilizadas y 159.264 predicciones. Estas filas repiten las mismas sesiones para múltiples configuraciones, no amplían el tamaño de la muestra independiente. Se comprueban parámetros heredados, columnas, fronteras purgadas y AUC recalculados. Los cuadernos 05 y 06 se ejecutan desde la raíz y desde su directorio; sus tablas, figuras, tildes y enlaces se revisan. Las huellas de informes también se contrastan con los bytes preparados para Git.
 
 La reorganización conservó 486 archivos entre resultados y modelos históricos, comprobando su contenido mediante hashes. Los manifiestos nuevos registran rutas relativas a la raíz, versiones, parámetros, estado, entradas y salidas. Los anteriores se conservaron en instantáneas. Las instantáneas de fuente no estaban disponibles cuando comenzó el primer experimento completo: este conserva hashes del código original, mientras que la copia de código se comprobó en ejecuciones posteriores.
 
@@ -500,7 +566,9 @@ La reproducibilidad tiene tres niveles distintos: inspeccionar informes guardado
 
 ## 14. Proceso de desarrollo y decisiones
 
-El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros de cambios identificables y fusiones de ramas. El historial conserva, entre otras etapas, indicadores, conjuntos de datos, modelos base e híbridos, evaluación, ajuste temporal y retardos. El trabajo acumulado de retardos, revisión y organización se integró en `main` mediante la fusión `2f1111d`, con implementación en `1ffdc1b`. La remodelación documental se realizó en `docs` y se integró mediante `3efa444`. Los experimentos adicionales de la tarea #47 se desarrollaron en `feature/per-company-temporal-evaluation`: `abdcce5` incorpora la evaluación independiente y `06cbd00` la identidad y las variables relativas. La memoria se amplía antes de integrar esta rama, conservando ambas ejecuciones por separado.
+El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros de cambios identificables y fusiones de ramas. El historial conserva, entre otras etapas, indicadores, conjuntos de datos, modelos base e híbridos, evaluación, ajuste temporal y retardos. El trabajo acumulado de retardos, revisión y organización se integró en `main` mediante la fusión `2f1111d`, con implementación en `1ffdc1b`. La remodelación documental se realizó en `docs` y se integró mediante `3efa444`. Los experimentos adicionales de la tarea #47 se desarrollaron en `feature/per-company-temporal-evaluation`: `abdcce5` incorpora la evaluación independiente y `06cbd00` la identidad y las variables relativas; se integraron mediante `00c0146`.
+
+La tarea #48 se desarrolla en `feature/controlled-improvement-round` con commits separados para auditoría (`05d346c`), ventanas (`bbf9836`), representación (`d136944`), selección (`037e741`), resultados (`c23198c`), ejecutor de ablación (`623d8a6`) e informe individual (`c57240e`). La memoria se actualiza antes de su integración, tras la revisión del autor. Se conservan las ejecuciones históricas y no se altera la selección de `reports/final/`.
 
 | Decisión | Motivo | Consecuencia o compromiso |
 | --- | --- | --- |
@@ -516,6 +584,9 @@ El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros
 | Probar estimadores independientes | Estudiar especialización por activo | Menos datos por ajuste; sin mejora media general |
 | Separar identidad y representación relativa | Distinguir adaptación y diferencias de escala | Más comparaciones exploratorias; no se declara un ganador global |
 | Conservar cuadernos 03 y 04 separados | Comparar hipótesis sin sobrescribir resultados | AUC macro y agrupado deben distinguirse explícitamente |
+| Separar deduplicación, ventanas, representación y ajuste | Localizar cambios frente a referencias comunes | Más selección interna no implica mejora externa |
+| Heredar parámetros en la ablación individual | Aislar cambios de columnas dentro de cada contraste | No optimiza cada subconjunto; depende de su contexto |
+| Conservar cuadernos 05 y 06 separados | Distinguir cambios conjuntos y aportes individuales | No se selecciona automáticamente una combinación ganadora |
 | Excluir modelos de Git ordinario | Reducir binarios y ruido experimental | Requiere gestión externa de artefactos |
 
 El asistente de programación se utilizó para implementación, revisión, experimentos y documentación bajo decisiones del estudiante. La memoria debe reflejar ese uso con arreglo a las indicaciones académicas aplicables; este borrador no atribuye al estudiante verificaciones personales que no estén documentadas. Las afirmaciones científicas y la versión entregada requieren su revisión y defensa.
@@ -526,11 +597,13 @@ El asistente de programación se utilizó para implementación, revisión, exper
 
 El histórico externo se consultó durante el desarrollo. La validación anidada posterior reduce contaminación dentro de una ejecución, pero no deshace decisiones motivadas por resultados anteriores. Tampoco los intervalos de predicciones fijas incorporan toda la incertidumbre del entrenamiento. La comparación entre etapas modifica varios elementos simultáneamente.
 
-Los experimentos por empresa e identidad reutilizan esas fechas. La selección posterior del caso de NVDA y la abundancia de contrastes impiden tratar sus intervalos nominales como confirmación independiente. La coherencia entre bloques no elimina este sesgo. Además, el criterio interno de AUC agrupado no coincide exactamente con el AUC macro externo y la búsqueda de dos configuraciones por algoritmo limita la adaptación de las variantes con interacciones.
+Los experimentos por empresa e identidad reutilizan esas fechas. La selección posterior del caso de NVDA y la abundancia de contrastes impiden tratar sus intervalos nominales como confirmación independiente. La coherencia entre bloques no elimina este sesgo. En esas ejecuciones, el criterio interno de AUC agrupado no coincide exactamente con el AUC macro externo y la búsqueda de dos configuraciones por algoritmo limita la adaptación de las variantes con interacciones. La ronda posterior estudia selección macro y candidatos ampliados sobre la representación enriquecida, no vuelve a optimizar todas las interacciones anteriores.
+
+Las ablaciones vuelven a utilizar las mismas fechas. El único contraste macro positivo de intensidad absoluta es nominal, está cerca del límite y forma parte de 60 comparaciones sin corrección. Los hiperparámetros heredados controlan cada comparación, pero no garantizan el ajuste óptimo de los subconjuntos. Añadir una variable y retirarla del bloque completo no son experimentos simétricos ni permiten atribuir causalidad.
 
 ### 15.2 Datos y generalización
 
-Solo se estudian cuatro empresas de gran capitalización y elevada presencia mediática. La selección retrospectiva no representa todo el mercado ni incorpora empresas desaparecidas. La cobertura informativa no está certificada; títulos repetidos pueden sobreponderar eventos; las puntuaciones de sentimiento no se contrastaron con una muestra anotada independiente.
+Solo se estudian cuatro empresas de gran capitalización y elevada presencia mediática. La selección retrospectiva no representa todo el mercado ni incorpora empresas desaparecidas. La cobertura informativa no está certificada; títulos repetidos pueden sobreponderar eventos; las puntuaciones de sentimiento no se contrastaron con una muestra anotada independiente. La deduplicación experimental reduce repeticiones literales, pero no elimina todas las duplicaciones semánticas ni se adopta automáticamente en las ejecuciones anteriores.
 
 El cierre ajustado descargado retrospectivamente, las revisiones del proveedor y la ausencia de marcas temporales de recepción impiden afirmar una reconstrucción perfecta de la información disponible en cada instante. El calendario y la purga corrigen riesgos concretos, no todos los sesgos posibles.
 
@@ -543,7 +616,7 @@ No se han calculado comisiones, deslizamiento, rotación, exposición, caída m�
 
 Antes de ampliar otra búsqueda, se fijaría una regla de selección y una comparación principal para evaluarlas en fechas nuevas no utilizadas en estas decisiones. Las variables relativas constituyen una hipótesis prioritaria, no una garantía de mejora. Debe comprobarse si el patrón de NVDA persiste y si es específico de la empresa, del periodo o de la cobertura informativa.
 
-También sería pertinente estudiar periodos con cobertura comparable y, como experimento separado, alinear la selección interna con el AUC macro externo. Una búsqueda más amplia, otras empresas o un horizonte diferente requerirían su propio protocolo. No se han realizado estas propuestas y no se presentan resultados esperados como obtenidos.
+La alineación con AUC macro, la búsqueda ampliada y las ventanas de tres y cinco años ya se han probado en la primera ronda, sin mejora general. Siguen pendientes una evaluación específicamente diseñada para periodos de cobertura comparable, otras empresas o un horizonte diferente. La sorpresa del volumen y la intensidad absoluta pueden motivar hipótesis prefijadas, no otra selección retrospectiva del máximo. Cualquier prueba adicional requerirá definir su protocolo antes de evaluar; no se presenta como ejecutada ni se anticipan sus resultados.
 
 ## 16. Conclusiones
 
@@ -552,6 +625,8 @@ Se ha construido un sistema modular capaz de integrar precios e información de 
 La evidencia obtenida no acredita una ventaja predictiva robusta y general del sentimiento para la siguiente sesión en este histórico. Entrenar por empresa no mejora el promedio global. Las variables relativas producen mejoras descriptivas mayores que añadir solo identidad, pero ninguno de los 81 intervalos de diferencias macro de la ampliación excluye cero. El modelo de referencia explica por qué una exactitud o un F1 positivo aparentemente altos pueden resultar poco informativos.
 
 NVDA presenta una señal exploratoria más favorable: el bosque aleatorio híbrido relativo con identidad alcanza 0,5717 de AUC, frente a 0,5180 del conjunto original, con un intervalo de diferencia positivo. Las relativas sin identidad ya alcanzan 0,5711, y AAPL empeora. Por tanto, se conserva este resultado como hipótesis para fechas nuevas, no como evidencia general del sentimiento, confirmación independiente ni demostración de rentabilidad.
+
+La primera ronda no mejora el promedio general al combinar depuración, enriquecimiento y búsqueda ampliada. La ablación individual sugiere utilidad descriptiva de la sorpresa del volumen en híbridos sin retardo y de la intensidad absoluta en el bosque híbrido, que alcanza 0,5202 de AUC macro. Sin embargo, el intervalo del propio AUC contiene 0,5, las diferencias no son uniformes y hay múltiples comparaciones. Las cinco adiciones con retardo empeoran en promedio. Se conservan como resultados exploratorios, sin eliminar variables ni cambiar automáticamente el modelo seleccionado.
 
 El resultado no invalida el TFG ni prueba que las noticias no afecten a los mercados. Delimita lo que puede sostenerse con el experimento realizado. La principal contribución es un procedimiento de comparación más controlado, verificable y documentado, junto con un análisis explícito de sus límites.
 
@@ -585,9 +660,13 @@ Las referencias siguientes se consultaron para este borrador el 15 de septiembre
 | Identidad, relativas e interacciones | `reports/experiments/ticker-aware-full-20260916/analysis.md` y `manifest.json` |
 | Métricas macro, por empresa e intervalos adicionales | `reports/experiments/ticker-aware-full-20260916/metrics/` |
 | Cuadernos de las ampliaciones | `notebooks/03_per_company_models.ipynb`, `notebooks/04_ticker_aware_models.ipynb` |
+| Primera ronda controlada | `reports/experiments/first-round-full-20260916/analysis.md` y `manifest.json` |
+| Ablación individual de variables | `reports/experiments/variable-ablation-full-20260917/analysis.md` y `manifest.json` |
+| Protocolos de las últimas comparaciones | `docs/first_round_protocol.md`, `docs/variable_ablation_protocol.md` |
+| Cuadernos de ronda y ablación | `notebooks/05_controlled_improvement_round.ipynb`, `notebooks/06_sentiment_variable_ablation.ipynb` |
 | Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuatro cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los seis cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
 ### 18.2 Glosario
 
