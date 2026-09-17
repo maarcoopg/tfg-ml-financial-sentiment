@@ -32,7 +32,13 @@ El experimento `ticker-aware-full-20260916` conserva sus enfoques nuevos bajo
 como las referencias conjunta e individual reutilizadas tras verificar su
 procedencia. No reemplaza `per-company-20260916` ni modifica `reports/final/`.
 
-Los informes `per-company-*` y `ticker-aware-*` conservan sus bytes mediante `.gitattributes`.
+La ejecución `first-round-full-20260916` identifica las siete etapas mediante la
+columna `approach` en predicciones, métricas y trazas de ajuste. `quality/` conserva
+la auditoría mensual y el recuento de eliminaciones. Las variables reconstruidas
+y el registro local de noticias eliminadas permanecen en `data/experiments/<id>/`;
+los modelos, bajo `models/experiments/<id>/<etapa>/`.
+
+Los informes `per-company-*`, `ticker-aware-*` y `first-round-*` conservan sus bytes mediante `.gitattributes`.
 Así Git no cambia los finales de línea al descargarlos en otro sistema operativo
 y se mantienen válidas las huellas SHA-256 verificadas por los notebooks correspondientes.
 
