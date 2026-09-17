@@ -1,0 +1,22 @@
+{
+  "verified_models": 180,
+  "verified_anchors": 36,
+  "predictions": 159264,
+  "intervals": 300,
+  "macro_intervals": 60,
+  "hashes_verified": true,
+  "feature_sets_and_parameters_verified": true,
+  "same_clean_reference_columns": true,
+  "purged_boundaries_verified": true,
+  "macro_auc_recomputed": true,
+  "notebook": {
+    "executed_from_root": true,
+    "cells": 14,
+    "images": [
+      "figure-1.png",
+      "figure-2.png"
+    ],
+    "utf8_and_links_verified": true
+  },
+  "unit_tests_passed": 58
+}

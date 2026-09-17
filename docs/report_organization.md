@@ -54,6 +54,14 @@ Los registros `reports/historical/migration_manifest.json` y
 con las nuevas y sus hashes. Las carpetas antiguas vacías que Windows no permita
 eliminar no contienen resultados y no vuelven a utilizarse.
 
+La ejecución `variable-ablation-full-20260917` separa las cinco variables nuevas
+de la primera ronda, sin sustituirla. Los enfoques `add_*` y `drop_*` indican
+adición individual y retirada del bloque completo, respectivamente. Conserva
+las dos referencias verificadas, las predicciones y los parámetros heredados
+en `tuning/inherited_params.csv`. Reutiliza el panel local de la primera ronda,
+con hash verificado, en lugar de duplicarlo. Los modelos nuevos permanecen
+excluidos de Git y `reports/final/` no cambia.
+
 ## Ejecución
 
 ```powershell

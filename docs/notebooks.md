@@ -93,6 +93,19 @@ python -m src.experiments.run_first_round --run-dir reports/experiments/first-ro
 La referencia anterior debe estar disponible y conservar entradas, versiones y
 fronteras. El ejecutor comprueba que reproduce sus predicciones antes de evaluar cambios.
 
+## 06. Ablación individual de variables
+
+[06_sentiment_variable_ablation.ipynb](../notebooks/06_sentiment_variable_ablation.ipynb)
+separa las cinco variables añadidas en la primera ronda. Compara añadir cada una
+a la referencia sin extras y retirarla del bloque completo, con parámetros fijos
+heredados de cada referencia. En retardo se estudia la variable y su retardo juntos.
+
+Incluye los 60 contrastes macro, intervalos pareados, diferencias por empresa y
+por bloque, comprobaciones de hashes y recálculo de AUC. Lee exclusivamente
+`variable-ablation-full-20260917`; no entrena ni necesita los modelos locales.
+El [protocolo previo](variable_ablation_protocol.md) explica los controles y
+el carácter exploratorio sobre fechas ya inspeccionadas.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:
@@ -111,7 +124,7 @@ Los cuadernos reconocen tanto la raíz del repositorio como `notebooks/`.
 Para ejecutarlos sin interfaz y conservar las salidas:
 
 ```powershell
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb notebooks/04_ticker_aware_models.ipynb notebooks/05_controlled_improvement_round.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=tfg-finanzas --ExecutePreprocessor.timeout=180 notebooks/01_dataset_exploration.ipynb notebooks/02_model_results.ipynb notebooks/03_per_company_models.ipynb notebooks/04_ticker_aware_models.ipynb notebooks/05_controlled_improvement_round.ipynb notebooks/06_sentiment_variable_ablation.ipynb
 ```
 
 Las salidas incluidas se han generado mediante ejecución completa, no mediante
