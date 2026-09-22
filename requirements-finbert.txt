@@ -1,0 +1,7 @@
+# Install requirements.txt first. This optional extension does not alter the
+# financial pipeline. CPU wheels can be installed from download.pytorch.org.
+torch==2.8.0
+transformers==4.57.6
+huggingface-hub==0.36.2
+tokenizers==0.22.2
+safetensors==0.7.0
