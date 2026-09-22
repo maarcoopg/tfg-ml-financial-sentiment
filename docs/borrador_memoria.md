@@ -5,6 +5,7 @@ Grado en Ingeniería del Software · Universidad de Sevilla
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
 **Revisión documental:** 19 de septiembre de 2026, según las orientaciones del tutor.
+**Ampliación de PLN:** 22 de septiembre de 2026, estudio interno de FinBERT; evaluación lingüística y financiera pendientes.
 
 > Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916` y `variable-ablation-full-20260917`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
@@ -69,7 +70,7 @@ La hipótesis principal plantea una posible contribución adicional del sentimie
 
 #### 1.3.3 Alcance y exclusiones
 
-La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. Tampoco se entrena un modelo propio de lenguaje: el sentimiento empleado procede del proveedor.
+La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. No se entrena un modelo propio de lenguaje: el sentimiento de todos los experimentos financieros presentados procede del proveedor. Como ampliación separada, se inspecciona el funcionamiento interno de FinBERT preentrenado, todavía sin integrarlo en esas comparaciones.
 
 ## 2. Planificación
 
@@ -108,7 +109,7 @@ Los hitos verificables son la disponibilidad del corpus, el primer modelo compar
 | Crecimiento del alcance | Memoria y desarrollo inconexos | Una hipótesis por ampliación y aprobación de su alcance antes de implementarla |
 | Pérdida de datos locales | Reproducción incompleta | Manifiestos y conservación externa de entradas; los hashes no sustituyen una copia |
 
-FinBERT, SHAP, otros horizontes, simulación económica y aplicación interactiva siguen siendo propuestas. No se incluyen como trabajo ejecutado ni se les asignan resultados ficticios. Si se aprueba una ampliación, deberá revisarse la planificación y la estimación de esfuerzo en lugar de mantener artificialmente el total anterior.
+El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). Solo la primera se ha implementado y verificado. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
 
 ## 3. Estado del arte y fundamentos teóricos
 
@@ -178,7 +179,7 @@ Para ampliar esta revisión se registrarán por estudio periodo, activos, tamañ
 | --- | --- | --- |
 | Alpha Vantage | API de datos y noticias con sentimiento | Proveedor de entrada, no evaluador independiente de la utilidad de sus puntuaciones |
 | yfinance | Acceso programático a datos de Yahoo Finance | Adquisición de precios, no protocolo experimental |
-| FinBERT | Clasificación de sentimiento financiero | Procesamiento textual potencial, aún no conectado al flujo |
+| FinBERT | Clasificación de sentimiento financiero | Inspección interna implementada; calidad del sentimiento e integración financiera pendientes |
 | VectorBT | Simulación de carteras a partir de órdenes o señales | Extensión económica posible; las métricas actuales no son un backtest |
 | SHAP | Atribuciones de variables a predicciones | Extensión explicativa; no sustituye evaluación externa ni demuestra causalidad |
 
@@ -196,6 +197,20 @@ $$
 La pérdida logística binaria básica es $-\sum_j[y_j\log p_j+(1-y_j)\log(1-p_j)]$, acompañada de regularización en el estimador. El parámetro `C` controla inversamente su intensidad. Un bosque agrega predicciones de árboles construidos con aleatorización; la potenciación construye una suma secuencial de árboles $F_M(x)=F_0(x)+\eta\sum_{m=1}^{M}h_m(x)$. La profundidad, tamaño de hojas y regularización limitan complejidad, pero no garantizan generalización temporal.
 
 Para un bloque externo $k$, la selección interna es $\hat\lambda_k=\arg\max_{\lambda\in\Lambda}K^{-1}\sum_{j=1}^{K}\operatorname{AUC}_{k,j}(\lambda)$. Solo después se reentrena con el pasado admisible y se evalúa el bloque externo. Las diferencias pareadas mantienen iguales fechas, activos y objetivos. El código de [construcción de modelos](../src/models/train_models.py) y [selección de la ronda](../src/experiments/round_selection.py) concreta los valores y convenciones; la notación anterior no sustituye esa especificación.
+
+### 3.10 Funcionamiento interno de FinBERT
+
+La ampliación utiliza exclusivamente `ProsusAI/finbert`, revisión `4556d13015211d73dccd3fdd39d39232506f3e43`. Hugging Face proporciona el repositorio y Transformers la implementación; no constituyen modelos competidores. El artefacto es un `BertForSequenceClassification` de 12 bloques, 12 cabezas por bloque y dimensión oculta 768. El preentrenamiento general de BERT, la adaptación financiera y el ajuste supervisado de sentimiento son etapas diferentes; nuestro proyecto reutiliza sus pesos y no repite esos entrenamientos.
+
+WordPiece transforma el texto en tokens y añade `[CLS]` y `[SEP]`. Las 512 posiciones admitidas incluyen esos tokens especiales. Se suman representaciones aprendidas de token, posición y segmento; después se aplica normalización. Cada cabeza calcula consultas, claves y valores y combina posiciones mediante:
+
+$$A=\operatorname{softmax}(QK^\top/\sqrt{64}+M),\qquad C=AV.$$
+
+La máscara excluye claves de relleno, no el contexto posterior de la misma noticia. Los controles de disponibilidad bursátil son externos a este mecanismo bidireccional. Las cabezas se concatenan, se proyectan y se combinan con la entrada mediante conexión residual y normalización. La red interna transforma 768 dimensiones en 3072 y vuelve a 768, con activación GELU y otra conexión residual normalizada.
+
+La representación final de `[CLS]` pasa por el pooler, una transformación lineal con tangente hiperbólica, y una capa de tres logits. Softmax produce probabilidades positiva, negativa y neutral. La diferencia entre probabilidades positiva y negativa es un indicador de tono, no la probabilidad de subida del activo. La confianza no está garantizada como calibrada, y un mapa de atención no constituye por sí solo una explicación causal.
+
+La [guía técnica](finbert_modelo.md) desarrolla las operaciones, objetivos de aprendizaje y limitaciones. El [cuaderno 07](../notebooks/07_finbert_model_understanding.ipynb) las muestra con tensores reales y comprobaciones numéricas. Fuentes: [BERT](https://aclanthology.org/N19-1423/), [configuración fijada](https://huggingface.co/ProsusAI/finbert/blob/4556d13015211d73dccd3fdd39d39232506f3e43/config.json) e [implementación de Transformers](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/bert/modeling_bert.py).
 
 ## 4. Fuentes de datos y procesamiento
 
@@ -716,6 +731,16 @@ No se presentan estos mapas como curvas de aprendizaje. Una curva que relacione 
 
 Los desgloses por activo y bloque de 5.3, junto con los cuadernos 03–06, permiten estudiar heterogeneidad sin elegir únicamente la empresa más favorable. Los informes completos conservan todas las configuraciones; las figuras anteriores son una selección de lectura. El [generador documental](figures/memoria/generar_figuras.py) conserva las fuentes y comprobaciones de estas figuras y no modifica los artefactos experimentales.
 
+### 5.7 Verificación interna de FinBERT, no evaluación predictiva
+
+La ejecución `finbert-understanding-20260922` utiliza el primer titular no vacío de AAPL según fecha UTC, URL y título, y una frase sintética corta como control de relleno. No se seleccionan ejemplos por su puntuación ni por la evolución posterior del precio. La inferencia se ejecuta localmente en CPU, con pesos fijos, precisión de 32 bits, atención explícita y dropout desactivado.
+
+Se contabilizan **109.484.547 parámetros** y se contrastan **28 operaciones**: embeddings; atención y salida de cada uno de los doce bloques; pooler, logits y softmax. Todas pasan. La máxima discrepancia absoluta observada es aproximadamente **3,73 × 10⁻⁹**, con tolerancias absolutas de 2 × 10⁻⁵ y relativas de 10⁻⁵. Cada bloque reconstruido parte de su entrada registrada por la biblioteca: es un contraste local, no una réplica independiente de todo el sistema ni una prueba de precisión del sentimiento.
+
+También se comprueba que el relleno no recibe atención como clave y que una frase mantiene sus probabilidades al cambiar la longitud del otro texto del lote, dentro de tolerancia. Un texto sintético de 522 tokens, incluidos los especiales, se recorta a 512, registrándose diez tokens descartados. Las doce pruebas unitarias adicionales usan una arquitectura BERT pequeña aleatoria, sin descargar pesos; se distinguen de la inspección del checkpoint real.
+
+Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. No se calculan macro-F1 lingüístico ni nuevas métricas bursátiles. La evaluación con anotaciones humanas, el tratamiento dirigido a cada empresa, las atribuciones y la integración temporal quedan para las siguientes fases. Todos los resultados financieros anteriores permanecen intactos.
+
 ## 6. Especificación de requisitos
 
 ### 6.1 Requisitos verificables
@@ -729,7 +754,8 @@ Los desgloses por activo y bloque de 5.3, junto con los cuadernos 03–06, permi
 | Aislar imputación y escalado | Cadena de preprocesamiento y modelado ajustada en cada entrenamiento | `src/models/train_models.py` |
 | No sobrescribir experimentos anteriores | Identificador nuevo y rechazo de colisiones | `src/experiments/artifacts.py` |
 | Conservar resultados auditables | CSV, manifiestos y hashes SHA-256 | `reports/experiments/` |
-| Facilitar la explicación | Memoria, guías y seis cuadernos de análisis | `docs/` y `notebooks/` |
+| Facilitar la explicación | Memoria, guías y siete cuadernos de análisis | `docs/` y `notebooks/` |
+| Inspeccionar el modelo de lenguaje | Checkpoint fijo, reconstrucción numérica y diagnóstico local | `src/nlp/` y cuaderno 07 |
 
 ### 6.2 Actores, alcance y casos de uso
 
@@ -768,13 +794,15 @@ flowchart LR
 | RNF4 | Conservación histórica | Una ejecución no sobrescribe otra con el mismo identificador | Rechazo de colisiones en `create_run` |
 | RNF5 | Protección de credenciales | Claves fuera del repositorio y de los informes | Variables de entorno; no sustituye auditoría de seguridad completa |
 | RNF6 | Mantenibilidad | Separación entre adquisición, modelos, experimentos y presentación | Módulos y pruebas focalizadas |
-| RNF7 | Legibilidad | Figuras con unidades, referencias y procedencia; texto en español | Memoria y seis cuadernos; revisión humana pendiente |
+| RNF7 | Legibilidad | Figuras con unidades, referencias y procedencia; texto en español | Memoria y siete cuadernos; revisión humana pendiente |
 
 No se declara disponibilidad continua, latencia garantizada ni escalabilidad de servicio web: no existen pruebas de carga ni despliegue de ese tipo. El requisito de calidad experimental se cumple documentando resultados válidos, aunque no mejoren el modelo de referencia.
 
 ## 7. Análisis del sistema
 
 ### 7.1 Arquitectura
+
+La extensión opcional `src/nlp/` inspecciona FinBERT de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. El ejecutor genera un informe nuevo sin modificar precios, sentimiento de Alpha Vantage ni modelos financieros. La vista siguiente describe el flujo financiero existente; conectar la salida textual a ese flujo queda pendiente de las issues #50 y #51.
 
 ```text
 Precios descargados + noticias con sentimiento por empresa
@@ -1051,7 +1079,7 @@ La bibliografía técnica inicial se consultó el 15 de septiembre de 2026 y los
 | Cuadernos de ronda y ablación | `notebooks/05_controlled_improvement_round.ipynb`, `notebooks/06_sentiment_variable_ablation.ipynb` |
 | Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los seis cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
 ### 10.2 Glosario
 
@@ -1075,7 +1103,7 @@ Los cuatro diagramas se mantienen como bloques Mermaid editables dentro del borr
 
 - Validar con el autor las 330 horas propuestas y separar dedicación acreditable de trabajo aún pendiente.
 - Ampliar y revisar críticamente el estado del arte; completar las fichas comparables y homogeneizar bibliografía.
-- Confirmar con el tutor la ampliación de desarrollo que se realizará. FinBERT, SHAP, otros horizontes, backtesting y aplicación siguen sin ejecutarse.
+- Revisar con el tutor el estudio interno de FinBERT y completar después su evaluación lingüística e integración predictiva. No presentar esas dos fases como ejecutadas; SHAP, otros horizontes, backtesting y aplicación siguen fuera del alcance elegido.
 - Añadir curvas de aprendizaje solo tras realizar los entrenamientos necesarios; no reutilizar curvas de ajuste como si fueran equivalentes.
 - Decidir si se necesita un calendario de resultados empresariales para analizar cobertura alrededor de esos eventos.
 - Revisar diagramas, ecuaciones, unidades, referencias cruzadas y legibilidad en el formato de entrega.

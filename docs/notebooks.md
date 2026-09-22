@@ -106,6 +106,25 @@ por bloque, comprobaciones de hashes y recálculo de AUC. Lee exclusivamente
 El [protocolo previo](variable_ablation_protocol.md) explica los controles y
 el carácter exploratorio sobre fechas ya inspeccionadas.
 
+## 07. Funcionamiento interno de FinBERT
+
+[07_finbert_model_understanding.ipynb](../notebooks/07_finbert_model_understanding.ipynb)
+recorre tokenización, embeddings, atención, conexiones residuales, normalización,
+redes internas, pooler y clasificación. Usa un titular real seleccionado por una
+regla fija y ejemplos sintéticos identificados. Verifica 28 operaciones con los
+pesos reales y explica qué no puede concluirse de las visualizaciones.
+
+La lectura puede hacerse con las salidas conservadas. Para repetir las celdas
+requiere las dependencias opcionales, el CSV local de noticias y los pesos en
+caché. Véase [la guía de FinBERT](finbert_modelo.md). No compara otros modelos de
+lenguaje, no evalúa calidad lingüística ni entrena clasificadores financieros.
+
+```powershell
+python -m pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-finbert.txt
+python -m src.nlp.inspect_finbert --download
+```
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:

@@ -1,0 +1,20 @@
+[
+  {
+    "positive": 0.03770288825035095,
+    "negative": 0.018712632358074188,
+    "neutral": 0.9435845017433167,
+    "label": "neutral",
+    "score": 0.018990255892276764,
+    "kind": "real_headline",
+    "text": "What Unilever shares with Google and Apple"
+  },
+  {
+    "positive": 0.9527685642242432,
+    "negative": 0.015673212707042694,
+    "neutral": 0.03155817463994026,
+    "label": "positive",
+    "score": 0.9370953515172005,
+    "kind": "synthetic_padding_control",
+    "text": "Profits increased."
+  }
+]

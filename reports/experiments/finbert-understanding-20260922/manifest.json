@@ -1,0 +1,205 @@
+{
+  "status": "complete",
+  "study": "forward_pass_only",
+  "model_id": "ProsusAI/finbert",
+  "revision": "4556d13015211d73dccd3fdd39d39232506f3e43",
+  "device": "cpu",
+  "threads": 4,
+  "created_at": "2026-09-22T10:14:12.355433+00:00",
+  "python": "3.13.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "git_commit": "7f361d99e34eea617cfbec5892dd45f6f3eb8bbc",
+  "git_status": "?? docs/finbert_modelo.md\n?? notebooks/07_finbert_model_understanding.ipynb\n?? reports/experiments/finbert-understanding-20260922/",
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "transformers": "4.57.6",
+    "huggingface-hub": "0.36.2",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.7.0",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.9"
+  },
+  "input_sha256": {
+    "data/processed/news/financial_news_with_sentiment.csv": "3ef77a2094c9975de73c65f9fb926c6c7e4d381b77194b854e5233c2ab46ef9d"
+  },
+  "source_sha256": {
+    "src/nlp/finbert.py": "76a4a9773d8388b2b843e9bd44d9eeab9dfeba88c1d0f7976cfc29c33567da93",
+    "src/nlp/inspect_finbert.py": "5be39d069ebf4851544a4ad478ba5303348fb649b0a4741738d49b3594f6ac0a",
+    "requirements-finbert.txt": "5fac2ef7978c057f463f249dba85277712252dce7e8d78cc7fc5b2d20f9aafca"
+  },
+  "model_sha256": {
+    "config.json": "f6449ddda85eb726207a40be59c0cd3bd4b142ccb27298d5e45f9ae3396b1abe",
+    "pytorch_model.bin": "e15a7b5738df7f17553399b6d94c6e2ff69c89245d066e8e5d183f5803a554e3",
+    "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+    "tokenizer_config.json": "ffc7913f6084b138dad68de5a0c2f0ee25ac983709260901e01f53be5796b9d9",
+    "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+  },
+  "example": {
+    "kind": "real_headline",
+    "ticker": "AAPL",
+    "published_at": "2015-01-07 09:42:51",
+    "url": "https://fortune.com/2015/01/07/what-unilever-shares-with-google-and-apple/",
+    "text": "What Unilever shares with Google and Apple",
+    "selection": "Earliest nonempty AAPL headline, ordered by UTC timestamp, URL and title"
+  },
+  "lengths": [
+    {
+      "full_tokens": 11,
+      "used_tokens": 11,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    {
+      "full_tokens": 5,
+      "used_tokens": 5,
+      "removed_tokens": 0,
+      "truncated": false
+    }
+  ],
+  "synthetic_truncation": {
+    "full_tokens": 522,
+    "used_tokens": 512,
+    "removed_tokens": 10,
+    "truncated": true
+  },
+  "parameters": 109484547,
+  "hidden_state_shapes": [
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ],
+    [
+      2,
+      11,
+      768
+    ]
+  ],
+  "first_layer_shapes": {
+    "query": [
+      2,
+      12,
+      11,
+      64
+    ],
+    "key": [
+      2,
+      12,
+      11,
+      64
+    ],
+    "value": [
+      2,
+      12,
+      11,
+      64
+    ],
+    "scores": [
+      2,
+      12,
+      11,
+      11
+    ],
+    "attention": [
+      2,
+      12,
+      11,
+      11
+    ],
+    "context": [
+      2,
+      11,
+      768
+    ],
+    "attention_output": [
+      2,
+      11,
+      768
+    ],
+    "intermediate": [
+      2,
+      11,
+      3072
+    ],
+    "encoder_output": [
+      2,
+      11,
+      768
+    ]
+  },
+  "checks_passed": 28,
+  "padding_mask_verified": true,
+  "batch_invariance_verified": true,
+  "elapsed_seconds": 3.5769162999931723,
+  "limitations": [
+    "No human labels or sentiment quality metrics",
+    "Not a financial prediction experiment",
+    "Attention is not causal explanation",
+    "Checkpoint training corpus overlap not fully audited"
+  ],
+  "output_sha256": {
+    "analysis.md": "96213b5b2d542842ddd437d8e58cd919901c520add95dc63bd9e485e0ec4ada6",
+    "architecture.png": "382a1ca7548c0b6bcc7493f244d5e4fbb493be35dfc698b0480dee5d423df2c7",
+    "attention.png": "b9847088d8e61cd33c0168c9dea9c310dc825748aae60e734337229104ec3755",
+    "parameters.csv": "614ed305caa2f3a16608aa586264f6aff601d7ef84275badebbb34cfdd2511f5",
+    "predictions.json": "bb7aed8e893a1a96096c7125bb5a82d3df0cf10ef45ec9aad9eec9155319b68c",
+    "reconstruction.csv": "f05758cdec218e3161e66b8841628b878841fc9108b51b8abd8138d46881eb39",
+    "tokens.csv": "c5752e35d6f3a2de71bafa76928e7b0c5df4c70293df5cd2c6f1fe8c76a5e3ba"
+  }
+}
