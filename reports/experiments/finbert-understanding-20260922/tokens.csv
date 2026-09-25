@@ -1,0 +1,12 @@
+position,token,id,attention_mask,segment_id
+0,[CLS],101,1,0
+1,what,2054,1,0
+2,un,4895,1,0
+3,##ile,9463,1,0
+4,##ver,6299,1,0
+5,shares,6661,1,0
+6,with,2007,1,0
+7,google,8224,1,0
+8,and,1998,1,0
+9,apple,6207,1,0
+10,[SEP],102,1,0

@@ -1,0 +1,16 @@
+component,parameters
+embeddings,23837184
+encoder_01,7087872
+encoder_02,7087872
+encoder_03,7087872
+encoder_04,7087872
+encoder_05,7087872
+encoder_06,7087872
+encoder_07,7087872
+encoder_08,7087872
+encoder_09,7087872
+encoder_10,7087872
+encoder_11,7087872
+encoder_12,7087872
+pooler,590592
+classifier,2307

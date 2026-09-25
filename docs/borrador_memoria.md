@@ -4,31 +4,27 @@
 Grado en Ingeniería del Software · Universidad de Sevilla  
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
+**Revisión documental:** 19 de septiembre de 2026, según las orientaciones del tutor.
+**Ampliación de PLN:** 22 de septiembre de 2026, estudio interno de FinBERT; evaluación lingüística y financiera pendientes.
 
 > Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916` y `variable-ablation-full-20260917`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
 ## Índice
 
-1. [Resumen](#1-resumen)
-2. [Introducción y motivación](#2-introducción-y-motivación)
-3. [Objetivos, hipótesis y alcance](#3-objetivos-hipótesis-y-alcance)
-4. [Fundamentos y referencias](#4-fundamentos-y-referencias)
-5. [Requisitos y diseño del software](#5-requisitos-y-diseño-del-software)
-6. [Datos y construcción del objetivo](#6-datos-y-construcción-del-objetivo)
-7. [Variables financieras y sentimiento](#7-variables-financieras-y-sentimiento)
-8. [Disponibilidad temporal y calidad de datos](#8-disponibilidad-temporal-y-calidad-de-datos)
-9. [Modelos y selección de hiperparámetros](#9-modelos-y-selección-de-hiperparámetros)
-10. [Diseño experimental y evaluación](#10-diseño-experimental-y-evaluación)
-11. [Resultados](#11-resultados)
-12. [Discusión](#12-discusión)
-13. [Verificación y reproducibilidad](#13-verificación-y-reproducibilidad)
-14. [Proceso de desarrollo y decisiones](#14-proceso-de-desarrollo-y-decisiones)
-15. [Limitaciones y trabajo futuro](#15-limitaciones-y-trabajo-futuro)
-16. [Conclusiones](#16-conclusiones)
-17. [Bibliografía inicial](#17-bibliografía-inicial)
-18. [Anexos y revisión pendiente](#18-anexos-y-revisión-pendiente)
+1. [Introducción y objetivos](#1-introducción-y-objetivos)
+2. [Planificación](#2-planificación)
+3. [Estado del arte y fundamentos teóricos](#3-estado-del-arte-y-fundamentos-teóricos)
+4. [Fuentes de datos y procesamiento](#4-fuentes-de-datos-y-procesamiento)
+5. [Diseño experimental y resultados](#5-diseño-experimental-y-resultados)
+6. [Especificación de requisitos](#6-especificación-de-requisitos)
+7. [Análisis del sistema](#7-análisis-del-sistema)
+8. [Conclusiones](#8-conclusiones)
+9. [Bibliografía](#9-bibliografía)
+10. [Anexos](#10-anexos)
 
-## 1. Resumen
+## 1. Introducción y objetivos
+
+### 1.1 Resumen
 
 Este trabajo estudia si incorporar sentimiento de noticias financieras aporta información predictiva adicional a un modelo basado en precios, volumen e indicadores técnicos. La tarea consiste en clasificar la dirección del precio ajustado de cierre de la siguiente sesión, no en estimar un precio exacto ni en desarrollar un sistema de negociación real.
 
@@ -46,7 +42,7 @@ Una ronda posterior separa deduplicación, ventanas de entrenamiento, nuevas var
 
 **Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad.
 
-## 2. Introducción y motivación
+### 1.2 Motivación
 
 Los precios y las noticias representan fuentes de información diferentes. Los primeros resumen movimientos ya observados; las segundas contienen mensajes sobre empresas, expectativas y acontecimientos. La motivación del proyecto consiste en estudiar si una representación numérica de esas noticias ayuda a clasificar movimientos posteriores cuando se añade a un conjunto financiero común.
 
@@ -54,13 +50,13 @@ La existencia de noticias relacionadas con un movimiento no implica que su senti
 
 Desde Ingeniería del Software, el trabajo requiere resolver adquisición de datos, validación, transformación, contratos entre módulos, almacenamiento de experimentos y comunicación de resultados. Una mejora aparente obtenida con una evaluación incorrecta no cumpliría el objetivo académico, aunque mostrase una métrica atractiva.
 
-## 3. Objetivos, hipótesis y alcance
+### 1.3 Objetivos, hipótesis y alcance
 
-### 3.1 Pregunta de investigación
+#### 1.3.1 Pregunta de investigación
 
 ¿Mejora la incorporación de sentimiento financiero la capacidad de discriminar subidas y no subidas de la siguiente sesión respecto a utilizar exclusivamente información financiera histórica?
 
-### 3.2 Objetivos específicos
+#### 1.3.2 Objetivos específicos
 
 1. Construir conjuntos de datos financieros y de noticias trazables por empresa y fecha.
 2. Definir una etiqueta y variables coherentes con el instante de predicción.
@@ -72,78 +68,155 @@ Desde Ingeniería del Software, el trabajo requiere resolver adquisición de dat
 
 La hipótesis principal plantea una posible contribución adicional del sentimiento. Una hipótesis secundaria plantea persistencia durante varias sesiones. También se estudia si entrenar un modelo independiente por empresa mejora la adaptación a sus características, y si un modelo conjunto con identidad e interacciones puede conservar información compartida sin ignorar esas diferencias. Las comparaciones realizadas no establecen una ventaja general confirmada; el resultado favorable en NVDA con variables relativas requiere validación independiente.
 
-### 3.3 Alcance y exclusiones
+#### 1.3.3 Alcance y exclusiones
 
-La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. Tampoco se entrena un modelo propio de lenguaje: el sentimiento empleado procede del proveedor.
+La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. No se entrena un modelo propio de lenguaje: el sentimiento de todos los experimentos financieros presentados procede del proveedor. Como ampliación separada, se inspecciona el funcionamiento interno de FinBERT preentrenado, todavía sin integrarlo en esas comparaciones.
 
-## 4. Fundamentos y referencias
+## 2. Planificación
 
-### 4.1 Análisis técnico como representación
+### 2.1 Organización y estimación del esfuerzo
+
+El trabajo se organiza en diez paquetes que combinan investigación, implementación, experimentación y comunicación. La tabla propone una distribución global de **330 horas**, dentro del intervalo de 300–360 indicado por el tutor. Es una estimación de planificación reconstruida para este borrador, **no un registro certificado de horas efectivamente invertidas**. El historial de Git acredita entregas, pero no mide dedicación. Marco deberá contrastar y corregir las estimaciones antes de entregar la memoria; el tiempo de cálculo desatendido no se suma automáticamente como trabajo personal.
+
+| Paquete | Actividades y entregable | Horas estimadas | Situación |
+| --- | --- | ---: | --- |
+| P1. Definición del problema | Objetivos, alcance, preguntas y requisitos | 25 | Base elaborada; revisión con tutor |
+| P2. Estado del arte | Búsqueda, lectura crítica y comparación de publicaciones | 35 | Fundamentación inicial; ampliación pendiente |
+| P3. Adquisición y auditoría | Precios, noticias, cobertura, duplicados y trazabilidad | 40 | Implementado y evaluado |
+| P4. Preparación y variables | Calendario, etiqueta, indicadores, agregación y retardos | 25 | Implementado y evaluado |
+| P5. Modelado inicial | Referencia mayoritaria, cinco algoritmos y flujo de entrenamiento | 35 | Implementado y evaluado |
+| P6. Evaluación temporal | Validación interna, purga, ajuste e incertidumbre | 45 | Implementado y evaluado |
+| P7. Experimentos adicionales | Empresas, representación, ventanas y ablaciones | 35 | Resultados documentados |
+| P8. Ingeniería y pruebas | Contratos, pruebas, artefactos, diagramas y reproducibilidad | 25 | Implementado; documentación ampliada |
+| P9. Análisis y memoria | Figuras, interpretación, redacción y revisiones | 50 | En curso |
+| P10. Preparación de la defensa | Selección de evidencias, presentación y ensayo | 15 | Pendiente |
+| **Total previsto** | **Trabajo realizado y pendiente, no horas acreditadas** | **330** | **Estimación pendiente de validación del autor** |
+
+### 2.2 Dependencias y seguimiento
+
+La dependencia principal es P1 → P2/P3 → P4 → P5 → P6 → P7. P8 y P9 acompañan a las demás tareas y P10 se realiza al consolidar la memoria. La revisión bibliográfica no se considera cerrada antes de programar: también sirve para interpretar resultados y revisar hipótesis durante el desarrollo.
+
+Los hitos verificables son la disponibilidad del corpus, el primer modelo comparable, la corrección temporal, los experimentos por empresa, la ronda controlada y la memoria revisada. Se comprueban mediante código, pruebas y manifiestos, no mediante fechas de ejecución convertidas artificialmente en horas. Las issues y ramas registran decisiones; los informes mantienen resultados favorables y desfavorables. La aceptación de un experimento exige trazabilidad y comparación válida, no una mejora del AUC.
+
+### 2.3 Riesgos y alcance pendiente
+
+| Riesgo | Efecto | Medida aplicada o pendiente |
+| --- | --- | --- |
+| Cobertura incompleta o cambiante | Comparaciones sesgadas por disponibilidad | Auditoría temporal, conservación de entradas y límites explícitos |
+| Fuga temporal | Resultados optimistas | Asignación al cierre, purga y preprocesamiento dentro del entrenamiento |
+| Búsqueda reiterada sobre las mismas fechas | Selección de máximos espurios | Protocolos acotados y resultados rotulados como exploratorios |
+| Coste de cómputo | Rejillas inviables | Candidatos prefijados, subconjunto de algoritmos en ampliaciones y artefactos reutilizables |
+| Crecimiento del alcance | Memoria y desarrollo inconexos | Una hipótesis por ampliación y aprobación de su alcance antes de implementarla |
+| Pérdida de datos locales | Reproducción incompleta | Manifiestos y conservación externa de entradas; los hashes no sustituyen una copia |
+
+El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). Solo la primera se ha implementado y verificado. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
+
+## 3. Estado del arte y fundamentos teóricos
+
+### 3.1 Análisis técnico como representación
 
 El análisis técnico se utiliza aquí para transformar el historial en variables tabulares: retornos, tendencia suavizada, oscilación y variabilidad. No se presupone que un indicador implique rentabilidad. La comparación experimental determina si estas representaciones resultan útiles en la tarea definida.
 
-### 4.2 Sentimiento financiero e integración temprana
+### 3.2 Sentimiento financiero e integración temprana
 
 Una noticia puede recibir una puntuación de tono distinta para cada empresa mencionada. Por ello se utiliza la puntuación por empresa en lugar de asumir que el tono global del artículo es adecuado para todas sus empresas. El servicio de consulta de Alpha Vantage proporciona noticias y metadatos de sentimiento; su documentación describe los filtros temporales y por activos. [Alpha Vantage](https://www.alphavantage.co/documentation/#news-sentiment).
 
 En este trabajo, «híbrido» significa concatenar variables financieras y variables de sentimiento antes del clasificador. No significa combinar dos redes neuronales ni construir un sistema multimodal entrenado de extremo a extremo. Se valoraron alternativas como diccionarios o FinBERT, pero no se implementaron como fuente operativa de los resultados presentados.
 
-### 4.3 Aprendizaje supervisado tabular
+### 3.3 Aprendizaje supervisado tabular
 
 La regresión logística constituye una referencia lineal; el bosque aleatorio (Random Forest) combina árboles; HistGradientBoosting, XGBoost y LightGBM representan enfoques de potenciación por gradiente, que combina modelos débiles de forma secuencial. XGBoost y LightGBM se incorporaron para ampliar la comparación de modelos tabulares, no porque su superioridad estuviera garantizada. Véanse los artículos originales de [XGBoost](https://arxiv.org/abs/1603.02754) y [LightGBM](https://papers.nips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html).
 
-### 4.4 Evaluación temporal
+### 3.4 Evaluación temporal
 
 La validación temporal mantiene el entrenamiento antes de la evaluación. La documentación de [TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html) ofrece una referencia sobre particiones ordenadas. La implementación del proyecto es propia: divide fechas completas y añade purga según `target_end`, manteniendo juntas las empresas de una sesión. No debe confundirse con aplicar directamente validación cruzada aleatoria con k particiones ni con una llamada literal a TimeSeriesSplit.
 
-Esta sección constituye una fundamentación inicial, no una revisión sistemática de literatura. Antes de la entrega deben ampliarse los antecedentes de predicción financiera y sentimiento con estudios comparables, registrando universo, horizonte, fuentes, protocolo y limitaciones de cada estudio.
+### 3.5 Hipótesis del mercado eficiente
 
-## 5. Requisitos y diseño del software
+La eficiencia informativa vincula los precios con la información disponible. Se distinguen información histórica de mercado, información pública e información también privada, asociadas a las formas débil, semifuerte y fuerte. El proyecto combina historial de precios y noticias públicas, pero no constituye por sí solo una prueba de ninguna de esas formas. La formulación depende además del modelo de rendimiento esperado y riesgo. [Lo, síntesis de la hipótesis del mercado eficiente](https://web.mit.edu/~alo/www/Papers/EMH_Final.pdf).
 
-### 5.1 Requisitos verificables
+Como notación para este trabajo, sea $\mathcal{I}_t$ la información disponible y $\mu^{eq}_{t+1}$ el rendimiento esperado bajo un modelo de equilibrio. Una restricción de ausencia de rendimiento anormal predecible se representa por:
 
-| Requisito | Solución implementada | Evidencia |
+$$
+\mathbb{E}[r_{t+1}-\mu^{eq}_{t+1}\mid\mathcal{I}_t]=0.
+$$
+
+La expresión no impone rendimiento esperado nulo ni probabilidad de subida igual a 0,5. Un AUC cercano a 0,5 en cuatro empresas no demuestra eficiencia; un AUC superior tampoco la refuta sin estudiar riesgo, costes y validez del protocolo. Son alcances diferentes: aquí se estima discriminación estadística sobre etiquetas diarias, no rendimiento anormal de una estrategia.
+
+### 3.6 Hipótesis del mercado adaptativo
+
+Lo propone interpretar los mercados mediante competencia, adaptación y selección, conciliando mecanismos de eficiencia y comportamiento. La eficacia de una regla puede depender del entorno y de los participantes, en lugar de ser estable en todo el histórico. [Lo (2004)](https://web.mit.edu/Alo/www/Papers/JPM2004.html).
+
+Una representación conceptual útil, no una ecuación universal atribuida al autor ni un modelo estimado en este TFG, es:
+
+$$
+\Pr(y_{t+1}=1\mid X_t,Z_t)=f_{\theta_t}(X_t,Z_t),
+$$
+
+donde $Z_t$ resume el entorno y $\theta_t$ puede variar. Motiva estudiar bloques temporales y ventanas retrospectivas. Que una ventana corta empeore no refuta esta hipótesis: puede perder información útil o aumentar la variabilidad del ajuste. En los experimentos actuales no se estima $Z_t$ ni se han etiquetado regímenes alcistas o bajistas con un protocolo específico.
+
+### 3.7 Antecedentes organizados por fuente y modelo
+
+La selección siguiente introduce líneas representativas, no una revisión sistemática exhaustiva. Se distingue predecir sentimiento textual de predecir movimientos de mercado. No se trasladan cifras de un artículo a este proyecto cuando cambian universo, periodo, etiqueta o partición.
+
+| Fuente | Estudio | Enfoque | Relación con este trabajo |
+| --- | --- | --- | --- |
+| Precios históricos | Fischer y Krauss (2018) | Redes LSTM para predicción financiera | Alternativa secuencial a los modelos tabulares; no implementada aquí |
+| Redes sociales | Bollen, Mao y Zeng (2011) | Indicadores de estado de ánimo, análisis de precedencia y red neuronal difusa para DJIA | Distingue dimensiones del texto; su índice agregado no equivale a noticias por empresa |
+| Noticias | Hu et al. (2018) | Redes de atención sobre secuencias de noticias | Modela influencia desigual y contexto; la agregación diaria de este proyecto es más simple |
+| Tweets y precios | Xu y Cohen (2018) | Modelo generativo que combina lenguaje y precios | Antecedente de fusión de fuentes; distinto de concatenar indicadores agregados |
+| Texto financiero | Araci (2019), FinBERT | Adaptación de BERT al dominio y clasificación de sentimiento | Alternativa al sentimiento del proveedor; clasificar bien el texto no garantiza predecir retornos |
+
+Fuentes primarias: [Fischer y Krauss](https://cris.fau.de/publications/208534319/), [Bollen et al.](https://arxiv.org/abs/1010.3003), [Hu et al.](https://arxiv.org/abs/1712.02136), [Xu y Cohen](https://aclanthology.org/P18-1183/) y [Araci](https://arxiv.org/abs/1908.10063).
+
+La comparación sugiere tres decisiones para la investigación: distinguir la calidad del lenguaje de su utilidad predictiva, controlar el instante de disponibilidad y comparar cada fuente contra una referencia financiera común. El resultado de una arquitectura compleja en otro corpus no justifica adoptarla sin esas comprobaciones. Las noticias también difieren de las redes sociales en selección editorial, repetición y unidad de análisis; no se presupone que una puntuación tenga el mismo significado en ambas fuentes.
+
+Para ampliar esta revisión se registrarán por estudio periodo, activos, tamaño de muestra, fuente, unidad temporal, objetivo, referencias, forma de separar entrenamiento y prueba, costes y disponibilidad de código. Se priorizarán artículos con protocolo verificable y se documentarán también resultados negativos. Queda pendiente una lectura crítica completa y una cobertura bibliográfica más amplia antes de presentar este capítulo como estado del arte definitivo.
+
+### 3.8 Herramientas y sistemas relacionados
+
+| Recurso | Función | Diferencia respecto al sistema desarrollado |
 | --- | --- | --- |
-| Relacionar precios y noticias por empresa | Claves `ticker`, `Date` y asignación bursátil | `src/data/point_in_time.py` |
-| Evitar datos posteriores al instante de decisión | Primer cierre igual o posterior a la marca temporal | Pruebas de calendario y asignación |
-| Evitar etiquetas solapadas en validación | Purga con `target_end < inicio_validación` | `src/models/temporal_validation.py` |
-| Comparar sobre el mismo universo | Predicciones pareadas por empresa y fecha | Validación de claves y objetivo |
-| Aislar imputación y escalado | Cadena de preprocesamiento y modelado ajustada en cada entrenamiento | `src/models/train_models.py` |
-| No sobrescribir experimentos anteriores | Identificador nuevo y rechazo de colisiones | `src/experiments/artifacts.py` |
-| Conservar resultados auditables | CSV, manifiestos y hashes SHA-256 | `reports/experiments/` |
-| Facilitar la explicación | Memoria, guías y cuatro cuadernos de análisis | `docs/` y `notebooks/` |
+| Alpha Vantage | API de datos y noticias con sentimiento | Proveedor de entrada, no evaluador independiente de la utilidad de sus puntuaciones |
+| yfinance | Acceso programático a datos de Yahoo Finance | Adquisición de precios, no protocolo experimental |
+| FinBERT | Clasificación de sentimiento financiero | Inspección interna implementada; calidad del sentimiento e integración financiera pendientes |
+| VectorBT | Simulación de carteras a partir de órdenes o señales | Extensión económica posible; las métricas actuales no son un backtest |
+| SHAP | Atribuciones de variables a predicciones | Extensión explicativa; no sustituye evaluación externa ni demuestra causalidad |
 
-### 5.2 Arquitectura
+La documentación de [Alpha Vantage](https://www.alphavantage.co/documentation/#news-sentiment), [yfinance](https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html), [FinBERT](https://huggingface.co/ProsusAI/finbert), [VectorBT](https://vectorbt.dev/api/portfolio/base/) y [SHAP](https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html) permite delimitar esas funciones. El producto construido es un flujo local reproducible con informes y cuadernos; no se presenta como una aplicación móvil, un servicio de señales ni un sistema en tiempo real.
 
-```text
-Precios descargados + noticias con sentimiento por empresa
-                         |
-          Validación, indicadores y etiqueta
-                         |
-     Alineación con el cierre y agregación diaria
-                         |
-           Variantes de variables comparables
-                         |
-   Selección interna -> entrenamiento -> bloque externo
-                         |
-       Predicciones, métricas e incertidumbre
-                         |
-              Informes y cuadernos
-```
+### 3.9 Formulación del aprendizaje y la comparación
 
-`src/data/` contiene adquisición y preparación; `src/models/`, construcción de estimadores, validación y evaluación; `src/experiments/`, orquestación de la revisión y gestión de artefactos; `src/visualization/`, figuras. Los cuadernos de análisis leen resultados o reconstruyen datos mediante funciones existentes; no duplican el entrenamiento completo.
+Cada ejemplo es $(X_{i,t},y_{i,t})$, con $X_{i,t}$ disponible al cierre. El modelo devuelve $p_{i,t}$ y la clase $\hat y_{i,t}=\mathbb{1}(p_{i,t}\geq0,5)$. La regresión logística utiliza:
 
-Las dependencias se fijan en `requirements.txt`. El entorno de trabajo utilizado en las verificaciones es Python 3.13. Pandas y NumPy soportan transformaciones tabulares; scikit-learn, XGBoost y LightGBM, modelado; Matplotlib y Seaborn, gráficos; las librerías de calendario proporcionan sesiones y cierres.
+$$
+p_{i,t}=\sigma(\beta_0+\beta^\top X_{i,t}),\qquad
+\sigma(z)=\frac{1}{1+e^{-z}}.
+$$
 
-### 5.3 Persistencia
+La pérdida logística binaria básica es $-\sum_j[y_j\log p_j+(1-y_j)\log(1-p_j)]$, acompañada de regularización en el estimador. El parámetro `C` controla inversamente su intensidad. Un bosque agrega predicciones de árboles construidos con aleatorización; la potenciación construye una suma secuencial de árboles $F_M(x)=F_0(x)+\eta\sum_{m=1}^{M}h_m(x)$. La profundidad, tamaño de hojas y regularización limitan complejidad, pero no garantizan generalización temporal.
 
-Los informes se separan en `reports/historical/`, `reports/experiments/<id>/` y `reports/final/`. Esta última carpeta contiene una selección para la memoria, no una nueva evaluación. Los modelos se guardan en `models/experiments/<id>/`; los conjuntos de datos de ejecución, en `data/experiments/<id>/`; y las instantáneas de código, en `artifacts/snapshots/<id>/`. Las verificaciones técnicas se distinguen en `artifacts/verification/`.
+Para un bloque externo $k$, la selección interna es $\hat\lambda_k=\arg\max_{\lambda\in\Lambda}K^{-1}\sum_{j=1}^{K}\operatorname{AUC}_{k,j}(\lambda)$. Solo después se reentrena con el pasado admisible y se evalúa el bloque externo. Las diferencias pareadas mantienen iguales fechas, activos y objetivos. El código de [construcción de modelos](../src/models/train_models.py) y [selección de la ronda](../src/experiments/round_selection.py) concreta los valores y convenciones; la notación anterior no sustituye esa especificación.
 
-Los `.joblib` y los artefactos locales pesados están excluidos del seguimiento ordinario de Git. Se conservan físicamente en el equipo. Esta decisión reduce ruido y tamaño en el repositorio, pero exige preservar los datos originales y el entorno para una reproducción externa; un manifiesto no sustituye a los archivos que identifica.
+### 3.10 Funcionamiento interno de FinBERT
 
-## 6. Datos y construcción del objetivo
+La ampliación utiliza exclusivamente `ProsusAI/finbert`, revisión `4556d13015211d73dccd3fdd39d39232506f3e43`. Hugging Face proporciona el repositorio y Transformers la implementación; no constituyen modelos competidores. El artefacto es un `BertForSequenceClassification` de 12 bloques, 12 cabezas por bloque y dimensión oculta 768. El preentrenamiento general de BERT, la adaptación financiera y el ajuste supervisado de sentimiento son etapas diferentes; nuestro proyecto reutiliza sus pesos y no repite esos entrenamientos.
 
-### 6.1 Universo y periodo
+WordPiece transforma el texto en tokens y añade `[CLS]` y `[SEP]`. Las 512 posiciones admitidas incluyen esos tokens especiales. Se suman representaciones aprendidas de token, posición y segmento; después se aplica normalización. Cada cabeza calcula consultas, claves y valores y combina posiciones mediante:
+
+$$A=\operatorname{softmax}(QK^\top/\sqrt{64}+M),\qquad C=AV.$$
+
+La máscara excluye claves de relleno, no el contexto posterior de la misma noticia. Los controles de disponibilidad bursátil son externos a este mecanismo bidireccional. Las cabezas se concatenan, se proyectan y se combinan con la entrada mediante conexión residual y normalización. La red interna transforma 768 dimensiones en 3072 y vuelve a 768, con activación GELU y otra conexión residual normalizada.
+
+La representación final de `[CLS]` pasa por el pooler, una transformación lineal con tangente hiperbólica, y una capa de tres logits. Softmax produce probabilidades positiva, negativa y neutral. La diferencia entre probabilidades positiva y negativa es un indicador de tono, no la probabilidad de subida del activo. La confianza no está garantizada como calibrada, y un mapa de atención no constituye por sí solo una explicación causal.
+
+La [guía técnica](finbert_modelo.md) desarrolla las operaciones, objetivos de aprendizaje y limitaciones. El [cuaderno 07](../notebooks/07_finbert_model_understanding.ipynb) las muestra con tensores reales y comprobaciones numéricas. Fuentes: [BERT](https://aclanthology.org/N19-1423/), [configuración fijada](https://huggingface.co/ProsusAI/finbert/blob/4556d13015211d73dccd3fdd39d39232506f3e43/config.json) e [implementación de Transformers](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/bert/modeling_bert.py).
+
+## 4. Fuentes de datos y procesamiento
+
+### 4.1 Datos y construcción del objetivo
+
+#### 4.1.1 Universo y periodo
 
 Se descargaron inicialmente AAPL, MSFT, NVDA, TSLA y SPY. El modelado utiliza las cuatro empresas, con SPY excluido por ser un ETF y no disponer en este diseño de una señal corporativa comparable. No se evalúa, por tanto, una hipótesis de sentimiento sobre el índice.
 
@@ -151,7 +224,7 @@ El periodo solicitado fue 2015–2025. Los precios disponibles comienzan el 2 de
 
 `yfinance` permite descargar campos de mercado como precios y volumen. La configuración y los CSV guardados son la evidencia efectiva de este proyecto; una descarga posterior puede no reproducir exactamente los mismos valores. [Documentación de yfinance](https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html).
 
-### 6.2 Etiqueta
+#### 4.1.2 Etiqueta
 
 Para el cierre ajustado $P^{adj}_{i,t}$:
 
@@ -163,7 +236,7 @@ La clase cero incluye bajadas e igualdad; no equivale exclusivamente a «baja».
 
 Se utiliza `Adj Close` para objetivo, retorno e indicadores basados en cierre. La revisión comprueba el objetivo frente al precio bruto guardado y obtiene `target_end` a partir de la fecha de la siguiente observación. Esto permite expresar de forma explícita cuándo se conoce cada etiqueta.
 
-### 6.3 Noticias y disponibilidad
+#### 4.1.3 Noticias y disponibilidad
 
 La descarga usa Alpha Vantage, filtros por empresa y rangos temporales. El código parte de rangos anuales, divide rangos con al menos 950 resultados y establece un límite de 1.000. Si una sola jornada permanece saturada se produce un error explícito. Los fragmentos se guardan para reanudar descargas; se incorporan reintentos y validación de respuestas.
 
@@ -171,9 +244,9 @@ El acceso de pago se utilizó para ampliar la capacidad operativa de adquisició
 
 Los registros conservan empresa, título, resumen, URL, fuente, marca temporal, puntuación y relevancia. Una misma noticia puede aparecer asociada a varias empresas; los recuentos deben interpretarse como registros noticia-empresa, no necesariamente como artículos únicos en todo el corpus.
 
-## 7. Variables financieras y sentimiento
+### 4.2 Variables financieras y sentimiento
 
-### 7.1 Bloque financiero
+#### 4.2.1 Bloque financiero
 
 El modelo base contiene 14 variables: `Adj Close`, `Close`, `High`, `Low`, `Open`, `Volume`, `daily_return`, `sma_5`, `sma_20`, `sma_50`, `RSI`, `MACD`, `MACD_signal` y `volatility_20`.
 
@@ -188,7 +261,7 @@ El modelo base contiene 14 variables: `Adj Close`, `Close`, `High`, `Low`, `Open
 
 Estas convenciones conservan las primeras filas y son decisiones de implementación. No equivalen a disponer de una ventana completa desde la primera sesión. Mezclar precios ajustados con niveles OHLC no ajustados también merece cautela al interpretar variables o comparar periodos con operaciones corporativas.
 
-### 7.2 Bloque de sentimiento
+#### 4.2.2 Bloque de sentimiento
 
 La puntuación procede de `ticker_sentiment_score`; no es una predicción textual generada por un modelo entrenado en este TFG. Las etiquetas alcistas (`Bullish` y `Somewhat-Bullish`) se agrupan como positivas; las bajistas (`Bearish` y `Somewhat-Bearish`), como negativas; y la etiqueta `Neutral`, como neutral. El clasificador de etiquetas actual asigna también las etiquetas desconocidas a neutral: esta tolerancia constituye una limitación que debería sustituirse por auditoría explícita en una evolución del sistema.
 
@@ -196,7 +269,7 @@ Por empresa y sesión se calculan media, mediana, mínimo y máximo de tono; nú
 
 Las sesiones sin noticias registradas se conservan con puntuaciones, conteos y proporciones cero y `has_news=False`. No se interpreta «sin noticias registradas» como «no ocurrió nada» ni se confunde con una noticia de tono neutral. El indicador de presencia permite distinguir parcialmente ambos casos, pero no resuelve una cobertura incompleta.
 
-### 7.3 Retardos y variantes controladas
+#### 4.2.3 Retardos y variantes controladas
 
 El primer ensayo de persistencia añadió retardos de 1, 2 y 3 sesiones y medias móviles de 3 y 5 a las 13 variables de sentimiento: 65 variables nuevas, hasta 92 predictoras. Las operaciones se agrupan por empresa. Los retardos usan sesiones anteriores; las medias móviles incluyen la actual porque el instante de decisión se sitúa después de conocer su información.
 
@@ -218,9 +291,9 @@ La revisión posterior separó hipótesis para evitar modificar 65 variables a l
 
 Las variables relativas incluyen distancia a SMA, MACD dividido por precio y volumen o cantidad de noticias divididos por su media de las veinte sesiones anteriores. Esta última media desplaza primero una sesión para excluir el valor actual del denominador. La variante cambia también la representación financiera; una mejora no podría atribuirse únicamente al sentimiento.
 
-## 8. Disponibilidad temporal y calidad de datos
+### 4.3 Disponibilidad temporal y calidad de datos
 
-### 8.1 Instante de predicción
+#### 4.3.1 Instante de predicción
 
 La predicción se plantea después de conocer el cierre de la sesión t y sus variables financieras. Una noticia se asigna al primer cierre igual o posterior a su marca temporal. Así, una noticia posterior al cierre del viernes se asigna a una sesión posterior, no al viernes. Si coincide exactamente con el cierre se considera disponible, una hipótesis que debe hacerse explícita.
 
@@ -228,7 +301,7 @@ El calendario NASDAQ incorpora sesiones, festivos y cierres anticipados mediante
 
 La marca temporal de publicación solo aproxima disponibilidad. No se dispone de tiempos de recepción, latencia del cálculo de sentimiento, revisiones del artículo ni una base que garantice íntegramente la información disponible en cada instante. Además, usar el cierre como característica no implica poder negociar a ese mismo precio una vez conocido. El objetivo es predictivo, no una simulación de ejecución.
 
-### 8.2 Auditoría observada
+#### 4.3.2 Auditoría observada
 
 La ejecución completa contiene 46.014 registros de noticias alineados con el calendario generado. De ellos, 17.308 pasan a una fecha posterior a su fecha local de publicación, incluyendo fines de semana y mensajes posteriores al cierre. No son necesariamente 17.308 errores del flujo de procesamiento anterior.
 
@@ -236,21 +309,107 @@ No se detectan duplicados exactos bajo la clave empresa, URL, título y marca te
 
 El conjunto de datos modelado registra 3.675 noticias en 2024 y 27.336 en 2025. El cambio de volumen puede alterar la distribución de las variables y no debe atribuirse automáticamente a actividad informativa real: la cobertura no está certificada. El manifiesto conserva `coverage_verified=False`.
 
-## 9. Modelos y selección de hiperparámetros
+### 4.4 Definición matemática de las transformaciones
 
-### 9.1 Algoritmos
+Las fórmulas siguientes describen el código existente, incluidas sus convenciones de arranque. Sea $P_t$ el cierre ajustado de una empresa; todas las operaciones se calculan dentro de esa empresa y en orden temporal.
+
+**Retorno y medias móviles.** El retorno simple es $r_t=P_t/P_{t-1}-1$. La primera fila se completa con cero por falta de observación anterior. Para una ventana $w$ y $m_t=\min(w,t+1)$ observaciones disponibles:
+
+$$
+\operatorname{SMA}_{w,t}=\frac{1}{m_t}\sum_{j=0}^{m_t-1}P_{t-j},\qquad w\in\{5,20,50\}.
+$$
+
+La EMA implementada con `adjust=False` sigue $E_t=\alpha P_t+(1-\alpha)E_{t-1}$, con $E_0=P_0$ y $\alpha=2/(w+1)$. A diferencia de la SMA, pondera más las observaciones recientes sin imponer un corte abrupto. Son descriptores del pasado, no reglas de compraventa incorporadas al sistema.
+
+**MACD y señal.** Se define $\operatorname{MACD}_t=\operatorname{EMA}_{12,t}-\operatorname{EMA}_{26,t}$ y $\operatorname{signal}_t=\operatorname{EMA}_{9}(\operatorname{MACD})_t$. El MACD conserva unidades de precio; dividirlo por $P_t$ en la representación relativa reduce diferencias de escala entre activos.
+
+**RSI.** Para $\Delta_t=P_t-P_{t-1}$, se calculan $g_t=\max(\Delta_t,0)$ y $\ell_t=\max(-\Delta_t,0)$. Sus medias exponenciales usan $\alpha=1/14$, `adjust=False` y un mínimo de 14 observaciones válidas. Para pérdidas medias positivas:
+
+$$
+\operatorname{RS}_t=\frac{\bar g_t}{\bar\ell_t},\qquad
+\operatorname{RSI}_t=100-\frac{100}{1+\operatorname{RS}_t}.
+$$
+
+Con ganancias y pérdidas medias nulas se usa 50; con ganancias positivas y pérdidas nulas, 100. Los valores iniciales no disponibles se rellenan con 50. Es un suavizado con coeficiente de Wilder; la inicialización de `ewm` no debe confundirse con otra implementación que inicialice la recurrencia mediante una media simple de las primeras 14 variaciones. Se conserva esta convención en todas las comparaciones.
+
+**Volatilidad.** Para $m_t=\min(20,t+1)$ y $m_t\geq2$:
+
+$$
+s_t=\sqrt{\frac{1}{m_t-1}\sum_{j=0}^{m_t-1}(r_{t-j}-\bar r_t)^2}.
+$$
+
+La implementación utiliza desviación muestral (`ddof=1`), no volatilidad anualizada. Se rellena con cero cuando no hay dos observaciones. La interpretación debe considerar que el primer retorno fue rellenado, no observado.
+
+**Representación relativa.** La distancia a una media es $d_{w,t}=P_t/\operatorname{SMA}_{w,t}-1$. El volumen relativo utiliza $V_t/\bar V_{t-1}^{(20)}$, donde el denominador excluye la sesión actual; se aplica el mismo principio a la cantidad de noticias. El código de [variantes](../src/experiments/ablations.py) establece los tratamientos de denominadores nulos y valores iniciales. No se ajusta una normalización utilizando fechas futuras.
+
+**Agregación textual.** Para las $n_{i,t}$ noticias registradas, con puntuaciones $s_j$ y relevancias $q_j$:
+
+$$
+\bar s_{i,t}=\frac{1}{n_{i,t}}\sum_j s_j,\qquad
+\bar s^{(q)}_{i,t}=\frac{\sum_jq_js_j}{\sum_jq_j},\qquad
+a_{i,t}=\frac{1}{n_{i,t}}\sum_j|s_j|.
+$$
+
+La dispersión de las nuevas variables usa denominador $n_{i,t}$ (`ddof=0`), no el de la volatilidad financiera. La sorpresa del tono resta su media histórica, excluyendo sesiones sin noticias de esa media. La sorpresa del volumen estandariza $\log(1+n_{i,t})$ con media y desviación de las veinte sesiones anteriores. Se utilizan ceros para casos sin información suficiente y un indicador explícito de disponibilidad histórica. La fórmula de tono no convierte esos ceros en observaciones neutrales reales.
+
+**Indicadores no utilizados.** Las bandas de Bollinger pueden expresarse como $\operatorname{SMA}_{w,t}\pm k s^{(P)}_{w,t}$, con desviación de precios y parámetros prefijados. Se mencionan como ejemplo de indicador relacionado, no como variable entrenada: no aparecen en los conjuntos de este TFG. Incorporarlas exigiría un experimento nuevo; tampoco se presupone normalidad ni cobertura probabilística del 95 % por elegir $k=2$.
+
+La correspondencia con la implementación puede revisarse en [medias móviles](../src/data/calculate_moving_averages.py), [MACD](../src/data/calculate_macd.py), [RSI](../src/data/calculate_rsi.py), [volatilidad](../src/data/calculate_volatility.py) y [representación enriquecida](../src/experiments/sentiment_representation.py).
+
+### 4.5 Contratos y esquemas de datos
+
+| Entidad lógica | Clave o identidad | Campos principales | Restricciones relevantes |
+| --- | --- | --- | --- |
+| Precio diario | Empresa y `Date` | OHLC, `Adj Close`, `Volume` | Orden temporal; una observación por sesión y empresa |
+| Noticia-empresa | Empresa, URL, título y publicación para duplicados exactos | `title`, `summary`, fuente, sentimiento, relevancia | Puntuación en [−1,1], relevancia en [0,1]; publicación interpretable |
+| Calendario | `trading_date` | `market_close` con zona horaria | Sesiones únicas y cierre válido |
+| Panel modelado | `ticker`, `Date` | Variables, `target`, `target_end` | Objetivo binario; variables finitas; horizonte posterior |
+| Predicción externa | Ejecución, enfoque, variante, modelo, bloque, empresa y fecha | `target`, `probability`, `prediction` | Probabilidad en [0,1]; mismas claves para contrastes |
+| Manifiesto | Identificador de ejecución | Configuración, versiones, Git, hashes y estado | Identificador nuevo; finalización explícita; procedencia localizable |
+
+Los CSV no imponen tipos por sí mismos. Los lectores convierten fechas y números y validan contratos antes de entrenar. Las claves de noticia representan registros, no garantizan que dos textos distintos describan acontecimientos distintos. `next_adj_close` y `target_end` se usan para etiqueta y validación, nunca como predictores. El [constructor temporal](../src/data/point_in_time.py) comprueba etiquetas contra los precios guardados, une tablas con validación de cardinalidad y rechaza valores no finitos.
+
+### 4.6 Análisis exploratorio visual
+
+Las figuras de este apartado se calculan a partir del panel conservado de `first-round-full-20260916`, sin descargas ni entrenamiento. Se representan las cuatro empresas por separado para evitar que sus niveles oculten diferencias. La normalización a 100 facilita comparar trayectorias, pero no transforma el gráfico en una simulación de inversión con costes.
+
+![Evolución del cierre ajustado, normalizado al primer valor](figures/memoria/precios.png)
+
+**Figura 4.1.** Cierre ajustado normalizado a 100 al inicio de cada serie; eje vertical logarítmico. El gráfico contextualiza cambios de escala y periodos de movimientos intensos. No se utiliza para escoger retrospectivamente un periodo favorable de prueba.
+
+![Volatilidad móvil por empresa](figures/memoria/volatilidad.png)
+
+**Figura 4.2.** Desviación típica móvil de veinte sesiones, expresada como porcentaje diario. Los cambios de volatilidad motivan el desglose temporal, pero no constituyen una evaluación por regímenes económicos formalmente definidos.
+
+![Volumen diario negociado por empresa](figures/memoria/volumen.png)
+
+**Figura 4.3.** Volumen diario en millones de acciones. Se mantienen escalas propias por empresa; comparar números absolutos entre activos requiere considerar sus características y ajustes históricos.
+
+![Correlaciones entre variables financieras y de sentimiento](figures/memoria/correlaciones.png)
+
+**Figura 4.4.** Correlación de Spearman por empresa entre seis variables representativas, calculada sobre el panel completo con los ceros de las sesiones sin noticias. Es un diagnóstico contemporáneo y descriptivo, no una prueba de causalidad ni una selección de variables basada en capacidad predictiva. La ausencia de correlación monotónica no excluye relaciones no lineales.
+
+![Densidad mensual y cobertura informativa](figures/memoria/cobertura.png)
+
+**Figura 4.5.** Noticias por sesión y proporción de sesiones con noticias, antes y después de deduplicar. Cada registro se cuenta por empresa. El fuerte cambio de cobertura exige cautela al interpretar aumentos de intensidad: no se identifica automáticamente con un cambio de actividad económica real. La asignación de noticias de fines de semana y festivos se describe en 4.3; no se ha contrastado todavía con un calendario independiente de anuncios de resultados empresariales.
+
+## 5. Diseño experimental y resultados
+
+### 5.1 Modelos y selección de hiperparámetros
+
+#### 5.1.1 Algoritmos
 
 Se utilizan cinco algoritmos predictivos: regresión logística, Random Forest, HistGradientBoosting, XGBoost y LightGBM. Se añade DummyClassifier como referencia de clase mayoritaria. Por tanto, son cinco algoritmos más una referencia, no seis modelos de sentimiento diferentes.
 
 Todos los estimadores incorporan imputación por mediana dentro de una cadena de preprocesamiento y modelado. La regresión logística añade StandardScaler. La imputación y el escalado se ajustan exclusivamente con el entrenamiento de cada partición. La semilla habitual es 42 y se limitan hilos en las ejecuciones para controlar el uso de recursos.
 
-### 9.2 Evolución del ajuste
+#### 5.1.2 Evolución del ajuste
 
 Tras los ensayos iniciales se incorporó validación temporal y se amplió la búsqueda. El ajuste tradicional utiliza para la regresión logística valores de C entre 0,01 y 100 y ponderación de clases opcional. En árboles se prueban profundidad, hojas, regularización, número de iteraciones, tasa de aprendizaje y muestreo según el algoritmo. Los detalles completos permanecen en `src/models/tune_temporal_cv.py` y en los CSV históricos de ajuste de hiperparámetros.
 
 También se exploraron umbrales entre 0,40 y 0,60, en pasos de 0,025, seleccionados mediante F1 de la clase positiva. Este criterio puede favorecer predecir muchas subidas. Por ello, la revisión principal fija el umbral en 0,5 y separa selección de parámetros y evaluación externa.
 
-### 9.3 Búsqueda del experimento corregido
+#### 5.1.3 Búsqueda del experimento corregido
 
 | Algoritmo | Dos configuraciones comparadas | Otros valores fijados en la revisión |
 | --- | --- | --- |
@@ -264,9 +423,9 @@ Los valores no enumerados se heredan del constructor y las versiones fijadas. El
 
 La búsqueda reducida permite repetir el protocolo en todas las variantes con un presupuesto acotado. No constituye una optimización exhaustiva y sus resultados no se comparan con los históricos como si solo hubiese cambiado una variable.
 
-## 10. Diseño experimental y evaluación
+### 5.2 Diseño experimental y evaluación
 
-### 10.1 De la partición temporal simple al protocolo anidado
+#### 5.2.1 De la partición temporal simple al protocolo anidado
 
 El primer diseño dividió el 80 % inicial de fechas únicas para entrenamiento y el 20 % final para prueba: 8.844 y 2.212 filas. La revisión incorpora purga: una fila de entrenamiento solo es admisible si su fecha y el fin de su etiqueta son anteriores al comienzo de validación. Por ello el primer entrenamiento externo corregido contiene 8.840 filas.
 
@@ -282,7 +441,7 @@ Los bloques externos anteriores pueden incorporarse al entrenamiento de bloques 
 
 Doce variantes por cinco algoritmos, dos configuraciones, tres particiones internas y tres bloques externos producen 1.080 ajustes internos. Los sesenta pares variante-algoritmo más el modelo de referencia, en tres bloques, producen 183 modelos externos. Se almacenan 61 grupos de predicciones con 2.212 filas cada uno, es decir, 134.932 predicciones; no son 134.932 observaciones independientes.
 
-### 10.2 Métricas
+#### 5.2.2 Métricas
 
 Se denotan los verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos mediante TP, TN, FP y FN, respectivamente, para mantener la correspondencia con la notación habitual de las métricas:
 
@@ -299,15 +458,15 @@ Estas definiciones y sus implementaciones pueden consultarse en [scikit-learn 1.
 
 Se informa tanto AUC agrupado de todas las predicciones externas como media de AUC por bloque. No coinciden necesariamente: el primero incluye comparaciones entre puntuaciones de modelos entrenados en distintos momentos, mientras que la segunda resume discriminación dentro de cada bloque.
 
-### 10.3 Incertidumbre
+#### 5.2.3 Incertidumbre
 
 Se emplea remuestreo pareado de bloques móviles: las fechas se remuestrean en bloques contiguos y las cuatro empresas de cada fecha permanecen juntas. Los dos modelos comparados utilizan exactamente las mismas filas remuestreadas. Se calculan 1.000 réplicas e intervalos percentiles del 95 %.
 
 El bloque principal tiene veinte sesiones. La comparación LightGBM con retardo de una sesión frente a híbrido también se evalúa con bloques de cinco y sesenta. Los intervalos son exploratorios: no incorporan todo el proceso de reentrenamiento y selección, ni corrigen las múltiples comparaciones. La comparación principal se fijó para esta ejecución tras haber observado resultados históricos anteriores; no equivale a un prerregistro independiente de todo el desarrollo.
 
-### 10.4 Especialización por empresa y representación compartida
+#### 5.2.4 Especialización por empresa y representación compartida
 
-El experimento `per-company-20260916` surge de una limitación posible del entrenamiento conjunto: las cuatro empresas pueden responder de manera distinta a indicadores y noticias. Se entrenan estimadores independientes para AAPL, MSFT, NVDA y TSLA, comparando base, híbrido y retardo de una sesión. Se mantienen los cinco algoritmos, las rejillas de la sección 9.3, tres particiones internas, tres bloques externos y umbral 0,5. No se utiliza el antiguo diseño de 92 variables, sino 14, 27 y 29 variables, respectivamente.
+El experimento `per-company-20260916` surge de una limitación posible del entrenamiento conjunto: las cuatro empresas pueden responder de manera distinta a indicadores y noticias. Se entrenan estimadores independientes para AAPL, MSFT, NVDA y TSLA, comparando base, híbrido y retardo de una sesión. Se mantienen los cinco algoritmos, las rejillas de la sección 5.1.3, tres particiones internas, tres bloques externos y umbral 0,5. No se utiliza el antiguo diseño de 92 variables, sino 14, 27 y 29 variables, respectivamente.
 
 Cada empresa dispone de 2.764 observaciones y 553 sesiones externas entre el 16 de octubre de 2023 y el 29 de diciembre de 2025. Tras la purga, los entrenamientos individuales contienen 2.210, 2.395 y 2.579 filas. La especialización reduce a una cuarta parte los ejemplos de cada estimador respecto al panel conjunto. Puede favorecer adaptación, pero también aumentar la variabilidad del ajuste; el experimento no identifica una causa única para los cambios observados.
 
@@ -329,7 +488,7 @@ Las relativas incluyen distancias del cierre ajustado a sus medias móviles, MAC
 
 Se reutilizan las referencias conjunta e individual solo tras verificar entradas, panel reconstruido, código principal, versiones, rejillas, umbral y fronteras temporales. No se descargan datos nuevos. La selección interna del modelo conjunto mantiene el AUC agrupado del panel; la evaluación externa prioriza el promedio de AUC dentro de cada empresa. Esta diferencia entre criterio de ajuste y resumen externo se conserva para mantener la comparación, no se presenta como una selección optimizada para AUC macro.
 
-### 10.5 Métricas comparables en las ampliaciones
+#### 5.2.5 Métricas comparables en las ampliaciones
 
 Para evitar comparar puntuaciones de empresas con calibraciones distintas, se calcula el AUC de cada empresa sobre sus 553 sesiones externas y después su media con igual peso:
 
@@ -341,7 +500,7 @@ Este AUC macro no es el AUC agrupado de todas las filas de la revisión inicial.
 
 En el experimento individual se calculan 60 diferencias individual menos conjunto y otras 40 comparaciones de sentimiento y retardo dentro del enfoque individual. En el segundo experimento, la comparación principal es relativas con identidad menos conjunto original para cada algoritmo y variante; los demás contrastes separan identidad, representación e interacciones. Sus 405 intervalos se distribuyen en 81 macro y 324 por empresa. Se mantienen 1.000 réplicas de bloques de veinte sesiones; en los contrastes macro se remuestrean las mismas fechas simultáneamente para las cuatro empresas y ambos enfoques. No se reentrena dentro del remuestreo ni se corrige por comparaciones múltiples.
 
-### 10.6 Ronda controlada de mejoras
+#### 5.2.6 Ronda controlada de mejoras
 
 El experimento `first-round-full-20260916` investiga si la calidad de las noticias, la cantidad de historia y el procedimiento de selección limitaban la representación relativa. Su referencia es el modelo conjunto con variables relativas y sin identidad. Se prefijan tres algoritmos: regresión logística, bosque aleatorio y potenciación por histogramas. Los promedios entre estos tres no deben compararse directamente con los promedios de cinco algoritmos anteriores.
 
@@ -351,7 +510,7 @@ La deduplicación conserva la primera publicación de cada título normalizado i
 
 La selección macro alinea el criterio interno con el promedio de AUC por empresa. La búsqueda ampliada compara veinte candidatos totales por algoritmo de árboles y seis en regresión logística, incluyendo la ventana de entrenamiento. No son veinte candidatos por ventana. Los candidatos y semillas se fijan antes de ejecutar la ronda. Se generan 210 modelos externos y 2.214 evaluaciones internas; los 315 intervalos pareados se distribuyen en 63 macro y 252 por empresa. El [protocolo de la ronda](first_round_protocol.md) conserva los espacios de búsqueda y controles.
 
-### 10.7 Ablación individual de las nuevas variables
+#### 5.2.7 Ablación individual de las nuevas variables
 
 Como añadir las cinco variables simultáneamente no produjo una mejora general, `variable-ablation-full-20260917` estudia qué aporta cada variable añadida a la referencia sin extras y qué sucede al retirarla del bloque completo. Se mantienen noticias deduplicadas, historia completa, fechas, etiquetas, algoritmos y purga. En la variante con retardo se añade o retira conjuntamente la variable actual y su retardo de una sesión; no se aísla el efecto de cada componente.
 
@@ -359,9 +518,9 @@ Los hiperparámetros se heredan, por algoritmo, variante y bloque, de la referen
 
 Se verifican 36 modelos de referencia y se entrenan 180 nuevos: cinco variables, dos operaciones, dos variantes, tres algoritmos y tres bloques. Se calculan 60 contrastes macro y 240 por empresa. Las 15 adiciones al híbrido sin retardo son primarias; las demás, secundarias. Los intervalos del 95 % utilizan 1.000 réplicas pareadas de bloques de veinte sesiones, sin reajustar modelos ni corregir por multiplicidad. El [protocolo de ablación](variable_ablation_protocol.md) se fija antes de consultar estos resultados.
 
-## 11. Resultados
+### 5.3 Resultados
 
-### 11.1 Antecedentes experimentales
+#### 5.3.1 Antecedentes experimentales
 
 Los primeros ensayos emplearon Dummy, regresión logística, Random Forest y HistGradientBoosting. Después se incorporaron XGBoost y LightGBM, ajuste temporal y retardos. La siguiente tabla conserva la evolución histórica del AUC a umbral 0,5; el umbral afecta a las clases, no al cálculo del AUC.
 
@@ -375,7 +534,7 @@ Los primeros ensayos emplearon Dummy, regresión logística, Random Forest y His
 
 Fuente: `reports/historical/tuning/model_progression_summary.csv`. Las celdas ausentes no son ceros. El AUC 0,5217 de LightGBM motivó seguir estudiando el retardo, pero no constituye evidencia final: se habían consultado repetidamente las mismas fechas externas y existían limitaciones en la alineación horaria y la purga.
 
-### 11.2 Comparación corregida base e híbrido
+#### 5.3.2 Comparación corregida base e híbrido
 
 | Algoritmo | AUC base | AUC híbrido | Diferencia híbrido − base |
 | --- | ---: | ---: | ---: |
@@ -387,7 +546,7 @@ Fuente: `reports/historical/tuning/model_progression_summary.csv`. Las celdas au
 
 Fuente: `reports/experiments/review-full-20260908/metrics/global_metrics.csv`; diferencias calculadas antes de redondear. No existe una mejora uniforme. Las diferencias positivas puntuales no bastan para sostener una ventaja robusta.
 
-### 11.3 Resultados destacados y modelo de referencia
+#### 5.3.3 Resultados destacados y modelo de referencia
 
 | Configuración | Exactitud | Exactitud equilibrada | F1 macro | MCC | AUC agrupado | Media AUC externa |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -405,7 +564,7 @@ HistGradientBoosting relativo presenta el mayor AUC agrupado; Random Forest pond
 
 **Figura 1.** AUC agrupado de las predicciones externas, sin el modelo de referencia. La referencia de discriminación es 0,5; el mapa no sustituye los intervalos de incertidumbre. Fuente: selección trazada en `reports/final/provenance.json`.
 
-### 11.4 Intervalos y persistencia
+#### 5.3.4 Intervalos y persistencia
 
 | Comparación | Diferencia AUC | Intervalo exploratorio del 95 % |
 | --- | ---: | --- |
@@ -417,7 +576,7 @@ Fuente: `metrics/auc_intervals.csv` de la misma ejecución, bloques de veinte se
 
 De 62 intervalos de diferencias, 61 incluyen cero. El único que no lo incluye corresponde a un empeoramiento de LightGBM con solo sentimiento frente al modelo de referencia. Ninguna mejora positiva excluye cero bajo este análisis. Esto limita la evidencia disponible, pero no demuestra equivalencia exacta entre modelos ni ausencia universal de efecto de las noticias.
 
-### 11.5 Modelos independientes por empresa
+#### 5.3.5 Modelos independientes por empresa
 
 Promediando el AUC dentro de cada empresa y después entre los cinco algoritmos:
 
@@ -440,7 +599,7 @@ De las 60 diferencias individual menos conjunto, 28 son positivas. Solo tres int
 
 Los máximos individuales observados son 0,4709 en AAPL, 0,5141 en MSFT, 0,5304 en NVDA y 0,5324 en TSLA. Son máximos seleccionados después de observar la prueba; ninguno supera en exactitud a su referencia mayoritaria. No se usan para elegir automáticamente un modelo final. Los resultados completos y sus intervalos están en el [análisis por empresa](../reports/experiments/per-company-20260916/analysis.md) y en el [cuaderno 03](../notebooks/03_per_company_models.ipynb).
 
-### 11.6 Identidad, variables relativas e interacciones
+#### 5.3.6 Identidad, variables relativas e interacciones
 
 Se utiliza el mismo resumen de AUC macro promediado entre cinco algoritmos, sin incorporar las interacciones exclusivas de regresión logística a esa media:
 
@@ -456,7 +615,7 @@ El mayor AUC macro nuevo es 0,5157, con bosque aleatorio, relativas, identidad y
 
 En regresión logística, las interacciones relativas elevan el AUC macro híbrido de 0,4980 a 0,5059 y el de retardo de 0,4981 a 0,5076, pero reducen el de la base de 0,5010 a 0,4978. Ninguno de los seis intervalos macro que comparan interacciones con su versión de solo identidad excluye cero.
 
-### 11.7 Resultado exploratorio en NVDA
+#### 5.3.7 Resultado exploratorio en NVDA
 
 La comparación del mismo bosque aleatorio híbrido en las mismas fechas permite separar los cambios:
 
@@ -476,7 +635,7 @@ El patrón no es general: AAPL empeora en los promedios de las tres variantes; M
 
 Fuente: [análisis de identidad y relativas](../reports/experiments/ticker-aware-full-20260916/analysis.md), sus tablas `metrics/` y el [cuaderno 04](../notebooks/04_ticker_aware_models.ipynb). Estos resultados amplían la memoria sin reemplazar la selección histórica de `reports/final/`.
 
-### 11.8 Primera ronda de mejoras: resultado agregado
+#### 5.3.8 Primera ronda de mejoras: resultado agregado
 
 La deduplicación reduce el corpus alineado de 46.014 a 42.734 registros: elimina 3.280, de los cuales 3.103 corresponden a 2025. Esto reduce repeticiones literales, pero no certifica cobertura exhaustiva ni identifica todos los eventos repetidos semánticamente. Las entradas originales se conservan.
 
@@ -494,7 +653,7 @@ Los tres contrastes principales del híbrido muestran diferencias negativas cuyo
 
 Fuente: [informe de la ronda](../reports/experiments/first-round-full-20260916/analysis.md) y [cuaderno 05](../notebooks/05_controlled_improvement_round.ipynb).
 
-### 11.9 Aporte individual de las variables de sentimiento
+#### 5.3.9 Aporte individual de las variables de sentimiento
 
 La tabla muestra diferencias de AUC macro, promediadas entre los tres algoritmos únicamente como resumen descriptivo. No representa una combinación de modelos ni dispone de un intervalo propio. Un valor positivo al añadir sugiere utilidad en ese contexto; un valor positivo al retirar sugiere perjuicio dentro del bloque completo.
 
@@ -514,25 +673,25 @@ Que una variable ayude sola y no dentro del bloque completo es compatible con re
 
 Fuente: [informe de ablación](../reports/experiments/variable-ablation-full-20260917/analysis.md) y [cuaderno 06](../notebooks/06_sentiment_variable_ablation.ipynb), con resultados por algoritmo, empresa y bloque.
 
-## 12. Discusión
+### 5.4 Discusión
 
-### 12.1 Respuesta a la pregunta principal
+#### 5.4.1 Respuesta a la pregunta principal
 
 No se ha demostrado que añadir el sentimiento disponible mejore de forma robusta la predicción de la siguiente sesión. El resultado depende de algoritmo y representación, con AUC próximos a 0,5 y diferencias inciertas. La conclusión se refiere a estas empresas, fuente, periodo y horizonte.
 
 La hipótesis de persistencia tampoco queda respaldada de forma concluyente. El ensayo con muchas variables retardadas produjo una mejora puntual en algunos modelos, pero la comparación controlada principal no confirmó una ventaja. Ambos ensayos difieren en calendario, purga, parametrización, conjunto de variables y forma de reentrenamiento. No es válido atribuir la caída desde 0,5217 a una única corrección.
 
-### 12.2 Explicaciones posibles, no demostradas
+#### 5.4.2 Explicaciones posibles, no demostradas
 
 La señal puede ser débil a un día; el sentimiento agregado puede perder matices; las noticias pueden describir hechos ya reflejados en precios; y la cobertura puede introducir cambios de distribución. También pueden influir el modelado conjunto de empresas y una búsqueda de parámetros limitada. Estos mecanismos son hipótesis compatibles con los resultados, no conclusiones causales del experimento.
 
 Las importancias de árboles o los coeficientes absolutos del modelo logístico describen el uso interno de variables. No prueban que una noticia cause un movimiento ni que una variable generalice fuera de muestra. La interpretación debe considerar correlación y escalas, especialmente cuando se comparan niveles de precio y sentimiento.
 
-### 12.3 Contribución de ingeniería
+#### 5.4.3 Contribución de ingeniería
 
 La revisión sustituyó una evaluación más frágil por un procedimiento verificable: horarios explícitos, fronteras purgadas, selección interna, comparaciones pareadas, artefactos aislados y pruebas. La calidad del software y la trazabilidad mejoraron sin que mejoraran necesariamente las métricas predictivas. Diferenciar esas dos dimensiones es una aportación del trabajo.
 
-### 12.4 Qué aportan los nuevos experimentos
+#### 5.4.4 Qué aportan los nuevos experimentos
 
 Separar empresas prueba una hipótesis distinta de añadir noticias. Su resultado muestra que una mayor especialización no garantiza una mejora: se elimina información de otros activos y se reduce el tamaño de entrenamiento. Esa pérdida de datos es una explicación posible, no un mecanismo demostrado. El segundo experimento conserva el panel para estudiar otra vía de adaptación.
 
@@ -540,13 +699,155 @@ Las relativas describen posiciones y cambios comparables entre activos con nivel
 
 La decisión es conservar ambos experimentos como evidencia, no reemplazar automáticamente el modelo conjunto ni presentar NVDA como un ganador validado. Su valor académico reside en acotar hipótesis y documentar resultados favorables y desfavorables con el mismo protocolo. Las conclusiones sobre sentimiento, especialización y representación se mantienen separadas.
 
-### 12.5 Qué cambia tras la ronda y las ablaciones
+#### 5.4.5 Qué cambia tras la ronda y las ablaciones
 
 Las nuevas pruebas acotan explicaciones que antes eran solo propuestas. Alinear el criterio interno no cambia las predicciones con los candidatos pequeños, ampliar la búsqueda mejora principalmente la puntuación interna y reducir la historia no aporta una ventaja general. Enriquecer el sentimiento como bloque tampoco ayuda de forma uniforme; separar sus variables permite localizar señales más concretas sin convertirlas en conclusiones robustas.
 
 Se conservan la auditoría, los controles y los resultados como aportaciones metodológicas. La sorpresa del volumen y la intensidad absoluta son hipótesis para una evaluación posterior prefijada, no ganadores confirmados. Incorporar los experimentos al código principal no implica adoptar sus transformaciones como configuración operativa ni modificar `reports/final/`.
 
-## 13. Verificación y reproducibilidad
+### 5.5 Diagnósticos de las predicciones conservadas
+
+La selección de figuras es explícitamente descriptiva: se compara el bosque híbrido sin extras con el mismo enfoque al añadir intensidad absoluta, por ser el contraste destacado en la ablación ya observada. No es una nueva validación ni una selección de umbral. Se utilizan las mismas 553 sesiones por empresa y el umbral fijo 0,5.
+
+![Curvas ROC por empresa del contraste de intensidad absoluta](figures/memoria/roc.png)
+
+**Figura 5.1.** Curvas ROC calculadas con las predicciones externas guardadas. La diagonal representa ausencia de discriminación en AUC, no una estrategia económica. Los AUC de cada panel se calculan dentro de una empresa; no deben confundirse con AUC agrupado entre empresas.
+
+![Curvas precisión-sensibilidad por empresa](figures/memoria/precision_recall.png)
+
+**Figura 5.2.** Curvas de precisión frente a sensibilidad. La referencia horizontal es la prevalencia de subidas de cada empresa. Se muestra precisión media (`average precision`, AP), que no equivale necesariamente al área trapezoidal interpolada. Las curvas no se utilizan para reajustar el umbral sobre la evaluación externa.
+
+![Matrices de confusión antes y después de añadir intensidad absoluta](figures/memoria/confusion.png)
+
+**Figura 5.3.** Recuentos de clase real frente a predicha; filas 0 y 1, columnas 0 y 1. Cada matriz contiene 553 observaciones. La clase 0 incluye igualdad y bajada. Los cambios de aciertos complementan el AUC: mejorar ordenación de probabilidades no implica mejorar todos los errores al umbral elegido.
+
+### 5.6 Monitorización de candidatos e interpretación
+
+![Puntuación interna de candidatos en la búsqueda ampliada](figures/memoria/candidatos.png)
+
+**Figura 5.4.** AUC macro interno medio por candidato y bloque externo, para el híbrido en la etapa de ajuste ampliado. Los identificadores corresponden a configuraciones completas, incluidas ventanas, registradas en el manifiesto; no son valores de un único hiperparámetro. Cada columna es la media de tres particiones internas. El gráfico permite detectar sensibilidad a candidatos, no atribuir causalmente cambios a un parámetro aislado. Se muestran todos los candidatos de los tres algoritmos de esa ronda, no solo el elegido.
+
+No se presentan estos mapas como curvas de aprendizaje. Una curva que relacione tamaño de entrenamiento y error requeriría reajustar modelos sobre tamaños comparables y registrar resultados internos y externos; eso todavía no se ha ejecutado. Los mapas de los dos candidatos de los cinco algoritmos de la revisión inicial pueden reconstruirse a partir de sus trazas, pero no equivalen a una búsqueda densa de cada parámetro.
+
+Los desgloses por activo y bloque de 5.3, junto con los cuadernos 03–06, permiten estudiar heterogeneidad sin elegir únicamente la empresa más favorable. Los informes completos conservan todas las configuraciones; las figuras anteriores son una selección de lectura. El [generador documental](figures/memoria/generar_figuras.py) conserva las fuentes y comprobaciones de estas figuras y no modifica los artefactos experimentales.
+
+### 5.7 Verificación interna de FinBERT, no evaluación predictiva
+
+La ejecución `finbert-understanding-20260922` utiliza el primer titular no vacío de AAPL según fecha UTC, URL y título, y una frase sintética corta como control de relleno. No se seleccionan ejemplos por su puntuación ni por la evolución posterior del precio. La inferencia se ejecuta localmente en CPU, con pesos fijos, precisión de 32 bits, atención explícita y dropout desactivado.
+
+Se contabilizan **109.484.547 parámetros** y se contrastan **28 operaciones**: embeddings; atención y salida de cada uno de los doce bloques; pooler, logits y softmax. Todas pasan. La máxima discrepancia absoluta observada es aproximadamente **3,73 × 10⁻⁹**, con tolerancias absolutas de 2 × 10⁻⁵ y relativas de 10⁻⁵. Cada bloque reconstruido parte de su entrada registrada por la biblioteca: es un contraste local, no una réplica independiente de todo el sistema ni una prueba de precisión del sentimiento.
+
+También se comprueba que el relleno no recibe atención como clave y que una frase mantiene sus probabilidades al cambiar la longitud del otro texto del lote, dentro de tolerancia. Un texto sintético de 522 tokens, incluidos los especiales, se recorta a 512, registrándose diez tokens descartados. Las doce pruebas unitarias adicionales usan una arquitectura BERT pequeña aleatoria, sin descargar pesos; se distinguen de la inspección del checkpoint real.
+
+Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. No se calculan macro-F1 lingüístico ni nuevas métricas bursátiles. La evaluación con anotaciones humanas, el tratamiento dirigido a cada empresa, las atribuciones y la integración temporal quedan para las siguientes fases. Todos los resultados financieros anteriores permanecen intactos.
+
+## 6. Especificación de requisitos
+
+### 6.1 Requisitos verificables
+
+| Requisito | Solución implementada | Evidencia |
+| --- | --- | --- |
+| Relacionar precios y noticias por empresa | Claves `ticker`, `Date` y asignación bursátil | `src/data/point_in_time.py` |
+| Evitar datos posteriores al instante de decisión | Primer cierre igual o posterior a la marca temporal | Pruebas de calendario y asignación |
+| Evitar etiquetas solapadas en validación | Purga con `target_end < inicio_validación` | `src/models/temporal_validation.py` |
+| Comparar sobre el mismo universo | Predicciones pareadas por empresa y fecha | Validación de claves y objetivo |
+| Aislar imputación y escalado | Cadena de preprocesamiento y modelado ajustada en cada entrenamiento | `src/models/train_models.py` |
+| No sobrescribir experimentos anteriores | Identificador nuevo y rechazo de colisiones | `src/experiments/artifacts.py` |
+| Conservar resultados auditables | CSV, manifiestos y hashes SHA-256 | `reports/experiments/` |
+| Facilitar la explicación | Memoria, guías y siete cuadernos de análisis | `docs/` y `notebooks/` |
+| Inspeccionar el modelo de lenguaje | Checkpoint fijo, reconstrucción numérica y diagnóstico local | `src/nlp/` y cuaderno 07 |
+
+### 6.2 Actores, alcance y casos de uso
+
+El actor principal es el investigador que configura y ejecuta experimentos. El tutor o revisor consulta memoria, cuadernos e informes. Los proveedores externos suministran datos, pero no deciden qué modelo se selecciona. No existe un actor de operador bursátil ni integración de órdenes con un intermediario.
+
+```mermaid
+flowchart LR
+    I[Investigador] --> U1([Adquirir y validar datos])
+    I --> U2([Preparar panel temporal])
+    I --> U3([Ejecutar comparación])
+    I --> U4([Verificar artefactos])
+    R[Revisor] --> U5([Consultar resultados y memoria])
+    P[Proveedores externos] --> U1
+    U1 --> U2
+    U2 --> U3
+    U3 --> U4
+    U4 --> U5
+```
+
+**Figura 6.1.** Vista de actores y casos de uso, representada con nodos y relaciones en Mermaid; no es una interfaz gráfica implementada ni un diagrama UML normativo de casos de uso.
+
+| Caso | Precondición | Flujo principal | Resultado o excepción |
+| --- | --- | --- | --- |
+| CU1. Preparar datos | Entradas disponibles y configuración de zona horaria | Validar, asignar al cierre, agregar y unir por empresa-sesión | Panel y registros no alineados; rechazo ante inconsistencia |
+| CU2. Ejecutar experimento | Panel válido e identificador libre | Separar fechas, purgar, seleccionar internamente y predecir | Modelos y predicciones externas; ejecución fallida identificada |
+| CU3. Comparar enfoques | Mismas claves, etiquetas y bloques | Calcular métricas y remuestreo pareado | Diferencias e intervalos; error si faltan observaciones |
+| CU4. Revisar resultados | Informes y procedencia accesibles | Abrir cuadernos, contrastar hashes y consultar desgloses | Evidencia interpretable, sin llamadas obligatorias a proveedores |
+
+### 6.3 Requisitos no funcionales y aceptación
+
+| ID | Requisito | Criterio de aceptación | Evidencia o límite |
+| --- | --- | --- | --- |
+| RNF1 | Trazabilidad | Cada ejecución conserva configuración, entradas, versiones y huellas | Manifiestos; no recuperan datos ausentes |
+| RNF2 | Reproducibilidad local | Modelos guardados reproducen probabilidades dentro de la tolerancia registrada | Verificaciones por ejecución; dependiente del entorno |
+| RNF3 | Integridad temporal | Ninguna etiqueta de entrenamiento alcanza el bloque validado | Pruebas de purga y fronteras |
+| RNF4 | Conservación histórica | Una ejecución no sobrescribe otra con el mismo identificador | Rechazo de colisiones en `create_run` |
+| RNF5 | Protección de credenciales | Claves fuera del repositorio y de los informes | Variables de entorno; no sustituye auditoría de seguridad completa |
+| RNF6 | Mantenibilidad | Separación entre adquisición, modelos, experimentos y presentación | Módulos y pruebas focalizadas |
+| RNF7 | Legibilidad | Figuras con unidades, referencias y procedencia; texto en español | Memoria y siete cuadernos; revisión humana pendiente |
+
+No se declara disponibilidad continua, latencia garantizada ni escalabilidad de servicio web: no existen pruebas de carga ni despliegue de ese tipo. El requisito de calidad experimental se cumple documentando resultados válidos, aunque no mejoren el modelo de referencia.
+
+## 7. Análisis del sistema
+
+### 7.1 Arquitectura
+
+La extensión opcional `src/nlp/` inspecciona FinBERT de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. El ejecutor genera un informe nuevo sin modificar precios, sentimiento de Alpha Vantage ni modelos financieros. La vista siguiente describe el flujo financiero existente; conectar la salida textual a ese flujo queda pendiente de las issues #50 y #51.
+
+```text
+Precios descargados + noticias con sentimiento por empresa
+                         |
+          Validación, indicadores y etiqueta
+                         |
+     Alineación con el cierre y agregación diaria
+                         |
+           Variantes de variables comparables
+                         |
+   Selección interna -> entrenamiento -> bloque externo
+                         |
+       Predicciones, métricas e incertidumbre
+                         |
+              Informes y cuadernos
+```
+
+`src/data/` contiene adquisición y preparación; `src/models/`, construcción de estimadores, validación y evaluación; `src/experiments/`, orquestación de la revisión y gestión de artefactos; `src/visualization/`, figuras. Los cuadernos de análisis leen resultados o reconstruyen datos mediante funciones existentes; no duplican el entrenamiento completo.
+
+Las dependencias se fijan en `requirements.txt`. El entorno de trabajo utilizado en las verificaciones es Python 3.13. Pandas y NumPy soportan transformaciones tabulares; scikit-learn, XGBoost y LightGBM, modelado; Matplotlib y Seaborn, gráficos; las librerías de calendario proporcionan sesiones y cierres.
+
+```mermaid
+flowchart TB
+    P[Precios y noticias guardados] --> D[Componente de datos: src/data]
+    C[Calendario bursátil] --> D
+    D --> E[Orquestación: src/experiments]
+    E --> M[Validación y modelos: src/models]
+    M --> E
+    E --> A[Gestión de artefactos: artifacts.py]
+    A --> R[Informes, manifiestos y predicciones]
+    A --> L[Datos y modelos locales]
+    R --> V[Visualización: src/visualization]
+    R --> N[Cuadernos y memoria]
+    V --> N
+```
+
+**Figura 7.1.** Vista de componentes y dependencias. Son módulos de un proceso local, no microservicios desplegados. La orquestación controla el experimento y la gestión de artefactos conserva su procedencia; los cuadernos leen resultados sin constituir una segunda implementación del entrenamiento.
+
+### 7.2 Persistencia
+
+Los informes se separan en `reports/historical/`, `reports/experiments/<id>/` y `reports/final/`. Esta última carpeta contiene una selección para la memoria, no una nueva evaluación. Los modelos se guardan en `models/experiments/<id>/`; los conjuntos de datos de ejecución, en `data/experiments/<id>/`; y las instantáneas de código, en `artifacts/snapshots/<id>/`. Las verificaciones técnicas se distinguen en `artifacts/verification/`.
+
+Los `.joblib` y los artefactos locales pesados están excluidos del seguimiento ordinario de Git. Se conservan físicamente en el equipo. Esta decisión reduce ruido y tamaño en el repositorio, pero exige preservar los datos originales y el entorno para una reproducción externa; un manifiesto no sustituye a los archivos que identifica.
+
+### 7.3 Verificación y reproducibilidad
 
 El conjunto local de pruebas contiene 58 pruebas superadas, frente a las 28 de la revisión inicial. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. La última ronda añade deduplicación, ventanas, nuevas representaciones, selección macro y aislamiento de las familias de variables. Se ejecuta mediante `python -m unittest discover -s tests -v`.
 
@@ -564,11 +865,11 @@ Existe una configuración de GitHub Actions para las pruebas. Las consultas real
 
 La reproducibilidad tiene tres niveles distintos: inspeccionar informes guardados, repetir cálculos con los mismos datos y reconstruir todo desde los proveedores. Los dos primeros tienen controles locales; el tercero sigue condicionado por disponibilidad, revisiones, licencias y cobertura del proveedor. Los hashes permiten detectar cambios, pero no recuperar archivos ausentes.
 
-## 14. Proceso de desarrollo y decisiones
+### 7.4 Proceso de desarrollo y decisiones
 
 El desarrollo fue incremental mediante tareas, ramas de funcionalidad, registros de cambios identificables y fusiones de ramas. El historial conserva, entre otras etapas, indicadores, conjuntos de datos, modelos base e híbridos, evaluación, ajuste temporal y retardos. El trabajo acumulado de retardos, revisión y organización se integró en `main` mediante la fusión `2f1111d`, con implementación en `1ffdc1b`. La remodelación documental se realizó en `docs` y se integró mediante `3efa444`. Los experimentos adicionales de la tarea #47 se desarrollaron en `feature/per-company-temporal-evaluation`: `abdcce5` incorpora la evaluación independiente y `06cbd00` la identidad y las variables relativas; se integraron mediante `00c0146`.
 
-La tarea #48 se desarrolla en `feature/controlled-improvement-round` con commits separados para auditoría (`05d346c`), ventanas (`bbf9836`), representación (`d136944`), selección (`037e741`), resultados (`c23198c`), ejecutor de ablación (`623d8a6`) e informe individual (`c57240e`). La memoria se actualiza antes de su integración, tras la revisión del autor. Se conservan las ejecuciones históricas y no se altera la selección de `reports/final/`.
+La tarea #48 se desarrolló en `feature/controlled-improvement-round` con commits separados para auditoría (`05d346c`), ventanas (`bbf9836`), representación (`d136944`), selección (`037e741`), resultados (`c23198c`), ejecutor de ablación (`623d8a6`) e informe individual (`c57240e`). La actualización de memoria `2fb2568` precedió a la integración mediante `3ca4e46`, autorizada por el autor. Se conservan las ejecuciones históricas y no se altera la selección de `reports/final/`. La presente reestructuración documental se realiza posteriormente en la rama `docs`.
 
 | Decisión | Motivo | Consecuencia o compromiso |
 | --- | --- | --- |
@@ -591,34 +892,110 @@ La tarea #48 se desarrolla en `feature/controlled-improvement-round` con commits
 
 El asistente de programación se utilizó para implementación, revisión, experimentos y documentación bajo decisiones del estudiante. La memoria debe reflejar ese uso con arreglo a las indicaciones académicas aplicables; este borrador no atribuye al estudiante verificaciones personales que no estén documentadas. Las afirmaciones científicas y la versión entregada requieren su revisión y defensa.
 
-## 15. Limitaciones y trabajo futuro
+### 7.5 Secuencia de una ejecución temporal
 
-### 15.1 Validez interna
+```mermaid
+sequenceDiagram
+    actor I as Investigador
+    participant E as Ejecutor del experimento
+    participant A as Gestión de artefactos
+    participant D as Constructor de datos
+    participant V as Validación temporal
+    participant M as Cadena de modelado
+    participant R as Evaluación
+    I->>E: Configuración e identificador nuevo
+    E->>A: create_run
+    A-->>E: Directorio y manifiesto inicial
+    E->>D: build_dataset o referencia verificada
+    D-->>E: Panel y procedencia
+    loop Cada bloque externo
+        E->>V: Seleccionar pasado y purgar etiquetas
+        V-->>E: Entrenamiento y fechas de validación
+        opt Experimento con selección interna
+            E->>V: Particiones internas y candidatos
+            loop Cada candidato y partición
+                E->>M: Ajustar preprocesamiento y estimador
+                M-->>E: Probabilidades internas
+            end
+        end
+        E->>M: Reajustar en pasado admisible
+        M-->>E: Predicciones del bloque externo
+        E->>A: Guardar modelo, parámetros y predicciones
+    end
+    E->>R: Comparar filas pareadas y métricas
+    R-->>E: Tablas e intervalos
+    E->>A: finish_run y huellas de salidas
+    E-->>I: Informes de ejecución completa
+```
 
-El histórico externo se consultó durante el desarrollo. La validación anidada posterior reduce contaminación dentro de una ejecución, pero no deshace decisiones motivadas por resultados anteriores. Tampoco los intervalos de predicciones fijas incorporan toda la incertidumbre del entrenamiento. La comparación entre etapas modifica varios elementos simultáneamente.
+**Figura 7.2.** Secuencia del flujo experimental. La ablación omite la búsqueda interna y hereda parámetros de referencias verificadas. Una excepción impide presentar la ejecución como completa; no equivale a un resultado negativo del modelo. El remuestreo se aplica a predicciones guardadas, no vuelve a entrenar todos los estimadores.
 
-Los experimentos por empresa e identidad reutilizan esas fechas. La selección posterior del caso de NVDA y la abundancia de contrastes impiden tratar sus intervalos nominales como confirmación independiente. La coherencia entre bloques no elimina este sesgo. En esas ejecuciones, el criterio interno de AUC agrupado no coincide exactamente con el AUC macro externo y la búsqueda de dos configuraciones por algoritmo limita la adaptación de las variantes con interacciones. La ronda posterior estudia selección macro y candidatos ampliados sobre la representación enriquecida, no vuelve a optimizar todas las interacciones anteriores.
+### 7.6 Modelo conceptual de clases y datos
 
-Las ablaciones vuelven a utilizar las mismas fechas. El único contraste macro positivo de intensidad absoluta es nominal, está cerca del límite y forma parte de 60 comparaciones sin corrección. Los hiperparámetros heredados controlan cada comparación, pero no garantizan el ajuste óptimo de los subconjuntos. Añadir una variable y retirarla del bloque completo no son experimentos simétricos ni permiten atribuir causalidad.
+```mermaid
+classDiagram
+    class Empresa {
+        ticker: string
+    }
+    class Sesion {
+        fecha: date
+        cierre_utc: datetime
+    }
+    class RegistroNoticiaEmpresa {
+        url: string
+        titulo: string
+        publicacion_utc: datetime
+        sentimiento: float
+        relevancia: float
+    }
+    class Observacion {
+        fecha: date
+        target: int
+        target_end: date
+        variables: vector
+    }
+    class Ejecucion {
+        identificador: string
+        configuracion: dict
+        estado: string
+        hashes: dict
+    }
+    class Prediccion {
+        enfoque: string
+        variante: string
+        algoritmo: string
+        bloque: int
+        probabilidad: float
+        clase: int
+    }
+    Empresa "1" --> "0..*" RegistroNoticiaEmpresa : mencionada en
+    Empresa "1" --> "0..*" Observacion : identifica
+    Sesion "0..1" <-- "0..*" RegistroNoticiaEmpresa : asignada a
+    Sesion "1" --> "0..*" Observacion : fecha
+    Observacion "1" <-- "0..*" Prediccion : evaluada mediante
+    Ejecucion "1" --> "0..*" Prediccion : conserva
+```
 
-### 15.2 Datos y generalización
+**Figura 7.3.** Diagrama de clases conceptual del dominio. Estas entidades se materializan principalmente como filas de `DataFrame`, CSV y documentos JSON, no como seis clases Python implementadas. La asociación opcional con sesión representa noticias sin cierre posterior disponible. Una predicción también queda identificada por enfoque, variante y algoritmo dentro de la ejecución; una observación puede recibir muchas predicciones comparables.
 
-Solo se estudian cuatro empresas de gran capitalización y elevada presencia mediática. La selección retrospectiva no representa todo el mercado ni incorpora empresas desaparecidas. La cobertura informativa no está certificada; títulos repetidos pueden sobreponderar eventos; las puntuaciones de sentimiento no se contrastaron con una muestra anotada independiente. La deduplicación experimental reduce repeticiones literales, pero no elimina todas las duplicaciones semánticas ni se adopta automáticamente en las ejecuciones anteriores.
+En el código sí existe `TrainResult`, una estructura inmutable con nombres y rutas de salida del flujo tradicional. El preprocesamiento utiliza `Pipeline`, `SimpleImputer`, `StandardScaler` y estimadores de las bibliotecas. No se inventa una jerarquía orientada a objetos para describir un proyecto predominantemente funcional. La [construcción real](../src/models/train_models.py) y los [contratos del panel](../src/models/temporal_validation.py) son la referencia para implementación.
 
-El cierre ajustado descargado retrospectivamente, las revisiones del proveedor y la ausencia de marcas temporales de recepción impiden afirmar una reconstrucción perfecta de la información disponible en cada instante. El calendario y la purga corrigen riesgos concretos, no todos los sesgos posibles.
+### 7.7 Trazabilidad de verificación y fallos
 
-### 15.3 Utilidad económica y uso responsable
+| Comportamiento | Verificación existente | Qué no demuestra |
+| --- | --- | --- |
+| Calendario y marcas temporales | `tests/test_temporal_pipeline.py` | Disponibilidad histórica real del proveedor |
+| Aislamiento de noticias y empresas | `tests/test_per_company.py`, `tests/test_ticker_aware.py` | Generalización a otras empresas |
+| Deduplicación conservadora | `tests/test_news_quality.py` | Equivalencia semántica de textos |
+| Ventanas y selección temporal | `tests/test_training_windows.py`, `tests/test_round_selection.py` | Que una ventana sea económicamente óptima |
+| Variables y ablaciones | `tests/test_sentiment_representation.py`, `tests/test_variable_ablation.py` | Causalidad o utilidad fuera de las fechas observadas |
+| Rutas y preservación de artefactos | `tests/test_artifact_layout.py` | Recuperación automática de archivos perdidos |
 
-No se han calculado comisiones, deslizamiento, rotación, exposición, caída máxima desde un máximo previo ni reglas de ejecución. AUC y exactitud no permiten deducir rentabilidad. Las salidas son académicas y no constituyen recomendaciones de inversión. Las claves de API permanecen fuera del repositorio; antes de redistribuir noticias o textos debe revisarse la autorización correspondiente del proveedor.
+La verificación combina pruebas automatizadas, reproducción de probabilidades de modelos guardados, cotejo de tablas y revisión de figuras. Un error de entrada o una referencia incompatible debe detener la comparación; un AUC bajo con entradas válidas se conserva como resultado. Son estados distintos y su separación evita confundir calidad del software con éxito predictivo.
 
+## 8. Conclusiones
 
-### 15.4 Validación futura propuesta
-
-Antes de ampliar otra búsqueda, se fijaría una regla de selección y una comparación principal para evaluarlas en fechas nuevas no utilizadas en estas decisiones. Las variables relativas constituyen una hipótesis prioritaria, no una garantía de mejora. Debe comprobarse si el patrón de NVDA persiste y si es específico de la empresa, del periodo o de la cobertura informativa.
-
-La alineación con AUC macro, la búsqueda ampliada y las ventanas de tres y cinco años ya se han probado en la primera ronda, sin mejora general. Siguen pendientes una evaluación específicamente diseñada para periodos de cobertura comparable, otras empresas o un horizonte diferente. La sorpresa del volumen y la intensidad absoluta pueden motivar hipótesis prefijadas, no otra selección retrospectiva del máximo. Cualquier prueba adicional requerirá definir su protocolo antes de evaluar; no se presenta como ejecutada ni se anticipan sus resultados.
-
-## 16. Conclusiones
+### 8.1 Conclusiones del trabajo
 
 Se ha construido un sistema modular capaz de integrar precios e información de noticias, generar variables comparables y evaluar modelos de clasificación temporal. La pregunta inicial se ha estudiado mediante cinco algoritmos, una referencia trivial, ajuste de hiperparámetros y variantes de sentimiento contemporáneo y retardado.
 
@@ -630,9 +1007,36 @@ La primera ronda no mejora el promedio general al combinar depuración, enriquec
 
 El resultado no invalida el TFG ni prueba que las noticias no afecten a los mercados. Delimita lo que puede sostenerse con el experimento realizado. La principal contribución es un procedimiento de comparación más controlado, verificable y documentado, junto con un análisis explícito de sus límites.
 
-## 17. Bibliografía inicial
+### 8.2 Limitaciones y trabajo futuro
 
-Las referencias siguientes se consultaron para este borrador el 15 de septiembre de 2026. Deben adaptarse al estilo bibliográfico exigido y completarse con estudios empíricos del área; no constituyen todavía un estado del arte exhaustivo.
+#### 8.2.1 Validez interna
+
+El histórico externo se consultó durante el desarrollo. La validación anidada posterior reduce contaminación dentro de una ejecución, pero no deshace decisiones motivadas por resultados anteriores. Tampoco los intervalos de predicciones fijas incorporan toda la incertidumbre del entrenamiento. La comparación entre etapas modifica varios elementos simultáneamente.
+
+Los experimentos por empresa e identidad reutilizan esas fechas. La selección posterior del caso de NVDA y la abundancia de contrastes impiden tratar sus intervalos nominales como confirmación independiente. La coherencia entre bloques no elimina este sesgo. En esas ejecuciones, el criterio interno de AUC agrupado no coincide exactamente con el AUC macro externo y la búsqueda de dos configuraciones por algoritmo limita la adaptación de las variantes con interacciones. La ronda posterior estudia selección macro y candidatos ampliados sobre la representación enriquecida, no vuelve a optimizar todas las interacciones anteriores.
+
+Las ablaciones vuelven a utilizar las mismas fechas. El único contraste macro positivo de intensidad absoluta es nominal, está cerca del límite y forma parte de 60 comparaciones sin corrección. Los hiperparámetros heredados controlan cada comparación, pero no garantizan el ajuste óptimo de los subconjuntos. Añadir una variable y retirarla del bloque completo no son experimentos simétricos ni permiten atribuir causalidad.
+
+#### 8.2.2 Datos y generalización
+
+Solo se estudian cuatro empresas de gran capitalización y elevada presencia mediática. La selección retrospectiva no representa todo el mercado ni incorpora empresas desaparecidas. La cobertura informativa no está certificada; títulos repetidos pueden sobreponderar eventos; las puntuaciones de sentimiento no se contrastaron con una muestra anotada independiente. La deduplicación experimental reduce repeticiones literales, pero no elimina todas las duplicaciones semánticas ni se adopta automáticamente en las ejecuciones anteriores.
+
+El cierre ajustado descargado retrospectivamente, las revisiones del proveedor y la ausencia de marcas temporales de recepción impiden afirmar una reconstrucción perfecta de la información disponible en cada instante. El calendario y la purga corrigen riesgos concretos, no todos los sesgos posibles.
+
+#### 8.2.3 Utilidad económica y uso responsable
+
+No se han calculado comisiones, deslizamiento, rotación, exposición, caída máxima desde un máximo previo ni reglas de ejecución. AUC y exactitud no permiten deducir rentabilidad. Las salidas son académicas y no constituyen recomendaciones de inversión. Las claves de API permanecen fuera del repositorio; antes de redistribuir noticias o textos debe revisarse la autorización correspondiente del proveedor.
+
+
+#### 8.2.4 Validación futura propuesta
+
+Antes de ampliar otra búsqueda, se fijaría una regla de selección y una comparación principal para evaluarlas en fechas nuevas no utilizadas en estas decisiones. Las variables relativas constituyen una hipótesis prioritaria, no una garantía de mejora. Debe comprobarse si el patrón de NVDA persiste y si es específico de la empresa, del periodo o de la cobertura informativa.
+
+La alineación con AUC macro, la búsqueda ampliada y las ventanas de tres y cinco años ya se han probado en la primera ronda, sin mejora general. Siguen pendientes una evaluación específicamente diseñada para periodos de cobertura comparable, otras empresas o un horizonte diferente. La sorpresa del volumen y la intensidad absoluta pueden motivar hipótesis prefijadas, no otra selección retrospectiva del máximo. Cualquier prueba adicional requerirá definir su protocolo antes de evaluar; no se presenta como ejecutada ni se anticipan sus resultados.
+
+## 9. Bibliografía
+
+La bibliografía técnica inicial se consultó el 15 de septiembre de 2026 y los nuevos antecedentes teóricos y empíricos se contrastaron el 19 de septiembre de 2026. Debe homogeneizarse al estilo exigido por la titulación. La selección no se presenta como una revisión sistemática completa ni como evidencia de haber reproducido los artículos citados.
 
 1. Alpha Vantage. *API Documentation: News & Sentiments*. [Documentación oficial](https://www.alphavantage.co/documentation/#news-sentiment).
 2. yfinance. *yfinance.download*. [Documentación del proyecto](https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html).
@@ -641,10 +1045,19 @@ Las referencias siguientes se consultaron para este borrador el 15 de septiembre
 5. pandas_market_calendars. *Documentación del proyecto*. [Calendarios bursátiles](https://pandas-market-calendars.readthedocs.io/en/latest/).
 6. Chen, T. y Guestrin, C. (2016). *XGBoost: A Scalable Tree Boosting System*. [Artículo](https://arxiv.org/abs/1603.02754).
 7. Ke, G. et al. (2017). *LightGBM: A Highly Efficient Gradient Boosting Decision Tree*. [Artículo](https://papers.nips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html).
+8. Lo, A. W. (2007, versión de autor). *Efficient Markets Hypothesis*. Preparado para The New Palgrave: A Dictionary of Economics, segunda edición. [Texto del autor en MIT](https://web.mit.edu/~alo/www/Papers/EMH_Final.pdf).
+9. Lo, A. W. (2004). *The Adaptive Markets Hypothesis: Market Efficiency from an Evolutionary Perspective*. Journal of Portfolio Management, 30, 15–29. [Resumen del autor](https://web.mit.edu/Alo/www/Papers/JPM2004.html).
+10. Bollen, J., Mao, H. y Zeng, X. (2011). *Twitter mood predicts the stock market*. Journal of Computational Science, 2(1), 1–8. [Artículo y metadatos](https://arxiv.org/abs/1010.3003).
+11. Hu, Z., Liu, W., Bian, J., Liu, X. y Liu, T.-Y. (2018). *Listening to Chaotic Whispers: A Deep Learning Framework for News-oriented Stock Trend Prediction*. WSDM 2018. [Versión de los autores, revisada en 2019](https://arxiv.org/abs/1712.02136).
+12. Xu, Y. y Cohen, S. B. (2018). *Stock Movement Prediction from Tweets and Historical Prices*. ACL, 1970–1979. [Publicación](https://aclanthology.org/P18-1183/).
+13. Fischer, T. y Krauss, C. (2018). *Deep learning with long short-term memory networks for financial market predictions*. European Journal of Operational Research, 270(2), 654–669. [Registro institucional](https://cris.fau.de/publications/208534319/).
+14. Araci, D. (2019). *FinBERT: Financial Sentiment Analysis with Pre-trained Language Models*. [Prepublicación](https://arxiv.org/abs/1908.10063) y [modelo publicado por ProsusAI](https://huggingface.co/ProsusAI/finbert).
+15. VectorBT. *Portfolio simulation: base*. [Documentación oficial](https://vectorbt.dev/api/portfolio/base/). Herramienta relacionada, no utilizada en los resultados actuales.
+16. SHAP. *TreeExplainer*. [Documentación oficial](https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html). Técnica relacionada, todavía no incorporada.
 
-## 18. Anexos y revisión pendiente
+## 10. Anexos
 
-### 18.1 Evidencias locales
+### 10.1 Evidencias locales
 
 | Evidencia | Ruta desde la raíz del repositorio |
 | --- | --- |
@@ -666,10 +1079,33 @@ Las referencias siguientes se consultaron para este borrador el 15 de septiembre
 | Cuadernos de ronda y ablación | `notebooks/05_controlled_improvement_round.ipynb`, `notebooks/06_sentiment_variable_ablation.ipynb` |
 | Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los seis cuadernos de análisis permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
-### 18.2 Glosario
+### 10.2 Glosario
 
 **Sesión:** día de negociación del calendario utilizado. **Identificador bursátil (`ticker`):** símbolo de un activo. **Variable predictora:** característica utilizada como entrada del modelo. **Objetivo (`target`):** etiqueta que se intenta predecir. **Partición:** división de entrenamiento y evaluación. **Purga:** exclusión de filas cuyo horizonte de etiqueta alcanza la evaluación. **Conjunto de prueba reservado:** observaciones separadas para evaluar. **Ablación:** comparación que modifica un bloque de variables. **Modelo de referencia:** método sencillo con el que se comparan los demás. **Remuestreo:** generación de muestras a partir de los datos para explorar incertidumbre. **Fuga de información:** utilización indebida de información futura o de evaluación.
 
 Los nombres de algoritmos, bibliotecas, columnas, rutas y títulos bibliográficos se conservan en su forma original para facilitar su identificación en el código y en las fuentes.
+
+### 10.3 Reproducción de las figuras de esta revisión
+
+Las nueve figuras añadidas a la memoria se guardan en `docs/figures/memoria/`. El archivo `procedencia.json` identifica las entradas y salidas mediante SHA-256 y conserva los AUC y precisiones medias del diagnóstico. Se regeneran desde la raíz con:
+
+```powershell
+.venv\Scripts\python.exe docs/figures/memoria/generar_figuras.py
+```
+
+El generador exige los informes de las dos últimas ejecuciones y el panel local conservado de la primera ronda. Verifica sus huellas antes de leerlos. No descarga noticias, no entrena, no modifica informes anteriores ni sustituye la selección de `reports/final/`. Sin ese panel local pueden inspeccionarse las imágenes conservadas, pero no reconstruir las figuras de datos únicamente a partir de sus hashes.
+
+Los cuatro diagramas se mantienen como bloques Mermaid editables dentro del borrador. La exportación final a Word o PDF deberá renderizarlos y revisar su paginación. Las figuras y ecuaciones deberán numerarse de forma automática al preparar el documento definitivo.
+
+### 10.4 Revisión pendiente antes de la entrega
+
+- Validar con el autor las 330 horas propuestas y separar dedicación acreditable de trabajo aún pendiente.
+- Ampliar y revisar críticamente el estado del arte; completar las fichas comparables y homogeneizar bibliografía.
+- Revisar con el tutor el estudio interno de FinBERT y completar después su evaluación lingüística e integración predictiva. No presentar esas dos fases como ejecutadas; SHAP, otros horizontes, backtesting y aplicación siguen fuera del alcance elegido.
+- Añadir curvas de aprendizaje solo tras realizar los entrenamientos necesarios; no reutilizar curvas de ajuste como si fueran equivalentes.
+- Decidir si se necesita un calendario de resultados empresariales para analizar cobertura alrededor de esos eventos.
+- Revisar diagramas, ecuaciones, unidades, referencias cruzadas y legibilidad en el formato de entrega.
+
+Las orientaciones de extensión del tutor (20–25 páginas para estado del arte y monitorización; 15–20 para ingeniería, fundamentos matemáticos y análisis exploratorio) son objetivos editoriales, no páginas ya producidas. Esta revisión amplía el contenido y lo organiza en los diez capítulos, pero no acredita esos rangos sin maquetación ni sustituye las lecturas y pruebas pendientes por texto de relleno.

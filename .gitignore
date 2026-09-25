@@ -5,6 +5,7 @@ __pycache__/
 
 # Generated model artifacts
 *.joblib
+/models/pretrained/
 /data/experiments/
 /artifacts/snapshots/
 /artifacts/verification/

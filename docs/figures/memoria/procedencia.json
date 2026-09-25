@@ -1,0 +1,125 @@
+{
+  "purpose": "Figuras documentales; sin entrenamiento ni descargas",
+  "input_sha256": {
+    "reports/experiments/first-round-full-20260916/manifest.json": "a73304e154463eb70d740431a0b6d273a142c6616fdec0f6b2cad445f63cae22",
+    "reports/experiments/variable-ablation-full-20260917/manifest.json": "638f0f31a49ad51d1bfdf835affe158463c73a461229b20370d61dbb30bb0d81",
+    "data/experiments/first-round-full-20260916/dataset.csv": "96880b580d47d8a6df4376bfba810f9db2de8ddf81498b3287c76f0e1e670d86",
+    "reports/experiments/first-round-full-20260916/quality/monthly_coverage.csv": "fe6ec97654c045958af41da7f97f7b2f463e35a91c070f358c09d742dfe5e9e8",
+    "reports/experiments/variable-ablation-full-20260917/predictions/all_predictions.csv": "74300105a03c5761761bdd252d0b362b70fcfef5ed145c81e5b1f50dd2e387e8",
+    "reports/experiments/variable-ablation-full-20260917/metrics/company_metrics.csv": "6614cf16c3fad3bd5555ff94545765e5c37c52de002557e7a7973a206281f83d",
+    "reports/experiments/first-round-full-20260916/tuning/inner_cv.csv": "324436999cf9a4e67b9c6fbfb24f6999034ad6ff48f1c22d283fcac907068fe4",
+    "docs/figures/memoria/generar_figuras.py": "4537297c8eb2195e2ee6ace8141e95fdc400b3d6848a61a03c6357965a57783a"
+  },
+  "output_sha256": {
+    "precios.png": "027e66f76119952bd3b3c7b650a46696d71b1d7e91cd142630c5e9627195085d",
+    "volatilidad.png": "8cdefbe133ed40f3b74246d90b5864ac61d0d3873fb75c9ce6203a84cc978c99",
+    "volumen.png": "77a00983ae526b61d15ba3487a8c32a517ba98bbfe36ac2093e586b638756ba2",
+    "correlaciones.png": "ef911158adc52acbb528b017faa44472fe5189917b16bc651588ccb70d95bf44",
+    "cobertura.png": "c7b2c13f241493618d5cb6aa9b3f5c129955c54f34fd4d2eb99adc2971188f93",
+    "roc.png": "62492d1ee5a420cf0d6f82f2e2f54c5be13a822e93ff2d371f1108ff88c4c639",
+    "precision_recall.png": "ae5dcf74b8809c1dcf0b9b1231e7d2f98707525fbf220834a0795f044f215e3b",
+    "confusion.png": "69351b9f4a804c4515b5468adebf41f020c896216e4eefc7eb07e2613711ece6",
+    "candidatos.png": "063f16568399b567c68bdfcfa5fe111897c012af578a2f3748a8cbccfe5a4076"
+  },
+  "panel_rows": 11056,
+  "diagnostic_model": "random_forest/hybrid; selección descriptiva tras observar la ablación",
+  "diagnostic_scores": [
+    {
+      "ticker": "AAPL",
+      "approach": "deduplicated",
+      "metric": "AUC",
+      "value": 0.4506011707008385
+    },
+    {
+      "ticker": "AAPL",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AUC",
+      "value": 0.48025101513473606
+    },
+    {
+      "ticker": "MSFT",
+      "approach": "deduplicated",
+      "metric": "AUC",
+      "value": 0.51679084760093
+    },
+    {
+      "ticker": "MSFT",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AUC",
+      "value": 0.5088115620376241
+    },
+    {
+      "ticker": "NVDA",
+      "approach": "deduplicated",
+      "metric": "AUC",
+      "value": 0.542208306911858
+    },
+    {
+      "ticker": "NVDA",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AUC",
+      "value": 0.574719932361023
+    },
+    {
+      "ticker": "TSLA",
+      "approach": "deduplicated",
+      "metric": "AUC",
+      "value": 0.5083235178641539
+    },
+    {
+      "ticker": "TSLA",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AUC",
+      "value": 0.5169873053265279
+    },
+    {
+      "ticker": "AAPL",
+      "approach": "deduplicated",
+      "metric": "AP",
+      "value": 0.5102784221475456
+    },
+    {
+      "ticker": "AAPL",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AP",
+      "value": 0.5335956884170623
+    },
+    {
+      "ticker": "MSFT",
+      "approach": "deduplicated",
+      "metric": "AP",
+      "value": 0.5677939123638054
+    },
+    {
+      "ticker": "MSFT",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AP",
+      "value": 0.5587907687275269
+    },
+    {
+      "ticker": "NVDA",
+      "approach": "deduplicated",
+      "metric": "AP",
+      "value": 0.6033296779646649
+    },
+    {
+      "ticker": "NVDA",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AP",
+      "value": 0.6208280722393665
+    },
+    {
+      "ticker": "TSLA",
+      "approach": "deduplicated",
+      "metric": "AP",
+      "value": 0.5431211585721986
+    },
+    {
+      "ticker": "TSLA",
+      "approach": "add_news_abs_sentiment",
+      "metric": "AP",
+      "value": 0.554149107715242
+    }
+  ],
+  "new_learning_curves": false
+}
