@@ -23,4 +23,4 @@ jobs:
           cache: pip
       - run: pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
       - run: pip install -r requirements-finbert.txt
-      - run: python -m unittest tests.test_finbert -v
+      - run: python -m unittest tests.test_finbert tests.test_finbert_attribution -v
