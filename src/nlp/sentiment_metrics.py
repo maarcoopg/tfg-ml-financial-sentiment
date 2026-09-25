@@ -51,12 +51,14 @@ def annotator_agreement(sample, primary, secondary):
         raise ValueError("Invalid secondary annotation IDs")
     subset = sample[sample.news_id.isin(secondary.news_id)]
     second = validated_annotations(subset, secondary)
-    paired = first.merge(second[["news_id", "label", "annotator_id"]], on="news_id",
+    paired = first.merge(second[["news_id", "label", "language", "annotator_id"]], on="news_id",
                          validate="one_to_one", suffixes=("_first", "_second"))
     if (paired.annotator_id_first.str.casefold() == paired.annotator_id_second.str.casefold()).any():
         raise ValueError("Double annotation requires independent annotators")
-    disagreements = paired.loc[paired.label_first != paired.label_second, "news_id"].tolist()
+    disagreements = paired.loc[(paired.label_first != paired.label_second) |
+                               (paired.language_first != paired.language_second), "news_id"].tolist()
     categories = set(paired.label_first) | set(paired.label_second)
     return {"count": len(paired), "agreement": float((paired.label_first == paired.label_second).mean()),
+            "language_agreement": float((paired.language_first == paired.language_second).mean()),
             "kappa": float(cohen_kappa_score(paired.label_first, paired.label_second)) if len(categories) > 1 else None,
             "disagreement_ids": disagreements, "adjudication_required": bool(disagreements)}

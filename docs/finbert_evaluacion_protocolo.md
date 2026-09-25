@@ -58,8 +58,10 @@ de resolver discrepancias; se guarda la adjudicación sin borrar los originales.
 Si no se dispone de un segundo anotador, debe declararse la limitación, no
 simularlo. El autor deberá confirmar la muestra y realizar u organizar la anotación.
 
-Se copian las plantillas a una carpeta de trabajo antes de rellenarlas; no se
-editan los informes inmutables. Las métricas exigen etiquetas y procedencia
+Las copias de trabajo se han preparado en `data/annotations/finbert-sentiment-20260925/`,
+fuera de Git; no se editan los informes inmutables. Quien haya consultado las
+predicciones de un ejemplo no puede presentarse como anotador ciego de ese caso.
+Las métricas exigen etiquetas y procedencia
 completas, ID únicos, empresa intacta y partición tomada del manifiesto, no del
 archivo editable. Unas etiquetas vacías no producen métricas ficticias.
 
@@ -116,3 +118,33 @@ La revisión publicada del checkpoint es de mayo de 2023, anterior al corte,
 según el [historial del modelo](https://huggingface.co/ProsusAI/finbert/commits/main).
 Esto no identifica todos los documentos de preentrenamiento ni descarta
 solapamiento con las noticias antiguas de desarrollo.
+
+La auditoría conservada contrasta además el SHA-256 LFS de los pesos publicados
+el 24 de diciembre de 2020 con los utilizados localmente: coincide
+(`e15a7b5738df7f17553399b6d94c6e2ff69c89245d066e8e5d183f5803a554e3`). Esto
+apoya que estos pesos ya estaban disponibles antes del panel reservado, pero no
+garantiza independencia respecto a textos antiguos o republicados. La evidencia
+está en `checkpoint_temporal_audit.json` del informe.
+
+## Comandos de reproducción
+
+Desde la raíz, con las dependencias principales y opcionales instaladas y pesos
+en caché, para crear un diagnóstico nuevo sin sobrescribir el existente:
+
+```powershell
+python -m src.nlp.evaluate_sentiment --output reports/experiments/finbert-sentiment-NUEVA-EJECUCION
+```
+
+Después de completar las anotaciones primarias y secundarias, el evaluador
+comprueba procedencia, IDs, texto y empresa. Si hay discrepancias exige un archivo
+adjudicado separado que conserve las 400 filas; no se sobrescriben los originales.
+Solo entonces permite inferencia sobre la partición elegida:
+
+```powershell
+python -m src.nlp.score_sentiment --sample-run reports/experiments/finbert-sentiment-20260925 --primary data/annotations/finbert-sentiment-20260925/annotation_primary.csv --secondary data/annotations/finbert-sentiment-20260925/annotation_secondary.csv --adjudicated data/annotations/finbert-sentiment-20260925/adjudicated.csv --partition evaluation --output reports/experiments/finbert-sentiment-human-NUEVA-EJECUCION
+```
+
+Se omite `--adjudicated` si no hubo desacuerdos. Si no se consigue un segundo
+anotador, `--allow-single-annotator` exige aceptar explícitamente esa limitación
+y sustituye a `--secondary`; no simula independencia. Ninguno de estos comandos
+de evaluación humana se ha ejecutado con etiquetas reales todavía.

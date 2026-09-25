@@ -5,7 +5,7 @@ Grado en Ingeniería del Software · Universidad de Sevilla
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
 **Revisión documental:** 19 de septiembre de 2026, según las orientaciones del tutor.
-**Ampliación de PLN:** 22 de septiembre de 2026, estudio interno de FinBERT; evaluación lingüística y financiera pendientes.
+**Ampliación de PLN:** 25 de septiembre de 2026, estudio interno y diagnóstico de desarrollo de FinBERT; evaluación humana y financiera pendientes.
 
 > Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916` y `variable-ablation-full-20260917`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
@@ -109,7 +109,7 @@ Los hitos verificables son la disponibilidad del corpus, el primer modelo compar
 | Crecimiento del alcance | Memoria y desarrollo inconexos | Una hipótesis por ampliación y aprobación de su alcance antes de implementarla |
 | Pérdida de datos locales | Reproducción incompleta | Manifiestos y conservación externa de entradas; los hashes no sustituyen una copia |
 
-El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). Solo la primera se ha implementado y verificado. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
+El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). La primera está implementada y verificada; la segunda dispone de diagnóstico de desarrollo y herramientas de evaluación, pero requiere anotaciones humanas. La tercera no ha comenzado. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
 
 ## 3. Estado del arte y fundamentos teóricos
 
@@ -211,6 +211,16 @@ La máscara excluye claves de relleno, no el contexto posterior de la misma noti
 La representación final de `[CLS]` pasa por el pooler, una transformación lineal con tangente hiperbólica, y una capa de tres logits. Softmax produce probabilidades positiva, negativa y neutral. La diferencia entre probabilidades positiva y negativa es un indicador de tono, no la probabilidad de subida del activo. La confianza no está garantizada como calibrada, y un mapa de atención no constituye por sí solo una explicación causal.
 
 La [guía técnica](finbert_modelo.md) desarrolla las operaciones, objetivos de aprendizaje y limitaciones. El [cuaderno 07](../notebooks/07_finbert_model_understanding.ipynb) las muestra con tensores reales y comprobaciones numéricas. Fuentes: [BERT](https://aclanthology.org/N19-1423/), [configuración fijada](https://huggingface.co/ProsusAI/finbert/blob/4556d13015211d73dccd3fdd39d39232506f3e43/config.json) e [implementación de Transformers](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/bert/modeling_bert.py).
+
+### 3.11 Atribución por gradientes integrados
+
+Para estudiar la sensibilidad de una predicción se utiliza Integrated Gradients de Captum sobre embeddings de palabras. Para una función $F$ que devuelve el logit de la clase elegida, una entrada $x$ y una referencia $x'$:
+
+$$IG_i(x)=(x_i-x'_i)\int_0^1\frac{\partial F(x'+\alpha(x-x'))}{\partial x_i}\,d\alpha.$$
+
+Las contribuciones se suman sobre las dimensiones del embedding para obtener una atribución por token. Se comparan referencias PAD y MASK, preservando tokens especiales, posiciones, segmentos y máscara de atención. Son referencias artificiales, no noticias neutrales. La completitud contrasta la suma con $F(x)-F(x')$; se registra el residuo y se incrementan los pasos de integración si excede la tolerancia fijada.
+
+La convergencia no demuestra fidelidad semántica. Se contrasta además la sensibilidad al enmascarar tokens con contribución positiva elevada, tokens de baja magnitud e igual número de tokens aleatorios. Estos cambios pueden generar entradas artificiales; no se infiere causalidad económica. Fuentes: [Sundararajan et al.](https://proceedings.mlr.press/v70/sundararajan17a.html) y [Captum](https://captum.ai/api/integrated_gradients.html).
 
 ## 4. Fuentes de datos y procesamiento
 
@@ -739,7 +749,23 @@ Se contabilizan **109.484.547 parámetros** y se contrastan **28 operaciones**: 
 
 También se comprueba que el relleno no recibe atención como clave y que una frase mantiene sus probabilidades al cambiar la longitud del otro texto del lote, dentro de tolerancia. Un texto sintético de 522 tokens, incluidos los especiales, se recorta a 512, registrándose diez tokens descartados. Las doce pruebas unitarias adicionales usan una arquitectura BERT pequeña aleatoria, sin descargar pesos; se distinguen de la inspección del checkpoint real.
 
-Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. No se calculan macro-F1 lingüístico ni nuevas métricas bursátiles. La evaluación con anotaciones humanas, el tratamiento dirigido a cada empresa, las atribuciones y la integración temporal quedan para las siguientes fases. Todos los resultados financieros anteriores permanecen intactos.
+Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. Esta primera tarea no calcula macro-F1 lingüístico ni nuevas métricas bursátiles. El diagnóstico posterior de contexto y atribuciones se presenta a continuación; la referencia humana y la integración financiera siguen pendientes. Todos los resultados financieros anteriores permanecen intactos.
+
+### 5.8 Diagnóstico del sentimiento, con referencia humana pendiente
+
+La ejecución `finbert-sentiment-20260925` audita 46.223 registros noticia–empresa y 38.704 textos distintos, antes de la alineación bursátil; no se confunden con las 46.014 noticias alineadas de experimentos anteriores. La longitud mediana es 114 tokens y la máxima 493, incluidos tokens especiales. No se detecta truncamiento por el límite de 512. Hay 13 resúmenes vacíos y 102 alertas heurísticas de idioma; estas últimas requieren revisión, no certifican textos no ingleses.
+
+Se agrupan coincidencias normalizadas de URL, titular o texto completo. Catorce grupos cruzan el corte del 16/10/2023 y se excluyen de la muestra, afectando a 46 filas. Se seleccionan 400 parejas, 50 por empresa y partición; 200 de desarrollo y 200 de evaluación. Los 96 ejemplos de doble anotación se fijan antes de obtener etiquetas. La selección por hash no utiliza sentimiento o retornos, pero el equilibrio impuesto no reproduce la distribución del corpus.
+
+La extracción de frases con alias explícitos de la empresa encuentra contexto en 193 de las 400 parejas; cuando falta se registra abstención. La inferencia se limita a desarrollo. Allí, las etiquetas coinciden en un 55,5 % entre titular y titular con resumen (200 parejas), un 83,0 % entre texto completo y contexto disponible (100 parejas) y un 49,0 % entre texto completo y Alpha Vantage (200 parejas). **Son acuerdos entre sistemas, no exactitud frente a una referencia humana.** No se presupone que añadir el ticker convierta FinBERT en un clasificador dirigido.
+
+Los siete pares sintéticos exploran beneficios, negación, pérdidas, expectativas, previsiones, litigios y empresas con efectos opuestos. Cinco de los seis contrastes con orden esperado presentan ese signo, pero varias frases conservan etiqueta positiva al introducir negación, ampliación de pérdidas o incumplimiento de expectativas. El par de litigios invierte el orden esperado. No se presentan estos ejemplos como benchmark representativo ni se calcula una tasa general de acierto con ellos.
+
+Las ocho atribuciones, cuatro textos por dos referencias, cumplen la tolerancia fijada con 32–128 pasos. El mayor residuo absoluto es 0,016535. Los resultados dependen de la referencia y no siempre superan el control aleatorio: en el primer ejemplo, el enmascaramiento dirigido con MASK reduce el logit aproximadamente 0,451, frente a 0,639 del control aleatorio medio. Se conservan estos casos para evitar una interpretación favorable selectiva.
+
+La huella SHA-256 de los pesos coincide con el objeto LFS publicado en diciembre de 2020. Esto apoya su disponibilidad antes del periodo reservado, pero no identifica el corpus de entrenamiento ni descarta solapamientos con noticias antiguas. Se conserva la evidencia consultada junto a las huellas de entradas, código y resultados.
+
+El [protocolo de anotación](finbert_evaluacion_protocolo.md) define las clases positiva, negativa, neutral e información insuficiente, revisión de idioma y resolución de desacuerdos. Las plantillas siguen vacías y el evaluador las rechaza: faltan las anotaciones humanas para calcular macro-F1, métricas por clase y matrices de confusión lingüísticas. No se generan predicciones para el panel reservado ni se inicia #51. El [informe](../reports/experiments/finbert-sentiment-20260925/analysis.md) y el [cuaderno 08](../notebooks/08_finbert_sentiment_evaluation.ipynb) presentan estos diagnósticos sin sustituir los resultados financieros.
 
 ## 6. Especificación de requisitos
 
@@ -754,7 +780,7 @@ Los [resultados y sus huellas](../reports/experiments/finbert-understanding-2026
 | Aislar imputación y escalado | Cadena de preprocesamiento y modelado ajustada en cada entrenamiento | `src/models/train_models.py` |
 | No sobrescribir experimentos anteriores | Identificador nuevo y rechazo de colisiones | `src/experiments/artifacts.py` |
 | Conservar resultados auditables | CSV, manifiestos y hashes SHA-256 | `reports/experiments/` |
-| Facilitar la explicación | Memoria, guías y siete cuadernos de análisis | `docs/` y `notebooks/` |
+| Facilitar la explicación | Memoria, guías y ocho cuadernos de análisis | `docs/` y `notebooks/` |
 | Inspeccionar el modelo de lenguaje | Checkpoint fijo, reconstrucción numérica y diagnóstico local | `src/nlp/` y cuaderno 07 |
 
 ### 6.2 Actores, alcance y casos de uso
@@ -794,7 +820,7 @@ flowchart LR
 | RNF4 | Conservación histórica | Una ejecución no sobrescribe otra con el mismo identificador | Rechazo de colisiones en `create_run` |
 | RNF5 | Protección de credenciales | Claves fuera del repositorio y de los informes | Variables de entorno; no sustituye auditoría de seguridad completa |
 | RNF6 | Mantenibilidad | Separación entre adquisición, modelos, experimentos y presentación | Módulos y pruebas focalizadas |
-| RNF7 | Legibilidad | Figuras con unidades, referencias y procedencia; texto en español | Memoria y siete cuadernos; revisión humana pendiente |
+| RNF7 | Legibilidad | Figuras con unidades, referencias y procedencia; texto en español | Memoria y ocho cuadernos; revisión humana pendiente |
 
 No se declara disponibilidad continua, latencia garantizada ni escalabilidad de servicio web: no existen pruebas de carga ni despliegue de ese tipo. El requisito de calidad experimental se cumple documentando resultados válidos, aunque no mejoren el modelo de referencia.
 
@@ -802,7 +828,7 @@ No se declara disponibilidad continua, latencia garantizada ni escalabilidad de 
 
 ### 7.1 Arquitectura
 
-La extensión opcional `src/nlp/` inspecciona FinBERT de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. El ejecutor genera un informe nuevo sin modificar precios, sentimiento de Alpha Vantage ni modelos financieros. La vista siguiente describe el flujo financiero existente; conectar la salida textual a ese flujo queda pendiente de las issues #50 y #51.
+La extensión opcional `src/nlp/` inspecciona FinBERT y ejecuta diagnósticos lingüísticos de desarrollo de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. Los ejecutores generan informes nuevos sin modificar precios, sentimiento de Alpha Vantage ni modelos financieros. Las anotaciones de trabajo se mantienen en `data/annotations/`, separadas de las plantillas inmutables. La vista siguiente describe el flujo financiero existente; conectar la salida textual a ese flujo queda pendiente de completar #50 y ejecutar #51.
 
 ```text
 Precios descargados + noticias con sentimiento por empresa
@@ -849,7 +875,7 @@ Los `.joblib` y los artefactos locales pesados están excluidos del seguimiento 
 
 ### 7.3 Verificación y reproducibilidad
 
-El conjunto local de pruebas contiene 58 pruebas superadas, frente a las 28 de la revisión inicial. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. La última ronda añade deduplicación, ventanas, nuevas representaciones, selección macro y aislamiento de las familias de variables. Se ejecuta mediante `python -m unittest discover -s tests -v`.
+El conjunto local contiene 89 pruebas superadas con las dependencias opcionales de PLN instaladas: conserva las 58 de los experimentos financieros y añade 31 de inspección interna, muestra, anotación, métricas y atribuciones. La revisión inicial tenía 28. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. Las rondas posteriores añaden deduplicación, ventanas, selección macro y aislamiento de variables; PLN incorpora grupos disjuntos, anotación independiente, rechazo de etiquetas vacías y completitud de atribuciones. Se ejecuta mediante `python -m unittest discover -s tests -v`; las pruebas que requieren PyTorch y Captum se omiten si faltan esas dependencias y disponen de un trabajo específico de CI.
 
 En la revisión completa se verificó que los 183 modelos guardados reproducían las probabilidades y clases almacenadas, y que las fronteras de los 1.080 ajustes internos y los 183 externos respetaban la condición de purga. Se verificaron ejecuciones reducidas independientes del protocolo y del flujo tradicional.
 
@@ -1079,7 +1105,7 @@ La bibliografía técnica inicial se consultó el 15 de septiembre de 2026 y los
 | Cuadernos de ronda y ablación | `notebooks/05_controlled_improvement_round.ipynb`, `notebooks/06_sentiment_variable_ablation.ipynb` |
 | Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. El cuaderno 08 lee informes del diagnóstico de sentimiento y distingue expresamente las anotaciones humanas pendientes. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
 ### 10.2 Glosario
 
@@ -1103,7 +1129,7 @@ Los cuatro diagramas se mantienen como bloques Mermaid editables dentro del borr
 
 - Validar con el autor las 330 horas propuestas y separar dedicación acreditable de trabajo aún pendiente.
 - Ampliar y revisar críticamente el estado del arte; completar las fichas comparables y homogeneizar bibliografía.
-- Revisar con el tutor el estudio interno de FinBERT y completar después su evaluación lingüística e integración predictiva. No presentar esas dos fases como ejecutadas; SHAP, otros horizontes, backtesting y aplicación siguen fuera del alcance elegido.
+- Revisar con el tutor el estudio interno y los diagnósticos de FinBERT; completar anotación humana, evaluación lingüística e integración predictiva. No presentar esas evaluaciones como terminadas; SHAP, otros horizontes, backtesting y aplicación siguen fuera del alcance elegido.
 - Añadir curvas de aprendizaje solo tras realizar los entrenamientos necesarios; no reutilizar curvas de ajuste como si fueran equivalentes.
 - Decidir si se necesita un calendario de resultados empresariales para analizar cobertura alrededor de esos eventos.
 - Revisar diagramas, ecuaciones, unidades, referencias cruzadas y legibilidad en el formato de entrega.

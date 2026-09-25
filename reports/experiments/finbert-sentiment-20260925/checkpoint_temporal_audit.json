@@ -1,0 +1,265 @@
+{
+  "consulted_at": "2026-09-25T10:14:05.543314+00:00",
+  "sources": [
+    "https://huggingface.co/api/models/ProsusAI/finbert/commits/main",
+    "https://huggingface.co/api/models/ProsusAI/finbert/revision/5fcfed04a2ca89adf4170ec0a4715103ed7745db?blobs=true"
+  ],
+  "commits": [
+    {
+      "id": "4556d13015211d73dccd3fdd39d39232506f3e43",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "Zulkuf",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1664744054132-6339f68d37faf14d3a9a06e2.jpeg"
+        }
+      ],
+      "date": "2023-05-23T12:43:35.000Z"
+    },
+    {
+      "id": "54bddcea2cca580dd1df6a88d33242dcf4c61a71",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "Zulkuf",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1664744054132-6339f68d37faf14d3a9a06e2.jpeg"
+        }
+      ],
+      "date": "2022-10-02T20:55:58.000Z"
+    },
+    {
+      "id": "6fb22e625407031b618804e3f4a9b23d8df18134",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "Zulkuf",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1664744054132-6339f68d37faf14d3a9a06e2.jpeg"
+        }
+      ],
+      "date": "2022-10-02T20:44:53.000Z"
+    },
+    {
+      "id": "1f29c7221f73062a9858d1e09e6bcc86d155203f",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "Zulkuf",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1664744054132-6339f68d37faf14d3a9a06e2.jpeg"
+        }
+      ],
+      "date": "2022-10-02T20:44:07.000Z"
+    },
+    {
+      "id": "5ea63b3d0c737ad6f06e061d9af36b1f7bbd1a4b",
+      "title": "Add TF weights (#2)",
+      "message": "\n\n\n- Add TF weights (fc14d8717a3aba01439b3bc714a20ea700c6f345)\n\n\nCo-authored-by: Joao Gante <joaogante@users.noreply.huggingface.co>\n",
+      "authors": [
+        {
+          "user": "theofpa",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1633354143361-5fe4a52073152f333e959e70.jpeg"
+        },
+        {
+          "user": "joaogante",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1641203017724-noauth.png"
+        }
+      ],
+      "date": "2022-06-03T06:34:37.000Z"
+    },
+    {
+      "id": "661ebe853a9b7c340782ebcd2e7c220839f9d67f",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2021-07-05T08:50:51.000Z"
+    },
+    {
+      "id": "e0a9afa4203ff000dcad7689508213d6b84f0920",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2021-07-05T08:50:09.000Z"
+    },
+    {
+      "id": "1e0cb46f5799a028f6df335abf2437b74a6c0ba8",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "theofpa",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1633354143361-5fe4a52073152f333e959e70.jpeg"
+        }
+      ],
+      "date": "2021-07-05T08:48:30.000Z"
+    },
+    {
+      "id": "02aac5de1865df6f054cc84110ecc2847f2ec409",
+      "title": "upload flax model",
+      "message": "\n",
+      "authors": [
+        {
+          "user": "patrickvonplaten",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1584435275418-5dfcb1aada6d0311fd3d5448.jpeg"
+        }
+      ],
+      "date": "2021-05-18T21:54:10.000Z"
+    },
+    {
+      "id": "4794c7bee6b6cc4b150b22dd2afb89bcedc567a8",
+      "title": "allow flax",
+      "message": "\n",
+      "authors": [
+        {
+          "user": "patrickvonplaten",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1584435275418-5dfcb1aada6d0311fd3d5448.jpeg"
+        }
+      ],
+      "date": "2021-05-18T21:53:53.000Z"
+    },
+    {
+      "id": "0b25586221efa26d70ce760da350194146c3e1ec",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T13:58:53.000Z"
+    },
+    {
+      "id": "6f8b7ad1d5e8c0ecbad4718c21c8687a6a292086",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T13:02:57.000Z"
+    },
+    {
+      "id": "9da7f98ee6a18d139b7d95b2017b283c74048e83",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T13:01:14.000Z"
+    },
+    {
+      "id": "a677990aaa7e6db63d673786a74d575cc071522e",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T13:00:44.000Z"
+    },
+    {
+      "id": "268ccdd02c757f8b61c8c628095052572fae65fe",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T13:00:13.000Z"
+    },
+    {
+      "id": "91f315a3688b6686ecdd9f96ecd557d382ac88f3",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T12:57:24.000Z"
+    },
+    {
+      "id": "5f0b68fa035e836df76ec510fccab4441537a468",
+      "title": "Update README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T12:57:09.000Z"
+    },
+    {
+      "id": "74520dc26ec011664969d3312566a8b1df332a82",
+      "title": "Create README.md",
+      "message": "",
+      "authors": [
+        {
+          "user": "doguaraci",
+          "avatar": "/avatars/b0280ab296d18c913cda8b6ba4939a14.svg"
+        }
+      ],
+      "date": "2020-12-24T12:52:04.000Z"
+    },
+    {
+      "id": "5fcfed04a2ca89adf4170ec0a4715103ed7745db",
+      "title": "First version of finbert",
+      "message": "\n",
+      "authors": [
+        {
+          "user": "Ubuntu"
+        }
+      ],
+      "date": "2020-12-24T12:41:41.000Z"
+    },
+    {
+      "id": "61a4192dfc9d0a899c63a10cc2adbef7c4fd541a",
+      "title": "initial commit",
+      "message": "",
+      "authors": [
+        {
+          "user": "system",
+          "avatar": "https://cdn-avatars.huggingface.co/v1/production/uploads/1646125250765-61af81e7a7205fb7cc9ec0cb.png"
+        }
+      ],
+      "date": "2020-12-24T12:34:31.000Z"
+    }
+  ],
+  "original_weights_metadata": {
+    "rfilename": "pytorch_model.bin",
+    "blobId": "c0104036bc2c3730025744ec953879eca6557f38",
+    "size": 437992753,
+    "lfs": {
+      "sha256": "e15a7b5738df7f17553399b6d94c6e2ff69c89245d066e8e5d183f5803a554e3",
+      "size": 437992753,
+      "pointerSize": 134
+    }
+  },
+  "current_local_sha256": "e15a7b5738df7f17553399b6d94c6e2ff69c89245d066e8e5d183f5803a554e3",
+  "same_weights_as_2020": true,
+  "limitation": "Publication history does not enumerate the training corpus; development-news overlap remains unknown"
+}

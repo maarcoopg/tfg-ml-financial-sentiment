@@ -39,3 +39,10 @@ class HumanMetricsTests(unittest.TestCase):
         result = annotator_agreement(self.sample, self.labels, other)
         self.assertEqual(result["agreement"], 1)
         self.assertIsNone(result["kappa"])
+
+    def test_language_disagreement_also_requires_adjudication(self):
+        other = self.labels.iloc[:3].assign(annotator_id="fixture_b", language="uncertain")
+        result = annotator_agreement(self.sample, self.labels, other)
+        self.assertEqual(result["agreement"], 1)
+        self.assertEqual(result["language_agreement"], 0)
+        self.assertTrue(result["adjudication_required"])

@@ -52,9 +52,9 @@ def main():
             raise ValueError("Adjudication requires the original independent annotations")
         gold = pd.read_csv(ROOT / args.adjudicated, keep_default_na=False)
         validated_annotations(sample, gold)
-        before = primary.set_index("news_id").label
-        after = gold.set_index("news_id").label.reindex(before.index)
-        changed = set(before.index[before != after])
+        before = primary.set_index("news_id")[["label", "language"]]
+        after = gold.set_index("news_id")[["label", "language"]].reindex(before.index)
+        changed = set(before.index[(before != after).any(axis=1)])
         if not changed <= set(agreement["disagreement_ids"]):
             raise ValueError("Adjudication changed labels outside the recorded disagreements")
         inputs.append(ROOT / args.adjudicated)
@@ -68,6 +68,7 @@ def main():
     output, output_manifest = create_run(ROOT, args.output, {
         "model_id": MODEL_ID, "revision": REVISION, "partition": args.partition,
         "sample_run": str(args.sample_run), "annotation_files_sha256": {str(p): sha256(p) for p in inputs}})
+    output_manifest["evaluation_status"] = "Human sentiment classification, not financial evaluation"
     predictions.to_csv(output / "predictions.csv", index=False)
     write_json(output / "quality.json", metrics)
     write_json(output / "annotator_agreement.json", agreement)

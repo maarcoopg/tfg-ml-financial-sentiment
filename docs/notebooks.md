@@ -125,6 +125,20 @@ python -m pip install -r requirements-finbert.txt
 python -m src.nlp.inspect_finbert --download
 ```
 
+## 08. Diagnóstico del sentimiento de FinBERT
+
+[08_finbert_sentiment_evaluation.ipynb](../notebooks/08_finbert_sentiment_evaluation.ipynb)
+lee `finbert-sentiment-20260925`: auditoría, muestra temporal ciega, disponibilidad
+de contexto por empresa, sensibilidad a las representaciones, siete pares
+sintéticos y gradientes integrados con dos referencias y perturbaciones.
+
+No ejecuta el modelo, no descarga pesos ni requiere las dependencias opcionales
+para leer y reproducir sus tablas y figuras. La inferencia del informe se limita
+a 200 parejas de desarrollo. Las otras 200 permanecen reservadas. La calidad
+lingüística sigue pendiente de anotación humana: coincidencia entre sistemas no
+equivale a exactitud. El [protocolo](finbert_evaluacion_protocolo.md) explica las
+plantillas y el comando que rechaza etiquetas incompletas.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:

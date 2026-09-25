@@ -7,6 +7,7 @@ __pycache__/
 *.joblib
 /models/pretrained/
 /data/experiments/
+/data/annotations/
 /artifacts/snapshots/
 /artifacts/verification/
 

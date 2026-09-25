@@ -1,0 +1,8 @@
+{
+  "status": "pending_human_annotation",
+  "primary_labels": 0,
+  "secondary_labels": 0,
+  "quality_metrics_computed": false,
+  "evaluation_predictions_computed": false,
+  "next_step": "Independent human annotation and adjudication before quality evaluation"
+}

@@ -50,6 +50,7 @@ def main():
         "model_id": MODEL_ID, "revision": REVISION, "cutoff_utc": CUTOFF,
         "sample_per_ticker_partition": 50, "seed": 50, "inference_partition": "development",
         "device": "cpu", "threads": args.threads, "human_evaluation": "pending_annotations"})
+    manifest["evaluation_status"] = "Development diagnostics only; human sentiment evaluation pending; no market training"
     source = artifact_dir(output, "source")
     shutil.copy2(ROOT / "requirements-finbert.txt", source / "requirements-finbert.txt")
     manifest["finbert_requirements_sha256"] = sha256(ROOT / "requirements-finbert.txt")

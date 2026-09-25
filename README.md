@@ -41,6 +41,7 @@ python -m src.experiments.run_review
 - [Resultados de la revisión temporal](docs/resultados_revision_temporal.md): evidencia del experimento principal.
 - [Organización de artefactos](docs/report_organization.md): informes, modelos, datos y trazabilidad.
 - [Notebooks de análisis](docs/notebooks.md): exploración guiada y comparación de modelos.
-- [Funcionamiento interno de FinBERT](docs/finbert_modelo.md): extensión opcional, inspección local y notebook 07; todavía sin evaluación lingüística ni integración predictiva.
+- [Funcionamiento interno de FinBERT](docs/finbert_modelo.md): extensión opcional, inspección local y notebook 07; todavía sin evaluación humana ni integración predictiva.
+- [Diagnóstico del sentimiento de FinBERT](docs/finbert_evaluacion_protocolo.md): notebook 08, auditoría y atribuciones; evaluación con referencia humana pendiente.
 
 La memoria consolida la documentación anteriormente dividida por tareas. Las plantillas de GitHub se conservan en `.github/ISSUE_TEMPLATE/`; la documentación versionada en `docs/` ya no contiene borradores de issues.

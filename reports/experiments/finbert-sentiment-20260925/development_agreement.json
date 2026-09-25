@@ -1,0 +1,23 @@
+[
+  {
+    "first": "headline",
+    "second": "full_text",
+    "n": 200,
+    "agreement": 0.555,
+    "interpretation": "agreement_between_systems_not_accuracy"
+  },
+  {
+    "first": "full_text",
+    "second": "company_context",
+    "n": 100,
+    "agreement": 0.83,
+    "interpretation": "agreement_between_systems_not_accuracy"
+  },
+  {
+    "first": "full_text",
+    "second": "alpha_vantage",
+    "n": 200,
+    "agreement": 0.49,
+    "interpretation": "agreement_between_systems_not_accuracy"
+  }
+]
