@@ -6,5 +6,6 @@ reports/experiments/variable-ablation-*/** -text whitespace=trailing-space,space
 reports/experiments/finbert-understanding-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 reports/experiments/finbert-sentiment-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 reports/experiments/finbert-ia-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+reports/experiments/finbert-predictive-*/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
 src/nlp/*.py text eol=lf
 requirements-finbert.txt text eol=lf

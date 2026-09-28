@@ -141,6 +141,31 @@ No hay validación humana: el acuerdo y F1 de esta ampliación no sustituyen esa
 evidencia. El [protocolo](finbert_evaluacion_protocolo.md) registra la delegación,
 las limitaciones y la separación obligatoria entre referencias humanas y de IA.
 
+## 09. Utilidad predictiva de FinBERT
+
+[09_finbert_predictive_evaluation.ipynb](../notebooks/09_finbert_predictive_evaluation.ipynb)
+lee `finbert-predictive-full-20260928`. Compara base financiera, Alpha completo,
+Alpha sobre noticias filtradas y FinBERT sobre esas mismas noticias, con y sin
+retardo. Incluye los tres algoritmos prefijados, métricas por empresa y bloque,
+cobertura, acuerdo entre proveedores, parámetros e intervalos pareados.
+
+Verifica hashes, purga, presupuesto, emparejamiento y AUC recalculados. No necesita
+GPU, pesos, `.joblib` ni ejecutar inferencia. Usa solo los informes versionados y
+las dependencias generales. La comparación sigue siendo exploratoria y no
+demuestra rentabilidad; la referencia de IA de la #50 no se usa para entrenar.
+
+El [protocolo](finbert_prediccion_protocolo.md) fija entrada, checkpoint, filtros y
+presupuesto. Para repetir el experimento, no solo leer el notebook:
+
+```powershell
+python -m src.experiments.run_finbert --run-dir reports/experiments/finbert-predictive-NUEVA --device cpu --cache data/experiments/finbert-cache-cpu/scores.sqlite
+```
+
+La reproducción del entrenamiento sí requiere noticias y precios locales,
+dependencias opcionales y pesos descargados mediante la guía del cuaderno 07.
+La ejecución conservada se hizo en un entorno GPU separado, sin sustituir el
+entorno CPU. La caché verifica checkpoint, texto y entorno, y rechaza mezclarlos.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:
