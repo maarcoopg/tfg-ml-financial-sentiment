@@ -1,0 +1,210 @@
+{
+  "annotation_kind": "ai",
+  "human_validation": false,
+  "labels": {
+    "insufficient": 211,
+    "positive": 94,
+    "neutral": 57,
+    "negative": 38
+  },
+  "language": {
+    "en": 399,
+    "uncertain": 1
+  },
+  "by_partition_company": [
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "label": "insufficient",
+      "n": 28
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "label": "negative",
+      "n": 10
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "label": "neutral",
+      "n": 5
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "label": "positive",
+      "n": 7
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "label": "insufficient",
+      "n": 28
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "label": "negative",
+      "n": 1
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "label": "neutral",
+      "n": 4
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "label": "positive",
+      "n": 17
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "label": "insufficient",
+      "n": 16
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "label": "negative",
+      "n": 5
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "label": "neutral",
+      "n": 6
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "label": "positive",
+      "n": 23
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "label": "insufficient",
+      "n": 28
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "label": "negative",
+      "n": 6
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "label": "neutral",
+      "n": 9
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "label": "positive",
+      "n": 7
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "label": "insufficient",
+      "n": 28
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "label": "negative",
+      "n": 3
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "label": "neutral",
+      "n": 11
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "label": "positive",
+      "n": 8
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "label": "insufficient",
+      "n": 31
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "label": "negative",
+      "n": 6
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "label": "neutral",
+      "n": 6
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "label": "positive",
+      "n": 7
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "label": "insufficient",
+      "n": 23
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "label": "negative",
+      "n": 3
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "label": "neutral",
+      "n": 7
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "label": "positive",
+      "n": 17
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "label": "insufficient",
+      "n": 29
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "label": "negative",
+      "n": 4
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "label": "neutral",
+      "n": 9
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "label": "positive",
+      "n": 8
+    }
+  ],
+  "review_input_sha256": "92191352bdd5906ff69b5a4de464213eb0824dcc2106024ccdc33d5a9db1320f",
+  "reserved_panel_predictions_now_computed": true
+}

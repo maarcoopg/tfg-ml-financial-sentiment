@@ -1,0 +1,401 @@
+row	label	reason
+1	positive	Desarrollo de capacidades propias de IA y mejoras ya aplicadas a productos de Apple.
+2	positive	La comparación atribuye al HomePod un rendimiento superior, aunque más caro.
+3	negative	Recortes de producción motivados por una demanda más débil.
+4	negative	Escasez de iPhone Pro y pérdida prevista de ventas navideñas.
+5	negative	Problemas técnicos obligan a aplazar una mejora del iPhone, aunque sin retrasar envíos.
+6	negative	El texto vincula el fallo con un refuerzo de investigaciones regulatorias sobre Apple.
+7	insufficient	Describe un ETF sin información concreta sobre Apple.
+8	neutral	Interés por opciones de Apple sin dirección ni efecto empresarial determinados.
+9	positive	Presenta Spatial Audio como una mejora diferenciadora de Apple Music.
+10	negative	Caída de Apple atribuida a preocupaciones regulatorias.
+11	insufficient	El beneficiario identificado es Intel; no se concreta una consecuencia para Apple.
+12	positive	Revalorización de Apple y éxito de su división de dispositivos portátiles.
+13	insufficient	Remuneración de instructores de Peloton, sin contexto sobre Apple.
+14	positive	Resultados sólidos de Apple y crecimiento de doble dígito en varios mercados.
+15	insufficient	Impacto ambiental de semiconductores sin atribución específica a Apple.
+16	negative	Infección masiva de aplicaciones que compromete la seguridad del ecosistema Apple.
+17	insufficient	Reforma fiscal general sin efecto individual descrito para Apple.
+18	insufficient	Reorganización de Sony sin contexto atribuible a Apple.
+19	insufficient	Reorganización de Vertiv sin información sobre Apple.
+20	insufficient	Perspectiva sectorial desfavorable sin identificar la situación de Apple.
+21	neutral	Rumor no confirmado sobre un proyecto de automóvil sin resultado comercial establecido.
+22	insufficient	Malas perspectivas de Illumina, no de Apple.
+23	insufficient	Discusión general sobre plataformas sin identificar efectos para Apple.
+24	insufficient	Inversión de TSMC sin relación concreta con Apple en el texto.
+25	insufficient	Resultados de Snap y publicidad sin efecto específico sobre Apple.
+26	insufficient	Retrasos de Intel sin vínculo empresarial con Apple en el texto.
+27	neutral	Apple figura como cliente de Broadcom, pero la previsión favorable es del proveedor.
+28	positive	Actualizaciones que mejoran prestaciones y precios de los portátiles de Apple.
+29	insufficient	Dificultades de Meta sin información atribuible a Apple.
+30	negative	Conflicto con el Gobierno que plantea riesgos para la seguridad de los productos de Apple.
+31	insufficient	Desdoblamiento de acciones de Alphabet sin contexto para Apple.
+32	insufficient	Lanzamiento de un ETF sin información concreta sobre Apple.
+33	positive	El texto sostiene explícitamente que los aranceles favorecerían a Apple.
+34	insufficient	Acuerdo audiovisual de Lionsgate sin vínculo con Apple.
+35	insufficient	Adquisición de NXP por Qualcomm sin efecto sobre Apple descrito.
+36	negative	Demanda cuantiosa por presunto abuso de las comisiones del App Store.
+37	neutral	Apple aparece como participación de un ETF, sin valoración individual de su desempeño.
+38	insufficient	Litigio entre Match y Google sin efecto sobre Apple explicitado.
+39	insufficient	Ventas de oro sin contexto empresarial de Apple.
+40	insufficient	Accesibilidad en Alaska Airlines sin relación descrita con Apple.
+41	insufficient	Componentes de ZTE sin información sobre Apple.
+42	insufficient	Valor de marca de Microsoft, no de Apple.
+43	negative	Netflix evita pagos mediante iTunes y elimina comisiones que recibía Apple.
+44	insufficient	Diversificación de Qualcomm; el texto no precisa una consecuencia para Apple.
+45	insufficient	Reestructuración de Microsoft sin efecto descrito sobre Apple.
+46	insufficient	Conducción autónoma de Tesla e Intel sin contexto sobre Apple.
+47	negative	Cuestionamiento de las prácticas laborales y posibles actividades antisindicales.
+48	neutral	Calendario y especificaciones de fabricación sin resultado comercial demostrado.
+49	insufficient	Contracción publicitaria general sin información atribuible a Apple.
+50	insufficient	Rendimiento de un ETF sin hechos específicos sobre Apple.
+51	positive	Despliegue hospitalario que amplía el uso de Microsoft Teams mediante Teladoc.
+52	insufficient	Producto de SentinelOne y NetApp sin contexto sobre Microsoft.
+53	positive	Integración premiada y eficiencias concretas para Microsoft y sus clientes.
+54	insufficient	Adquisición de Yahoo por Apollo sin relación descrita con Microsoft.
+55	insufficient	Inversión de GM en Cruise sin identificar un efecto para Microsoft.
+56	neutral	Nombramiento directivo y responsabilidades sin resultado empresarial evaluado.
+57	positive	Microsoft aparece como competidor fuerte frente a proveedores que tienen dificultades.
+58	positive	Expansión de capacidades y colaboración comercial en ciberseguridad en India.
+59	positive	Más periféricos compatibles y ampliación del ecosistema de Xbox y Mixer.
+60	insufficient	Resultados y despidos de SAP sin información específica sobre Microsoft.
+61	insufficient	Lanzamientos de AMD sin contexto atribuible a Microsoft.
+62	positive	Adquisición presentada como impulsora del crecimiento de Office y Dynamics.
+63	insufficient	Previsiones de semiconductores sin información sobre Microsoft.
+64	negative	ByteDance rechaza la oferta de Microsoft y selecciona a Oracle.
+65	positive	Mejoras de Bing y Edge con IA para competir en búsquedas.
+66	insufficient	Éxito comercial de Take-Two sin atribución a Microsoft.
+67	neutral	Azure aparece como parte de un acuerdo existente; la noticia es un nombramiento en CIBC.
+68	insufficient	Análisis de Alphabet sin contexto de Microsoft.
+69	insufficient	Recomendación de TELUS sin información sobre Microsoft.
+70	insufficient	Precios de TurboTax sin relación con Microsoft.
+71	positive	Planes de colaboración que amplían las oportunidades de IA en Vietnam.
+72	positive	Mayor capitalización y fuerte crecimiento por demanda de servicios en la nube.
+73	positive	Contrato público que utilizará Azure para modernizar sistemas.
+74	insufficient	Riqueza de fundadores de otras compañías sin situación específica de Microsoft.
+75	insufficient	Negocio de Wonbang Tech sin contexto para Microsoft.
+76	insufficient	Nombramiento en Target sin relación empresarial con Microsoft.
+77	positive	El fallo del servicio de Rackspace impulsa una recomendación de migrar a Microsoft 365.
+78	insufficient	Ataque a Sony sin atribución de responsabilidad o perjuicio a Microsoft.
+79	insufficient	Noticias de Google, empresas chinas y Twitter sin contexto de Microsoft.
+80	insufficient	Perspectivas generales de robótica sin datos sobre Microsoft.
+81	positive	Automatización que mejora eficiencia, reduce riesgos y facilita auditorías de Microsoft.
+82	insufficient	Valoraciones de otras corporaciones sin datos sobre Microsoft.
+83	insufficient	Problemas de infraestructura de Internet sin efecto específico para Microsoft.
+84	insufficient	Financiación de Phocas sin relación descrita con Microsoft.
+85	positive	Microsoft obtiene participación en un contrato de nube de hasta nueve mil millones.
+86	positive	HoloLens se integra en un nuevo producto médico con planes de comercialización.
+87	positive	Adopción de servicios de Microsoft con beneficios operativos descritos por un cliente.
+88	insufficient	Comparación de relojes de otras marcas sin información sobre Microsoft.
+89	insufficient	Servicios de HPE y AWS sin efecto concreto sobre Microsoft.
+90	neutral	Nombramiento de un director regional sin resultados o riesgos específicos.
+91	insufficient	Propuesta industrial de Rockwell sin contexto empresarial de Microsoft.
+92	insufficient	Análisis general del metaverso sin efecto atribuible a Microsoft.
+93	neutral	Actuación procesal en una disputa documental sin resolución favorable o adversa.
+94	insufficient	Reestructuración de SAP sin impacto concreto sobre Microsoft.
+95	insufficient	Herramientas de Adobe sin información específica sobre Microsoft.
+96	positive	Nueva capacidad cuántica prevista para ampliar la oferta de Azure Quantum.
+97	insufficient	Educación y redes en Arabia Saudí sin contexto sobre Microsoft.
+98	positive	Expansión comercial cerca de clientes estratégicos y de un contrato relevante.
+99	insufficient	Financiación de Nanox sin información sobre Microsoft.
+100	insufficient	Riesgos del protocolo RDP sin atribución empresarial suficiente a Microsoft.
+101	positive	Nuevas DPU con mejoras de rendimiento e integración por socios comerciales.
+102	positive	Acuerdo con Jaguar Land Rover descrito como una victoria comercial para NVIDIA.
+103	insufficient	Ventas de Microchip y restricciones generales sin situación específica de NVIDIA.
+104	neutral	Participación en financiación de Rescale sin resultado económico definido para NVIDIA.
+105	positive	Citi eleva el precio objetivo y anticipa liderazgo y crecimiento en aceleradores de IA.
+106	positive	Crecimiento de ingresos y expansión internacional vinculados a la demanda de IA.
+107	insufficient	Adquisición de AMD sin efecto sobre NVIDIA explicitado.
+108	positive	Mejoras del SDK de robótica y ampliación del ecosistema compatible.
+109	negative	Obstáculos regulatorios y retraso en la adquisición de ARM.
+110	insufficient	Advertencia de Samsung sin efecto específico sobre NVIDIA descrito.
+111	insufficient	Debate del metaverso sin información sobre NVIDIA.
+112	insufficient	Fábricas de Texas Instruments sin contexto para NVIDIA.
+113	negative	Descenso importante de envíos de GPU de NVIDIA en un mercado deprimido.
+114	insufficient	Ficha de un ETF de bonos sin relación con NVIDIA.
+115	positive	NVIDIA participa como socio en mejoras demostradas de simulación de circuitos.
+116	insufficient	Cambio de dirección en Intel sin información atribuible a NVIDIA.
+117	positive	La GPU de NVIDIA figura entre los componentes potentes valorados en el equipo.
+118	insufficient	Ataques a empresas taiwanesas sin identificar perjuicios para NVIDIA.
+119	positive	Tres fabricantes adoptan GeForce NOW en sus vehículos.
+120	positive	Acceso a nuevos usuarios mediante la integración de GPU Cloud con Azure.
+121	insufficient	Problemas de fabricación de Intel sin efecto para NVIDIA descrito.
+122	positive	Nuevo superordenador con inversión y adopción por grandes compañías farmacéuticas.
+123	negative	Advertencia de ingresos de NVIDIA que contribuye a la preocupación del mercado.
+124	insufficient	Geopolítica de semiconductores sin efecto individual sobre NVIDIA.
+125	neutral	Se anuncia continuidad de un servicio a NVIDIA tras una adquisición ajena.
+126	insufficient	Histórico de un ETF sin información sobre NVIDIA; además menciona fechas de 2026.
+127	positive	Alianza con Palo Alto y mejora de cinco veces en rendimiento de cortafuegos.
+128	positive	Previsión de fuerte crecimiento de centros de datos y demanda elevada de GPU.
+129	insufficient	Análisis bursátil de Credo sin contexto de NVIDIA.
+130	neutral	Incorporación a un consorcio técnico sin efecto comercial determinado.
+131	positive	Adopción de Quadro en un portátil de altas prestaciones y expansión de sistemas RTX.
+132	negative	AMD lanza alternativas asequibles que compiten explícitamente con NVIDIA.
+133	positive	NVIDIA supera a Intel en una sesión en la que Intel ya subía.
+134	insufficient	Inversiones en Texas sin papel concreto de NVIDIA.
+135	insufficient	ETF hipotecario sin información sobre NVIDIA.
+136	positive	NVIDIA figura entre las tecnológicas que impulsan las ganancias del Nasdaq.
+137	neutral	NVIDIA aparece entre las posiciones de un ETF, sin valoración empresarial individual.
+138	insufficient	Descuento de una GPU Intel sin efecto específico sobre NVIDIA en el texto.
+139	positive	Tecnología de NVIDIA utilizada en robots agrícolas con mejoras operativas.
+140	positive	Presenta un avance destacado en rendimiento y eficiencia de nuevas GPU.
+141	neutral	El titular comunica una adquisición; sin resumen no se describen beneficios ni riesgos.
+142	insufficient	Producto de Teledyne FLIR sin vínculo descrito con NVIDIA.
+143	negative	NVIDIA queda por detrás de AMD en rendimiento relativo, sin implicar una caída absoluta.
+144	positive	Nueva herramienta de NVIDIA mejora la seguridad y control de aplicaciones de IA.
+145	positive	Disponibilidad comercial de AI Enterprise con apoyo de fabricantes y clientes iniciales.
+146	positive	Ventas récord y beneficios superiores a expectativas.
+147	neutral	NVIDIA figura como posición de un ETF, sin valoración; el resumen cita diciembre de 2025.
+148	positive	NVIDIA se identifica como beneficiaria directa de IA, aunque sin infravaloración bursátil.
+149	positive	Pruebas de rendimiento descritas como récord y superiores a competidores.
+150	positive	Nuevas GPU con mejoras importantes de rendimiento para juegos y creación.
+151	neutral	Incentivos regionales favorables y bloqueo nacional sin desenlace definido.
+152	insufficient	Tractor autónomo de John Deere sin efecto atribuible a Tesla.
+153	insufficient	Explicación de vehículos de hidrógeno sin contexto de Tesla.
+154	negative	Musk reconoce problemas de calidad, especialmente al aumentar la producción.
+155	insufficient	Controversias de C3.ai sin relación empresarial con Tesla.
+156	insufficient	Traslado de Caterpillar sin información sobre Tesla.
+157	insufficient	Motos de nieve eléctricas de otras empresas sin contexto de Tesla.
+158	negative	Se señalan limitaciones y uso peligroso de Autopilot por expectativas equivocadas.
+159	positive	Lanzamiento de Tesla Tequila con existencias agotadas casi de inmediato.
+160	insufficient	Descripción de empresas emergentes sin efecto concreto sobre Tesla.
+161	insufficient	Electrificación de refrigeración de Albertsons sin relación con Tesla.
+162	positive	Acceso a financiación para expansión apoyado en demanda de acciones y revalorización.
+163	neutral	Tesla aparece como comparación de valoración, sin juicio individual concretado.
+164	insufficient	Resultados y planes de GM sin información específica sobre Tesla.
+165	insufficient	Plan de Honda sin atribución de impacto a Tesla en el texto.
+166	neutral	Política de cobertura sanitaria sin efecto financiero o comercial definido.
+167	positive	Expansión en Austin acompañada de inversión, empleo y acogida institucional favorable.
+168	neutral	Aumento de plantilla para crecer acompañado de fuertes incrementos de gastos.
+169	insufficient	Opiniones de Musk sobre energía sin consecuencias descritas para Tesla.
+170	insufficient	Adquisición de Aptiv sin contexto de Tesla.
+171	insufficient	Ficha de NIO sin información específica de Tesla.
+172	insufficient	Contrato de Ta Win y Aptiv sin relación descrita con Tesla.
+173	insufficient	Perspectivas del cobre sin efecto específico sobre Tesla.
+174	insufficient	Fábrica de ElectraMeccanica sin contexto de Tesla.
+175	neutral	Tesla se menciona como inversión pasada de Draper, sin novedad empresarial propia.
+176	insufficient	Adquisición entre Sunrun y Vivint sin impacto sobre Tesla explicitado.
+177	positive	Compras de Ark y rebote de Tesla tras la caída previa.
+178	negative	Retirada del plan de exclusión bursátil en un contexto de investigación y demandas.
+179	insufficient	ETF apalancado del S&P 500 sin contexto de Tesla.
+180	insufficient	Nuevos vuelos de JetBlue sin información atribuible a Tesla.
+181	insufficient	Ficha y noticias de un ETF de bonos sin contexto de Tesla.
+182	insufficient	Historia de la denominación GMC sin relación con Tesla.
+183	insufficient	ETF de bonos corporativos sin información de Tesla.
+184	neutral	Hertz añade Polestar sin que se describa cancelación o reducción de pedidos a Tesla.
+185	positive	Análisis técnico con sesgo alcista de largo plazo para Tesla.
+186	insufficient	Seguridad de baterías de Volta y KULR sin contexto de Tesla.
+187	positive	Previsión de entregas récord, aunque con preocupaciones por demanda y descuentos.
+188	neutral	Comparación de entrada al mercado con Model 3 sin conclusión específica sobre Tesla.
+189	insufficient	Electrificación de GM sin efecto sobre Tesla descrito en el texto.
+190	neutral	Se recuerda un acuerdo existente con Tesla en una noticia sobre dirección de Hertz.
+191	negative	XPeng se presenta como rival más barato y mejor construido que amenaza a Tesla.
+192	insufficient	Contratos automovilísticos de Qualcomm sin información de Tesla.
+193	insufficient	Reciclaje de litio de ReElement sin relación descrita con Tesla.
+194	insufficient	Planes de vehículos Ford sin contexto de Tesla.
+195	insufficient	Reutilización de baterías por otras empresas sin relación con Tesla.
+196	insufficient	Tractor eléctrico de John Deere sin efecto específico sobre Tesla.
+197	negative	Li Auto busca financiación y expansión con un producto diferenciado frente a Tesla.
+198	neutral	Tesla aparece como cliente de un proveedor que sale a bolsa, sin efecto propio definido.
+199	negative	Nueva división de GM que compite explícitamente con Tesla en energía y baterías.
+200	positive	Tesla registra beneficios frente a pérdidas de rivales; las declaraciones de Musk son controvertidas.
+201	neutral	Apple es cliente y oportunidad de crecimiento de SiTime; no se evalúa su propio rendimiento.
+202	neutral	Apple sirve como referencia de capitalización en un análisis centrado en Alphabet.
+203	insufficient	Dividendos de otras tecnológicas sin información específica sobre Apple.
+204	insufficient	Resultados de Meta sin contexto de Apple.
+205	insufficient	Estrategia de Netflix sin relación descrita con Apple.
+206	insufficient	Rentabilidad de IVV sin datos individualizados sobre Apple.
+207	insufficient	Venta de participaciones QQQ sin información sobre Apple.
+208	insufficient	Presentación de AMD sin relación con Apple en el texto.
+209	insufficient	Acuerdo judicial de Cash App sin contexto de Apple.
+210	insufficient	Venta de acciones de Alphabet sin información de Apple.
+211	negative	Reducción de posición en Apple y ventas internas; las otras noticias no precisan contrapesos.
+212	insufficient	Anuncia recomendaciones sobre Apple pero no detalla su sentido o contenido.
+213	positive	Resolución favorable que protege la marca de Apple frente a Opple.
+214	insufficient	Fiscalidad de Exxon sin información sobre Apple.
+215	insufficient	Actualizaciones de Windows sin efecto explícito sobre Apple.
+216	positive	Apple se incluye entre las compañías para las que se prevé crecimiento impulsado por IA.
+217	insufficient	Inversión en Palatin sin contexto de Apple.
+218	insufficient	Caída de Netskope sin información de Apple.
+219	neutral	Descripción de un ETF vinculado a Apple sin valoración del negocio subyacente.
+220	neutral	Rumor de Apple como cliente de Intel sin beneficio o perjuicio propio concretado.
+221	neutral	Compatibilidad de un disco de terceros con productos Apple, sin impacto comercial definido.
+222	negative	La comparación prefiere Amazon frente a Apple, aun reconociendo sus servicios rentables.
+223	insufficient	Comparación de ETF sin información sobre Apple.
+224	insufficient	Perfil de una empresa energética sin contexto de Apple.
+225	insufficient	Análisis de Jabil sin información de Apple.
+226	insufficient	Votación salarial en Applied Materials sin contexto de Apple.
+227	insufficient	Fin de una alianza Qualcomm-Iridium sin efecto sobre Apple descrito.
+228	neutral	Apple figura como participante de un estudio sectorial sin perspectivas propias detalladas.
+229	neutral	Alto volumen de negociación de Apple sin dirección de precios ni valoración individual.
+230	insufficient	Efectos del tamaño empresarial sobre comercio sin hechos específicos de Apple.
+231	negative	Ventas de inversores e internos y obstáculos regulatorios, pese a señales favorables en IA.
+232	positive	Nuevos dispositivos con mejoras de IA, almacenamiento y batería.
+233	insufficient	Análisis de VGT sin información individualizada de Apple.
+234	insufficient	Valoración de Arm sin contexto de Apple.
+235	neutral	Ligera reducción institucional y consenso moderadamente comprador sin dirección inequívoca.
+236	positive	El balance destaca fortaleza financiera, expansión e IA pese a riesgos regulatorios.
+237	positive	Ampliación de alianza, fabricación e innovación con compromiso de inversión.
+238	insufficient	Comparación de Berkshire y SPY sin información sobre Apple.
+239	positive	Conclusión favorable sobre rentabilidad, crecimiento y valoración frente a competidores.
+240	insufficient	Revalorización de Alphabet sin consecuencias concretas para Apple.
+241	insufficient	Nuevos líderes del mercado sin valoración individual de Apple.
+242	neutral	Posible fabricación de chips Apple por Intel; los efectos bursátiles descritos son de Intel.
+243	neutral	Apple aparece entre las posiciones de un ETF sin evaluación empresarial propia.
+244	insufficient	Posiciones cortas en otras compañías sin datos de Apple.
+245	insufficient	Crítica a IBM sin información de Apple.
+246	neutral	Compromiso inversor y lanzamiento en China en contexto de tensiones, sin resultado definido.
+247	insufficient	Nuevo ETF de ingresos sin contexto de Apple.
+248	insufficient	Señal técnica de VIG sin datos específicos sobre Apple.
+249	positive	Se atribuyen a Apple crecimiento sólido de servicios e impulso del iPhone 17.
+250	positive	Se anticipan mejoras de rendimiento y autonomía en el MacBook Pro M5.
+251	insufficient	Aplicación médica para VisionPro sin efecto sobre Microsoft descrito.
+252	insufficient	Iniciativas de Cloudflare sin contexto específico de Microsoft.
+253	insufficient	Análisis de Marvell sin información sobre Microsoft.
+254	insufficient	Adquisición de Salesforce sin consecuencias explícitas para Microsoft.
+255	negative	Vulnerabilidades graves obligan a restringir una función de Edge y adaptar aplicaciones.
+256	insufficient	Proyecto energético de Oracle y OpenAI sin papel descrito de Microsoft.
+257	insufficient	Inversión en Hims & Hers sin contexto para Microsoft.
+258	insufficient	Perspectivas de Broadcom y OpenAI sin información de Microsoft.
+259	positive	Nueva plataforma agrícola sobre Azure que demuestra adopción y oportunidades de expansión.
+260	negative	Demanda antimonopolio por supuesta restricción de competencia y encarecimiento de IA.
+261	positive	Beneficios superiores a expectativas y consenso comprador, pese a ventas de internos.
+262	neutral	HoloLens figura en un informe sectorial sin resultados específicos de Microsoft.
+263	insufficient	Resultados de Timken sin contexto de Microsoft.
+264	positive	Acuerdo para ampliar de forma importante la infraestructura de IA de Microsoft.
+265	insufficient	Reorganización de una cadena de NBCUniversal sin relación actual con Microsoft descrita.
+266	insufficient	Cambio sectorial hacia proveedores locales sin identificar efectos para Microsoft.
+267	neutral	Cambio de localización de producción sin beneficios o costes cuantificados en el texto.
+268	insufficient	Negociación energética sectorial sin participación específica de Microsoft descrita.
+269	insufficient	Conectividad de United y Starlink sin contexto de Microsoft.
+270	positive	Cliente obtiene mejoras medibles de disponibilidad, rendimiento y despliegue con Azure.
+271	insufficient	Recomendación sobre Amazon y OpenAI sin efecto explícito sobre Microsoft.
+272	neutral	Calendario de resultados sin anticipar desempeño favorable o desfavorable.
+273	insufficient	Ganancias de Alphabet sin contexto específico de Microsoft.
+274	insufficient	Previsión sectorial de herramientas de datos sin información de Microsoft.
+275	negative	Google aprovecha fallos y preocupaciones de seguridad para atraer clientes de Microsoft.
+276	insufficient	Operaciones y resultados de Chubb sin relación con Microsoft.
+277	negative	Rechazo de usuarios, preocupaciones de privacidad y pruebas deficientes de funciones de IA.
+278	insufficient	Gestión energética con NVIDIA sin información de Microsoft.
+279	insufficient	Promociones de Best Buy sin contexto atribuible a Microsoft.
+280	insufficient	Se anuncian comentarios sobre Microsoft sin detallar resultados o valoración.
+281	neutral	Posible destino de inversiones tras vender Pfizer, sin compra de Microsoft confirmada.
+282	insufficient	Subida de NVIDIA sin efecto individual sobre Microsoft.
+283	insufficient	Rendimiento de NVIDIA sin contexto de Microsoft.
+284	insufficient	Dividendo e inclusión bursátil de Monolithic Power sin contexto de Microsoft.
+285	positive	Alianza con Oracle que amplía usos de Azure y Fabric y mejora procesos industriales.
+286	negative	Vulnerabilidades de Windows explotadas activamente, aunque se publiquen correcciones.
+287	insufficient	Perfil de Color Star sin información sobre Microsoft.
+288	neutral	Posible cambio de socio para chips; los efectos bursátiles detallados son de proveedores.
+289	insufficient	Características de un ETF sin datos de Microsoft.
+290	insufficient	Cotización de Apple sin información sobre Microsoft.
+291	insufficient	Negociaciones de Sunrun sin cliente Microsoft identificado.
+292	negative	Se detectan vulnerabilidades de Microsoft ya explotadas, pese a su corrección.
+293	insufficient	Dividendos de otras compañías sin contexto de Microsoft.
+294	insufficient	Revalorización de UnitedHealth sin relación con Microsoft.
+295	insufficient	Presión general sobre grandes tecnológicas sin análisis individual de Microsoft.
+296	insufficient	Reconocimiento de Asana sin efecto sobre Microsoft descrito.
+297	positive	Perspectiva alcista del fondo y analistas apoyada en rendimiento e IA.
+298	neutral	Expectación ante Azure y OpenAI sin previsión concreta de resultados.
+299	insufficient	Vulnerabilidad de Progress Software sin contexto de Microsoft.
+300	positive	Microsoft figura entre las grandes tecnológicas que superan al índice e impulsan récords.
+301	positive	Se recomienda NVIDIA frente a Marvell por liderazgo, tecnología y fortaleza financiera.
+302	insufficient	Recomendaciones sobre Waystar sin contexto de NVIDIA.
+303	insufficient	Ideas generales de inversión en IA sin identificar información propia de NVIDIA.
+304	positive	Mayor gasto de clientes en IA favorece la demanda de chips de NVIDIA.
+305	insufficient	Estrategia de opciones de General Dynamics sin relación con NVIDIA.
+306	insufficient	Operaciones y resultados de Vertex sin información de NVIDIA.
+307	neutral	Se espera el informe de NVIDIA sin anticipar resultados favorables o desfavorables.
+308	insufficient	Inversión en oro sin contexto de NVIDIA.
+309	insufficient	Avances de Alphabet sin consecuencias explícitas para NVIDIA.
+310	insufficient	Ventas de acciones de Texas Instruments sin contexto de NVIDIA.
+311	positive	Nueva alianza con NVIDIA AI citada entre los impulsores del crecimiento de Akamai.
+312	insufficient	Resultados previstos de NVR sin relación con NVIDIA.
+313	insufficient	Previsión de un ETF sin información individualizada sobre NVIDIA.
+314	negative	AMD ofrece un rival que afirma superar a H100 y consigue clientes relevantes.
+315	negative	Caída de NVIDIA ante la posible sustitución de sus chips por soluciones de Google.
+316	insufficient	Movimientos de inversores en AMD sin contexto de NVIDIA.
+317	insufficient	Ficha de un ETF sin datos específicos sobre NVIDIA.
+318	neutral	NVIDIA aparece como cliente de TSMC; la recomendación concreta recae en el fabricante.
+319	insufficient	Recomendación de venta de Hain sin información de NVIDIA.
+320	positive	Socios reconocidos por impulsar adopción de tecnología NVIDIA y resolver necesidades de clientes.
+321	neutral	NVIDIA es componente de un ETF nuevo; las reservas de valoración son sectoriales.
+322	positive	Expansión de soluciones de NVIDIA para acelerar investigación farmacéutica.
+323	positive	Compra explícita de 2.400 GPU Blackwell por Iris Energy.
+324	positive	Inversión importante de Iren en GPU de NVIDIA asociada a un contrato de nube.
+325	positive	Soluciones de vídeo basadas en NVIDIA con mejoras demostradas y promoción comercial.
+326	insufficient	Ficha de un ETF sin contenido individual sobre NVIDIA.
+327	insufficient	Perspectivas de TSMC sin información propia de NVIDIA.
+328	positive	Autorización de exportaciones que abre ventas relevantes de chips a Emiratos.
+329	positive	Alianza con Samsung para una instalación de más de 50.000 GPU de NVIDIA.
+330	neutral	NVIDIA figura como cliente inversor de TSMC, cuyos beneficios son el foco del texto.
+331	positive	La demanda de IA impulsa a NVIDIA a máximos pese a debilidad en otras partes del sector.
+332	positive	Inicio de producción de Blackwell en una fábrica estadounidense asociada a NVIDIA.
+333	neutral	NVIDIA aparece como posición de FDVV sin evaluación individual de sus perspectivas.
+334	positive	Nueva plataforma de robótica con capacidades de percepción y desarrollo mejoradas.
+335	positive	Participación en una adquisición orientada a ampliar infraestructura para demanda creciente de IA.
+336	insufficient	Cotización de Allient sin contexto para NVIDIA.
+337	neutral	Volatilidad y escrutinio sin dirección o efecto específico determinado para NVIDIA.
+338	insufficient	Resultados de Applied Digital sin información específica de NVIDIA.
+339	negative	Se debilita el impulso inicial de NVIDIA en un giro de mercado contra tecnológicas.
+340	insufficient	Recomendaciones sobre Microsoft sin información individual de NVIDIA.
+341	insufficient	Advertencia de ASML sin efectos sobre NVIDIA explicitados.
+342	positive	Adquisición con participación de NVIDIA que refuerza capacidad de infraestructura de IA.
+343	insufficient	Perspectivas de un ETF de IA sin datos individuales de NVIDIA.
+344	insufficient	Recomendaciones de ETF sin información específica de NVIDIA.
+345	positive	El crecimiento de NVIDIA se utiliza explícitamente como referencia de grandes ganancias por IA.
+346	positive	Colaboración con Foxconn para desarrollar infraestructura de fábricas de IA.
+347	neutral	Se menciona desarrollo de software cuántico sin resultado o valoración específicos de NVIDIA.
+348	insufficient	Alianza de Honeywell y TotalEnergies sin relación descrita con NVIDIA.
+349	insufficient	Rendimiento de modelos de inversión sin contexto de NVIDIA.
+350	insufficient	Nombramiento en VivoSim sin información de NVIDIA.
+351	positive	El resumen identifica un aumento de producción de Tesla.
+352	negative	Fuerte caída bursátil y retirada de productos energéticos residenciales.
+353	insufficient	Crecimiento de GM Energy sin efecto específico sobre Tesla descrito.
+354	insufficient	Promoción de VinFast sin contexto de Tesla.
+355	insufficient	ETF inverso de bitcoin sin información de Tesla.
+356	insufficient	Descuentos de otras marcas sin datos sobre Tesla.
+357	negative	La caída reciente de Tesla se cita como fuente de preocupación para inversores de ARKK.
+358	neutral	Descripción de un producto financiero ligado a Tesla sin valoración de la empresa.
+359	neutral	Recomendaciones opuestas y avances autónomos frente a dudas de valoración, sin consenso claro.
+360	insufficient	Análisis de Hims & Hers sin contexto de Tesla.
+361	positive	El texto defiende capacidades de camiones Tesla ya operativos frente a las dudas de Gates.
+362	insufficient	Financiación de Professional Diversity sin información de Tesla.
+363	insufficient	Reacción de otros fabricantes a aranceles sin efecto de Tesla descrito.
+364	insufficient	Incentivos de Ford y GM sin identificación del efecto sobre Tesla.
+365	negative	Se cuestiona la viabilidad práctica de construir una fábrica propia de chips para Tesla.
+366	insufficient	Previsión del mercado autónomo sin datos individuales de Tesla.
+367	neutral	Aprobación de remuneración y cambio de foco estratégico sin resultado empresarial definido.
+368	insufficient	Valoración de WNS sin contexto de Tesla.
+369	neutral	Peso de Tesla en un ETF sin juicio de rendimiento; el resumen cita marzo de 2026.
+370	positive	Tesla se destaca entre valores cercanos a máximos con nuevas oportunidades de robotaxi.
+371	insufficient	Problemas judiciales de TROOPS sin relación con Tesla.
+372	insufficient	TSLA solo aparece como enlace relacionado en una ficha de otro ETF; encabezado multilingüe.
+373	positive	Subida del precio objetivo, recomendación de compra y expectativas favorables de entregas.
+374	insufficient	Valoración de Li Auto sin efecto sobre Tesla explicitado.
+375	negative	Reducción importante de la posición en Tesla por preocupación por una burbuja de IA.
+376	insufficient	Panorama bursátil y Qualcomm sin información individual de Tesla.
+377	neutral	Nuevo instrumento de acceso a acciones de Tesla sin valoración de sus perspectivas.
+378	insufficient	Perspectivas de ASML sin contexto de Tesla.
+379	insufficient	Votaciones ESG generales sin datos específicos de Tesla.
+380	insufficient	Indicadores sectoriales sin información individual sobre Tesla.
+381	neutral	Aprobación de remuneración y predicciones de Musk sin cifras operativas verificables en el resumen.
+382	neutral	Tesla aparece entre posiciones de un ETF; no se evalúa su desempeño y se citan datos de 2026.
+383	insufficient	Revalorización de Palantir sin información de Tesla.
+384	insufficient	Demandas contra CDK sin relación descrita con Tesla.
+385	insufficient	Crecimiento de XPeng sin efecto sobre Tesla explicitado.
+386	insufficient	ETF sobre Robinhood sin contexto de Tesla.
+387	positive	Nuevo máximo bursátil de Tesla tras una resolución favorable sobre remuneración.
+388	neutral	Tesla se utiliza como referencia de precio para descuentos de Maserati, sin efecto propio definido.
+389	insufficient	Comparación de GM y Ford sin información específica sobre Tesla.
+390	positive	Las ventas de Tesla aumentan, aunque BYD venda más unidades.
+391	insufficient	Activos gestionados por Tradr sin información de Tesla.
+392	insufficient	Se anuncia un debate sobre Tesla sin incluir el análisis o su conclusión.
+393	insufficient	Perspectivas de fabricantes chinos sin consecuencia concreta para Tesla.
+394	insufficient	Inversión y resultados de GM sin contexto de Tesla.
+395	insufficient	Resultados de Lam Research sin relación con Tesla.
+396	positive	Propuesta que impulsa ventas eléctricas y que Tesla respalda explícitamente.
+397	insufficient	Reestructuración financiera de Profusa sin contexto de Tesla.
+398	positive	Incremento importante de inversión institucional en Tesla, sin valoración analista negativa.
+399	neutral	Tesla figura entre posiciones de un ETF de robótica sin evaluación individual.
+400	insufficient	Venta de acciones de Alphabet sin relación con Tesla.

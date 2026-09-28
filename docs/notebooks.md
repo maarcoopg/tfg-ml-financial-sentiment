@@ -125,6 +125,22 @@ python -m pip install -r requirements-finbert.txt
 python -m src.nlp.inspect_finbert --download
 ```
 
+## 08. Diagnóstico del sentimiento de FinBERT
+
+[08_finbert_sentiment_evaluation.ipynb](../notebooks/08_finbert_sentiment_evaluation.ipynb)
+lee `finbert-sentiment-20260925`: auditoría, muestra temporal ciega, disponibilidad
+de contexto por empresa, sensibilidad a las representaciones, siete pares
+sintéticos y gradientes integrados con dos referencias y perturbaciones.
+
+No ejecuta el modelo, no descarga pesos ni requiere las dependencias opcionales
+para leer y reproducir sus tablas y figuras. El informe original solo infería
+200 parejas de desarrollo. La sección 11 añade `finbert-ia-comparison-20260928`,
+con las 400 valoraciones delegadas al asistente, sus justificaciones y métricas
+frente a esa referencia de IA. Las otras 200 ya no permanecen sin consultar.
+No hay validación humana: el acuerdo y F1 de esta ampliación no sustituyen esa
+evidencia. El [protocolo](finbert_evaluacion_protocolo.md) registra la delegación,
+las limitaciones y la separación obligatoria entre referencias humanas y de IA.
+
 ## Preparación y ejecución
 
 Desde la raíz, con el entorno del proyecto activado:

@@ -1,0 +1,205 @@
+[
+  {
+    "probe": "profits",
+    "first_text": "The company's profits increased.",
+    "second_text": "The company's profits decreased.",
+    "first": {
+      "positive": 0.9567819833755493,
+      "negative": 0.014553038403391838,
+      "neutral": 0.028664996847510338,
+      "label": "positive",
+      "score": 0.9422289449721575,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.010891016572713852,
+      "negative": 0.9712280035018921,
+      "neutral": 0.017881013453006744,
+      "label": "negative",
+      "score": -0.9603369869291782,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 1.9025659319013357,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "negation",
+    "first_text": "The company expects profits to rise.",
+    "second_text": "The company does not expect profits to rise.",
+    "first": {
+      "positive": 0.9543797969818115,
+      "negative": 0.017727777361869812,
+      "neutral": 0.027892420068383217,
+      "label": "positive",
+      "score": 0.9366520196199417,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.9305785298347473,
+      "negative": 0.019121401011943817,
+      "neutral": 0.050300050526857376,
+      "label": "positive",
+      "score": 0.9114571288228035,
+      "full_tokens": 11,
+      "used_tokens": 11,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 0.025194890797138214,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "losses",
+    "first_text": "The company's losses narrowed.",
+    "second_text": "The company's losses widened.",
+    "first": {
+      "positive": 0.9253325462341309,
+      "negative": 0.05362734943628311,
+      "neutral": 0.021040054038167,
+      "label": "positive",
+      "score": 0.8717051967978477,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.7556036114692688,
+      "negative": 0.195308119058609,
+      "neutral": 0.049088262021541595,
+      "label": "positive",
+      "score": 0.5602954924106598,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 0.31140970438718796,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "expectations",
+    "first_text": "Profits rose and exceeded analysts' expectations.",
+    "second_text": "Profits rose but missed analysts' expectations.",
+    "first": {
+      "positive": 0.9555402994155884,
+      "negative": 0.02379763126373291,
+      "neutral": 0.0206620916724205,
+      "label": "positive",
+      "score": 0.9317426681518555,
+      "full_tokens": 10,
+      "used_tokens": 10,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.8114180564880371,
+      "negative": 0.171005517244339,
+      "neutral": 0.017576459795236588,
+      "label": "positive",
+      "score": 0.6404125392436981,
+      "full_tokens": 10,
+      "used_tokens": 10,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 0.29133012890815735,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "outlook",
+    "first_text": "The company raised its revenue outlook.",
+    "second_text": "The company lowered its revenue outlook.",
+    "first": {
+      "positive": 0.937250554561615,
+      "negative": 0.012628355994820595,
+      "neutral": 0.05012109875679016,
+      "label": "positive",
+      "score": 0.9246221985667944,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.012233950197696686,
+      "negative": 0.9359851479530334,
+      "neutral": 0.05178079381585121,
+      "label": "negative",
+      "score": -0.9237511977553368,
+      "full_tokens": 9,
+      "used_tokens": 9,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 1.8483733963221312,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "litigation",
+    "first_text": "The court dismissed the lawsuit against the company.",
+    "second_text": "The court upheld the lawsuit against the company.",
+    "first": {
+      "positive": 0.1320914775133133,
+      "negative": 0.5358129739761353,
+      "neutral": 0.33209550380706787,
+      "label": "negative",
+      "score": -0.40372149646282196,
+      "full_tokens": 11,
+      "used_tokens": 11,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.2501251995563507,
+      "negative": 0.5393761396408081,
+      "neutral": 0.21049867570400238,
+      "label": "negative",
+      "score": -0.2892509400844574,
+      "full_tokens": 11,
+      "used_tokens": 11,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": -0.11447055637836456,
+    "expected_first_higher": true
+  },
+  {
+    "probe": "mixed_entities",
+    "first_text": "Apple gained market share while Microsoft lost market share.",
+    "second_text": "Microsoft gained market share while Apple lost market share.",
+    "first": {
+      "positive": 0.013041259720921516,
+      "negative": 0.9545367360115051,
+      "neutral": 0.03242208808660507,
+      "label": "negative",
+      "score": -0.9414954762905836,
+      "full_tokens": 12,
+      "used_tokens": 12,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "second": {
+      "positive": 0.010729141533374786,
+      "negative": 0.9585524797439575,
+      "neutral": 0.030718453228473663,
+      "label": "negative",
+      "score": -0.9478233382105827,
+      "full_tokens": 12,
+      "used_tokens": 12,
+      "removed_tokens": 0,
+      "truncated": false
+    },
+    "score_difference": 0.006327861919999123,
+    "expected_first_higher": null
+  }
+]

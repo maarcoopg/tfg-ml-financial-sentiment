@@ -1,0 +1,7331 @@
+{
+  "reference_kind": "ai",
+  "not_human_accuracy": true,
+  "class_order": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "results": [
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.65,
+      "macro_f1": 0.6240740740740741,
+      "report": {
+        "negative": {
+          "precision": 0.7222222222222222,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.65,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.4642857142857143,
+          "recall": 0.5416666666666666,
+          "f1-score": 0.5,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7222222222222222,
+          "recall": 0.7222222222222222,
+          "f1-score": 0.7222222222222222,
+          "support": 54.0
+        },
+        "accuracy": 0.65,
+        "macro avg": {
+          "precision": 0.6362433862433862,
+          "recall": 0.6182659932659932,
+          "f1-score": 0.6240740740740741,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6603174603174602,
+          "recall": 0.65,
+          "f1-score": 0.653,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          13,
+          3,
+          6
+        ],
+        [
+          2,
+          13,
+          9
+        ],
+        [
+          3,
+          12,
+          39
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.61,
+      "macro_f1": 0.5895273330878528,
+      "report": {
+        "negative": {
+          "precision": 0.6842105263157895,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.6341463414634146,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 0.5,
+          "f1-score": 0.46153846153846156,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.6792452830188679,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6728971962616822,
+          "support": 54.0
+        },
+        "accuracy": 0.61,
+        "macro avg": {
+          "precision": 0.597342412635362,
+          "recall": 0.5858585858585857,
+          "f1-score": 0.5895273330878528,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6201759114768052,
+          "recall": 0.61,
+          "f1-score": 0.6136459118724903,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          13,
+          3,
+          6
+        ],
+        [
+          1,
+          12,
+          11
+        ],
+        [
+          5,
+          13,
+          36
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.4,
+      "macro_f1": 0.41342365383286106,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.2647058823529412,
+          "recall": 0.75,
+          "f1-score": 0.391304347826087,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7,
+          "recall": 0.25925925925925924,
+          "f1-score": 0.3783783783783784,
+          "support": 54.0
+        },
+        "accuracy": 0.4,
+        "macro avg": {
+          "precision": 0.5437908496732026,
+          "recall": 0.457631874298541,
+          "f1-score": 0.41342365383286106,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.5881960784313724,
+          "recall": 0.4,
+          "f1-score": 0.40176677956729107,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          8,
+          13,
+          1
+        ],
+        [
+          1,
+          18,
+          5
+        ],
+        [
+          3,
+          37,
+          14
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.67,
+      "macro_f1": 0.5856920949510452,
+      "report": {
+        "negative": {
+          "precision": 0.8333333333333334,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.5882352941176471,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.42105263157894735,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.37209302325581395,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7101449275362319,
+          "recall": 0.9074074074074074,
+          "f1-score": 0.7967479674796748,
+          "support": 54.0
+        },
+        "accuracy": 0.67,
+        "macro avg": {
+          "precision": 0.6548436308161709,
+          "recall": 0.5650953984287318,
+          "f1-score": 0.5856920949510452,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.667864225781846,
+          "recall": 0.67,
+          "f1-score": 0.648957992726302,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          10,
+          7,
+          5
+        ],
+        [
+          1,
+          8,
+          15
+        ],
+        [
+          1,
+          4,
+          49
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.54,
+      "macro_f1": 0.23376623376623376,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.54,
+          "recall": 1.0,
+          "f1-score": 0.7012987012987013,
+          "support": 54.0
+        },
+        "accuracy": 0.54,
+        "macro avg": {
+          "precision": 0.18000000000000002,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.23376623376623376,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.2916,
+          "recall": 0.54,
+          "f1-score": 0.3787012987012987,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          22
+        ],
+        [
+          0,
+          0,
+          24
+        ],
+        [
+          0,
+          0,
+          54
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.24,
+      "macro_f1": 0.12903225806451613,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.24,
+          "recall": 1.0,
+          "f1-score": 0.3870967741935484,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 54.0
+        },
+        "accuracy": 0.24,
+        "macro avg": {
+          "precision": 0.08,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.12903225806451613,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.0576,
+          "recall": 0.24,
+          "f1-score": 0.0929032258064516,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          22,
+          0
+        ],
+        [
+          0,
+          24,
+          0
+        ],
+        [
+          0,
+          54,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.65,
+      "macro_f1": 0.6240740740740741,
+      "report": {
+        "negative": {
+          "precision": 0.7222222222222222,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.65,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.4642857142857143,
+          "recall": 0.5416666666666666,
+          "f1-score": 0.5,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7222222222222222,
+          "recall": 0.7222222222222222,
+          "f1-score": 0.7222222222222222,
+          "support": 54.0
+        },
+        "accuracy": 0.65,
+        "macro avg": {
+          "precision": 0.6362433862433862,
+          "recall": 0.6182659932659932,
+          "f1-score": 0.6240740740740741,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6603174603174602,
+          "recall": 0.65,
+          "f1-score": 0.653,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          13,
+          3,
+          6
+        ],
+        [
+          2,
+          13,
+          9
+        ],
+        [
+          3,
+          12,
+          39
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.61,
+      "macro_f1": 0.5895273330878528,
+      "report": {
+        "negative": {
+          "precision": 0.6842105263157895,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.6341463414634146,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 0.5,
+          "f1-score": 0.46153846153846156,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.6792452830188679,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6728971962616822,
+          "support": 54.0
+        },
+        "accuracy": 0.61,
+        "macro avg": {
+          "precision": 0.597342412635362,
+          "recall": 0.5858585858585857,
+          "f1-score": 0.5895273330878528,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.6201759114768052,
+          "recall": 0.61,
+          "f1-score": 0.6136459118724903,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          13,
+          3,
+          6
+        ],
+        [
+          1,
+          12,
+          11
+        ],
+        [
+          5,
+          13,
+          36
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.4,
+      "macro_f1": 0.41342365383286106,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.2647058823529412,
+          "recall": 0.75,
+          "f1-score": 0.391304347826087,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7,
+          "recall": 0.25925925925925924,
+          "f1-score": 0.3783783783783784,
+          "support": 54.0
+        },
+        "accuracy": 0.4,
+        "macro avg": {
+          "precision": 0.5437908496732026,
+          "recall": 0.457631874298541,
+          "f1-score": 0.41342365383286106,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.5881960784313724,
+          "recall": 0.4,
+          "f1-score": 0.40176677956729107,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          8,
+          13,
+          1
+        ],
+        [
+          1,
+          18,
+          5
+        ],
+        [
+          3,
+          37,
+          14
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.67,
+      "macro_f1": 0.5856920949510452,
+      "report": {
+        "negative": {
+          "precision": 0.8333333333333334,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.5882352941176471,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.42105263157894735,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.37209302325581395,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.7101449275362319,
+          "recall": 0.9074074074074074,
+          "f1-score": 0.7967479674796748,
+          "support": 54.0
+        },
+        "accuracy": 0.67,
+        "macro avg": {
+          "precision": 0.6548436308161709,
+          "recall": 0.5650953984287318,
+          "f1-score": 0.5856920949510452,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.667864225781846,
+          "recall": 0.67,
+          "f1-score": 0.648957992726302,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          10,
+          7,
+          5
+        ],
+        [
+          1,
+          8,
+          15
+        ],
+        [
+          1,
+          4,
+          49
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.54,
+      "macro_f1": 0.23376623376623376,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.54,
+          "recall": 1.0,
+          "f1-score": 0.7012987012987013,
+          "support": 54.0
+        },
+        "accuracy": 0.54,
+        "macro avg": {
+          "precision": 0.18000000000000002,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.23376623376623376,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.2916,
+          "recall": 0.54,
+          "f1-score": 0.3787012987012987,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          22
+        ],
+        [
+          0,
+          0,
+          24
+        ],
+        [
+          0,
+          0,
+          54
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 100,
+      "scored": 100,
+      "coverage": 1.0,
+      "agreement": 0.24,
+      "macro_f1": 0.12903225806451613,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 22.0
+        },
+        "neutral": {
+          "precision": 0.24,
+          "recall": 1.0,
+          "f1-score": 0.3870967741935484,
+          "support": 24.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 54.0
+        },
+        "accuracy": 0.24,
+        "macro avg": {
+          "precision": 0.08,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.12903225806451613,
+          "support": 100.0
+        },
+        "weighted avg": {
+          "precision": 0.0576,
+          "recall": 0.24,
+          "f1-score": 0.0929032258064516,
+          "support": 100.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          22,
+          0
+        ],
+        [
+          0,
+          24,
+          0
+        ],
+        [
+          0,
+          54,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5909090909090909,
+      "macro_f1": 0.5337690631808278,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.7,
+          "f1-score": 0.8235294117647058,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.25,
+          "recall": 0.2,
+          "f1-score": 0.2222222222222222,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.45454545454545453,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5555555555555556,
+          "support": 7.0
+        },
+        "accuracy": 0.5909090909090909,
+        "macro avg": {
+          "precision": 0.5681818181818182,
+          "recall": 0.5380952380952381,
+          "f1-score": 0.5337690631808278,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.65599173553719,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.6016042780748663,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          7,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.6405228758169934,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.4,
+          "f1-score": 0.4444444444444444,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5882352941176471,
+          "support": 7.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6380952380952382,
+          "f1-score": 0.6405228758169934,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.7272727272727273,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.6922162804515746,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          8,
+          0,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.3756449948400413,
+      "report": {
+        "negative": {
+          "precision": 0.8571428571428571,
+          "recall": 0.6,
+          "f1-score": 0.7058823529411765,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.2857142857142857,
+          "recall": 0.8,
+          "f1-score": 0.42105263157894735,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.38095238095238093,
+          "recall": 0.4666666666666666,
+          "f1-score": 0.3756449948400413,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.45454545454545453,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.4165493948775683,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          6,
+          4,
+          0
+        ],
+        [
+          0,
+          4,
+          1
+        ],
+        [
+          1,
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5909090909090909,
+      "macro_f1": 0.49561403508771934,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1-score": 0.75,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.5833333333333334,
+          "recall": 1.0,
+          "f1-score": 0.7368421052631579,
+          "support": 7.0
+        },
+        "accuracy": 0.5909090909090909,
+        "macro avg": {
+          "precision": 0.5277777777777778,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.49561403508771934,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6401515151515151,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.5753588516746412,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          6,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.16091954022988506,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.3181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.4827586206896552,
+          "support": 7.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.10606060606060606,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16091954022988506,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1012396694214876,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.1536050156739812,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          10
+        ],
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.22727272727272727,
+      "macro_f1": 0.12345679012345678,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.22727272727272727,
+          "recall": 1.0,
+          "f1-score": 0.37037037037037035,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.22727272727272727,
+        "macro avg": {
+          "precision": 0.07575757575757576,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.12345679012345678,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.051652892561983466,
+          "recall": 0.22727272727272727,
+          "f1-score": 0.08417508417508417,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          10,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5909090909090909,
+      "macro_f1": 0.5337690631808278,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.7,
+          "f1-score": 0.8235294117647058,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.25,
+          "recall": 0.2,
+          "f1-score": 0.2222222222222222,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.45454545454545453,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5555555555555556,
+          "support": 7.0
+        },
+        "accuracy": 0.5909090909090909,
+        "macro avg": {
+          "precision": 0.5681818181818182,
+          "recall": 0.5380952380952381,
+          "f1-score": 0.5337690631808278,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.65599173553719,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.6016042780748663,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          7,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.6405228758169934,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.4,
+          "f1-score": 0.4444444444444444,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5882352941176471,
+          "support": 7.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6380952380952382,
+          "f1-score": 0.6405228758169934,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.7272727272727273,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.6922162804515746,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          8,
+          0,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.3756449948400413,
+      "report": {
+        "negative": {
+          "precision": 0.8571428571428571,
+          "recall": 0.6,
+          "f1-score": 0.7058823529411765,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.2857142857142857,
+          "recall": 0.8,
+          "f1-score": 0.42105263157894735,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.38095238095238093,
+          "recall": 0.4666666666666666,
+          "f1-score": 0.3756449948400413,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.45454545454545453,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.4165493948775683,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          6,
+          4,
+          0
+        ],
+        [
+          0,
+          4,
+          1
+        ],
+        [
+          1,
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5909090909090909,
+      "macro_f1": 0.49561403508771934,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1-score": 0.75,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.5833333333333334,
+          "recall": 1.0,
+          "f1-score": 0.7368421052631579,
+          "support": 7.0
+        },
+        "accuracy": 0.5909090909090909,
+        "macro avg": {
+          "precision": 0.5277777777777778,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.49561403508771934,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6401515151515151,
+          "recall": 0.5909090909090909,
+          "f1-score": 0.5753588516746412,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          6,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.16091954022988506,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.3181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.4827586206896552,
+          "support": 7.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.10606060606060606,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16091954022988506,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1012396694214876,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.1536050156739812,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          10
+        ],
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.22727272727272727,
+      "macro_f1": 0.12345679012345678,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 10.0
+        },
+        "neutral": {
+          "precision": 0.22727272727272727,
+          "recall": 1.0,
+          "f1-score": 0.37037037037037035,
+          "support": 5.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.22727272727272727,
+        "macro avg": {
+          "precision": 0.07575757575757576,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.12345679012345678,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.051652892561983466,
+          "recall": 0.22727272727272727,
+          "f1-score": 0.08417508417508417,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          10,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.4277180406212664,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.4,
+          "recall": 0.5,
+          "f1-score": 0.4444444444444444,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.9285714285714286,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.8387096774193549,
+          "support": 17.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.4428571428571429,
+          "recall": 0.4215686274509804,
+          "f1-score": 0.4277180406212664,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.7902597402597403,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.7289019224503096,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          13
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6363636363636364,
+      "macro_f1": 0.4437229437229437,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 0.75,
+          "f1-score": 0.5454545454545454,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 1.0,
+          "recall": 0.6470588235294118,
+          "f1-score": 0.7857142857142857,
+          "support": 17.0
+        },
+        "accuracy": 0.6363636363636364,
+        "macro avg": {
+          "precision": 0.4761904761904762,
+          "recall": 0.4656862745098039,
+          "f1-score": 0.4437229437229437,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.8506493506493507,
+          "recall": 0.6363636363636364,
+          "f1-score": 0.7063164108618655,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          3,
+          3,
+          11
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.21900161030595813,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.14285714285714285,
+          "recall": 0.5,
+          "f1-score": 0.2222222222222222,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.8333333333333334,
+          "recall": 0.29411764705882354,
+          "f1-score": 0.43478260869565216,
+          "support": 17.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.3253968253968254,
+          "recall": 0.2647058823529412,
+          "f1-score": 0.21900161030595813,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6699134199134199,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.3763724198506807,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          11,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.2777777777777778,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.7894736842105263,
+          "recall": 0.8823529411764706,
+          "f1-score": 0.8333333333333334,
+          "support": 17.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.2631578947368421,
+          "recall": 0.29411764705882354,
+          "f1-score": 0.2777777777777778,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6100478468899522,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.643939393939394,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          2,
+          15
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.7727272727272727,
+      "macro_f1": 0.2905982905982906,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.7727272727272727,
+          "recall": 1.0,
+          "f1-score": 0.8717948717948718,
+          "support": 17.0
+        },
+        "accuracy": 0.7727272727272727,
+        "macro avg": {
+          "precision": 0.25757575757575757,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2905982905982906,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.597107438016529,
+          "recall": 0.7727272727272727,
+          "f1-score": 0.6736596736596737,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.18181818181818182,
+      "macro_f1": 0.10256410256410257,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.18181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.3076923076923077,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 17.0
+        },
+        "accuracy": 0.18181818181818182,
+        "macro avg": {
+          "precision": 0.06060606060606061,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.10256410256410257,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.03305785123966942,
+          "recall": 0.18181818181818182,
+          "f1-score": 0.055944055944055944,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          17,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.4277180406212664,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.4,
+          "recall": 0.5,
+          "f1-score": 0.4444444444444444,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.9285714285714286,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.8387096774193549,
+          "support": 17.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.4428571428571429,
+          "recall": 0.4215686274509804,
+          "f1-score": 0.4277180406212664,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.7902597402597403,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.7289019224503096,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          13
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6363636363636364,
+      "macro_f1": 0.4437229437229437,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 0.75,
+          "f1-score": 0.5454545454545454,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 1.0,
+          "recall": 0.6470588235294118,
+          "f1-score": 0.7857142857142857,
+          "support": 17.0
+        },
+        "accuracy": 0.6363636363636364,
+        "macro avg": {
+          "precision": 0.4761904761904762,
+          "recall": 0.4656862745098039,
+          "f1-score": 0.4437229437229437,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.8506493506493507,
+          "recall": 0.6363636363636364,
+          "f1-score": 0.7063164108618655,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          3,
+          3,
+          11
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.21900161030595813,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.14285714285714285,
+          "recall": 0.5,
+          "f1-score": 0.2222222222222222,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.8333333333333334,
+          "recall": 0.29411764705882354,
+          "f1-score": 0.43478260869565216,
+          "support": 17.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.3253968253968254,
+          "recall": 0.2647058823529412,
+          "f1-score": 0.21900161030595813,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6699134199134199,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.3763724198506807,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          11,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.6818181818181818,
+      "macro_f1": 0.2777777777777778,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.7894736842105263,
+          "recall": 0.8823529411764706,
+          "f1-score": 0.8333333333333334,
+          "support": 17.0
+        },
+        "accuracy": 0.6818181818181818,
+        "macro avg": {
+          "precision": 0.2631578947368421,
+          "recall": 0.29411764705882354,
+          "f1-score": 0.2777777777777778,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6100478468899522,
+          "recall": 0.6818181818181818,
+          "f1-score": 0.643939393939394,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          2,
+          15
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.7727272727272727,
+      "macro_f1": 0.2905982905982906,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.7727272727272727,
+          "recall": 1.0,
+          "f1-score": 0.8717948717948718,
+          "support": 17.0
+        },
+        "accuracy": 0.7727272727272727,
+        "macro avg": {
+          "precision": 0.25757575757575757,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2905982905982906,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.597107438016529,
+          "recall": 0.7727272727272727,
+          "f1-score": 0.6736596736596737,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.18181818181818182,
+      "macro_f1": 0.10256410256410257,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.18181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.3076923076923077,
+          "support": 4.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 17.0
+        },
+        "accuracy": 0.18181818181818182,
+        "macro avg": {
+          "precision": 0.06060606060606061,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.10256410256410257,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.03305785123966942,
+          "recall": 0.18181818181818182,
+          "f1-score": 0.055944055944055944,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          17,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.7647058823529411,
+      "macro_f1": 0.7468013468013468,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.4444444444444444,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5333333333333333,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8571428571428571,
+          "recall": 0.782608695652174,
+          "f1-score": 0.8181818181818182,
+          "support": 23.0
+        },
+        "accuracy": 0.7647058823529411,
+        "macro avg": {
+          "precision": 0.7671957671957671,
+          "recall": 0.7497584541062802,
+          "f1-score": 0.7468013468013468,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.8053221288515405,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.7783125371360666,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          0,
+          5,
+          18
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.6764705882352942,
+      "macro_f1": 0.648062015503876,
+      "report": {
+        "negative": {
+          "precision": 0.8,
+          "recall": 0.8,
+          "f1-score": 0.8,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "f1-score": 0.4,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.6956521739130435,
+          "f1-score": 0.7441860465116279,
+          "support": 23.0
+        },
+        "accuracy": 0.6764705882352942,
+        "macro avg": {
+          "precision": 0.6444444444444445,
+          "recall": 0.6652173913043479,
+          "f1-score": 0.648062015503876,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.7176470588235295,
+          "recall": 0.6764705882352942,
+          "f1-score": 0.6916552667578659,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          3,
+          3
+        ],
+        [
+          1,
+          6,
+          16
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.4117647058823529,
+      "macro_f1": 0.43154761904761907,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.4,
+          "f1-score": 0.5,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.22727272727272727,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.35714285714285715,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7777777777777778,
+          "recall": 0.30434782608695654,
+          "f1-score": 0.4375,
+          "support": 23.0
+        },
+        "accuracy": 0.4117647058823529,
+        "macro avg": {
+          "precision": 0.5572390572390572,
+          "recall": 0.5125603864734299,
+          "f1-score": 0.43154761904761907,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.6642899584076054,
+          "recall": 0.4117647058823529,
+          "f1-score": 0.43251050420168063,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          0,
+          5,
+          1
+        ],
+        [
+          1,
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.7941176470588235,
+      "macro_f1": 0.6564625850340136,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8461538461538461,
+          "recall": 0.9565217391304348,
+          "f1-score": 0.8979591836734694,
+          "support": 23.0
+        },
+        "accuracy": 0.7941176470588235,
+        "macro avg": {
+          "precision": 0.782051282051282,
+          "recall": 0.618840579710145,
+          "f1-score": 0.6564625850340136,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.8076923076923076,
+          "recall": 0.7941176470588235,
+          "f1-score": 0.7797118847539016,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          3
+        ],
+        [
+          0,
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.6764705882352942,
+      "macro_f1": 0.26900584795321636,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6764705882352942,
+          "recall": 1.0,
+          "f1-score": 0.8070175438596491,
+          "support": 23.0
+        },
+        "accuracy": 0.6764705882352942,
+        "macro avg": {
+          "precision": 0.22549019607843138,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.26900584795321636,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.4576124567474049,
+          "recall": 0.6764705882352942,
+          "f1-score": 0.545923632610939,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.17647058823529413,
+      "macro_f1": 0.09999999999999999,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.17647058823529413,
+          "recall": 1.0,
+          "f1-score": 0.3,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 23.0
+        },
+        "accuracy": 0.17647058823529413,
+        "macro avg": {
+          "precision": 0.05882352941176471,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.09999999999999999,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.03114186851211073,
+          "recall": 0.17647058823529413,
+          "f1-score": 0.05294117647058823,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          23,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.7647058823529411,
+      "macro_f1": 0.7468013468013468,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1-score": 0.8888888888888888,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.4444444444444444,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5333333333333333,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8571428571428571,
+          "recall": 0.782608695652174,
+          "f1-score": 0.8181818181818182,
+          "support": 23.0
+        },
+        "accuracy": 0.7647058823529411,
+        "macro avg": {
+          "precision": 0.7671957671957671,
+          "recall": 0.7497584541062802,
+          "f1-score": 0.7468013468013468,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.8053221288515405,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.7783125371360666,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          0,
+          5,
+          18
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.6764705882352942,
+      "macro_f1": 0.648062015503876,
+      "report": {
+        "negative": {
+          "precision": 0.8,
+          "recall": 0.8,
+          "f1-score": 0.8,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.3333333333333333,
+          "recall": 0.5,
+          "f1-score": 0.4,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.6956521739130435,
+          "f1-score": 0.7441860465116279,
+          "support": 23.0
+        },
+        "accuracy": 0.6764705882352942,
+        "macro avg": {
+          "precision": 0.6444444444444445,
+          "recall": 0.6652173913043479,
+          "f1-score": 0.648062015503876,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.7176470588235295,
+          "recall": 0.6764705882352942,
+          "f1-score": 0.6916552667578659,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          3,
+          3
+        ],
+        [
+          1,
+          6,
+          16
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.4117647058823529,
+      "macro_f1": 0.43154761904761907,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.4,
+          "f1-score": 0.5,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.22727272727272727,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.35714285714285715,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7777777777777778,
+          "recall": 0.30434782608695654,
+          "f1-score": 0.4375,
+          "support": 23.0
+        },
+        "accuracy": 0.4117647058823529,
+        "macro avg": {
+          "precision": 0.5572390572390572,
+          "recall": 0.5125603864734299,
+          "f1-score": 0.43154761904761907,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.6642899584076054,
+          "recall": 0.4117647058823529,
+          "f1-score": 0.43251050420168063,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          0,
+          5,
+          1
+        ],
+        [
+          1,
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.7941176470588235,
+      "macro_f1": 0.6564625850340136,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1-score": 0.5714285714285714,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.8461538461538461,
+          "recall": 0.9565217391304348,
+          "f1-score": 0.8979591836734694,
+          "support": 23.0
+        },
+        "accuracy": 0.7941176470588235,
+        "macro avg": {
+          "precision": 0.782051282051282,
+          "recall": 0.618840579710145,
+          "f1-score": 0.6564625850340136,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.8076923076923076,
+          "recall": 0.7941176470588235,
+          "f1-score": 0.7797118847539016,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          3
+        ],
+        [
+          0,
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.6764705882352942,
+      "macro_f1": 0.26900584795321636,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6764705882352942,
+          "recall": 1.0,
+          "f1-score": 0.8070175438596491,
+          "support": 23.0
+        },
+        "accuracy": 0.6764705882352942,
+        "macro avg": {
+          "precision": 0.22549019607843138,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.26900584795321636,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.4576124567474049,
+          "recall": 0.6764705882352942,
+          "f1-score": 0.545923632610939,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 34,
+      "scored": 34,
+      "coverage": 1.0,
+      "agreement": 0.17647058823529413,
+      "macro_f1": 0.09999999999999999,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "neutral": {
+          "precision": 0.17647058823529413,
+          "recall": 1.0,
+          "f1-score": 0.3,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 23.0
+        },
+        "accuracy": 0.17647058823529413,
+        "macro avg": {
+          "precision": 0.05882352941176471,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.09999999999999999,
+          "support": 34.0
+        },
+        "weighted avg": {
+          "precision": 0.03114186851211073,
+          "recall": 0.17647058823529413,
+          "f1-score": 0.05294117647058823,
+          "support": 34.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          23,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.47719298245614034,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.631578947368421,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.375,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.4,
+          "support": 7.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.4916666666666667,
+          "recall": 0.4761904761904762,
+          "f1-score": 0.47719298245614034,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5011363636363636,
+          "recall": 0.5,
+          "f1-score": 0.4947368421052632,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          1,
+          6,
+          2
+        ],
+        [
+          1,
+          3,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.38054695562435503,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.25,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.4444444444444444,
+          "f1-score": 0.47058823529411764,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.3333333333333333,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.42105263157894735,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.4444444444444444,
+          "recall": 0.39417989417989413,
+          "f1-score": 0.38054695562435503,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.4469696969696969,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.3946664790318041,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.2940516273849607,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.3888888888888889,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.5185185185185185,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.2857142857142857,
+          "f1-score": 0.36363636363636365,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.2962962962962963,
+          "recall": 0.3544973544973545,
+          "f1-score": 0.2940516273849607,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.3181818181818182,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.327823691460055,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          7,
+          2
+        ],
+        [
+          0,
+          5,
+          2
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5454545454545454,
+      "macro_f1": 0.5319200779727096,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.7142857142857143,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.625,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.4166666666666667,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5263157894736842,
+          "support": 7.0
+        },
+        "accuracy": 0.5454545454545454,
+        "macro avg": {
+          "precision": 0.5992063492063492,
+          "recall": 0.5343915343915344,
+          "f1-score": 0.5319200779727096,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6066017316017316,
+          "recall": 0.5454545454545454,
+          "f1-score": 0.5443580542264752,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          1,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.16091954022988506,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.3181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.4827586206896552,
+          "support": 7.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.10606060606060606,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16091954022988506,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1012396694214876,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.1536050156739812,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.19354838709677422,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.4090909090909091,
+          "recall": 1.0,
+          "f1-score": 0.5806451612903226,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.13636363636363638,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.19354838709677422,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.16735537190082647,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.23753665689149564,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.47719298245614034,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.631578947368421,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.375,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.4,
+          "support": 7.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.4916666666666667,
+          "recall": 0.4761904761904762,
+          "f1-score": 0.47719298245614034,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5011363636363636,
+          "recall": 0.5,
+          "f1-score": 0.4947368421052632,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          1,
+          6,
+          2
+        ],
+        [
+          1,
+          3,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.38054695562435503,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.25,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.4444444444444444,
+          "f1-score": 0.47058823529411764,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.3333333333333333,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.42105263157894735,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.4444444444444444,
+          "recall": 0.39417989417989413,
+          "f1-score": 0.38054695562435503,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.4469696969696969,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.3946664790318041,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.2940516273849607,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.3888888888888889,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.5185185185185185,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.2857142857142857,
+          "f1-score": 0.36363636363636365,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.2962962962962963,
+          "recall": 0.3544973544973545,
+          "f1-score": 0.2940516273849607,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.3181818181818182,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.327823691460055,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          7,
+          2
+        ],
+        [
+          0,
+          5,
+          2
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5454545454545454,
+      "macro_f1": 0.5319200779727096,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.7142857142857143,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.625,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.4166666666666667,
+          "recall": 0.7142857142857143,
+          "f1-score": 0.5263157894736842,
+          "support": 7.0
+        },
+        "accuracy": 0.5454545454545454,
+        "macro avg": {
+          "precision": 0.5992063492063492,
+          "recall": 0.5343915343915344,
+          "f1-score": 0.5319200779727096,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.6066017316017316,
+          "recall": 0.5454545454545454,
+          "f1-score": 0.5443580542264752,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          1,
+          5
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.3181818181818182,
+      "macro_f1": 0.16091954022988506,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.3181818181818182,
+          "recall": 1.0,
+          "f1-score": 0.4827586206896552,
+          "support": 7.0
+        },
+        "accuracy": 0.3181818181818182,
+        "macro avg": {
+          "precision": 0.10606060606060606,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16091954022988506,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1012396694214876,
+          "recall": 0.3181818181818182,
+          "f1-score": 0.1536050156739812,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "development",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.4090909090909091,
+      "macro_f1": 0.19354838709677422,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.4090909090909091,
+          "recall": 1.0,
+          "f1-score": 0.5806451612903226,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.4090909090909091,
+        "macro avg": {
+          "precision": 0.13636363636363638,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.19354838709677422,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.16735537190082647,
+          "recall": 0.4090909090909091,
+          "f1-score": 0.23753665689149564,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.6179775280898876,
+      "macro_f1": 0.6143954879248996,
+      "report": {
+        "negative": {
+          "precision": 0.5714285714285714,
+          "recall": 0.75,
+          "f1-score": 0.6486486486486487,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.6521739130434783,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.5357142857142857,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.6222222222222222,
+          "recall": 0.7,
+          "f1-score": 0.6588235294117647,
+          "support": 40.0
+        },
+        "accuracy": 0.6179775280898876,
+        "macro avg": {
+          "precision": 0.615274902231424,
+          "recall": 0.6348484848484849,
+          "f1-score": 0.6143954879248996,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6241964624964136,
+          "recall": 0.6179775280898876,
+          "f1-score": 0.6113470897013528,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          12,
+          0,
+          4
+        ],
+        [
+          5,
+          15,
+          13
+        ],
+        [
+          4,
+          8,
+          28
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.6741573033707865,
+      "macro_f1": 0.6587570621468927,
+      "report": {
+        "negative": {
+          "precision": 0.6111111111111112,
+          "recall": 0.6875,
+          "f1-score": 0.6470588235294118,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.6538461538461539,
+          "recall": 0.5151515151515151,
+          "f1-score": 0.576271186440678,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.7111111111111111,
+          "recall": 0.8,
+          "f1-score": 0.7529411764705882,
+          "support": 40.0
+        },
+        "accuracy": 0.6741573033707865,
+        "macro avg": {
+          "precision": 0.6586894586894587,
+          "recall": 0.6675505050505052,
+          "f1-score": 0.6587570621468927,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6719005089791606,
+          "recall": 0.6741573033707865,
+          "f1-score": 0.6683992964925448,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          11,
+          3,
+          2
+        ],
+        [
+          5,
+          17,
+          11
+        ],
+        [
+          2,
+          6,
+          32
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.449438202247191,
+      "macro_f1": 0.47600373482726427,
+      "report": {
+        "negative": {
+          "precision": 0.6428571428571429,
+          "recall": 0.5625,
+          "f1-score": 0.6,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.36538461538461536,
+          "recall": 0.5757575757575758,
+          "f1-score": 0.4470588235294118,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.5217391304347826,
+          "recall": 0.3,
+          "f1-score": 0.38095238095238093,
+          "support": 40.0
+        },
+        "accuracy": 0.449438202247191,
+        "macro avg": {
+          "precision": 0.509993629558847,
+          "recall": 0.4794191919191919,
+          "f1-score": 0.47600373482726427,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.48553900911008874,
+          "recall": 0.449438202247191,
+          "f1-score": 0.44484310578163844,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          9,
+          6,
+          1
+        ],
+        [
+          4,
+          19,
+          10
+        ],
+        [
+          1,
+          27,
+          12
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.651685393258427,
+      "macro_f1": 0.646798245614035,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.5625,
+          "f1-score": 0.72,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.5833333333333334,
+          "recall": 0.42424242424242425,
+          "f1-score": 0.49122807017543857,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.625,
+          "recall": 0.875,
+          "f1-score": 0.7291666666666666,
+          "support": 40.0
+        },
+        "accuracy": 0.651685393258427,
+        "macro avg": {
+          "precision": 0.7361111111111112,
+          "recall": 0.6205808080808081,
+          "f1-score": 0.646798245614035,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6769662921348315,
+          "recall": 0.651685393258427,
+          "f1-score": 0.6392943031736644,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          9,
+          5,
+          2
+        ],
+        [
+          0,
+          14,
+          19
+        ],
+        [
+          0,
+          5,
+          35
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.449438202247191,
+      "macro_f1": 0.20671834625322996,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.449438202247191,
+          "recall": 1.0,
+          "f1-score": 0.6201550387596899,
+          "support": 40.0
+        },
+        "accuracy": 0.449438202247191,
+        "macro avg": {
+          "precision": 0.149812734082397,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.20671834625322996,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.20199469763918698,
+          "recall": 0.449438202247191,
+          "f1-score": 0.27872136573469214,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          16
+        ],
+        [
+          0,
+          0,
+          33
+        ],
+        [
+          0,
+          0,
+          40
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.3707865168539326,
+      "macro_f1": 0.18032786885245902,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.3707865168539326,
+          "recall": 1.0,
+          "f1-score": 0.5409836065573771,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 40.0
+        },
+        "accuracy": 0.3707865168539326,
+        "macro avg": {
+          "precision": 0.12359550561797754,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.18032786885245902,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.13748264108067165,
+          "recall": 0.3707865168539326,
+          "f1-score": 0.2005894271504881,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          16,
+          0
+        ],
+        [
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          40,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.6179775280898876,
+      "macro_f1": 0.6143954879248996,
+      "report": {
+        "negative": {
+          "precision": 0.5714285714285714,
+          "recall": 0.75,
+          "f1-score": 0.6486486486486487,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.6521739130434783,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.5357142857142857,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.6222222222222222,
+          "recall": 0.7,
+          "f1-score": 0.6588235294117647,
+          "support": 40.0
+        },
+        "accuracy": 0.6179775280898876,
+        "macro avg": {
+          "precision": 0.615274902231424,
+          "recall": 0.6348484848484849,
+          "f1-score": 0.6143954879248996,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6241964624964136,
+          "recall": 0.6179775280898876,
+          "f1-score": 0.6113470897013528,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          12,
+          0,
+          4
+        ],
+        [
+          5,
+          15,
+          13
+        ],
+        [
+          4,
+          8,
+          28
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.6741573033707865,
+      "macro_f1": 0.6587570621468927,
+      "report": {
+        "negative": {
+          "precision": 0.6111111111111112,
+          "recall": 0.6875,
+          "f1-score": 0.6470588235294118,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.6538461538461539,
+          "recall": 0.5151515151515151,
+          "f1-score": 0.576271186440678,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.7111111111111111,
+          "recall": 0.8,
+          "f1-score": 0.7529411764705882,
+          "support": 40.0
+        },
+        "accuracy": 0.6741573033707865,
+        "macro avg": {
+          "precision": 0.6586894586894587,
+          "recall": 0.6675505050505052,
+          "f1-score": 0.6587570621468927,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6719005089791606,
+          "recall": 0.6741573033707865,
+          "f1-score": 0.6683992964925448,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          11,
+          3,
+          2
+        ],
+        [
+          5,
+          17,
+          11
+        ],
+        [
+          2,
+          6,
+          32
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.449438202247191,
+      "macro_f1": 0.47600373482726427,
+      "report": {
+        "negative": {
+          "precision": 0.6428571428571429,
+          "recall": 0.5625,
+          "f1-score": 0.6,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.36538461538461536,
+          "recall": 0.5757575757575758,
+          "f1-score": 0.4470588235294118,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.5217391304347826,
+          "recall": 0.3,
+          "f1-score": 0.38095238095238093,
+          "support": 40.0
+        },
+        "accuracy": 0.449438202247191,
+        "macro avg": {
+          "precision": 0.509993629558847,
+          "recall": 0.4794191919191919,
+          "f1-score": 0.47600373482726427,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.48553900911008874,
+          "recall": 0.449438202247191,
+          "f1-score": 0.44484310578163844,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          9,
+          6,
+          1
+        ],
+        [
+          4,
+          19,
+          10
+        ],
+        [
+          1,
+          27,
+          12
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.651685393258427,
+      "macro_f1": 0.646798245614035,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.5625,
+          "f1-score": 0.72,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.5833333333333334,
+          "recall": 0.42424242424242425,
+          "f1-score": 0.49122807017543857,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.625,
+          "recall": 0.875,
+          "f1-score": 0.7291666666666666,
+          "support": 40.0
+        },
+        "accuracy": 0.651685393258427,
+        "macro avg": {
+          "precision": 0.7361111111111112,
+          "recall": 0.6205808080808081,
+          "f1-score": 0.646798245614035,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.6769662921348315,
+          "recall": 0.651685393258427,
+          "f1-score": 0.6392943031736644,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          9,
+          5,
+          2
+        ],
+        [
+          0,
+          14,
+          19
+        ],
+        [
+          0,
+          5,
+          35
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.449438202247191,
+      "macro_f1": 0.20671834625322996,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.449438202247191,
+          "recall": 1.0,
+          "f1-score": 0.6201550387596899,
+          "support": 40.0
+        },
+        "accuracy": 0.449438202247191,
+        "macro avg": {
+          "precision": 0.149812734082397,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.20671834625322996,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.20199469763918698,
+          "recall": 0.449438202247191,
+          "f1-score": 0.27872136573469214,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          16
+        ],
+        [
+          0,
+          0,
+          33
+        ],
+        [
+          0,
+          0,
+          40
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "all",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 89,
+      "scored": 89,
+      "coverage": 1.0,
+      "agreement": 0.3707865168539326,
+      "macro_f1": 0.18032786885245902,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "neutral": {
+          "precision": 0.3707865168539326,
+          "recall": 1.0,
+          "f1-score": 0.5409836065573771,
+          "support": 33.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 40.0
+        },
+        "accuracy": 0.3707865168539326,
+        "macro avg": {
+          "precision": 0.12359550561797754,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.18032786885245902,
+          "support": 89.0
+        },
+        "weighted avg": {
+          "precision": 0.13748264108067165,
+          "recall": 0.3707865168539326,
+          "f1-score": 0.2005894271504881,
+          "support": 89.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          16,
+          0
+        ],
+        [
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          40,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.46388028895768835,
+      "report": {
+        "negative": {
+          "precision": 0.4,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.36363636363636365,
+          "recall": 0.5,
+          "f1-score": 0.42105263157894735,
+          "support": 8.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.47676767676767673,
+          "recall": 0.51010101010101,
+          "f1-score": 0.46388028895768835,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5201101928374655,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.4565859836757669,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          4,
+          6
+        ],
+        [
+          2,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5454545454545454,
+      "macro_f1": 0.5473389355742296,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5714285714285714,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 8.0
+        },
+        "accuracy": 0.5454545454545454,
+        "macro avg": {
+          "precision": 0.5555555555555555,
+          "recall": 0.5934343434343434,
+          "f1-score": 0.5473389355742296,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5833333333333333,
+          "recall": 0.5454545454545454,
+          "f1-score": 0.531398013750955,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          4,
+          6
+        ],
+        [
+          1,
+          1,
+          6
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.3128205128205128,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.4666666666666667,
+          "recall": 0.6363636363636364,
+          "f1-score": 0.5384615384615384,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.42857142857142855,
+          "recall": 0.375,
+          "f1-score": 0.4,
+          "support": 8.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.2984126984126984,
+          "recall": 0.3371212121212121,
+          "f1-score": 0.3128205128205128,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.3891774891774892,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.41468531468531467,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          7,
+          4
+        ],
+        [
+          0,
+          5,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.3383333333333334,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.2727272727272727,
+          "f1-score": 0.375,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.47058823529411764,
+          "recall": 1.0,
+          "f1-score": 0.64,
+          "support": 8.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.3568627450980392,
+          "recall": 0.42424242424242425,
+          "f1-score": 0.3383333333333334,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.47112299465240637,
+          "recall": 0.5,
+          "f1-score": 0.4202272727272728,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          8
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.36363636363636365,
+      "macro_f1": 0.17777777777777778,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.36363636363636365,
+          "recall": 1.0,
+          "f1-score": 0.5333333333333333,
+          "support": 8.0
+        },
+        "accuracy": 0.36363636363636365,
+        "macro avg": {
+          "precision": 0.12121212121212122,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.17777777777777778,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1322314049586777,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.19393939393939394,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          11
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.2222222222222222,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2222222222222222,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.25,
+          "recall": 0.5,
+          "f1-score": 0.3333333333333333,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          11,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.46388028895768835,
+      "report": {
+        "negative": {
+          "precision": 0.4,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.36363636363636365,
+          "recall": 0.5,
+          "f1-score": 0.42105263157894735,
+          "support": 8.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.47676767676767673,
+          "recall": 0.51010101010101,
+          "f1-score": 0.46388028895768835,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5201101928374655,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.4565859836757669,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          4,
+          6
+        ],
+        [
+          2,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5454545454545454,
+      "macro_f1": 0.5473389355742296,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5714285714285714,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.47058823529411764,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 8.0
+        },
+        "accuracy": 0.5454545454545454,
+        "macro avg": {
+          "precision": 0.5555555555555555,
+          "recall": 0.5934343434343434,
+          "f1-score": 0.5473389355742296,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.5833333333333333,
+          "recall": 0.5454545454545454,
+          "f1-score": 0.531398013750955,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          4,
+          6
+        ],
+        [
+          1,
+          1,
+          6
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.45454545454545453,
+      "macro_f1": 0.3128205128205128,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.4666666666666667,
+          "recall": 0.6363636363636364,
+          "f1-score": 0.5384615384615384,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.42857142857142855,
+          "recall": 0.375,
+          "f1-score": 0.4,
+          "support": 8.0
+        },
+        "accuracy": 0.45454545454545453,
+        "macro avg": {
+          "precision": 0.2984126984126984,
+          "recall": 0.3371212121212121,
+          "f1-score": 0.3128205128205128,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.3891774891774892,
+          "recall": 0.45454545454545453,
+          "f1-score": 0.41468531468531467,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          7,
+          4
+        ],
+        [
+          0,
+          5,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.3383333333333334,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.2727272727272727,
+          "f1-score": 0.375,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.47058823529411764,
+          "recall": 1.0,
+          "f1-score": 0.64,
+          "support": 8.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.3568627450980392,
+          "recall": 0.42424242424242425,
+          "f1-score": 0.3383333333333334,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.47112299465240637,
+          "recall": 0.5,
+          "f1-score": 0.4202272727272728,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          8
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.36363636363636365,
+      "macro_f1": 0.17777777777777778,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.36363636363636365,
+          "recall": 1.0,
+          "f1-score": 0.5333333333333333,
+          "support": 8.0
+        },
+        "accuracy": 0.36363636363636365,
+        "macro avg": {
+          "precision": 0.12121212121212122,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.17777777777777778,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.1322314049586777,
+          "recall": 0.36363636363636365,
+          "f1-score": 0.19393939393939394,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          11
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "AAPL",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 22,
+      "scored": 22,
+      "coverage": 1.0,
+      "agreement": 0.5,
+      "macro_f1": 0.2222222222222222,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 11.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2222222222222222,
+          "support": 22.0
+        },
+        "weighted avg": {
+          "precision": 0.25,
+          "recall": 0.5,
+          "f1-score": 0.3333333333333333,
+          "support": 22.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          11,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7368421052631579,
+      "macro_f1": 0.6975867269984916,
+      "report": {
+        "negative": {
+          "precision": 0.7142857142857143,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.7692307692307693,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.5,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7,
+          "recall": 1.0,
+          "f1-score": 0.8235294117647058,
+          "support": 7.0
+        },
+        "accuracy": 0.7368421052631579,
+        "macro avg": {
+          "precision": 0.8047619047619049,
+          "recall": 0.7222222222222223,
+          "f1-score": 0.6975867269984916,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7992481203007518,
+          "recall": 0.7368421052631579,
+          "f1-score": 0.7042152893546083,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7894736842105263,
+      "macro_f1": 0.7765151515151515,
+      "report": {
+        "negative": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7272727272727273,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7272727272727273,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7777777777777778,
+          "recall": 1.0,
+          "f1-score": 0.875,
+          "support": 7.0
+        },
+        "accuracy": 0.7894736842105263,
+        "macro avg": {
+          "precision": 0.7925925925925926,
+          "recall": 0.7777777777777777,
+          "f1-score": 0.7765151515151515,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7918128654970761,
+          "recall": 0.7894736842105263,
+          "f1-score": 0.7816985645933014,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          4,
+          1
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.6842105263157895,
+      "macro_f1": 0.6986346986346986,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.9090909090909091,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5714285714285714,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.6153846153846154,
+          "support": 7.0
+        },
+        "accuracy": 0.6842105263157895,
+        "macro avg": {
+          "precision": 0.7222222222222222,
+          "recall": 0.6904761904761904,
+          "f1-score": 0.6986346986346986,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7192982456140351,
+          "recall": 0.6842105263157895,
+          "f1-score": 0.6942531153057468,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          0,
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7368421052631579,
+      "macro_f1": 0.7104377104377103,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.9090909090909091,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6363636363636364,
+          "recall": 1.0,
+          "f1-score": 0.7777777777777778,
+          "support": 7.0
+        },
+        "accuracy": 0.7368421052631579,
+        "macro avg": {
+          "precision": 0.7676767676767676,
+          "recall": 0.7222222222222223,
+          "f1-score": 0.7104377104377103,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7607655502392344,
+          "recall": 0.7368421052631579,
+          "f1-score": 0.7139819245082403,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          4
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.3684210526315789,
+      "macro_f1": 0.1794871794871795,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.3684210526315789,
+          "recall": 1.0,
+          "f1-score": 0.5384615384615384,
+          "support": 7.0
+        },
+        "accuracy": 0.3684210526315789,
+        "macro avg": {
+          "precision": 0.12280701754385964,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1794871794871795,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.13573407202216067,
+          "recall": 0.3684210526315789,
+          "f1-score": 0.19838056680161942,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.3157894736842105,
+      "macro_f1": 0.16,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.3157894736842105,
+          "recall": 1.0,
+          "f1-score": 0.48,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.3157894736842105,
+        "macro avg": {
+          "precision": 0.10526315789473684,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.09972299168975068,
+          "recall": 0.3157894736842105,
+          "f1-score": 0.15157894736842104,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7368421052631579,
+      "macro_f1": 0.6975867269984916,
+      "report": {
+        "negative": {
+          "precision": 0.7142857142857143,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.7692307692307693,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.5,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7,
+          "recall": 1.0,
+          "f1-score": 0.8235294117647058,
+          "support": 7.0
+        },
+        "accuracy": 0.7368421052631579,
+        "macro avg": {
+          "precision": 0.8047619047619049,
+          "recall": 0.7222222222222223,
+          "f1-score": 0.6975867269984916,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7992481203007518,
+          "recall": 0.7368421052631579,
+          "f1-score": 0.7042152893546083,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7894736842105263,
+      "macro_f1": 0.7765151515151515,
+      "report": {
+        "negative": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7272727272727273,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.7272727272727273,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.7777777777777778,
+          "recall": 1.0,
+          "f1-score": 0.875,
+          "support": 7.0
+        },
+        "accuracy": 0.7894736842105263,
+        "macro avg": {
+          "precision": 0.7925925925925926,
+          "recall": 0.7777777777777777,
+          "f1-score": 0.7765151515151515,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7918128654970761,
+          "recall": 0.7894736842105263,
+          "f1-score": 0.7816985645933014,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          4,
+          1
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.6842105263157895,
+      "macro_f1": 0.6986346986346986,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.9090909090909091,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5714285714285714,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.6153846153846154,
+          "support": 7.0
+        },
+        "accuracy": 0.6842105263157895,
+        "macro avg": {
+          "precision": 0.7222222222222222,
+          "recall": 0.6904761904761904,
+          "f1-score": 0.6986346986346986,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7192982456140351,
+          "recall": 0.6842105263157895,
+          "f1-score": 0.6942531153057468,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          0,
+          4,
+          2
+        ],
+        [
+          0,
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.7368421052631579,
+      "macro_f1": 0.7104377104377103,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.9090909090909091,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.6363636363636364,
+          "recall": 1.0,
+          "f1-score": 0.7777777777777778,
+          "support": 7.0
+        },
+        "accuracy": 0.7368421052631579,
+        "macro avg": {
+          "precision": 0.7676767676767676,
+          "recall": 0.7222222222222223,
+          "f1-score": 0.7104377104377103,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.7607655502392344,
+          "recall": 0.7368421052631579,
+          "f1-score": 0.7139819245082403,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          4
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.3684210526315789,
+      "macro_f1": 0.1794871794871795,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.3684210526315789,
+          "recall": 1.0,
+          "f1-score": 0.5384615384615384,
+          "support": 7.0
+        },
+        "accuracy": 0.3684210526315789,
+        "macro avg": {
+          "precision": 0.12280701754385964,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1794871794871795,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.13573407202216067,
+          "recall": 0.3684210526315789,
+          "f1-score": 0.19838056680161942,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          6
+        ],
+        [
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "MSFT",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 19,
+      "scored": 19,
+      "coverage": 1.0,
+      "agreement": 0.3157894736842105,
+      "macro_f1": 0.16,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "neutral": {
+          "precision": 0.3157894736842105,
+          "recall": 1.0,
+          "f1-score": 0.48,
+          "support": 6.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "accuracy": 0.3157894736842105,
+        "macro avg": {
+          "precision": 0.10526315789473684,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.16,
+          "support": 19.0
+        },
+        "weighted avg": {
+          "precision": 0.09972299168975068,
+          "recall": 0.3157894736842105,
+          "f1-score": 0.15157894736842104,
+          "support": 19.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7037037037037037,
+      "macro_f1": 0.6626262626262626,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5333333333333333,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.8125,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.7878787878787878,
+          "support": 17.0
+        },
+        "accuracy": 0.7037037037037037,
+        "macro avg": {
+          "precision": 0.6597222222222222,
+          "recall": 0.6676003734827264,
+          "f1-score": 0.6626262626262626,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7152777777777778,
+          "recall": 0.7037037037037037,
+          "f1-score": 0.7084175084175084,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          4,
+          13
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7407407407407407,
+      "macro_f1": 0.6666666666666666,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.5,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.7894736842105263,
+          "recall": 0.8823529411764706,
+          "f1-score": 0.8333333333333334,
+          "support": 17.0
+        },
+        "accuracy": 0.7407407407407407,
+        "macro avg": {
+          "precision": 0.6853801169590644,
+          "recall": 0.6591970121381886,
+          "f1-score": 0.6666666666666666,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7267056530214425,
+          "recall": 0.7407407407407407,
+          "f1-score": 0.7283950617283951,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          3,
+          3
+        ],
+        [
+          0,
+          2,
+          15
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.2222222222222222,
+      "macro_f1": 0.2490821256038647,
+      "report": {
+        "negative": {
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.3333333333333333,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.16666666666666666,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.24,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.3333333333333333,
+          "recall": 0.11764705882352941,
+          "f1-score": 0.17391304347826086,
+          "support": 17.0
+        },
+        "accuracy": 0.2222222222222222,
+        "macro avg": {
+          "precision": 0.27777777777777773,
+          "recall": 0.2931839402427638,
+          "f1-score": 0.2490821256038647,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.2901234567901234,
+          "recall": 0.2222222222222222,
+          "f1-score": 0.2087600644122383,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          3,
+          3
+        ],
+        [
+          1,
+          14,
+          2
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7777777777777778,
+      "macro_f1": 0.6600831600831601,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.5,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.6153846153846154,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.8648648648648649,
+          "support": 17.0
+        },
+        "accuracy": 0.7777777777777778,
+        "macro avg": {
+          "precision": 0.8222222222222223,
+          "recall": 0.6153127917833799,
+          "f1-score": 0.6600831600831601,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7876543209876543,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.7596442596442597,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          4,
+          3
+        ],
+        [
+          0,
+          1,
+          16
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.6296296296296297,
+      "macro_f1": 0.25757575757575757,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.6296296296296297,
+          "recall": 1.0,
+          "f1-score": 0.7727272727272727,
+          "support": 17.0
+        },
+        "accuracy": 0.6296296296296297,
+        "macro avg": {
+          "precision": 0.20987654320987656,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.25757575757575757,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.39643347050754457,
+          "recall": 0.6296296296296297,
+          "f1-score": 0.48653198653198654,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.25925925925925924,
+      "macro_f1": 0.1372549019607843,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.25925925925925924,
+          "recall": 1.0,
+          "f1-score": 0.4117647058823529,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 17.0
+        },
+        "accuracy": 0.25925925925925924,
+        "macro avg": {
+          "precision": 0.08641975308641975,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1372549019607843,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.0672153635116598,
+          "recall": 0.25925925925925924,
+          "f1-score": 0.10675381263616558,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          17,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7037037037037037,
+      "macro_f1": 0.6626262626262626,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5333333333333333,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.8125,
+          "recall": 0.7647058823529411,
+          "f1-score": 0.7878787878787878,
+          "support": 17.0
+        },
+        "accuracy": 0.7037037037037037,
+        "macro avg": {
+          "precision": 0.6597222222222222,
+          "recall": 0.6676003734827264,
+          "f1-score": 0.6626262626262626,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7152777777777778,
+          "recall": 0.7037037037037037,
+          "f1-score": 0.7084175084175084,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          0,
+          4,
+          13
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7407407407407407,
+      "macro_f1": 0.6666666666666666,
+      "report": {
+        "negative": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.5,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.7894736842105263,
+          "recall": 0.8823529411764706,
+          "f1-score": 0.8333333333333334,
+          "support": 17.0
+        },
+        "accuracy": 0.7407407407407407,
+        "macro avg": {
+          "precision": 0.6853801169590644,
+          "recall": 0.6591970121381886,
+          "f1-score": 0.6666666666666666,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7267056530214425,
+          "recall": 0.7407407407407407,
+          "f1-score": 0.7283950617283951,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          1,
+          3,
+          3
+        ],
+        [
+          0,
+          2,
+          15
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.2222222222222222,
+      "macro_f1": 0.2490821256038647,
+      "report": {
+        "negative": {
+          "precision": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.3333333333333333,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.16666666666666666,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.24,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.3333333333333333,
+          "recall": 0.11764705882352941,
+          "f1-score": 0.17391304347826086,
+          "support": 17.0
+        },
+        "accuracy": 0.2222222222222222,
+        "macro avg": {
+          "precision": 0.27777777777777773,
+          "recall": 0.2931839402427638,
+          "f1-score": 0.2490821256038647,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.2901234567901234,
+          "recall": 0.2222222222222222,
+          "f1-score": 0.2087600644122383,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          3,
+          3
+        ],
+        [
+          1,
+          14,
+          2
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.7777777777777778,
+      "macro_f1": 0.6600831600831601,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.5,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.6666666666666666,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.6153846153846154,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.8648648648648649,
+          "support": 17.0
+        },
+        "accuracy": 0.7777777777777778,
+        "macro avg": {
+          "precision": 0.8222222222222223,
+          "recall": 0.6153127917833799,
+          "f1-score": 0.6600831600831601,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.7876543209876543,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.7596442596442597,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          4,
+          3
+        ],
+        [
+          0,
+          1,
+          16
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.6296296296296297,
+      "macro_f1": 0.25757575757575757,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.6296296296296297,
+          "recall": 1.0,
+          "f1-score": 0.7727272727272727,
+          "support": 17.0
+        },
+        "accuracy": 0.6296296296296297,
+        "macro avg": {
+          "precision": 0.20987654320987656,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.25757575757575757,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.39643347050754457,
+          "recall": 0.6296296296296297,
+          "f1-score": 0.48653198653198654,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "NVDA",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 27,
+      "scored": 27,
+      "coverage": 1.0,
+      "agreement": 0.25925925925925924,
+      "macro_f1": 0.1372549019607843,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "neutral": {
+          "precision": 0.25925925925925924,
+          "recall": 1.0,
+          "f1-score": 0.4117647058823529,
+          "support": 7.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 17.0
+        },
+        "accuracy": 0.25925925925925924,
+        "macro avg": {
+          "precision": 0.08641975308641975,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1372549019607843,
+          "support": 27.0
+        },
+        "weighted avg": {
+          "precision": 0.0672153635116598,
+          "recall": 0.25925925925925924,
+          "f1-score": 0.10675381263616558,
+          "support": 27.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          17,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "company_context",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5714285714285714,
+      "macro_f1": 0.5750000000000001,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.7142857142857143,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.625,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5714285714285714,
+        "macro avg": {
+          "precision": 0.5714285714285715,
+          "recall": 0.6018518518518519,
+          "f1-score": 0.5750000000000001,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5918367346938775,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5726190476190476,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          1,
+          5,
+          3
+        ],
+        [
+          2,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "full_text",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.6190476190476191,
+      "macro_f1": 0.6156545209176788,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.631578947368421,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.5,
+          "f1-score": 0.6153846153846154,
+          "support": 8.0
+        },
+        "accuracy": 0.6190476190476191,
+        "macro avg": {
+          "precision": 0.6333333333333334,
+          "recall": 0.6388888888888888,
+          "f1-score": 0.6156545209176788,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.6571428571428571,
+          "recall": 0.6190476190476191,
+          "f1-score": 0.6193946404472721,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          2,
+          6,
+          1
+        ],
+        [
+          1,
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "headline",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5238095238095238,
+      "macro_f1": 0.5333333333333333,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.45454545454545453,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.5,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.75,
+          "recall": 0.375,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5238095238095238,
+        "macro avg": {
+          "precision": 0.5681818181818182,
+          "recall": 0.5601851851851852,
+          "f1-score": 0.5333333333333333,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5757575757575757,
+          "recall": 0.5238095238095238,
+          "f1-score": 0.5190476190476191,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          5,
+          1
+        ],
+        [
+          0,
+          5,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "alpha_vantage",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5714285714285714,
+      "macro_f1": 0.6278195488721804,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1-score": 0.8571428571428571,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.5263157894736842,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5714285714285714,
+        "macro avg": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6018518518518519,
+          "f1-score": 0.6278195488721804,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5952380952380952,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5793054063730756,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          0,
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "constant_positive",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.38095238095238093,
+      "macro_f1": 0.1839080459770115,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.38095238095238093,
+          "recall": 1.0,
+          "f1-score": 0.5517241379310345,
+          "support": 8.0
+        },
+        "accuracy": 0.38095238095238093,
+        "macro avg": {
+          "precision": 0.12698412698412698,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1839080459770115,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.14512471655328799,
+          "recall": 0.38095238095238093,
+          "f1-score": 0.21018062397372742,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "all_eligible",
+      "system": "constant_neutral",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.42857142857142855,
+      "macro_f1": 0.19999999999999998,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 1.0,
+          "f1-score": 0.6,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "accuracy": 0.42857142857142855,
+        "macro avg": {
+          "precision": 0.14285714285714285,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.19999999999999998,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.18367346938775508,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.2571428571428571,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "company_context",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5714285714285714,
+      "macro_f1": 0.5750000000000001,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.7142857142857143,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.625,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5714285714285714,
+        "macro avg": {
+          "precision": 0.5714285714285715,
+          "recall": 0.6018518518518519,
+          "f1-score": 0.5750000000000001,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5918367346938775,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5726190476190476,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          1,
+          5,
+          3
+        ],
+        [
+          2,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "full_text",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.6190476190476191,
+      "macro_f1": 0.6156545209176788,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.6,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.631578947368421,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.8,
+          "recall": 0.5,
+          "f1-score": 0.6153846153846154,
+          "support": 8.0
+        },
+        "accuracy": 0.6190476190476191,
+        "macro avg": {
+          "precision": 0.6333333333333334,
+          "recall": 0.6388888888888888,
+          "f1-score": 0.6156545209176788,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.6571428571428571,
+          "recall": 0.6190476190476191,
+          "f1-score": 0.6193946404472721,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          2,
+          6,
+          1
+        ],
+        [
+          1,
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "headline",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5238095238095238,
+      "macro_f1": 0.5333333333333333,
+      "report": {
+        "negative": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.45454545454545453,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.5,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.75,
+          "recall": 0.375,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5238095238095238,
+        "macro avg": {
+          "precision": 0.5681818181818182,
+          "recall": 0.5601851851851852,
+          "f1-score": 0.5333333333333333,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5757575757575757,
+          "recall": 0.5238095238095238,
+          "f1-score": 0.5190476190476191,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          5,
+          1
+        ],
+        [
+          0,
+          5,
+          3
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "alpha_vantage",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.5714285714285714,
+      "macro_f1": 0.6278195488721804,
+      "report": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1-score": 0.8571428571428571,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.5,
+          "recall": 0.5555555555555556,
+          "f1-score": 0.5263157894736842,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.5714285714285714,
+        "macro avg": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6018518518518519,
+          "f1-score": 0.6278195488721804,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.5952380952380952,
+          "recall": 0.5714285714285714,
+          "f1-score": 0.5793054063730756,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          0,
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "constant_positive",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.38095238095238093,
+      "macro_f1": 0.1839080459770115,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.38095238095238093,
+          "recall": 1.0,
+          "f1-score": 0.5517241379310345,
+          "support": 8.0
+        },
+        "accuracy": 0.38095238095238093,
+        "macro avg": {
+          "precision": 0.12698412698412698,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.1839080459770115,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.14512471655328799,
+          "recall": 0.38095238095238093,
+          "f1-score": 0.21018062397372742,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "partition": "evaluation",
+      "ticker": "TSLA",
+      "panel": "paired_context",
+      "system": "constant_neutral",
+      "eligible": 21,
+      "scored": 21,
+      "coverage": 1.0,
+      "agreement": 0.42857142857142855,
+      "macro_f1": 0.19999999999999998,
+      "report": {
+        "negative": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.42857142857142855,
+          "recall": 1.0,
+          "f1-score": 0.6,
+          "support": 9.0
+        },
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "accuracy": 0.42857142857142855,
+        "macro avg": {
+          "precision": 0.14285714285714285,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.19999999999999998,
+          "support": 21.0
+        },
+        "weighted avg": {
+          "precision": 0.18367346938775508,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.2571428571428571,
+          "support": 21.0
+        }
+      },
+      "confusion": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          8,
+          0
+        ]
+      ]
+    }
+  ]
+}

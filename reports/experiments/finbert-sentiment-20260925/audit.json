@@ -1,0 +1,25 @@
+{
+  "rows": 46223,
+  "unique_exact_texts": 38704,
+  "groups": 35709,
+  "duplicate_ids": 0,
+  "cross_boundary_rows": 46,
+  "cross_boundary_groups": 14,
+  "empty_titles": 0,
+  "empty_summaries": 13,
+  "empty_texts": 0,
+  "rows_over_512_tokens": 0,
+  "token_quantiles": {
+    "0.5": 114.0,
+    "0.9": 140.0,
+    "0.99": 166.0,
+    "1.0": 493.0
+  },
+  "language_review_flags": 102,
+  "language_verified": false,
+  "sample_rows": 400,
+  "double_annotation_rows": 96,
+  "sample_context_available": 193,
+  "sample_multi_company": 115,
+  "evaluation_predictions_computed": false
+}
