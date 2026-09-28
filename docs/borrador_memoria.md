@@ -5,9 +5,9 @@ Grado en Ingeniería del Software · Universidad de Sevilla
 **Autor:** Marco Padilla Gómez  
 **Tutor:** Jose Antonio Troyano Jimenez  
 **Revisión documental:** 19 de septiembre de 2026, según las orientaciones del tutor.
-**Ampliación de PLN:** 28 de septiembre de 2026, estudio interno, diagnóstico y referencia de sentimiento elaborada por IA; sin validación humana ni integración financiera.
+**Ampliación de PLN:** 28 de septiembre de 2026, estudio interno, diagnóstico, referencia de IA y comparación predictiva emparejada de FinBERT; sin validación humana independiente.
 
-> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916` y `variable-ablation-full-20260917`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
+> Este documento describe la implementación y los experimentos existentes. No presenta como realizadas las propuestas futuras. La revisión principal corresponde a `review-full-20260908` y se amplía con `per-company-20260916`, `ticker-aware-full-20260916`, `first-round-full-20260916`, `variable-ablation-full-20260917` y `finbert-predictive-full-20260928`. Se distinguen sus métricas y todos los resultados se consideran exploratorios, al reutilizar un histórico ya examinado.
 
 ## Índice
 
@@ -40,7 +40,9 @@ Dos experimentos adicionales estudian si conviene especializar el aprendizaje po
 
 Una ronda posterior separa deduplicación, ventanas de entrenamiento, nuevas variables de sentimiento, criterio de selección y búsqueda ampliada. La combinación completa no mejora el AUC macro general. Una ablación individual identifica resultados puntuales: la sorpresa del volumen mejora descriptivamente los tres híbridos sin retardo, y la intensidad absoluta eleva el AUC macro del bosque híbrido de 0,5045 a 0,5202. No se acredita una mejora robusta tras considerar la incertidumbre, las comparaciones múltiples y la reutilización de las fechas evaluadas.
 
-**Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad.
+Finalmente se integra FinBERT congelado tras estudiar su funcionamiento interno y diagnosticar su sentimiento. Una comparación emparejada separa el efecto del filtrado de noticias del cambio de proveedor. FinBERT mejora descriptivamente cuatro de seis variantes respecto a Alpha Vantage con las mismas noticias, pero ninguna de sus diferencias frente a la base financiera excluye cero. Su máximo AUC macro es 0,5141, con boosting y retardo. No se acredita una ventaja general ni rentabilidad; se completa una evaluación de extremo a extremo con resultados favorables y desfavorables conservados.
+
+**Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad, FinBERT.
 
 ### 1.2 Motivación
 
@@ -70,7 +72,7 @@ La hipótesis principal plantea una posible contribución adicional del sentimie
 
 #### 1.3.3 Alcance y exclusiones
 
-La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. No se entrena un modelo propio de lenguaje: el sentimiento de todos los experimentos financieros presentados procede del proveedor. Como ampliación separada, se inspecciona el funcionamiento interno de FinBERT preentrenado, todavía sin integrarlo en esas comparaciones.
+La unidad de observación es una pareja empresa-sesión. La revisión inicial utiliza modelos conjuntos para las cuatro empresas sin introducir el identificador bursátil como predictor. Los experimentos adicionales comparan modelos independientes y modelos conjuntos con indicadores binarios de empresa, variables relativas e interacciones. La clasificación es diaria y binaria. No se desarrolla predicción intradía, una política de inversión, ejecución de órdenes ni una simulación económica retrospectiva. No se entrena un modelo propio de lenguaje: los experimentos iniciales utilizan el sentimiento del proveedor y la ampliación de PLN compara ese sentimiento con FinBERT preentrenado, sin ajustar sus pesos. Se estudian sus operaciones internas, comportamiento lingüístico y utilidad predictiva en fases separadas.
 
 ## 2. Planificación
 
@@ -109,7 +111,7 @@ Los hitos verificables son la disponibilidad del corpus, el primer modelo compar
 | Crecimiento del alcance | Memoria y desarrollo inconexos | Una hipótesis por ampliación y aprobación de su alcance antes de implementarla |
 | Pérdida de datos locales | Reproducción incompleta | Manifiestos y conservación externa de entradas; los hashes no sustituyen una copia |
 
-El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). La primera está implementada y verificada. En la segunda, el autor delegó la valoración de 400 parejas al asistente de IA por la carga manual: se dispone de una referencia automática razonada, no de validación humana independiente. La tercera no ha comenzado. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
+El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). La primera está implementada y verificada. En la segunda, el autor delegó la valoración de 400 parejas al asistente de IA por la carga manual: se dispone de una referencia automática razonada, no de validación humana independiente. La tercera incorpora una comparación financiera emparejada completada en su rama, pendiente de autorización de fusión. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
 
 ## 3. Estado del arte y fundamentos teóricos
 
@@ -121,7 +123,7 @@ El análisis técnico se utiliza aquí para transformar el historial en variable
 
 Una noticia puede recibir una puntuación de tono distinta para cada empresa mencionada. Por ello se utiliza la puntuación por empresa en lugar de asumir que el tono global del artículo es adecuado para todas sus empresas. El servicio de consulta de Alpha Vantage proporciona noticias y metadatos de sentimiento; su documentación describe los filtros temporales y por activos. [Alpha Vantage](https://www.alphavantage.co/documentation/#news-sentiment).
 
-En este trabajo, «híbrido» significa concatenar variables financieras y variables de sentimiento antes del clasificador. No significa combinar dos redes neuronales ni construir un sistema multimodal entrenado de extremo a extremo. Se valoraron alternativas como diccionarios o FinBERT, pero no se implementaron como fuente operativa de los resultados presentados.
+En este trabajo, «híbrido» significa concatenar variables financieras y variables de sentimiento antes del clasificador. No significa combinar dos redes neuronales ni construir un sistema multimodal entrenado de extremo a extremo. Las primeras rondas usan Alpha Vantage; la ampliación de la sección 5.10 incorpora FinBERT congelado como fuente alternativa. No se han implementado diccionarios ni otros modelos de lenguaje en esta comparación.
 
 ### 3.3 Aprendizaje supervisado tabular
 
@@ -179,7 +181,7 @@ Para ampliar esta revisión se registrarán por estudio periodo, activos, tamañ
 | --- | --- | --- |
 | Alpha Vantage | API de datos y noticias con sentimiento | Proveedor de entrada, no evaluador independiente de la utilidad de sus puntuaciones |
 | yfinance | Acceso programático a datos de Yahoo Finance | Adquisición de precios, no protocolo experimental |
-| FinBERT | Clasificación de sentimiento financiero | Inspección interna implementada; calidad del sentimiento e integración financiera pendientes |
+| FinBERT | Clasificación de sentimiento financiero | Inspección interna, diagnóstico lingüístico con referencia de IA e integración financiera emparejada; validación humana pendiente |
 | VectorBT | Simulación de carteras a partir de órdenes o señales | Extensión económica posible; las métricas actuales no son un backtest |
 | SHAP | Atribuciones de variables a predicciones | Extensión explicativa; no sustituye evaluación externa ni demuestra causalidad |
 
@@ -792,7 +794,37 @@ Los desacuerdos muestran límites de sentimiento dirigido: noticias sobre Netfli
 
 La lectura encuentra además fichas de ETF con discrepancias temporales: FIAX e IWY están fechadas en 2023 pero sus resúmenes contienen información de 2026 y 2025; TSLL y RONB están fechadas en 2025 pero describen posiciones de 2026. Podrían ser páginas actualizadas u otro problema de origen, sin causa verificada. Debe auditarse la disponibilidad histórica del texto antes de integrarlo en predicción financiera. No se modifican fechas ni resultados bursátiles en esta tarea.
 
-La partición posterior ya ha sido inferida y consultada; deja de ser una reserva sin inspeccionar. Las plantillas humanas permanecen vacías, la segunda anotación no se realizó y #51 no se ha iniciado. El evaluador humano rechaza etiquetas explícitamente marcadas como IA para evitar atribuirles una procedencia que no tienen.
+La partición posterior ya ha sido inferida y consultada; deja de ser una reserva sin inspeccionar. Las plantillas humanas permanecen vacías y la segunda anotación no se realizó. La #50 se cerró con este alcance revisado por autorización del autor. El evaluador humano rechaza etiquetas explícitamente marcadas como IA para evitar atribuirles una procedencia que no tienen. La comparación financiera posterior se describe a continuación y no usa esas etiquetas para entrenar.
+
+### 5.10 Utilidad predictiva de FinBERT sobre noticias emparejadas
+
+La ejecución `finbert-predictive-full-20260928` responde a una pregunta distinta de la calidad lingüística: si sustituir el sentimiento del proveedor aporta información sobre la dirección de la siguiente sesión. Se fija antes de calcular resultados el checkpoint de ProsusAI, el texto original de titular y resumen, la puntuación P(positivo) − P(negativo), el filtro de elegibilidad y dos configuraciones por algoritmo. No se ajustan los pesos de FinBERT ni se vuelve a ampliar la búsqueda después de observar las métricas.
+
+El entrenamiento de todos los enfoques comienza el 04/01/2021, después de publicarse el checkpoint en diciembre de 2020. Las variables financieras conservan historia previa para su cálculo. Se mantienen los tres bloques externos desde el 16/10/2023 al 29/12/2025: 553 sesiones por empresa y 2.212 filas por combinación. La selección interna maximiza AUC macro en tres bloques expansivos con purga. Son 378 ajustes internos, 63 externos y tres referencias mayoritarias. La base tiene nueve variables; el híbrido, veintidós; el retardo añade sentimiento medio y volumen relativo de la sesión anterior. Como cambia el comienzo del entrenamiento respecto a rondas antiguas, no deben atribuirse a FinBERT todas las diferencias entre tablas de distintas ejecuciones.
+
+Se comparan base financiera, Alpha completo deduplicado, Alpha filtrado y FinBERT sobre exactamente los mismos IDs que Alpha filtrado. De 37.524 parejas noticia-empresa deduplicadas desde 2021 se seleccionan 15.937 con mención explícita de empresa y sin ficha dinámica reconocida por titular o URL. Corresponden a 14.699 textos únicos, ninguno truncado a 512 tokens. En las sesiones con objetivo disponible intervienen 15.844 parejas emparejadas; las restantes quedan trazadas pero no generan filas financieras. El filtro no usa retornos ni anotaciones de IA, y los días sin noticias permanecen en el panel.
+
+La inferencia FP32 se ejecuta con atención explícita y TF32 desactivado, en un entorno GPU separado. En dieciséis textos prefijados por hash coincide la etiqueta CPU/GPU y el error máximo de probabilidad es 0,000001967. Se conservan las probabilidades, huellas de texto, versión de pesos y entorno. La caché reanuda lotes sin mezclar configuraciones incompatibles. FinBERT no es dirigido por empresa: un texto compartido recibe la misma puntuación y la relevancia del proveedor sigue ponderando la agregación. El acuerdo de etiquetas con Alpha en el corpus emparejado es 58,93 %, no una exactitud frente a referencia humana.
+
+**AUC macro de empresas sobre las predicciones externas:**
+
+| Enfoque | Regresión logística | Bosque aleatorio | Boosting por histogramas |
+| --- | ---: | ---: | ---: |
+| Base financiera | 0,4915 | 0,5131 | 0,4991 |
+| Alpha completo, sin retardo | 0,4896 | 0,5105 | 0,5189 |
+| Alpha completo, con retardo | 0,4903 | 0,5174 | 0,5153 |
+| Alpha emparejado, sin retardo | 0,4875 | 0,5070 | 0,5085 |
+| Alpha emparejado, con retardo | 0,4864 | 0,5097 | 0,4917 |
+| FinBERT emparejado, sin retardo | 0,4967 | 0,5102 | 0,5061 |
+| FinBERT emparejado, con retardo | 0,4970 | 0,5037 | 0,5141 |
+
+FinBERT mejora descriptivamente cuatro de seis variantes frente a Alpha emparejado. El filtro, por sí solo, reduce los seis AUC de Alpha, aunque sus intervalos de diferencia contienen cero. Esto muestra por qué no conviene atribuir a un modelo lingüístico el efecto simultáneo de sustituir sentimiento y perder noticias.
+
+El boosting con retardo pasa de 0,4917 a 0,5141 al sustituir Alpha emparejado por FinBERT: diferencia +0,0224, intervalo nominal del 95 % [+0,0019; +0,0463]. Es el único de seis contrastes principales y treinta macro totales cuyo intervalo excluye cero. No obstante, el propio AUC de FinBERT tiene intervalo [0,4927; 0,5360] y su diferencia frente a la base es +0,0150, intervalo [−0,0044; +0,0369]. Ningún contraste FinBERT-base excluye cero. Los intervalos usan 1.000 remuestreos de bloques de veinte sesiones compartidos entre empresas, sin reentrenamiento ni corrección por multiplicidad.
+
+La exactitud de las variantes FinBERT oscila entre 50,59 % y 51,72 %, por debajo del 53,89 % de la referencia mayoritaria. Su exactitud equilibrada está entre 49,42 % y 50,76 %. El desglose es heterogéneo: boosting con retardo alcanza 0,5532 en TSLA pero 0,4768 en MSFT. No se selecciona la empresa más favorable para reabrir el ajuste. El [informe completo](../reports/experiments/finbert-predictive-full-20260928/analysis.md) y el cuaderno 09 conservan todos los algoritmos, empresas, bloques y contrastes.
+
+La conclusión es una aportación técnica y experimental, no una victoria predictiva general: conectar un modelo financiero de lenguaje inspeccionado internamente con una evaluación temporalmente ordenada no garantiza superar a los precios solos. Persisten el sentimiento no dirigido, la cobertura incompleta, posibles resúmenes actualizados, incertidumbre del preentrenamiento y reutilización del histórico. Las mejoras puntuales son exploratorias y no demuestran causalidad ni rentabilidad. Los experimentos previos y la selección de `reports/final/` no se reemplazan.
 
 ## 6. Especificación de requisitos
 
@@ -855,7 +887,7 @@ No se declara disponibilidad continua, latencia garantizada ni escalabilidad de 
 
 ### 7.1 Arquitectura
 
-La extensión opcional `src/nlp/` inspecciona FinBERT y ejecuta diagnósticos lingüísticos de desarrollo de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. Los ejecutores generan informes nuevos sin modificar precios, sentimiento de Alpha Vantage ni modelos financieros. Las anotaciones de trabajo se mantienen en `data/annotations/`, separadas de las plantillas inmutables. La vista siguiente describe el flujo financiero existente; conectar la salida textual a ese flujo queda pendiente de completar #50 y ejecutar #51.
+La extensión opcional `src/nlp/` inspecciona FinBERT y ejecuta diagnósticos lingüísticos de forma independiente. Sus dependencias están en `requirements-finbert.txt`; los pesos descargados en `models/pretrained/` se excluyen de Git. Las anotaciones de trabajo se mantienen en `data/annotations/`, separadas de las plantillas inmutables. En la #51, `news_score_cache` calcula y conserva probabilidades por texto; `finbert_panel` comprueba el emparejamiento y reconstruye las variables de sentimiento; `run_finbert` selecciona y evalúa los clasificadores financieros. Este flujo crea artefactos nuevos sin sobrescribir precios, sentimiento de Alpha Vantage ni resultados anteriores. La caché mutable queda fuera de Git y cada ejecución exporta de forma inmutable las puntuaciones utilizadas. La vista siguiente describe el flujo financiero general, que comparte calendario, agregación y validación con esta ampliación.
 
 ```text
 Precios descargados + noticias con sentimiento por empresa
@@ -902,7 +934,7 @@ Los `.joblib` y los artefactos locales pesados están excluidos del seguimiento 
 
 ### 7.3 Verificación y reproducibilidad
 
-El conjunto local contiene 96 pruebas superadas con las dependencias opcionales de PLN instaladas: conserva las 58 de los experimentos financieros y añade 38 de inspección interna, muestra, anotación, métricas y atribuciones. La revisión inicial tenía 28. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. Las rondas posteriores añaden deduplicación, ventanas, selección macro y aislamiento de variables; PLN incorpora grupos disjuntos, anotación independiente, rechazo de etiquetas vacías y completitud de atribuciones. La referencia de IA añade controles de procedencia, correspondencia con la fuente, abstención y rechazo en el evaluador humano. Se ejecuta mediante `python -m unittest discover -s tests -v`; las pruebas que requieren PyTorch y Captum se omiten si faltan esas dependencias y disponen de un trabajo específico de CI.
+El conjunto local contiene 104 pruebas superadas con las dependencias opcionales de PLN instaladas: conserva las 58 de los experimentos financieros, 38 de inspección interna, muestra, anotación, métricas y atribuciones, y añade ocho de integración predictiva. La revisión inicial tenía 28. Cubre calendario regular, fines de semana, cierres anticipados, cambios horarios, marcas temporales, duplicados, objetivo, purga, retardos por empresa, emparejamiento de predicciones, modelo de referencia, LightGBM, descargas y organización de artefactos. Las ampliaciones comprueban aislamiento por empresa, noticias compartidas con puntuaciones distintas, identidad, interacciones, transformaciones causales, ausencia de noticias en la base, referencias incompatibles y remuestreo ponderado. Las rondas posteriores añaden deduplicación, ventanas, selección macro y aislamiento de variables; PLN incorpora grupos disjuntos, anotación independiente, rechazo de etiquetas vacías y completitud de atribuciones. La referencia de IA añade controles de procedencia, correspondencia con la fuente, abstención y rechazo en el evaluador humano. La integración comprueba filtros fijos, probabilidades, paneles emparejados, caché interrumpida o corrupta, presupuesto y purga. Se ejecuta mediante `python -m unittest discover -s tests -v`; las pruebas que requieren PyTorch y Captum se omiten si faltan esas dependencias y disponen de un trabajo específico de CI. Las 104 pasan en ambos entornos locales, CPU y GPU; además se recargan los 66 modelos de la #51 y se reproducen sus probabilidades sin diferencias.
 
 En la revisión completa se verificó que los 183 modelos guardados reproducían las probabilidades y clases almacenadas, y que las fronteras de los 1.080 ajustes internos y los 183 externos respetaban la condición de purga. Se verificaron ejecuciones reducidas independientes del protocolo y del flujo tradicional.
 
@@ -1043,6 +1075,7 @@ En el código sí existe `TrainResult`, una estructura inmutable con nombres y r
 | Ventanas y selección temporal | `tests/test_training_windows.py`, `tests/test_round_selection.py` | Que una ventana sea económicamente óptima |
 | Variables y ablaciones | `tests/test_sentiment_representation.py`, `tests/test_variable_ablation.py` | Causalidad o utilidad fuera de las fechas observadas |
 | Rutas y preservación de artefactos | `tests/test_artifact_layout.py` | Recuperación automática de archivos perdidos |
+| Integración de FinBERT | `tests/test_finbert_panel.py`, `tests/test_news_score_cache.py`, `tests/test_finbert_experiment.py` | Calidad humana del sentimiento o rentabilidad |
 
 La verificación combina pruebas automatizadas, reproducción de probabilidades de modelos guardados, cotejo de tablas y revisión de figuras. Un error de entrada o una referencia incompatible debe detener la comparación; un AUC bajo con entradas válidas se conserva como resultado. Son estados distintos y su separación evita confundir calidad del software con éxito predictivo.
 
@@ -1057,6 +1090,8 @@ La evidencia obtenida no acredita una ventaja predictiva robusta y general del s
 NVDA presenta una señal exploratoria más favorable: el bosque aleatorio híbrido relativo con identidad alcanza 0,5717 de AUC, frente a 0,5180 del conjunto original, con un intervalo de diferencia positivo. Las relativas sin identidad ya alcanzan 0,5711, y AAPL empeora. Por tanto, se conserva este resultado como hipótesis para fechas nuevas, no como evidencia general del sentimiento, confirmación independiente ni demostración de rentabilidad.
 
 La primera ronda no mejora el promedio general al combinar depuración, enriquecimiento y búsqueda ampliada. La ablación individual sugiere utilidad descriptiva de la sorpresa del volumen en híbridos sin retardo y de la intensidad absoluta en el bosque híbrido, que alcanza 0,5202 de AUC macro. Sin embargo, el intervalo del propio AUC contiene 0,5, las diferencias no son uniformes y hay múltiples comparaciones. Las cinco adiciones con retardo empeoran en promedio. Se conservan como resultados exploratorios, sin eliminar variables ni cambiar automáticamente el modelo seleccionado.
+
+La ampliación de FinBERT completa el análisis desde sus operaciones internas hasta su utilidad en la predicción bursátil. Mejora cuatro de seis variantes frente a Alpha con las mismas noticias, pero no demuestra una ventaja general frente a los precios solos. El caso de boosting con retardo, AUC macro 0,5141, conserva una diferencia nominal favorable frente a Alpha emparejado sin superar claramente la base. Una representación lingüística diferente no implica automáticamente una señal predictiva adicional a horizonte diario.
 
 El resultado no invalida el TFG ni prueba que las noticias no afecten a los mercados. Delimita lo que puede sostenerse con el experimento realizado. La principal contribución es un procedimiento de comparación más controlado, verificable y documentado, junto con un análisis explícito de sus límites.
 
@@ -1075,6 +1110,8 @@ Las ablaciones vuelven a utilizar las mismas fechas. El único contraste macro p
 Solo se estudian cuatro empresas de gran capitalización y elevada presencia mediática. La selección retrospectiva no representa todo el mercado ni incorpora empresas desaparecidas. La cobertura informativa no está certificada; títulos repetidos pueden sobreponderar eventos; las puntuaciones de sentimiento no se contrastaron con una muestra anotada independiente. La deduplicación experimental reduce repeticiones literales, pero no elimina todas las duplicaciones semánticas ni se adopta automáticamente en las ejecuciones anteriores.
 
 El cierre ajustado descargado retrospectivamente, las revisiones del proveedor y la ausencia de marcas temporales de recepción impiden afirmar una reconstrucción perfecta de la información disponible en cada instante. El calendario y la purga corrigen riesgos concretos, no todos los sesgos posibles.
+
+FinBERT añade limitaciones específicas: sentimiento general del texto en lugar de dirigido a cada entidad, falta de anotación humana independiente y procedencia del preentrenamiento. El filtro de menciones y fichas dinámicas no es un detector validado de relevancia o fuga; reduce mucho el volumen y puede conservar resúmenes revisados. Restringir todos los entrenamientos a 2021 en adelante evita situar los pesos antes de publicarse, pero no transforma el corpus en una fuente histórica certificada. Los treinta contrastes macro no están corregidos por multiplicidad.
 
 #### 8.2.3 Utilidad económica y uso responsable
 
@@ -1130,9 +1167,12 @@ La bibliografía técnica inicial se consultó el 15 de septiembre de 2026 y los
 | Ablación individual de variables | `reports/experiments/variable-ablation-full-20260917/analysis.md` y `manifest.json` |
 | Protocolos de las últimas comparaciones | `docs/first_round_protocol.md`, `docs/variable_ablation_protocol.md` |
 | Cuadernos de ronda y ablación | `notebooks/05_controlled_improvement_round.ipynb`, `notebooks/06_sentiment_variable_ablation.ipynb` |
+| Estudio interno y diagnóstico de FinBERT | `docs/finbert_modelo.md`, `notebooks/07_finbert_model_understanding.ipynb`, `notebooks/08_finbert_sentiment_evaluation.ipynb` |
+| Utilidad predictiva emparejada de FinBERT | `reports/experiments/finbert-predictive-full-20260928/analysis.md`, `manifest.json`, `verification.json` |
+| Protocolo y cuaderno de integración | `docs/finbert_prediccion_protocolo.md`, `notebooks/09_finbert_predictive_evaluation.ipynb` |
 | Pruebas automatizadas | `tests/`, incluidas las pruebas temporales, de artefactos, por empresa y de identidad |
 
-Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. El cuaderno 08 lee informes del diagnóstico de sentimiento y distingue expresamente las anotaciones humanas pendientes. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
+Las tablas redondean resultados guardados; las cifras completas están en los CSV. Los cuadernos 01–06 permiten consultar dimensiones, calidad, cobertura, comparaciones e incertidumbre sin entrenar modelos ni consumir API. El cuaderno 07 añade inspección local de FinBERT con dependencias opcionales y pesos previamente descargados; no entrena ni utiliza una API de inferencia. El cuaderno 08 lee informes del diagnóstico de sentimiento y distingue expresamente las anotaciones humanas pendientes. El cuaderno 09 verifica y explica la comparación financiera emparejada, sin requerir pesos ni GPU para leer sus resultados. Los informes de las ejecuciones se conservan como documentos históricos: sus notas sobre el estado de la rama o propuestas futuras describen el momento de elaboración; esta memoria incorpora los experimentos posteriores.
 
 ### 10.2 Glosario
 

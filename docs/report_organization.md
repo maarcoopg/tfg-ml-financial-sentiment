@@ -62,6 +62,15 @@ en `tuning/inherited_params.csv`. Reutiliza el panel local de la primera ronda,
 con hash verificado, en lugar de duplicarlo. Los modelos nuevos permanecen
 excluidos de Git y `reports/final/` no cambia.
 
+La ejecución `finbert-predictive-full-20260928` añade `sentiment/` con
+probabilidades por texto, trazabilidad por noticia y verificación CPU/GPU.
+`quality/` registra filtros y cobertura; `metrics/`, `tuning/` y `predictions/`
+conservan la comparación bursátil. Sus informes mantienen los bytes mediante
+`.gitattributes`. No reemplaza los diagnósticos lingüísticos ni `reports/final/`.
+La caché SQLite reanudable queda en `data/experiments/finbert-cache/`, fuera de
+Git; los scores concretos utilizados se exportan de forma inmutable en cada
+ejecución. El hash de una caché mutable no se confunde con el de una entrada fija.
+
 ## Ejecución
 
 ```powershell
