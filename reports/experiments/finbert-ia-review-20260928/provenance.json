@@ -1,0 +1,36 @@
+{
+  "annotation_kind": "ai",
+  "annotator_id": "codex_conversation_assistant",
+  "model_version": "not_recorded",
+  "reviewed_at": "2026-09-28",
+  "requested_by": "Autor del proyecto: delegación de la valoración para evitar anotación manual en CSV.",
+  "source": "reports/experiments/finbert-sentiment-20260925/annotation_primary.csv",
+  "source_sha256": "71cee2f1cc447ac19de06cf581bbf0bcf569f6d07bbe3f450bb1db29ff646cf2",
+  "row_numbering": "1-based data rows in the exact source file, not spreadsheet line numbers",
+  "rows": 400,
+  "reference_status": "Single AI-generated reference; not human gold or independent validation",
+  "procedure": "Lectura por el asistente del ticker, titular y resumen íntegros en ocho lotes de 50; asignación individual de etiqueta y razón antes de abrir predicciones por fila. No se utilizaron etiquetas de Alpha Vantage, cotizaciones externas ni el artículo completo para anotar.",
+  "criteria": {
+    "positive": "Contenido favorable hacia la empresa objetivo, incluidas mejoras, adopción, resultados o valoraciones explícitas.",
+    "negative": "Contenido desfavorable hacia la empresa objetivo, incluidos riesgos explícitos, resultados adversos o desventajas relativas.",
+    "neutral": "Contexto atribuible suficiente pero sin dirección clara, con señales contrapuestas o mención factual incidental.",
+    "insufficient": "Sin contexto atribuible a la empresa, o sin contenido suficiente para decidir; no equivale a neutral.",
+    "scope": "Sentimiento expresado en el texto, no predicción de rentabilidad ni verificación de sus hechos. No atribuir automáticamente a una empresa noticias sobre competidores o sobre su sector.",
+    "language": "Inglés como idioma del contenido semántico; encabezado sustancialmente multilingüe se marca uncertain. Un nombre de medio en otro idioma no cambia por sí solo el idioma del texto."
+  },
+  "language_overrides": {"372": "uncertain"},
+  "prior_exposure": {
+    "aggregate_development_results_known": true,
+    "known_previous_individual_prediction_rows": [180],
+    "note": "El contexto previo incluía la predicción neutral del titular de JetBlue de la fila 180. Se declara esta excepción: no se afirma cegamiento total. La valoración propia es insufficient para Tesla. No había predicciones de la partición reservada."
+  },
+  "limitations": [
+    "Un único asistente; sin segundo anotador ni adjudicación independiente.",
+    "Criterios y decisiones de IA pueden ser discutibles; no son verdad de referencia humana.",
+    "Corpus de preentrenamiento del asistente desconocido: no puede descartarse exposición previa a noticias o conocimiento posterior.",
+    "Sin verificación externa de hechos, fuente o fecha de disponibilidad de los resúmenes.",
+    "Muestra equilibrada, no representativa de la distribución completa del corpus.",
+    "No equivale a entrenar ni ajustar FinBERT, ni demuestra utilidad bursátil."
+  ],
+  "temporal_examples_to_audit": [126, 147, 369, 382]
+}

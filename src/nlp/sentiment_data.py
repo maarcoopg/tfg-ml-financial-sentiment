@@ -124,7 +124,13 @@ def annotation_templates(sample: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFra
     return first.reset_index(drop=True), second.reset_index(drop=True)
 
 
-def validated_annotations(sample: pd.DataFrame, labels: pd.DataFrame) -> pd.DataFrame:
+def validated_annotations(sample: pd.DataFrame, labels: pd.DataFrame, *, reference_kind="human") -> pd.DataFrame:
+    if reference_kind not in {"human", "ai"}:
+        raise ValueError("Unknown annotation reference kind")
+    if reference_kind == "ai" and "annotation_kind" not in labels:
+        raise ValueError("AI reference requires explicit annotation_kind provenance")
+    if "annotation_kind" in labels and not labels.annotation_kind.eq(reference_kind).all():
+        raise ValueError("Annotation kind does not match the requested reference; AI is not human gold")
     immutable = ["ticker", "partition", "group_id", "title", "summary"]
     required = {"news_id", "label", "language", "annotator_id", "reviewed_at", *immutable}
     if not required <= set(labels):
@@ -132,11 +138,11 @@ def validated_annotations(sample: pd.DataFrame, labels: pd.DataFrame) -> pd.Data
     if labels.news_id.duplicated().any() or set(labels.news_id) != set(sample.news_id):
         raise ValueError("Annotations must match every requested ID exactly once")
     if not labels.label.isin(ANNOTATION_LABELS).all():
-        raise ValueError("Human labels are missing or invalid; no quality metrics generated")
+        raise ValueError("Reference labels are missing or invalid; no metrics generated")
     if not labels.language.isin(["en", "other", "uncertain"]).all():
-        raise ValueError("Human language review is missing")
+        raise ValueError("Reference language review is missing")
     if any(labels[c].fillna("").str.strip().eq("").any() for c in ["annotator_id", "reviewed_at"]):
-        raise ValueError("Human annotation provenance is required")
+        raise ValueError("Annotation provenance is required")
     dates = pd.to_datetime(labels.reviewed_at, errors="coerce", utc=True)
     if dates.isna().any():
         raise ValueError("Invalid annotation dates")

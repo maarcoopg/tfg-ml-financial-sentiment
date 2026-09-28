@@ -7,7 +7,11 @@ from src.nlp.sentiment_data import LABELS, validated_annotations
 
 
 def human_metrics(sample, annotations, predictions):
-    gold = validated_annotations(sample, annotations)
+    return reference_metrics(sample, annotations, predictions, reference_kind="human")
+
+
+def reference_metrics(sample, annotations, predictions, *, reference_kind):
+    gold = validated_annotations(sample, annotations, reference_kind=reference_kind)
     if predictions.duplicated(["news_id", "variant"]).any():
         raise ValueError("Duplicate predictions")
     if not set(predictions.news_id) <= set(gold.news_id):
@@ -41,7 +45,8 @@ def human_metrics(sample, annotations, predictions):
                     item["confusion"] = confusion_matrix(usable.label_human, usable.label,
                                                          labels=list(LABELS)).tolist()
                 rows.append(item)
-    return {"status": "human_labels_supplied", "requested": len(gold), "eligible": len(eligible),
+    return {"status": "human_labels_supplied" if reference_kind == "human" else "ai_reference_not_human_gold",
+            "reference_kind": reference_kind, "requested": len(gold), "eligible": len(eligible),
             "excluded": len(gold) - len(eligible), "class_order": list(LABELS), "metrics": rows}
 
 

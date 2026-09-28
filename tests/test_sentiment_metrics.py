@@ -2,11 +2,25 @@ import unittest
 import pandas as pd
 
 from src.nlp.sentiment_data import prepare_news, sample_news, annotation_templates
-from src.nlp.sentiment_metrics import human_metrics, annotator_agreement
+from src.nlp.sentiment_metrics import human_metrics, reference_metrics, annotator_agreement
 from tests.test_sentiment_data import corpus
 
 
 class HumanMetricsTests(unittest.TestCase):
+    def test_ai_annotations_cannot_enter_human_metrics(self):
+        with self.assertRaisesRegex(ValueError, "AI is not human gold"):
+            human_metrics(self.sample, self.labels.assign(annotation_kind="ai"), self.pred)
+
+    def test_ai_metrics_have_explicit_nonhuman_status(self):
+        result = reference_metrics(self.sample, self.labels.assign(annotation_kind="ai"),
+                                   self.pred, reference_kind="ai")
+        self.assertEqual(result["reference_kind"], "ai")
+        self.assertEqual(result["status"], "ai_reference_not_human_gold")
+
+    def test_ai_metrics_require_explicit_provenance(self):
+        with self.assertRaisesRegex(ValueError, "provenance"):
+            reference_metrics(self.sample, self.labels, self.pred, reference_kind="ai")
+
     def setUp(self):
         self.sample = sample_news(prepare_news(corpus()), per_cell=2)
         self.blank, _ = annotation_templates(self.sample)
