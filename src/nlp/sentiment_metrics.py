@@ -1,4 +1,4 @@
-"""Quality metrics require explicit human labels, not provider sentiment."""
+"""Reference metrics preserve the distinction between human and AI annotations."""
 
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix, cohen_kappa_score

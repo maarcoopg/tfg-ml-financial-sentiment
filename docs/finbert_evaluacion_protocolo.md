@@ -128,6 +128,41 @@ está en `checkpoint_temporal_audit.json` del informe.
 
 ## Comandos de reproducción
 
+### Cambio de alcance: referencia elaborada por IA
+
+El 28 de septiembre de 2026 el autor delegó la valoración de las 400 parejas en
+el asistente por la carga de anotación manual. Se conserva el protocolo humano
+como diseño inicialmente previsto, pero **no se presenta la nueva referencia
+como humana ni como validación independiente**. No se solicita al autor rellenar
+los CSV para este diagnóstico. Las plantillas humanas permanecen vacías.
+
+El asistente leyó ticker, titular y resumen en ocho lotes y dejó una razón para
+cada decisión en `reports/experiments/finbert-ia-review-20260928/`. Se fijaron las
+etiquetas en el commit `d46e2d6` antes de abrir las predicciones por fila. El
+contexto previo contenía los acuerdos globales de desarrollo y la predicción
+neutral del titular de JetBlue (fila 180); por ello no se afirma cegamiento total.
+Tampoco se conoce el corpus de entrenamiento del asistente ni se descarta
+conocimiento posterior a las noticias. No hubo doble anotación ni adjudicación.
+
+El evaluador específico registra `annotation_kind=ai`; los evaluadores humanos
+rechazan esas anotaciones. Las métricas son acuerdo y F1 **respecto a una
+referencia de IA discutible**, no exactitud humana, y se separan por partición y
+empresa. `insufficient` se cuenta y excluye del cálculo de tres clases, al igual
+que el idioma incierto. Para contexto se declara cobertura y comparación pareada.
+También se incluyen referencias constantes positiva y neutral para hacer visible
+el desequilibrio. No se ajustan pesos ni hiperparámetros según estos resultados.
+
+```powershell
+python -m src.nlp.score_ai_sentiment --sample-run reports/experiments/finbert-sentiment-20260925 --review reports/experiments/finbert-ia-review-20260928 --output reports/experiments/finbert-ia-comparison-NUEVA-EJECUCION
+```
+
+Esta ejecución genera predicciones también sobre las 200 noticias antes reservadas.
+Tras inspeccionar los resultados, ese panel deja de ser una reserva sin consultar.
+La falta de validación humana sigue siendo una limitación; no se renombra la
+referencia de IA como humana ni se considera completada la doble anotación.
+
+### Diagnóstico original y evaluación humana opcional
+
 Desde la raíz, con las dependencias principales y opcionales instaladas y pesos
 en caché, para crear un diagnóstico nuevo sin sobrescribir el existente:
 
