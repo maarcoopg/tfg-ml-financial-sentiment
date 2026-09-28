@@ -40,7 +40,9 @@ Dos experimentos adicionales estudian si conviene especializar el aprendizaje po
 
 Una ronda posterior separa deduplicación, ventanas de entrenamiento, nuevas variables de sentimiento, criterio de selección y búsqueda ampliada. La combinación completa no mejora el AUC macro general. Una ablación individual identifica resultados puntuales: la sorpresa del volumen mejora descriptivamente los tres híbridos sin retardo, y la intensidad absoluta eleva el AUC macro del bosque híbrido de 0,5045 a 0,5202. No se acredita una mejora robusta tras considerar la incertidumbre, las comparaciones múltiples y la reutilización de las fechas evaluadas.
 
-Finalmente se integra FinBERT congelado tras estudiar su funcionamiento interno y diagnosticar su sentimiento. Una comparación emparejada separa el efecto del filtrado de noticias del cambio de proveedor. FinBERT mejora descriptivamente cuatro de seis variantes respecto a Alpha Vantage con las mismas noticias, pero ninguna de sus diferencias frente a la base financiera excluye cero. Su máximo AUC macro es 0,5141, con boosting y retardo. No se acredita una ventaja general ni rentabilidad; se completa una evaluación de extremo a extremo con resultados favorables y desfavorables conservados.
+La ampliación de procesamiento de lenguaje natural tiene como eje comprender cómo FinBERT representa el texto, combina el contexto y produce una decisión de sentimiento. Se inspeccionan sus tensores y operaciones, se verifica numéricamente el recorrido interno y se estudia su comportamiento ante cambios de representación, negación, expectativas y noticias con varias empresas. Los gradientes integrados y las perturbaciones permiten discutir qué aporta una explicación local y cuáles son sus límites. El propósito no es únicamente obtener una puntuación, sino relacionar arquitectura, comportamiento observado y restricciones de uso.
+
+Como aplicación posterior de ese estudio se integra FinBERT congelado en la predicción bursátil. Una comparación emparejada separa el efecto del filtrado de noticias del cambio de proveedor. FinBERT mejora descriptivamente cuatro de seis variantes respecto a Alpha Vantage con las mismas noticias, pero ninguna de sus diferencias frente a la base financiera excluye cero. Su máximo AUC macro es 0,5141, con boosting y retardo. Esta evaluación cierra la ampliación sin sustituir su aportación principal: el análisis técnico y crítico del modelo de lenguaje.
 
 **Palabras clave:** aprendizaje automático, sentimiento financiero, series temporales, clasificación binaria, validación temporal, reproducibilidad, FinBERT.
 
@@ -67,6 +69,7 @@ Desde Ingeniería del Software, el trabajo requiere resolver adquisición de dat
 5. Investigar si retardos, ventanas, relevancia, representaciones relativas y especialización por empresa modifican los resultados.
 6. Cuantificar incertidumbre y documentar los límites de las conclusiones.
 7. Proporcionar programas, pruebas y cuadernos de análisis que permitan inspeccionar y reproducir el experimento.
+8. Explicar y verificar el recorrido interno de FinBERT, desde la tokenización hasta las probabilidades, y analizar su sensibilidad al contexto y sus limitaciones lingüísticas mediante pruebas controladas y atribuciones.
 
 La hipótesis principal plantea una posible contribución adicional del sentimiento. Una hipótesis secundaria plantea persistencia durante varias sesiones. También se estudia si entrenar un modelo independiente por empresa mejora la adaptación a sus características, y si un modelo conjunto con identidad e interacciones puede conservar información compartida sin ignorar esas diferencias. Las comparaciones realizadas no establecen una ventaja general confirmada; el resultado favorable en NVDA con variables relativas requiere validación independiente.
 
@@ -202,17 +205,77 @@ Para un bloque externo $k$, la selección interna es $\hat\lambda_k=\arg\max_{\l
 
 ### 3.10 Funcionamiento interno de FinBERT
 
-La ampliación utiliza exclusivamente `ProsusAI/finbert`, revisión `4556d13015211d73dccd3fdd39d39232506f3e43`. Hugging Face proporciona el repositorio y Transformers la implementación; no constituyen modelos competidores. El artefacto es un `BertForSequenceClassification` de 12 bloques, 12 cabezas por bloque y dimensión oculta 768. El preentrenamiento general de BERT, la adaptación financiera y el ajuste supervisado de sentimiento son etapas diferentes; nuestro proyecto reutiliza sus pesos y no repite esos entrenamientos.
+#### 3.10.1 Qué modelo se estudia y qué significa comprenderlo
 
-WordPiece transforma el texto en tokens y añade `[CLS]` y `[SEP]`. Las 512 posiciones admitidas incluyen esos tokens especiales. Se suman representaciones aprendidas de token, posición y segmento; después se aplica normalización. Cada cabeza calcula consultas, claves y valores y combina posiciones mediante:
+La ampliación utiliza exclusivamente `ProsusAI/finbert`, revisión `4556d13015211d73dccd3fdd39d39232506f3e43`. Hugging Face proporciona el repositorio y Transformers la implementación; no constituyen modelos competidores. El artefacto es un `BertForSequenceClassification`: un codificador que transforma una secuencia en representaciones contextuales y una cabeza que clasifica su sentimiento. En esta aplicación no genera respuestas ni continúa el texto como un asistente conversacional.
 
-$$A=\operatorname{softmax}(QK^\top/\sqrt{64}+M),\qquad C=AV.$$
+Se separan tres preguntas: qué operaciones ejecuta, cómo cambia su salida cuando cambia el texto y si esa salida resulta útil para otro problema. La arquitectura permite abordar la primera, las pruebas lingüísticas y atribuciones la segunda, y el experimento bursátil la tercera. Ninguna sustituye a las otras. La explicación siguiente se apoya en el [código inspeccionado](../src/nlp/finbert.py), la configuración conservada y los resultados del cuaderno 07; no atribuye automáticamente las mismas propiedades a todos los modelos de PLN.
 
-La máscara excluye claves de relleno, no el contexto posterior de la misma noticia. Los controles de disponibilidad bursátil son externos a este mecanismo bidireccional. Las cabezas se concatenan, se proyectan y se combinan con la entrada mediante conexión residual y normalización. La red interna transforma 768 dimensiones en 3072 y vuelve a 768, con activación GELU y otra conexión residual normalizada.
+#### 3.10.2 Aprendizaje previo, especialización e inferencia
 
-La representación final de `[CLS]` pasa por el pooler, una transformación lineal con tangente hiperbólica, y una capa de tres logits. Softmax produce probabilidades positiva, negativa y neutral. La diferencia entre probabilidades positiva y negativa es un indicador de tono, no la probabilidad de subida del activo. La confianza no está garantizada como calibrada, y un mapa de atención no constituye por sí solo una explicación causal.
+El BERT original aprende representaciones bidireccionales mediante reconstrucción de tokens enmascarados y una tarea sobre la relación entre segmentos. La adaptación financiera y el ajuste supervisado de sentimiento son etapas posteriores y diferentes. El trabajo de FinBERT describe el uso de TRC2-financial y Financial PhraseBank; aquí no se reproducen esos entrenamientos ni se presupone que la configuración descargada documente por completo su historia. Fuentes: [BERT](https://aclanthology.org/N19-1423/) y [FinBERT](https://arxiv.org/abs/1908.10063).
 
-La [guía técnica](finbert_modelo.md) desarrolla las operaciones, objetivos de aprendizaje y limitaciones. El [cuaderno 07](../notebooks/07_finbert_model_understanding.ipynb) las muestra con tensores reales y comprobaciones numéricas. Fuentes: [BERT](https://aclanthology.org/N19-1423/), [configuración fijada](https://huggingface.co/ProsusAI/finbert/blob/4556d13015211d73dccd3fdd39d39232506f3e43/config.json) e [implementación de Transformers](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/bert/modeling_bert.py).
+
+En un ajuste supervisado, los parámetros $\theta$ se optimizan para reducir una pérdida como $\mathcal{L}(\theta)=-\sum_c y_c\log p_\theta(c\mid x)$. En nuestra inferencia, $\theta$ permanece fijo: las noticias nuevas cambian las activaciones y las probabilidades, no los pesos. No hay aprendizaje continuo por procesar más titulares. `eval()` desactiva el dropout; `no_grad()` evita construir el grafo de derivadas en la inferencia ordinaria. Las atribuciones sí necesitan gradientes respecto a la entrada, pero calcularlos no implica entrenar ni actualizar parámetros.
+
+La especialización financiera ofrece una razón para estudiar este checkpoint, no una garantía de interpretar correctamente cualquier noticia. La relación entre lo aprendido y nuestro corpus debe comprobarse mediante ejemplos y evaluación; una buena métrica publicada en otro conjunto no se traslada automáticamente al proyecto.
+
+#### 3.10.3 Tokenización: del texto a unidades numéricas
+
+WordPiece divide el texto en unidades de vocabulario. Un token puede ser una palabra o un fragmento; el prefijo `##` identifica continuaciones. Los identificadores son índices, no puntuaciones de significado: que un token tenga un número mayor no expresa mayor intensidad positiva. El tokenizador utilizado normaliza mayúsculas y minúsculas; los resultados de la inspección conservan la secuencia efectiva, no una segmentación inventada para ilustrar la teoría.
+
+Para una noticia se construye `[CLS] texto [SEP]`. `[CLS]` es una posición cuya representación se utilizará al clasificar; al principio no contiene un resumen del artículo. `[SEP]` delimita la secuencia. El relleno `[PAD]` iguala longitudes dentro del lote y la máscara identifica posiciones válidas. Las 512 posiciones disponibles incluyen los tokens especiales. El truncamiento descarta contenido: no lo resume ni selecciona por relevancia empresarial.
+
+Esta fase condiciona lo que puede procesar el modelo. Una noticia sin la empresa relevante, un resumen incompleto o una frase importante truncada no se recuperan mediante atención. En el corpus auditado no se detectó truncamiento, por lo que no puede usarse como explicación comprobada de los fallos observados en estos textos. El ensayo sintético largo verifica un límite del sistema, no la frecuencia de ese problema en los datos reales.
+
+#### 3.10.4 Representaciones iniciales y contexto
+
+En cada posición se suman tres vectores aprendidos: token, posición y segmento. Para la entrada de una sola secuencia, los identificadores de segmento valen cero:
+
+$$X_i^{(0)}=\operatorname{LayerNorm}(E_{token_i}+P_i+T_0).$$
+
+Cada vector tiene 768 componentes. Un lote de $B$ textos y longitud rellenada $L$ produce un tensor $B\times L\times768$. Las posiciones son aprendidas y absolutas. Los componentes no se han definido manualmente como «beneficio», «riesgo» o «negación»: forman una representación distribuida.
+
+La consulta inicial de vocabulario no incorpora por sí sola el resto de la frase. Las capas posteriores transforman la representación de cada aparición utilizando su contexto. Esto permite que una misma palabra termine con vectores distintos en frases diferentes; no garantiza que toda relación contextual se resuelva correctamente. Esa distinción es esencial al interpretar los experimentos de negación.
+
+#### 3.10.5 Autoatención: qué se combina y cómo
+
+Para cada cabeza se calculan consultas, claves y valores a partir de la representación de entrada:
+
+$$Q=XW_Q+b_Q,\qquad K=XW_K+b_K,\qquad V=XW_V+b_V,$$
+$$A=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}+M\right),\qquad C=AV.$$
+
+El checkpoint tiene doce cabezas por bloque y $d_k=64$. Una fila de $A$ distribuye pesos entre posiciones consultadas por un token; $C$ combina sus vectores de valores. Dividir por $\sqrt{d_k}$ ajusta la escala antes de softmax. Las consultas, claves y valores no son bases de datos externas: son proyecciones aprendidas de las activaciones de la propia secuencia.
+
+La máscara excluye claves de relleno. No oculta el contexto posterior dentro de la noticia, porque este codificador es bidireccional. Leer una palabra posterior en un artículo ya disponible no equivale a incorporar una noticia publicada al día siguiente: la disponibilidad bursátil se controla fuera del Transformer. El relleno puede producir estados internos no nulos; lo verificado es que no se utiliza como clave de contenido en la atención.
+
+Las cabezas ofrecen distintas proyecciones, pero no tienen funciones semánticas asignadas de antemano. Un gráfico de una cabeza no demuestra que exista «la cabeza de las negaciones». Tampoco un peso de atención alto identifica automáticamente qué palabra causó la clase final: después intervienen otras cabezas, proyecciones y capas. La atención describe una operación de combinación, no toda la decisión.
+
+#### 3.10.6 Bloques, conexiones residuales y transformación no lineal
+
+Las doce salidas se concatenan y proyectan de nuevo a 768 dimensiones. En inferencia, con dropout desactivado, el bloque inspeccionado se expresa como:
+
+$$H=\operatorname{LayerNorm}(X+\operatorname{Dense}(\operatorname{Concat}(C_1,\ldots,C_{12}))),$$
+$$X'=\operatorname{LayerNorm}(H+W_2\operatorname{GELU}(W_1H+b_1)+b_2).$$
+
+La red interna amplía de 768 a 3072 componentes y vuelve a 768. La atención mezcla posiciones; esta red transforma cada posición con parámetros compartidos. Las conexiones residuales suman la entrada a la transformación y mantienen una vía directa de información. La normalización actúa sobre las características de cada posición; no es una normalización estadística del corpus ni sustituye al escalado del clasificador bursátil.
+
+Se encadenan doce bloques, no doce clasificadores independientes. La salida de uno alimenta al siguiente y solo después se obtiene la decisión de sentimiento. En la inspección se contabilizan 109.484.547 parámetros: 23.837.184 en las representaciones de entrada, 7.087.872 en cada bloque, 590.592 en el agrupador y 2.307 en la cabeza final. Estos valores proceden de `parameters.csv`, no de una estimación genérica del tamaño de BERT.
+
+#### 3.10.7 De la representación de [CLS] a las probabilidades
+
+El estado final de `[CLS]` pasa por el agrupador o *pooler*, una transformación lineal con tangente hiperbólica. La cabeza genera tres valores sin normalizar, llamados logits:
+
+$$h_p=\tanh(W_ph_{CLS}+b_p),\qquad z=W_ch_p+b_c,$$
+$$p_c=\frac{\exp(z_c-m)}{\sum_j\exp(z_j-m)},\qquad m=\max_j z_j.$$
+
+Restar $m$ preserva el resultado matemático y mejora la estabilidad numérica. Las clases se leen de la configuración: positivo, negativo y neutral. Se elige la de mayor probabilidad y se conserva la distribución completa. Para la agregación financiera se deriva $s=p_{positivo}-p_{negativo}$, que comprime tres probabilidades en un escalar y pierde información.
+
+Por ejemplo, las distribuciones hipotéticas $(0,05;0,05;0,90)$ y $(0,45;0,45;0,10)$, ordenadas como positivo, negativo y neutral, producen $s=0$. La primera concentra masa en neutral; la segunda reparte masa entre signos opuestos. Son ejemplos didácticos, no resultados del corpus. Confundir ambas situaciones ocultaría una limitación de la representación escogida.
+
+Una probabilidad alta expresa la salida del modelo para sus clases, no certeza objetiva, comprensión humana ni probabilidad de rentabilidad. Comprobar calibración requeriría etiquetas de referencia adecuadas y un análisis específico, que no se ha realizado aquí. Por tanto, las probabilidades se estudian como comportamiento del clasificador sin dar por demostrada su fiabilidad.
+
+La [guía técnica](finbert_modelo.md) y el [cuaderno 07](../notebooks/07_finbert_model_understanding.ipynb) permiten seguir estas operaciones con tensores reales. La explicación se corresponde con la implementación utilizada, no con cualquier Transformer: [configuración fijada](https://huggingface.co/ProsusAI/finbert/blob/4556d13015211d73dccd3fdd39d39232506f3e43/config.json) y [código BERT de Transformers 4.57.6](https://github.com/huggingface/transformers/blob/v4.57.6/src/transformers/models/bert/modeling_bert.py).
 
 ### 3.11 Atribución por gradientes integrados
 
@@ -223,6 +286,12 @@ $$IG_i(x)=(x_i-x'_i)\int_0^1\frac{\partial F(x'+\alpha(x-x'))}{\partial x_i}\,d\
 Las contribuciones se suman sobre las dimensiones del embedding para obtener una atribución por token. Se comparan referencias PAD y MASK, preservando tokens especiales, posiciones, segmentos y máscara de atención. Son referencias artificiales, no noticias neutrales. La completitud contrasta la suma con $F(x)-F(x')$; se registra el residuo y se incrementan los pasos de integración si excede la tolerancia fijada.
 
 La convergencia no demuestra fidelidad semántica. Se contrasta además la sensibilidad al enmascarar tokens con contribución positiva elevada, tokens de baja magnitud e igual número de tokens aleatorios. Estos cambios pueden generar entradas artificiales; no se infiere causalidad económica. Fuentes: [Sundararajan et al.](https://proceedings.mlr.press/v70/sundararajan17a.html) y [Captum](https://captum.ai/api/integrated_gradients.html).
+
+Conviene distinguir tres niveles de interpretación. El mapa de atención muestra cómo se combinan posiciones en una operación; la atribución estima contribuciones respecto a una referencia y una salida concretas; la perturbación mide qué sucede al modificar la entrada. No son medidas intercambiables. La literatura sobre [atención y explicación](https://aclanthology.org/N19-1357/) motiva esa cautela, sin demostrar por sí sola qué explica cada decisión de nuestro checkpoint.
+
+En este proyecto se fija el logit de la clase originalmente elegida, incluso si una perturbación cambiase la etiqueta. Así se estudia la misma salida antes y después. Una atribución positiva favorece ese logit respecto a la referencia, no necesariamente el sentimiento positivo: si se explica la clase negativa, una contribución positiva apoya esa clase. Al agrupar por token se suman las dimensiones del vector; los subfragmentos WordPiece pueden repartir la contribución de una misma palabra.
+
+La elección de PAD o MASK cambia el punto de comparación, de modo que las atribuciones pueden variar sin que cambie la predicción original. La completitud comprueba una propiedad numérica de la descomposición, no si la explicación coincide con el razonamiento de una persona. Por eso se conservan ambas referencias y los controles aleatorios, incluidos los casos que no favorecen al método. No se concluye que el modelo haya aprendido una regla lingüística general a partir de una visualización local.
 
 ## 4. Fuentes de datos y procesamiento
 
@@ -743,7 +812,9 @@ No se presentan estos mapas como curvas de aprendizaje. Una curva que relacione 
 
 Los desgloses por activo y bloque de 5.3, junto con los cuadernos 03–06, permiten estudiar heterogeneidad sin elegir únicamente la empresa más favorable. Los informes completos conservan todas las configuraciones; las figuras anteriores son una selección de lectura. El [generador documental](figures/memoria/generar_figuras.py) conserva las fuentes y comprobaciones de estas figuras y no modifica los artefactos experimentales.
 
-### 5.7 Verificación interna de FinBERT, no evaluación predictiva
+### 5.7 Estudio experimental del funcionamiento interno de FinBERT
+
+La ampliación de PLN se organiza alrededor de dos aportaciones principales: verificar el recorrido numérico del modelo y analizar su comportamiento ante variaciones lingüísticas. Las secciones 5.7 y 5.8 desarrollan esas aportaciones; la 5.9 añade una referencia de IA con límites explícitos y la 5.10 examina una aplicación posterior a precios. El interés del estudio interno no depende de que esa aplicación mejore su AUC.
 
 La ejecución `finbert-understanding-20260922` utiliza el primer titular no vacío de AAPL según fecha UTC, URL y título, y una frase sintética corta como control de relleno. No se seleccionan ejemplos por su puntuación ni por la evolución posterior del precio. La inferencia se ejecuta localmente en CPU, con pesos fijos, precisión de 32 bits, atención explícita y dropout desactivado.
 
@@ -751,9 +822,26 @@ Se contabilizan **109.484.547 parámetros** y se contrastan **28 operaciones**: 
 
 También se comprueba que el relleno no recibe atención como clave y que una frase mantiene sus probabilidades al cambiar la longitud del otro texto del lote, dentro de tolerancia. Un texto sintético de 522 tokens, incluidos los especiales, se recorta a 512, registrándose diez tokens descartados. Las doce pruebas unitarias adicionales usan una arquitectura BERT pequeña aleatoria, sin descargar pesos; se distinguen de la inspección del checkpoint real.
 
-Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. Esta primera tarea no calcula macro-F1 lingüístico ni nuevas métricas bursátiles. El diagnóstico posterior de contexto y atribuciones se presenta a continuación; la referencia humana y la integración financiera siguen pendientes. Todos los resultados financieros anteriores permanecen intactos.
+Los [resultados y sus huellas](../reports/experiments/finbert-understanding-20260922/manifest.json) identifican entradas, código y pesos. Esta primera tarea no calcula macro-F1 lingüístico ni nuevas métricas bursátiles. El diagnóstico posterior de contexto y atribuciones se presenta a continuación; la referencia humana permanece pendiente y la integración financiera posterior se recoge en 5.10. Todos los resultados financieros anteriores permanecen intactos.
 
-### 5.8 Diagnóstico del sentimiento, con referencia humana pendiente
+| Operación estudiada | Comprobación realizada | Alcance de la evidencia |
+| --- | --- | --- |
+| Representación de entrada | Reconstrucción de suma de vectores y normalización | La implementación coincide con las operaciones descritas |
+| Atención | Proyecciones, escalado, máscara, softmax y combinación de valores | Se comprueba el cálculo, no el significado de cada cabeza |
+| Doce bloques | Comparación de atención y estados de salida | Se verifican transformaciones locales, no reglas lingüísticas universales |
+| Agrupador y cabeza | Reconstrucción de logits y probabilidades | Se explica de dónde sale la distribución de clases |
+| Relleno y lotes | Claves de relleno enmascaradas e invariancia numérica del ejemplo | La longitud del otro texto no debe cambiar su interpretación por el relleno |
+| Límite de entrada | Ensayo sintético de truncamiento | Se caracteriza qué contenido recibe efectivamente el modelo |
+
+La figura siguiente permite seguir una operación interna conservada en la ejecución. Es una selección fija de capa y cabeza, no una búsqueda de la visualización más convincente. El recorte de posiciones puede omitir parte de la masa de atención; no debe exigirse que cada fila del recorte sume uno.
+
+![Atención inspeccionada en el estudio interno de FinBERT](../reports/experiments/finbert-understanding-20260922/attention.png)
+
+**Lectura de la figura:** cada celda relaciona una posición que consulta con otra consultada. Una relación intensa no identifica por sí sola la contribución a positivo, negativo o neutral. Para estudiar la salida final hacen falta controles adicionales, como los que siguen. La verificación interna permite explicar el mecanismo sin presentar la visualización como una lectura directa de «lo que piensa» el modelo.
+
+### 5.8 Comportamiento lingüístico, contexto y explicabilidad
+
+#### 5.8.1 Corpus, representación y disponibilidad de contexto
 
 La ejecución `finbert-sentiment-20260925` audita 46.223 registros noticia–empresa y 38.704 textos distintos, antes de la alineación bursátil; no se confunden con las 46.014 noticias alineadas de experimentos anteriores. La longitud mediana es 114 tokens y la máxima 493, incluidos tokens especiales. No se detecta truncamiento por el límite de 512. Hay 13 resúmenes vacíos y 102 alertas heurísticas de idioma; estas últimas requieren revisión, no certifican textos no ingleses.
 
@@ -761,9 +849,44 @@ Se agrupan coincidencias normalizadas de URL, titular o texto completo. Catorce 
 
 La extracción de frases con alias explícitos de la empresa encuentra contexto en 193 de las 400 parejas; cuando falta se registra abstención. La inferencia de esta ejecución inicial se limita a desarrollo. Allí, las etiquetas coinciden en un 55,5 % entre titular y titular con resumen (200 parejas), un 83,0 % entre texto completo y contexto disponible (100 parejas) y un 49,0 % entre texto completo y Alpha Vantage (200 parejas). **Son acuerdos entre sistemas, no exactitud frente a una referencia humana.** No se presupone que añadir el ticker convierta FinBERT en un clasificador dirigido.
 
+Cambiar de titular a titular con resumen altera la evidencia que recibe el modelo, aunque los pesos sean idénticos. Extraer únicamente frases con alias también cambia el contexto: puede eliminar distracciones, pero puede perder antecedentes o relaciones útiles. El acuerdo entre representaciones permite observar sensibilidad, no decidir por sí solo cuál es correcta. La falta de contexto empresarial no equivale a sentimiento neutral; esta diferencia motiva la abstención del procedimiento de evaluación, que es externa al clasificador de tres clases.
+
+#### 5.8.2 Pruebas controladas de composición lingüística
+
 Los siete pares sintéticos exploran beneficios, negación, pérdidas, expectativas, previsiones, litigios y empresas con efectos opuestos. Cinco de los seis contrastes con orden esperado presentan ese signo, pero varias frases conservan etiqueta positiva al introducir negación, ampliación de pérdidas o incumplimiento de expectativas. El par de litigios invierte el orden esperado. No se presentan estos ejemplos como benchmark representativo ni se calcula una tasa general de acierto con ellos.
 
+| Cambio controlado | Puntuación inicial | Puntuación modificada | Observación de esta ejecución |
+| --- | ---: | ---: | --- |
+| Beneficios aumentan / disminuyen | +0,9422 | −0,9603 | Cambian el signo y la etiqueta |
+| Se espera que aumenten / no se espera que aumenten | +0,9367 | +0,9115 | La negación reduce poco la puntuación; ambas etiquetas siguen positivas |
+| Pérdidas se reducen / se amplían | +0,8717 | +0,5603 | Cambia la intensidad, pero ambas etiquetas siguen positivas |
+| Beneficios superan / incumplen expectativas | +0,9317 | +0,6404 | La adversativa reduce el tono sin cambiar la clase elegida |
+| Previsión de ingresos se eleva / se recorta | +0,9246 | −0,9238 | Respuesta diferenciada en signo y etiqueta |
+| Demanda desestimada / mantenida por el tribunal | −0,4037 | −0,2893 | Ambas negativas; orden contrario al esperado en el ensayo |
+
+Los textos ingleses exactos y las distribuciones completas están en [controlled_probes.json](../reports/experiments/finbert-sentiment-20260925/controlled_probes.json); las formulaciones españolas de la tabla son descripciones, no entradas traducidas e inferidas. Por ejemplo, al introducir negación la probabilidad positiva pasa de 0,9544 a 0,9306. Este caso muestra que una salida muy concentrada puede acompañar una respuesta lingüísticamente cuestionable; no basta para estimar la calibración global.
+
+El resultado de la negación es compatible con un peso excesivo de asociaciones léxicas favorables, pero el ensayo no demuestra ese mecanismo. Para comprobarlo harían falta más formulaciones controladas y una evaluación específica. Lo que sí puede afirmarse es más acotado: en esa pareja, disponer de atención bidireccional no produce la inversión de tono que cabría esperar. Capacidad arquitectónica y comportamiento adquirido no son equivalentes.
+
+#### 5.8.3 Varias empresas y sentimiento dirigido
+
+En el séptimo par se intercambian Apple y Microsoft como empresa que gana o pierde cuota. Las puntuaciones son −0,9415 y −0,9478: ambos textos se clasifican como negativos. No se fija un orden esperado para el tono global porque hay efectos opuestos dentro de cada frase. La observación relevante es que el modelo no recibe una entidad objetivo entrenada ni produce una distribución por empresa.
+
+Por tanto, preguntar por el tono del artículo y preguntar por el efecto descrito sobre Apple son tareas distintas. Anteponer un ticker no convierte automáticamente el checkpoint en un modelo dirigido; seleccionar frases por alias es una regla de preprocesamiento y debe evaluarse como tal. Los desacuerdos de la sección 5.9 ilustran esta limitación también en noticias reales. La comparación bursátil conserva expresamente esa restricción.
+
+#### 5.8.4 Atribuciones y contraste mediante perturbaciones
+
 Las ocho atribuciones, cuatro textos por dos referencias, cumplen la tolerancia fijada con 32–128 pasos. El mayor residuo absoluto es 0,016535. Los resultados dependen de la referencia y no siempre superan el control aleatorio: en el primer ejemplo, el enmascaramiento dirigido con MASK reduce el logit aproximadamente 0,451, frente a 0,639 del control aleatorio medio. Se conservan estos casos para evitar una interpretación favorable selectiva.
+
+Esto impide concluir que la completitud numérica garantice una explicación semántica satisfactoria. El residuo indica cuánto se aproxima la integral calculada a la diferencia entre salidas; no mide porcentaje de palabras correctamente explicadas. Asimismo, ocultar palabras con MASK puede crear una frase alejada de las noticias habituales. Una caída del logit demuestra sensibilidad a esa modificación, no que se haya aislado una causa lingüística única.
+
+El diseño combina mecanismos internos, atribuciones y perturbaciones porque responden a preguntas diferentes. La atención muestra una ruta de combinación; los gradientes integrados reparten una diferencia respecto a una referencia; los controles contrastan el efecto de modificar posiciones. Cuando no coinciden, la discrepancia forma parte del resultado y no se elimina de la memoria.
+
+#### 5.8.5 Síntesis del comportamiento y alcance de las conclusiones
+
+El checkpoint distingue algunos cambios explícitos de beneficios y previsiones, pero presenta respuestas débiles o discutibles ante negación, pérdidas, expectativas y litigios en los ensayos realizados. También cambia al variar cuánto contexto recibe. Estas observaciones caracterizan este modelo, estas entradas y esta revisión; no prueban que todos los Transformers fallen del mismo modo ni que ningún modelo de PLN pueda resolver esos fenómenos.
+
+La aportación de esta fase consiste en mostrar por qué una etiqueta aislada es insuficiente para describir el comportamiento de un modelo. Se necesita conocer la entrada efectiva, inspeccionar la distribución completa, contrastar variaciones del texto y declarar los límites de la explicación. El siguiente paso añade una referencia de IA discutible; la aplicación financiera posterior evalúa otra tarea y no valida retrospectivamente la comprensión lingüística.
 
 La huella SHA-256 de los pesos coincide con el objeto LFS publicado en diciembre de 2020. Esto apoya su disponibilidad antes del periodo reservado, pero no identifica el corpus de entrenamiento ni descarta solapamientos con noticias antiguas. Se conserva la evidencia consultada junto a las huellas de entradas, código y resultados.
 
@@ -797,6 +920,8 @@ La lectura encuentra además fichas de ETF con discrepancias temporales: FIAX e 
 La partición posterior ya ha sido inferida y consultada; deja de ser una reserva sin inspeccionar. Las plantillas humanas permanecen vacías y la segunda anotación no se realizó. La #50 se cerró con este alcance revisado por autorización del autor. El evaluador humano rechaza etiquetas explícitamente marcadas como IA para evitar atribuirles una procedencia que no tienen. La comparación financiera posterior se describe a continuación y no usa esas etiquetas para entrenar.
 
 ### 5.10 Utilidad predictiva de FinBERT sobre noticias emparejadas
+
+Esta sección es una aplicación complementaria del estudio de PLN: comprueba qué ocurre al utilizar su salida en otro sistema. Se conserva la comparación completa, pero no se toma la mejora bursátil como único criterio para valorar la ampliación. Comprender y caracterizar el modelo, documentado en 3.10–3.11 y 5.7–5.9, constituye su eje principal.
 
 La ejecución `finbert-predictive-full-20260928` responde a una pregunta distinta de la calidad lingüística: si sustituir el sentimiento del proveedor aporta información sobre la dirección de la siguiente sesión. Se fija antes de calcular resultados el checkpoint de ProsusAI, el texto original de titular y resumen, la puntuación P(positivo) − P(negativo), el filtro de elegibilidad y dos configuraciones por algoritmo. No se ajustan los pesos de FinBERT ni se vuelve a ampliar la búsqueda después de observar las métricas.
 
@@ -1091,7 +1216,9 @@ NVDA presenta una señal exploratoria más favorable: el bosque aleatorio híbri
 
 La primera ronda no mejora el promedio general al combinar depuración, enriquecimiento y búsqueda ampliada. La ablación individual sugiere utilidad descriptiva de la sorpresa del volumen en híbridos sin retardo y de la intensidad absoluta en el bosque híbrido, que alcanza 0,5202 de AUC macro. Sin embargo, el intervalo del propio AUC contiene 0,5, las diferencias no son uniformes y hay múltiples comparaciones. Las cinco adiciones con retardo empeoran en promedio. Se conservan como resultados exploratorios, sin eliminar variables ni cambiar automáticamente el modelo seleccionado.
 
-La ampliación de FinBERT completa el análisis desde sus operaciones internas hasta su utilidad en la predicción bursátil. Mejora cuatro de seis variantes frente a Alpha con las mismas noticias, pero no demuestra una ventaja general frente a los precios solos. El caso de boosting con retardo, AUC macro 0,5141, conserva una diferencia nominal favorable frente a Alpha emparejado sin superar claramente la base. Una representación lingüística diferente no implica automáticamente una señal predictiva adicional a horizonte diario.
+La contribución central de la ampliación de PLN es hacer explícito y verificable el recorrido desde texto y tokens hasta contexto, representaciones y decisión. Se han contrastado veintiocho operaciones con los pesos reales y se ha estudiado cómo cambian las salidas ante variaciones de contexto, negación, expectativas y empresas con efectos opuestos. Las atribuciones y perturbaciones muestran, además, que una explicación numéricamente convergente no equivale necesariamente a una explicación semántica satisfactoria. Este análisis permite discutir el modelo más allá de su etiqueta o su métrica final.
+
+La aplicación bursátil actúa como contraste posterior: FinBERT mejora cuatro de seis variantes frente a Alpha con las mismas noticias, pero no demuestra una ventaja general frente a los precios solos. El caso de boosting con retardo, AUC macro 0,5141, conserva una diferencia nominal favorable frente a Alpha emparejado sin superar claramente la base. Una representación lingüística diferente no implica automáticamente una señal predictiva adicional a horizonte diario. El resultado financiero limita la aplicación estudiada, no anula lo aprendido sobre el funcionamiento y comportamiento del modelo.
 
 El resultado no invalida el TFG ni prueba que las noticias no afecten a los mercados. Delimita lo que puede sostenerse con el experimento realizado. La principal contribución es un procedimiento de comparación más controlado, verificable y documentado, junto con un análisis explícito de sus límites.
 
@@ -1144,6 +1271,9 @@ La bibliografía técnica inicial se consultó el 15 de septiembre de 2026 y los
 14. Araci, D. (2019). *FinBERT: Financial Sentiment Analysis with Pre-trained Language Models*. [Prepublicación](https://arxiv.org/abs/1908.10063) y [modelo publicado por ProsusAI](https://huggingface.co/ProsusAI/finbert).
 15. VectorBT. *Portfolio simulation: base*. [Documentación oficial](https://vectorbt.dev/api/portfolio/base/). Herramienta relacionada, no utilizada en los resultados actuales.
 16. SHAP. *TreeExplainer*. [Documentación oficial](https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html). Técnica relacionada, todavía no incorporada.
+17. Devlin, J., Chang, M.-W., Lee, K. y Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL-HLT, 4171–4186. [Artículo](https://aclanthology.org/N19-1423/).
+18. Sundararajan, M., Taly, A. y Yan, Q. (2017). *Axiomatic Attribution for Deep Networks*. ICML, PMLR 70, 3319–3328. [Artículo](https://proceedings.mlr.press/v70/sundararajan17a.html).
+19. Jain, S. y Wallace, B. C. (2019). *Attention is not Explanation*. NAACL-HLT, 3543–3556. [Artículo](https://aclanthology.org/N19-1357/).
 
 ## 10. Anexos
 
