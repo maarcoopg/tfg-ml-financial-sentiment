@@ -198,4 +198,5 @@ Una ausencia de noticias registradas no certifica ausencia de noticias reales.
 Un F1 positivo alto puede corresponder a predecir siempre subida. Un AUC cercano
 a 0,5 no demuestra rentabilidad; tampoco los máximos entre muchas variantes
 constituyen una validación independiente. La evidencia y sus límites se
-desarrollan en [el borrador de memoria](borrador_memoria.md).
+desarrollan en [los resultados de la revisión temporal](resultados_revision_temporal.md)
+y en los informes de cada experimento enlazados en esta guía.

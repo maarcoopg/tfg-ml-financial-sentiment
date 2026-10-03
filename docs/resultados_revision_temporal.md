@@ -68,7 +68,7 @@ El dataset modelado registra 3.675 noticias en 2024 y 27.336 en 2025. La cobertu
 - Compatibilidad de entrenamiento, evaluación y comparación tradicional comprobada; tuning reducido verificado en `artifacts/verification/tuning-verification-20260908`.
 - Figuras revisadas visualmente. La configuración de CI está publicada; las consultas realizadas durante la integración no devolvieron ejecuciones remotas. No se afirma que CI haya superado las pruebas.
 
-El primer ensayo completo conserva hashes del código de inicio, pero comenzó antes de añadir las copias de fuente por ejecución. Esa mejora se verificó en el ensayo reducido posterior. Posteriormente, la reorganización añadió seis pruebas de artefactos, hasta 28 pruebas locales superadas. La explicación integrada está en [el borrador de memoria](borrador_memoria.md).
+El primer ensayo completo conserva hashes del código de inicio, pero comenzó antes de añadir las copias de fuente por ejecución. Esa mejora se verificó en el ensayo reducido posterior. Posteriormente, la reorganización añadió seis pruebas de artefactos, hasta 28 pruebas locales superadas. La conservación de informes y sus comprobaciones se describe en [la organización de resultados](report_organization.md).
 
 ## Conclusión
 
