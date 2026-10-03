@@ -95,7 +95,7 @@ El trabajo se organiza en diez paquetes que combinan investigación, implementac
 | P8. Ingeniería y pruebas | Contratos, pruebas, artefactos, diagramas y reproducibilidad | 25 | Implementado; documentación ampliada |
 | P9. Análisis y memoria | Figuras, interpretación, redacción y revisiones | 50 | En curso |
 | P10. Preparación de la defensa | Selección de evidencias, presentación y ensayo | 15 | Pendiente |
-| **Total previsto** | **Trabajo realizado y pendiente, no horas acreditadas** | **330** | **Estimación pendiente de validación del autor** |
+| **Total previsto** | **Trabajo realizado y pendiente, no horas acreditadas** | **330** | **Estimación pendiente** |
 
 ### 2.2 Dependencias y seguimiento
 
@@ -114,7 +114,6 @@ Los hitos verificables son la disponibilidad del corpus, el primer modelo compar
 | Crecimiento del alcance | Memoria y desarrollo inconexos | Una hipótesis por ampliación y aprobación de su alcance antes de implementarla |
 | Pérdida de datos locales | Reproducción incompleta | Manifiestos y conservación externa de entradas; los hashes no sustituyen una copia |
 
-El autor ha seleccionado la ampliación de procesamiento de lenguaje natural con FinBERT. Se divide en comprensión del modelo (#49), evaluación del sentimiento (#50) y utilidad predictiva (#51). La primera está implementada y verificada. En la segunda, el autor delegó la valoración de 400 parejas al asistente de IA por la carga manual: se dispone de una referencia automática razonada, no de validación humana independiente. La tercera incorpora una comparación financiera emparejada completada en su rama, pendiente de autorización de fusión. SHAP, otros horizontes, simulación económica y aplicación interactiva no forman parte de esta ampliación. La tabla de 330 horas conserva su carácter provisional: habrá que revisar la distribución y las estimaciones con el autor para incluir el nuevo alcance, no sumar horas de cálculo como dedicación personal ni inventar horas realizadas.
 
 ## 3. Estado del arte y fundamentos teóricos
 
@@ -1330,5 +1329,3 @@ Los cuatro diagramas se mantienen como bloques Mermaid editables dentro del borr
 - Añadir curvas de aprendizaje solo tras realizar los entrenamientos necesarios; no reutilizar curvas de ajuste como si fueran equivalentes.
 - Decidir si se necesita un calendario de resultados empresariales para analizar cobertura alrededor de esos eventos.
 - Revisar diagramas, ecuaciones, unidades, referencias cruzadas y legibilidad en el formato de entrega.
-
-Las orientaciones de extensión del tutor (20–25 páginas para estado del arte y monitorización; 15–20 para ingeniería, fundamentos matemáticos y análisis exploratorio) son objetivos editoriales, no páginas ya producidas. Esta revisión amplía el contenido y lo organiza en los diez capítulos, pero no acredita esos rangos sin maquetación ni sustituye las lecturas y pruebas pendientes por texto de relleno.
