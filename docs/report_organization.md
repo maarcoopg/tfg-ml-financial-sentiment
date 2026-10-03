@@ -6,7 +6,7 @@ El README permanece en la raíz. No hay un README adicional en `reports/final/`.
 
 | Ruta | Contenido |
 | --- | --- |
-| `reports/final/tables/` | Métricas globales e intervalos del experimento seleccionado para la memoria. |
+| `reports/final/tables/` | Métricas globales e intervalos del experimento seleccionado como referencia documental. |
 | `reports/final/figures/` | Cuatro figuras del mismo experimento, sin mezclar pruebas técnicas. |
 | `reports/final/provenance.json` | Ejecución de origen, rutas, hashes y límites de la evaluación. |
 | `reports/experiments/<id>/` | Métricas, predicciones, tuning, cobertura, figuras y manifiesto de cada experimento. |
@@ -91,7 +91,7 @@ automáticamente el último experimento. Para nuevos resultados se debe pasar
 el mismo directorio a todas las fases.
 
 La selección actual en `reports/final/` procede de `review-full-20260908`.
-"Final" designa los archivos seleccionados para redactar la memoria, no una
+"Final" designa una selección documental de referencia del proyecto, no una
 prueba independiente ni evidencia concluyente de capacidad predictiva. Se
 mantiene el carácter exploratorio y la reutilización del histórico evaluado.
 

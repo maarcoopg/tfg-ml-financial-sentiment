@@ -2,7 +2,7 @@
 
 Esta guía resume cómo reproducir el flujo principal del proyecto desde la descarga de datos hasta las métricas y figuras finales.
 
-Desde la revisión metodológica, el bloque recomendado de modelado es `python -m src.experiments.run_review`. Reconstruye la alineación horaria y guarda una ejecución aislada. Los informes anteriores son históricos. La justificación está en [el borrador de memoria](borrador_memoria.md).
+Desde la revisión metodológica, el bloque recomendado de modelado es `python -m src.experiments.run_review`. Reconstruye la alineación horaria y guarda una ejecución aislada. Los informes anteriores son históricos. El protocolo y sus límites se describen en [los resultados de la revisión temporal](resultados_revision_temporal.md).
 
 Todos los comandos parten de la raíz del repositorio y deben utilizar el mismo entorno virtual. Para inspeccionar informes existentes basta con los notebooks. Las descargas de los apartados 2 y 3 pueden sobrescribir datos o consumir cuota del proveedor; no son necesarias para leer resultados.
 
